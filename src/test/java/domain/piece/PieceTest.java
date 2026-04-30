@@ -28,4 +28,10 @@ public class PieceTest {
         Piece piece = new Piece(PieceType.BISHOP, Color.BLACK);
         assertNotNull(piece);
     }
+
+    @Test
+    public void constructor_knightAndWhite_createsSuccessfully() {
+        Piece piece = new Piece(PieceType.KNIGHT, Color.WHITE);
+        assertNotNull(piece);
+    }
 }
