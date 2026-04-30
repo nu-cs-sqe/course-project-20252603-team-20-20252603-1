@@ -24,7 +24,7 @@ public class Position {
         return col;
     }
 
-    public boolean equals(Position a) {
-        return true;
+    public boolean equals(Position other) {
+        return row == other.getRow() && col == other.getCol();
     }
 }

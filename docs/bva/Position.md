@@ -27,6 +27,6 @@
 |------|--------------------------------------------------------|-----------------|--------------------|
 | TC11 | Comparing a Position to itself (same object reference) | true            | :white_check_mark: |
 | TC12 | Two different Position objects with same row and col   | true            | :white_check_mark: |
-| TC13 | Two Position objects with different row, same col      | false           | :x:                |
+| TC13 | Two Position objects with different row, same col      | false           | :white_check_mark: |
 | TC14 | Two Position objects with same row, different col      | false           | :x:                |
 | TC15 | Comparing Position to null                             | false           | :x:                |
