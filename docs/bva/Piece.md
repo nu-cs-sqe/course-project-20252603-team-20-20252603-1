@@ -19,11 +19,11 @@
 | TC10 | Piece created with color=BLACK | Returns Color.BLACK | :white_check_mark: |
 
 ### Method under test: `getPieceType()`
-|      | State of the System               | Expected output          | Implemented? |
-|------|-----------------------------------|--------------------------|--------------|
-| TC11 | Piece created with type=KING      | Returns PieceType.KING   | :x:          |
-| TC12 | Piece created with type=QUEEN     | Returns PieceType.QUEEN  | :x:          |
-| TC13 | Piece created with type=ROOK      | Returns PieceType.ROOK   | :x:          |
-| TC14 | Piece created with type=BISHOP    | Returns PieceType.BISHOP | :x:          |
-| TC15 | Piece created with type=KNIGHT    | Returns PieceType.KNIGHT | :x:          |
-| TC16 | Piece created with type=PAWN      | Returns PieceType.PAWN   | :x:          |
+|      | State of the System            | Expected output          | Implemented?       |
+|------|--------------------------------|--------------------------|--------------------|
+| TC11 | Piece created with type=KING   | Returns PieceType.KING   | :white_check_mark: |
+| TC12 | Piece created with type=QUEEN  | Returns PieceType.QUEEN  | :x:                |
+| TC13 | Piece created with type=ROOK   | Returns PieceType.ROOK   | :x:                |
+| TC14 | Piece created with type=BISHOP | Returns PieceType.BISHOP | :x:                |
+| TC15 | Piece created with type=KNIGHT | Returns PieceType.KNIGHT | :x:                |
+| TC16 | Piece created with type=PAWN   | Returns PieceType.PAWN   | :x:                |

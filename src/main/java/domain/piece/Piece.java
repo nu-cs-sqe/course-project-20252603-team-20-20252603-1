@@ -19,4 +19,8 @@ public class Piece {
     public Color getColor() {
         return color;
     }
+
+    public PieceType getPieceType() {
+        return pieceType;
+    }
 }

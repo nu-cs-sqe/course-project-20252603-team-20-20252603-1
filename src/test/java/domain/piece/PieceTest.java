@@ -62,4 +62,10 @@ public class PieceTest {
         Piece piece = new Piece(PieceType.KING, Color.BLACK);
         assertEquals(Color.BLACK, piece.getColor());
     }
+
+    @Test
+    public void getPieceType_pieceCreatedWithKing_returnsKing() {
+        Piece piece = new Piece(PieceType.KING, Color.WHITE);
+        assertEquals(PieceType.KING, piece.getPieceType());
+    }
 }
