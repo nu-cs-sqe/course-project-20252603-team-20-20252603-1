@@ -8,7 +8,7 @@
 | TC3 | type=ROOK, color=WHITE   | Piece created successfully      | :white_check_mark: |
 | TC4 | type=BISHOP, color=BLACK | Piece created successfully      | :white_check_mark: |
 | TC5 | type=KNIGHT, color=WHITE | Piece created successfully      | :white_check_mark: |
-| TC6 | type=PAWN, color=BLACK   | Piece created successfully      | :x:                |
+| TC6 | type=PAWN, color=BLACK   | Piece created successfully      | :white_check_mark: |
 | TC7 | type=null, color=WHITE   | IllegalArgumentException thrown | :x:                |
 | TC8 | type=KING, color=null    | IllegalArgumentException thrown | :x:                |
 

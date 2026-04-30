@@ -34,4 +34,10 @@ public class PieceTest {
         Piece piece = new Piece(PieceType.KNIGHT, Color.WHITE);
         assertNotNull(piece);
     }
+
+    @Test
+    public void constructor_pawnAndBlack_createsSuccessfully() {
+        Piece piece = new Piece(PieceType.PAWN, Color.BLACK);
+        assertNotNull(piece);
+    }
 }
