@@ -11,4 +11,9 @@ public class PositionTest {
         assertNotNull(position);
     }
 
+    @Test
+    void constructor_rowAndColAtUpperBound_createsSuccessfully() {
+        Position position = new Position(8, 8);
+        assertNotNull(position);
+    }
 }
