@@ -86,4 +86,10 @@ public class PieceTest {
         Piece piece = new Piece(PieceType.BISHOP, Color.WHITE);
         assertEquals(PieceType.BISHOP, piece.getPieceType());
     }
+
+    @Test
+    public void getPieceType_pieceCreatedWithKnight_returnsKnight() {
+        Piece piece = new Piece(PieceType.KNIGHT, Color.WHITE);
+        assertEquals(PieceType.KNIGHT, piece.getPieceType());
+    }
 }
