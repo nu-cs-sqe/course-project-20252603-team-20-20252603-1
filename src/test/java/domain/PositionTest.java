@@ -3,6 +3,7 @@ package domain;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PositionTest {
     @Test
@@ -15,5 +16,10 @@ public class PositionTest {
     void constructor_rowAndColAtUpperBound_createsSuccessfully() {
         Position position = new Position(8, 8);
         assertNotNull(position);
+    }
+
+    @Test
+    void constructor_rowBelowLowerBound_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Position(0, 1));
     }
 }
