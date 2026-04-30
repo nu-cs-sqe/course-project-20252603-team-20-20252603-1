@@ -16,4 +16,10 @@ public class PieceTest {
         Piece piece = new Piece(PieceType.QUEEN, Color.BLACK);
         assertNotNull(piece);
     }
+
+    @Test
+    public void constructor_rookAndWhite_createsSuccessfully() {
+        Piece piece = new Piece(PieceType.ROOK, Color.WHITE);
+        assertNotNull(piece);
+    }
 }

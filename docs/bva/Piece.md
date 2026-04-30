@@ -5,7 +5,7 @@
 |-----|--------------------------|---------------------------------|--------------------|
 | TC1 | type=KING, color=WHITE   | Piece created successfully      | :white_check_mark: |
 | TC2 | type=QUEEN, color=BLACK  | Piece created successfully      | :white_check_mark: |
-| TC3 | type=ROOK, color=WHITE   | Piece created successfully      | :x:                |
+| TC3 | type=ROOK, color=WHITE   | Piece created successfully      | :white_check_mark: |
 | TC4 | type=BISHOP, color=BLACK | Piece created successfully      | :x:                |
 | TC5 | type=KNIGHT, color=WHITE | Piece created successfully      | :x:                |
 | TC6 | type=PAWN, color=BLACK   | Piece created successfully      | :x:                |
