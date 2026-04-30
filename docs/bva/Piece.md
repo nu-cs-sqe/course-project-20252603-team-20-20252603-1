@@ -1,16 +1,16 @@
 # BVA: Piece
 
 ### Method under test: `Piece(PieceType type, Color color)`
-|      | State of the System               | Expected output                 | Implemented? |
-|------|-----------------------------------|---------------------------------|--------------|
-| TC1  | type=KING, color=WHITE            | Piece created successfully      | :x:          |
-| TC2  | type=QUEEN, color=BLACK           | Piece created successfully      | :x:          |
-| TC3  | type=ROOK, color=WHITE            | Piece created successfully      | :x:          |
-| TC4  | type=BISHOP, color=BLACK          | Piece created successfully      | :x:          |
-| TC5  | type=KNIGHT, color=WHITE          | Piece created successfully      | :x:          |
-| TC6  | type=PAWN, color=BLACK            | Piece created successfully      | :x:          |
-| TC7  | type=null, color=WHITE            | IllegalArgumentException thrown | :x:          |
-| TC8  | type=KING, color=null             | IllegalArgumentException thrown | :x:          |
+|     | State of the System      | Expected output                 | Implemented?       |
+|-----|--------------------------|---------------------------------|--------------------|
+| TC1 | type=KING, color=WHITE   | Piece created successfully      | :white_check_mark: |
+| TC2 | type=QUEEN, color=BLACK  | Piece created successfully      | :x:                |
+| TC3 | type=ROOK, color=WHITE   | Piece created successfully      | :x:                |
+| TC4 | type=BISHOP, color=BLACK | Piece created successfully      | :x:                |
+| TC5 | type=KNIGHT, color=WHITE | Piece created successfully      | :x:                |
+| TC6 | type=PAWN, color=BLACK   | Piece created successfully      | :x:                |
+| TC7 | type=null, color=WHITE   | IllegalArgumentException thrown | :x:                |
+| TC8 | type=KING, color=null    | IllegalArgumentException thrown | :x:                |
 
 ### Method under test: `getColor()`
 |      | State of the System               | Expected output      | Implemented? |
