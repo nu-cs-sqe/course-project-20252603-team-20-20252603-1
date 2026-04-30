@@ -76,8 +76,14 @@ public class PieceTest {
     }
 
     @Test
-    public void getPieceType_pieceCreatedWithRooke_returnsRook() {
+    public void getPieceType_pieceCreatedWithRook_returnsRook() {
         Piece piece = new Piece(PieceType.ROOK, Color.WHITE);
         assertEquals(PieceType.ROOK, piece.getPieceType());
+    }
+
+    @Test
+    public void getPieceType_pieceCreatedWithBishop_returnsBishop() {
+        Piece piece = new Piece(PieceType.BISHOP, Color.WHITE);
+        assertEquals(PieceType.BISHOP, piece.getPieceType());
     }
 }

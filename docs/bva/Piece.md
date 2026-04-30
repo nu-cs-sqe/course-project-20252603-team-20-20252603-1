@@ -24,6 +24,6 @@
 | TC11 | Piece created with type=KING   | Returns PieceType.KING   | :white_check_mark: |
 | TC12 | Piece created with type=QUEEN  | Returns PieceType.QUEEN  | :white_check_mark: |
 | TC13 | Piece created with type=ROOK   | Returns PieceType.ROOK   | :white_check_mark: |
-| TC14 | Piece created with type=BISHOP | Returns PieceType.BISHOP | :x:                |
+| TC14 | Piece created with type=BISHOP | Returns PieceType.BISHOP | :white_check_mark: |
 | TC15 | Piece created with type=KNIGHT | Returns PieceType.KNIGHT | :x:                |
 | TC16 | Piece created with type=PAWN   | Returns PieceType.PAWN   | :x:                |
