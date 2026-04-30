@@ -48,4 +48,10 @@ public class PositionTest {
         Position position = new Position(8, 2);
         assertEquals(8, position.getRow());
     }
+
+    @Test
+    void getCol_positionCreatedWithColOne_returnsOne() {
+        Position position = new Position(1, 1);
+        assertEquals(1, position.getCol());
+    }
 }
