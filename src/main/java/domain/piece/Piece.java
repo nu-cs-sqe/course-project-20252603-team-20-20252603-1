@@ -5,6 +5,10 @@ public class Piece {
     private final Color color;
 
     public Piece(PieceType pieceType, Color color) {
+        if (pieceType == null) {
+            throw new IllegalArgumentException("Piece type cannot be null");
+        }
+
         this.pieceType = pieceType;
         this.color = color;
     }

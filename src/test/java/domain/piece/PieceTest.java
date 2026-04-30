@@ -3,6 +3,7 @@ package domain.piece;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PieceTest {
     @Test
@@ -39,5 +40,10 @@ public class PieceTest {
     public void constructor_pawnAndBlack_createsSuccessfully() {
         Piece piece = new Piece(PieceType.PAWN, Color.BLACK);
         assertNotNull(piece);
+    }
+
+    @Test
+    public void constructor_nullPieceType_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Piece(null, Color.BLACK));
     }
 }
