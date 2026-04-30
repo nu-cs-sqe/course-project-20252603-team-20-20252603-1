@@ -92,4 +92,10 @@ public class PieceTest {
         Piece piece = new Piece(PieceType.KNIGHT, Color.WHITE);
         assertEquals(PieceType.KNIGHT, piece.getPieceType());
     }
+
+    @Test
+    public void getPieceType_pieceCreatedWithPawn_returnsPawn() {
+        Piece piece = new Piece(PieceType.PAWN, Color.WHITE);
+        assertEquals(PieceType.PAWN, piece.getPieceType());
+    }
 }
