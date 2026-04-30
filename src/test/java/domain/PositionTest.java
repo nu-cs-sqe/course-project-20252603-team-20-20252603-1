@@ -60,4 +60,10 @@ public class PositionTest {
         Position position = new Position(1, 8);
         assertEquals(8, position.getCol());
     }
+
+    @Test
+    void equals_sameObjectReference_returnsTrue() {
+        Position position = new Position(1, 1);
+        assertTrue(position.equals(position));
+    }
 }
