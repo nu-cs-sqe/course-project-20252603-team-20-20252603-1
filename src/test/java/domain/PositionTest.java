@@ -32,4 +32,9 @@ public class PositionTest {
     void constructor_colBelowLowerBound_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Position(1, 0));
     }
+
+    @Test
+    void constructor_colAboveUpperBound_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Position(1, 9));
+    }
 }
