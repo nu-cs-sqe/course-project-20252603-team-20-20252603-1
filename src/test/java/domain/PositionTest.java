@@ -2,8 +2,7 @@ package domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PositionTest {
     @Test
@@ -36,5 +35,11 @@ public class PositionTest {
     @Test
     void constructor_colAboveUpperBound_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Position(1, 9));
+    }
+
+    @Test
+    void getRow_positionCreatedWithRowOne_returnsOne() {
+        Position position = new Position(1, 2);
+        assertEquals(1, position.getRow());
     }
 }
