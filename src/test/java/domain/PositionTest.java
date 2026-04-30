@@ -27,4 +27,9 @@ public class PositionTest {
     void constructor_rowAboveUpperBound_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Position(9, 1));
     }
+
+    @Test
+    void constructor_colBelowLowerBound_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Position(1, 0));
+    }
 }
