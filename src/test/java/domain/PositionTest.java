@@ -22,4 +22,9 @@ public class PositionTest {
     void constructor_rowBelowLowerBound_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Position(0, 1));
     }
+
+    @Test
+    void constructor_rowAboveUpperBound_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Position(9, 1));
+    }
 }
