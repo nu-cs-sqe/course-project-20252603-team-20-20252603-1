@@ -39,7 +39,13 @@ public class PositionTest {
 
     @Test
     void getRow_positionCreatedWithRowOne_returnsOne() {
-        Position position = new Position(1, 2);
+        Position position = new Position(1, 1);
         assertEquals(1, position.getRow());
+    }
+
+    @Test
+    void getRow_positionCreatedWithRowEight_returnsEight() {
+        Position position = new Position(8, 2);
+        assertEquals(8, position.getRow());
     }
 }
