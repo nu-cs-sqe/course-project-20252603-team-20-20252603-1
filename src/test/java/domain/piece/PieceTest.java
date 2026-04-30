@@ -10,4 +10,10 @@ public class PieceTest {
         Piece piece = new Piece(PieceType.KING, Color.WHITE);
         assertNotNull(piece);
     }
+
+    @Test
+    public void constructor_queenAndBlack_createsSuccessfully() {
+        Piece piece = new Piece(PieceType.QUEEN, Color.BLACK);
+        assertNotNull(piece);
+    }
 }
