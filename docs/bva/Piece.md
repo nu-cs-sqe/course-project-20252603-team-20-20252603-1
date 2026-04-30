@@ -10,7 +10,7 @@
 | TC5 | type=KNIGHT, color=WHITE | Piece created successfully      | :white_check_mark: |
 | TC6 | type=PAWN, color=BLACK   | Piece created successfully      | :white_check_mark: |
 | TC7 | type=null, color=WHITE   | IllegalArgumentException thrown | :white_check_mark: |
-| TC8 | type=KING, color=null    | IllegalArgumentException thrown | :x:                |
+| TC8 | type=KING, color=null    | IllegalArgumentException thrown | :white_check_mark: |
 
 ### Method under test: `getColor()`
 |      | State of the System               | Expected output      | Implemented? |

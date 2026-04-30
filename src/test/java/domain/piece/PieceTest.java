@@ -46,4 +46,9 @@ public class PieceTest {
     public void constructor_nullPieceType_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Piece(null, Color.BLACK));
     }
+
+    @Test
+    public void constructor_nullColor_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new Piece(PieceType.PAWN, null));
+    }
 }

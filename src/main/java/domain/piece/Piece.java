@@ -8,6 +8,9 @@ public class Piece {
         if (pieceType == null) {
             throw new IllegalArgumentException("Piece type cannot be null");
         }
+        if (color == null) {
+            throw new IllegalArgumentException("Color cannot be null");
+        }
 
         this.pieceType = pieceType;
         this.color = color;
