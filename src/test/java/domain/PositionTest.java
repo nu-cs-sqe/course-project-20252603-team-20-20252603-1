@@ -45,7 +45,7 @@ public class PositionTest {
 
     @Test
     void getRow_positionCreatedWithRowEight_returnsEight() {
-        Position position = new Position(8, 2);
+        Position position = new Position(8, 1);
         assertEquals(8, position.getRow());
     }
 
@@ -53,5 +53,11 @@ public class PositionTest {
     void getCol_positionCreatedWithColOne_returnsOne() {
         Position position = new Position(1, 1);
         assertEquals(1, position.getCol());
+    }
+
+    @Test
+    void getCol_positionCreatedWithColEight_returnsEight() {
+        Position position = new Position(1, 8);
+        assertEquals(8, position.getCol());
     }
 }
