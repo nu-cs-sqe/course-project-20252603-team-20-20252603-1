@@ -16,7 +16,7 @@
 |      | State of the System            | Expected output     | Implemented?       |
 |------|--------------------------------|---------------------|--------------------|
 | TC9  | Piece created with color=WHITE | Returns Color.WHITE | :white_check_mark: |
-| TC10 | Piece created with color=BLACK | Returns Color.BLACK | :x:                |
+| TC10 | Piece created with color=BLACK | Returns Color.BLACK | :white_check_mark: |
 
 ### Method under test: `getPieceType()`
 |      | State of the System               | Expected output          | Implemented? |
