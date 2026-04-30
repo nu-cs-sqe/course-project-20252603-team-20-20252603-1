@@ -15,4 +15,8 @@ public class Piece {
         this.pieceType = pieceType;
         this.color = color;
     }
+
+    public Color getColor() {
+        return color;
+    }
 }

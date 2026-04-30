@@ -2,8 +2,7 @@ package domain.piece;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PieceTest {
     @Test
@@ -50,5 +49,11 @@ public class PieceTest {
     @Test
     public void constructor_nullColor_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Piece(PieceType.PAWN, null));
+    }
+
+    @Test
+    public void getColor_pieceCreatedWithWhite_returnsWhite() {
+        Piece piece = new Piece(PieceType.KING, Color.WHITE);
+        assertEquals(Color.WHITE, piece.getColor());
     }
 }
