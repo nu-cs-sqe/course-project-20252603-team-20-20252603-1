@@ -87,4 +87,10 @@ public class PositionTest {
         Position position2 = new Position(1, 1);
         assertFalse(position1.equals(position2));
     }
+
+    @Test
+    void equals_null_returnsFalse() {
+        Position position = new Position(1,8);
+        assertFalse(position.equals(null));
+    }
 }

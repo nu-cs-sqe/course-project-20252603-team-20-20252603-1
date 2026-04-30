@@ -25,6 +25,10 @@ public class Position {
     }
 
     public boolean equals(Position other) {
-        return row == other.getRow() && col == other.getCol();
+        if (other == null) {
+            return false;
+        }
+        Position otherPosition = (Position) other;
+        return this.row == otherPosition.row && this.col == otherPosition.col;
     }
 }
