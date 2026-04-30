@@ -66,4 +66,11 @@ public class PositionTest {
         Position position = new Position(1, 1);
         assertTrue(position.equals(position));
     }
+
+    @Test
+    void equals_differentObjectSameRowAndCol_returnsTrue() {
+        Position position1 = new Position(1, 1);
+        Position position2 = new Position(1, 1);
+        assertTrue(position1.equals(position2));
+    }
 }
