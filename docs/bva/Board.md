@@ -5,12 +5,12 @@
 | ID   | State of the System                     | Expected output | Implemented?       |
 |------|-----------------------------------------|-----------------|--------------------|
 | TC1  | new `Board()` created, Position `(0,0)` | `true`          | :white_check_mark: |
-| TC2  | new `Board()` created, Position `(1,0)` | `true`          | :x:                |
-| TC3  | new `Board()` created, Position `(6,0)` | `true`          | :x:                |
-| TC4  | new `Board()` created, Position `(7,0)` | `true`          | :x:                |
-| TC5  | new `Board()` created, Position `(0,1)` | `true`          | :x:                |
-| TC6  | new `Board()` created, Position `(0,6)` | `true`          | :x:                |
-| TC7  | new `Board()` created, Position `(0,7)` | `true`          | :x:                |
+| TC2  | new `Board()` created, Position `(1,0)` | `true`          | :white_check_mark: |
+| TC3  | new `Board()` created, Position `(6,0)` | `true`          | :white_check_mark: |
+| TC4  | new `Board()` created, Position `(7,0)` | `true`          | :white_check_mark: |
+| TC5  | new `Board()` created, Position `(0,1)` | `true`          | :white_check_mark: |
+| TC6  | new `Board()` created, Position `(0,6)` | `true`          | :white_check_mark: |
+| TC7  | new `Board()` created, Position `(0,7)` | `true`          | :white_check_mark: |
 | TC8  | Before first move, Position `(0,0)`     | `false`         | :x:                |
 
 The rest of the `false` cases are covered below with getPieceAt.
