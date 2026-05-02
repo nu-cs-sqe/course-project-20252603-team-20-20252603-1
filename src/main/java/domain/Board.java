@@ -23,10 +23,9 @@ public class Board {
         }
 
         // black pieces
-        for (int row = 6; row < 8; ++row) {
-            for(int col = 0; col < 8; ++col) {
-                _squares[row][col] = new Piece(PieceType.ROOK, Color.BLACK);
-            }
+        for(int col = 0; col < 8; ++col) {
+            _squares[7][col] = new Piece(PieceType.ROOK, Color.BLACK);
+            _squares[6][col] = new Piece(PieceType.PAWN, Color.BLACK);
         }
     }
 

@@ -25,7 +25,7 @@ The rest of the `false` cases are covered below with getPieceAt.
 | TC12 | Before first move, Position `(0,1)`     | `Piece(KNIGHT, WHITE)`, `isEmpty()` is `false` at position                                        | :x:                |
 | TC13 | Before first move, Position `(0,6)`     | `Piece(KNIGHT, WHITE)`, `isEmpty()` is `false` at position                                        | :x:                |
 | TC14 | Before first move, Position `(1,0)`     | `Piece(PAWN, WHITE)`, `isEmpty()` is `false` at position                                          | :white_check_mark: |
-| TC15 | Before first move, Position `(6,0)`     | `Piece(PAWN, BLACK)`, `isEmpty()` is `false` at position                                          | :x:                |
+| TC15 | Before first move, Position `(6,0)`     | `Piece(PAWN, BLACK)`, `isEmpty()` is `false` at position                                          | :white_check_mark: |
 | TC16 | Before first move, Position `(0,2)`     | `Piece(BISHOP, WHITE)`, `isEmpty()` is `false` at position                                        | :x:                |
 | TC17 | Before first move, Position `(0,3)`     | `Piece(QUEEN, WHITE)`, `isEmpty()` is `false` at position                                         | :x:                |
 | TC18 | Before first move, Position `(0,4)`     | `Piece(KING, WHITE)`, `isEmpty()` is `false` at position                                          | :x:                |
