@@ -66,13 +66,21 @@ public class BoardTest {
     * getPieceAt() SOCIABLE unit tests
     * */
 
-    @Test
-    public void GetPieceAt_AfterInitRow0Col0_WhiteRook() {
+    @ParameterizedTest
+    @CsvSource({
+        "0, 0, WHITE, ROOK",
+        "0, 7, WHITE, ROOK",
+    })
+    public void GetPieceAt_AfterInitRowXColY_CorrectPiece(int row,
+                                                          int col,
+                                                          Color color,
+                                                          PieceType pieceType)
+    {
         Board board = new Board();
         Position position = EasyMock.createMock(Position.class);
 
-        EasyMock.expect(position.getRow()).andStubReturn(0);
-        EasyMock.expect(position.getCol()).andStubReturn(0);
+        EasyMock.expect(position.getRow()).andStubReturn(row);
+        EasyMock.expect(position.getCol()).andStubReturn(col);
 
         EasyMock.replay(position);
 
@@ -80,28 +88,8 @@ public class BoardTest {
 
         Piece actual = board.getPieceAt(position);
 
-        assertEquals(Color.WHITE, actual.getColor());
-        assertEquals(PieceType.ROOK, actual.getPieceType());
-        assertFalse(board.isEmpty(position));
-
-    }
-
-    @Test
-    public void GetPieceAt_AfterInitRow0Col7_WhiteRook() {
-        Board board = new Board();
-        Position position = EasyMock.createMock(Position.class);
-
-        EasyMock.expect(position.getRow()).andStubReturn(0);
-        EasyMock.expect(position.getCol()).andStubReturn(7);
-
-        EasyMock.replay(position);
-
-        board.initializeBoard();
-
-        Piece actual = board.getPieceAt(position);
-
-        assertEquals(Color.WHITE, actual.getColor());
-        assertEquals(PieceType.ROOK, actual.getPieceType());
+        assertEquals(color, actual.getColor());
+        assertEquals(pieceType, actual.getPieceType());
         assertFalse(board.isEmpty(position));
     }
 
