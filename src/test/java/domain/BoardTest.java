@@ -1,5 +1,8 @@
 package domain;
 
+import domain.piece.Color;
+import domain.piece.Piece;
+import domain.piece.PieceType;
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -60,8 +63,28 @@ public class BoardTest {
     }
 
     /*
-    * getPieceAt() unit tests
+    * getPieceAt() SOCIABLE unit tests
     * */
+
+    @Test
+    public void GetPieceAt_AfterInitRow0Col0_WhiteRook() {
+        Board board = new Board();
+        Position position = EasyMock.createMock(Position.class);
+
+        EasyMock.expect(position.getRow()).andStubReturn(0);
+        EasyMock.expect(position.getCol()).andStubReturn(0);
+
+        EasyMock.replay(position);
+
+        board.initializeBoard();
+
+        Piece actual = board.getPieceAt(position);
+
+        assertEquals(Color.WHITE, actual.getColor());
+        assertEquals(PieceType.ROOK, actual.getPieceType());
+        assertFalse(board.isEmpty(position));
+
+    }
 
     @Test
     public void GetPieceAt_NewBoardRow0Col0_ThrowsException() {

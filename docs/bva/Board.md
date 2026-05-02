@@ -19,7 +19,7 @@ The rest of the `false` cases are covered below with getPieceAt.
 
 | ID   | State of the System                     | Expected output                                                                                   | Implemented?       |
 |------|-----------------------------------------|---------------------------------------------------------------------------------------------------|--------------------|
-| TC9  | Before first move, Position `(0,0)`     | `Piece(ROOK, WHITE)`, `isEmpty()` is `false` at position                                          | :x:                |
+| TC9  | Before first move, Position `(0,0)`     | `Piece(ROOK, WHITE)`, `isEmpty()` is `false` at position                                          | :white_check_mark: |
 | TC10 | Before first move, Position `(0,7)`     | `Piece(ROOK, WHITE)`, `isEmpty()` is `false` at position                                          | :x:                |
 | TC11 | Before first move, Position `(7,0)`     | `Piece(ROOK, BLACK)`, `isEmpty()` is `false` at position                                          | :x:                |
 | TC12 | Before first move, Position `(0,1)`     | `Piece(KNIGHT, WHITE)`, `isEmpty()` is `false` at position                                        | :x:                |
