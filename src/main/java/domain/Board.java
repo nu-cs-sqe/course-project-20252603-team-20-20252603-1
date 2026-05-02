@@ -17,10 +17,9 @@ public class Board {
 
     public void initializeBoard() {
         // white pieces
-        for (int row = 0; row < 2; ++row) {
-            for(int col = 0; col < 8; ++col) {
-                _squares[row][col] = new Piece(PieceType.ROOK, Color.WHITE);
-            }
+        for(int col = 0; col < 8; ++col) {
+            _squares[0][col] = new Piece(PieceType.ROOK, Color.WHITE);
+            _squares[1][col] = new Piece(PieceType.PAWN, Color.WHITE);
         }
 
         // black pieces
