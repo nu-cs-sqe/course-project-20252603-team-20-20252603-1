@@ -11,7 +11,7 @@
 | TC5  | new `Board()` created, Position `(0,1)` | `true`          | :white_check_mark: |
 | TC6  | new `Board()` created, Position `(0,6)` | `true`          | :white_check_mark: |
 | TC7  | new `Board()` created, Position `(0,7)` | `true`          | :white_check_mark: |
-| TC8  | Before first move, Position `(0,0)`     | `false`         | :x:                |
+| TC8  | Before first move, Position `(0,0)`     | `false`         | :white_check_mark: |
 
 The rest of the `false` cases are covered below with getPieceAt.
 
