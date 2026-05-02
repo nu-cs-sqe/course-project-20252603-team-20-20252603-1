@@ -87,6 +87,25 @@ public class BoardTest {
     }
 
     @Test
+    public void GetPieceAt_AfterInitRow0Col7_WhiteRook() {
+        Board board = new Board();
+        Position position = EasyMock.createMock(Position.class);
+
+        EasyMock.expect(position.getRow()).andStubReturn(0);
+        EasyMock.expect(position.getCol()).andStubReturn(7);
+
+        EasyMock.replay(position);
+
+        board.initializeBoard();
+
+        Piece actual = board.getPieceAt(position);
+
+        assertEquals(Color.WHITE, actual.getColor());
+        assertEquals(PieceType.ROOK, actual.getPieceType());
+        assertFalse(board.isEmpty(position));
+    }
+
+    @Test
     public void GetPieceAt_NewBoardRow0Col0_ThrowsException() {
         Board board = new Board();
         Position position = EasyMock.createMock(Position.class);
