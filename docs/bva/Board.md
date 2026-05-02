@@ -17,19 +17,19 @@ The rest of the `false` cases are covered below with getPieceAt.
 
 ### Method under test: `getPieceAt(Position pos)`
 
-| ID   | State of the System                     | Expected output                                                                                   | Implemented? |
-|------|-----------------------------------------|---------------------------------------------------------------------------------------------------|--------------|
-| TC9  | Before first move, Position `(0,0)`     | `Piece(ROOK, WHITE)`, `isEmpty()` is `false` at position                                          | :x:          |
-| TC10 | Before first move, Position `(0,7)`     | `Piece(ROOK, WHITE)`, `isEmpty()` is `false` at position                                          | :x:          |
-| TC11 | Before first move, Position `(7,0)`     | `Piece(ROOK, BLACK)`, `isEmpty()` is `false` at position                                          | :x:          |
-| TC12 | Before first move, Position `(0,1)`     | `Piece(KNIGHT, WHITE)`, `isEmpty()` is `false` at position                                        | :x:          |
-| TC13 | Before first move, Position `(0,6)`     | `Piece(KNIGHT, WHITE)`, `isEmpty()` is `false` at position                                        | :x:          |
-| TC14 | Before first move, Position `(1,0)`     | `Piece(PAWN, WHITE)`, `isEmpty()` is `false` at position                                          | :x:          |
-| TC15 | Before first move, Position `(6,0)`     | `Piece(PAWN, BLACK)`, `isEmpty()` is `false` at position                                          | :x:          |
-| TC16 | Before first move, Position `(0,2)`     | `Piece(BISHOP, WHITE)`, `isEmpty()` is `false` at position                                        | :x:          |
-| TC17 | Before first move, Position `(0,3)`     | `Piece(QUEEN, WHITE)`, `isEmpty()` is `false` at position                                         | :x:          |
-| TC18 | Before first move, Position `(0,4)`     | `Piece(KING, WHITE)`, `isEmpty()` is `false` at position                                          | :x:          |
-| TC19 | new `Board()`, Position `(0,0)`         | `NoSuchElementException("Cannot get piece at empty position")`, `isEmpty()` is `true` at position | :x:          |
+| ID   | State of the System                     | Expected output                                                                                   | Implemented?       |
+|------|-----------------------------------------|---------------------------------------------------------------------------------------------------|--------------------|
+| TC9  | Before first move, Position `(0,0)`     | `Piece(ROOK, WHITE)`, `isEmpty()` is `false` at position                                          | :x:                |
+| TC10 | Before first move, Position `(0,7)`     | `Piece(ROOK, WHITE)`, `isEmpty()` is `false` at position                                          | :x:                |
+| TC11 | Before first move, Position `(7,0)`     | `Piece(ROOK, BLACK)`, `isEmpty()` is `false` at position                                          | :x:                |
+| TC12 | Before first move, Position `(0,1)`     | `Piece(KNIGHT, WHITE)`, `isEmpty()` is `false` at position                                        | :x:                |
+| TC13 | Before first move, Position `(0,6)`     | `Piece(KNIGHT, WHITE)`, `isEmpty()` is `false` at position                                        | :x:                |
+| TC14 | Before first move, Position `(1,0)`     | `Piece(PAWN, WHITE)`, `isEmpty()` is `false` at position                                          | :x:                |
+| TC15 | Before first move, Position `(6,0)`     | `Piece(PAWN, BLACK)`, `isEmpty()` is `false` at position                                          | :x:                |
+| TC16 | Before first move, Position `(0,2)`     | `Piece(BISHOP, WHITE)`, `isEmpty()` is `false` at position                                        | :x:                |
+| TC17 | Before first move, Position `(0,3)`     | `Piece(QUEEN, WHITE)`, `isEmpty()` is `false` at position                                         | :x:                |
+| TC18 | Before first move, Position `(0,4)`     | `Piece(KING, WHITE)`, `isEmpty()` is `false` at position                                          | :x:                |
+| TC19 | new `Board()`, Position `(0,0)`         | `NoSuchElementException("Cannot get piece at empty position")`, `isEmpty()` is `true` at position | :white_check_mark: |
 
 ### Method under test: `initializeBoard()`
 
@@ -56,14 +56,14 @@ The rest of the `false` cases are covered below with getPieceAt.
 | `(7,6)`             | `Piece(KNIGHT, BLACK)`, `isEmpty()` is `false`                       |
 | `(7,7)`             | `Piece(ROOK, BLACK)`, `isEmpty()` is `false`                         |
 
-| ID   | State of the System                                                    | Expected output  | Implemented? |
-|------|------------------------------------------------------------------------|------------------|--------------|
-| TC26 | after `initializeBoard()`, All piece positions (parameterized)         | See table above | :x:          |
-| TC27 | after `initializeBoard()`, Position `(2,0)` (first empty row, min col) | `isEmpty()` is `true` | :x: |
-| TC28 | after `initializeBoard()`, Position `(2,7)` (first empty row, max col) | `isEmpty()` is `true` | :x: |
-| TC29 | after `initializeBoard()`, Position `(5,0)` (last empty row, min col)  | `isEmpty()` is `true` | :x: |
-| TC30 | after `initializeBoard()`, Position `(5,7)` (last empty row, max col)  | `isEmpty()` is `true` | :x: |
-| TC31 | after `initializeBoard()`, Position `(3,3)` (interior empty square)    | `isEmpty()` is `true` | :x: |
+| ID   | State of the System                                                    | Expected output  | Implemented?       |
+|------|------------------------------------------------------------------------|------------------|--------------------|
+| TC26 | after `initializeBoard()`, All piece positions (parameterized)         | See table above | :x:                |
+| TC27 | after `initializeBoard()`, Position `(2,0)` (first empty row, min col) | `isEmpty()` is `true` | :white_check_mark: |
+| TC28 | after `initializeBoard()`, Position `(2,7)` (first empty row, max col) | `isEmpty()` is `true` | :white_check_mark: |
+| TC29 | after `initializeBoard()`, Position `(5,0)` (last empty row, min col)  | `isEmpty()` is `true` | :white_check_mark: |
+| TC30 | after `initializeBoard()`, Position `(5,7)` (last empty row, max col)  | `isEmpty()` is `true` | :white_check_mark: |
+| TC31 | after `initializeBoard()`, Position `(3,3)` (interior empty square)    | `isEmpty()` is `true` | :white_check_mark: |
 
 
 

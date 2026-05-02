@@ -56,4 +56,27 @@ public class BoardTest {
 
     }
 
+    /*
+    * initializeBoard() unit tests
+    * */
+
+    @ParameterizedTest
+    @CsvSource({
+        "2, 0",
+        "2, 7",
+        "5, 0",
+        "5, 7",
+        "3, 3",
+    })
+    public void InitializeBoard_EmptySquare_EmptyIsTrue(int row, int col) {
+        Board board = new Board();
+        Position position = EasyMock.createMock(Position.class);
+
+        board.initializeBoard();
+
+        boolean actual = board.isEmpty(position);
+
+        assertTrue(actual);
+    }
+
 }

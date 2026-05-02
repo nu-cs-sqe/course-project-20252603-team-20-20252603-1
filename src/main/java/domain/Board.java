@@ -6,6 +6,10 @@ import java.util.NoSuchElementException;
 
 public class Board {
 
+    public void initializeBoard() {
+
+    }
+
     public boolean isEmpty(Position position) {
         return true;
     }
