@@ -153,15 +153,15 @@ public class BoardTest {
 
   @ParameterizedTest
   @CsvSource({
-      "1, WHITE, ROOK",
-      "2, WHITE, KNIGHT",
-      "3, WHITE, BISHOP",
-      "4, WHITE, QUEEN",
-      "5, WHITE, KING",
-      "6, WHITE, BISHOP",
+      "1, ROOK",
+      "2, KNIGHT",
+      "3, BISHOP",
+      "4, QUEEN",
+      "5, KING",
+      "6, BISHOP",
+      "7, KNIGHT",
   })
   public void InitializeBoard_Row1ColY_WhiteBackRankCorrect(int col,
-                                                            Color color,
                                                             PieceType pieceType) {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
@@ -175,7 +175,7 @@ public class BoardTest {
 
     Piece actual = board.getPieceAt(position);
 
-    assertEquals(color, actual.getColor());
+    assertEquals(Color.WHITE, actual.getColor());
     assertEquals(pieceType, actual.getPieceType());
     assertFalse(board.isEmpty(position));
   }
