@@ -202,4 +202,34 @@ public class BoardTest {
     assertEquals(PieceType.PAWN, actual.getPieceType());
     assertFalse(board.isEmpty(position));
   }
+
+  @ParameterizedTest
+  @CsvSource({
+      "1, ROOK",
+      "2, KNIGHT",
+      "3, BISHOP",
+      "4, QUEEN",
+      "5, KING",
+      "6, BISHOP",
+      "7, KNIGHT",
+      "8, ROOK",
+  })
+  public void InitializeBoard_Row8ColY_BlackBackRankCorrect(int col,
+                                                            PieceType pieceType) {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(8);
+    EasyMock.expect(position.getCol()).andStubReturn(col);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    Piece actual = board.getPieceAt(position);
+
+    assertEquals(Color.BLACK, actual.getColor());
+    assertEquals(pieceType, actual.getPieceType());
+    assertFalse(board.isEmpty(position));
+  }
 }
