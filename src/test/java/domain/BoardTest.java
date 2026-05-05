@@ -155,6 +155,7 @@ public class BoardTest {
   @CsvSource({
       "1, WHITE, ROOK",
       "2, WHITE, KNIGHT",
+      "3, WHITE, BISHOP",
   })
   public void InitializeBoard_Row1ColY_WhiteBackRankCorrect(int col,
                                                             Color color,
