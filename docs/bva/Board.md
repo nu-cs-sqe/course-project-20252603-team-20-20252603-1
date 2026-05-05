@@ -58,7 +58,7 @@ The rest of the `false` cases are covered below with getPieceAt.
 
 | ID   | State of the System                                                    | Expected output  | Implemented?       |
 |------|------------------------------------------------------------------------|------------------|--------------------|
-| TC26 | after `initializeBoard()`, All piece positions (parameterized)         | See table above | 8/32               |
+| TC26 | after `initializeBoard()`, All piece positions (parameterized)         | See table above | 16/32              |
 | TC27 | after `initializeBoard()`, Position `(3,1)` (first empty row, min col) | `isEmpty()` is `true` | :white_check_mark: |
 | TC28 | after `initializeBoard()`, Position `(3,8)` (first empty row, max col) | `isEmpty()` is `true` | :white_check_mark: |
 | TC29 | after `initializeBoard()`, Position `(6,1)` (last empty row, min col)  | `isEmpty()` is `true` | :white_check_mark: |

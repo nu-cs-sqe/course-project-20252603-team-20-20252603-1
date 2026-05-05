@@ -12,6 +12,8 @@ import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import java.util.NoSuchElementException;
 
 
@@ -178,6 +180,26 @@ public class BoardTest {
 
     assertEquals(Color.WHITE, actual.getColor());
     assertEquals(pieceType, actual.getPieceType());
+    assertFalse(board.isEmpty(position));
+  }
+
+  @ParameterizedTest
+  @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8})
+  public void InitializeBoard_Row2_WhitePawns(int col) {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(2);
+    EasyMock.expect(position.getCol()).andStubReturn(col);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    Piece actual = board.getPieceAt(position);
+
+    assertEquals(Color.WHITE, actual.getColor());
+    assertEquals(PieceType.PAWN, actual.getPieceType());
     assertFalse(board.isEmpty(position));
   }
 }
