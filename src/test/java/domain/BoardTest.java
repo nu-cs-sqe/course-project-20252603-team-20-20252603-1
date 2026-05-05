@@ -74,7 +74,8 @@ public class BoardTest {
       "2, 1, WHITE, PAWN",
       "7, 1, BLACK, PAWN",
       "1, 2, WHITE, KNIGHT",
-      "1, 7, WHITE, KNIGHT"
+      "1, 7, WHITE, KNIGHT",
+      "1, 3, WHITE, BISHOP",
   })
   public void GetPieceAt_AfterInitRowXColY_CorrectPiece(int row,
                                                         int col,
