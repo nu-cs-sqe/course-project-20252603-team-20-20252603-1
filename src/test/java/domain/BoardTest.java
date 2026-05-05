@@ -156,6 +156,7 @@ public class BoardTest {
       "1, WHITE, ROOK",
       "2, WHITE, KNIGHT",
       "3, WHITE, BISHOP",
+      "4, WHITE, QUEEN",
   })
   public void InitializeBoard_Row1ColY_WhiteBackRankCorrect(int col,
                                                             Color color,
