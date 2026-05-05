@@ -23,13 +23,13 @@ public class BoardTest {
 
   @ParameterizedTest
   @CsvSource({
-      "0, 0",
-      "1, 0",
-      "6, 0",
-      "7, 0",
-      "0, 1",
-      "0, 6",
-      "0, 7",
+      "1, 1",
+      "2, 1",
+      "7, 1",
+      "8, 1",
+      "1, 2",
+      "1, 7",
+      "1, 8",
   })
   public void IsEmpty_NewBoardRowColBounds_IsTrue(int row, int col) {
     Board board = new Board();
@@ -46,12 +46,12 @@ public class BoardTest {
   }
 
   @Test
-  public void IsEmpty_AfterInitRow0Col0_IsFalse() {
+  public void IsEmpty_AfterInitRow1Col1_IsFalse() {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
 
-    EasyMock.expect(position.getRow()).andStubReturn(0);
-    EasyMock.expect(position.getCol()).andStubReturn(0);
+    EasyMock.expect(position.getRow()).andStubReturn(1);
+    EasyMock.expect(position.getCol()).andStubReturn(1);
 
     EasyMock.replay(position);
 
@@ -68,11 +68,11 @@ public class BoardTest {
 
   @ParameterizedTest
   @CsvSource({
-      "0, 0, WHITE, ROOK",
-      "0, 7, WHITE, ROOK",
-      "7, 0, BLACK, ROOK",
-      "1, 0, WHITE, PAWN",
-      "6, 0, BLACK, PAWN",
+      "1, 1, WHITE, ROOK",
+      "1, 8, WHITE, ROOK",
+      "8, 1, BLACK, ROOK",
+      "2, 1, WHITE, PAWN",
+      "7, 1, BLACK, PAWN",
   })
   public void GetPieceAt_AfterInitRowXColY_CorrectPiece(int row,
                                                         int col,
@@ -96,12 +96,12 @@ public class BoardTest {
   }
 
   @Test
-  public void GetPieceAt_NewBoardRow0Col0_ThrowsException() {
+  public void GetPieceAt_NewBoardRow1Col1_ThrowsException() {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
 
-    EasyMock.expect(position.getRow()).andStubReturn(0);
-    EasyMock.expect(position.getCol()).andStubReturn(0);
+    EasyMock.expect(position.getRow()).andStubReturn(1);
+    EasyMock.expect(position.getCol()).andStubReturn(1);
 
     EasyMock.replay(position);
 
@@ -124,11 +124,11 @@ public class BoardTest {
 
   @ParameterizedTest
   @CsvSource({
-      "2, 0",
-      "2, 7",
-      "5, 0",
-      "5, 7",
-      "3, 3",
+      "3, 1",
+      "3, 8",
+      "6, 1",
+      "6, 8",
+      "4, 4",
   })
   public void InitializeBoard_EmptySquare_EmptyIsTrue(int row, int col) {
     Board board = new Board();

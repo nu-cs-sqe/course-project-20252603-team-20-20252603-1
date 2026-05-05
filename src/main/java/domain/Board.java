@@ -11,7 +11,7 @@ public class Board {
   private final Piece[][] squares = new Piece[8][8];
 
   private Optional<Piece> pieceAt(Position position) {
-    return Optional.ofNullable(squares[position.getRow()][position.getCol()]);
+    return Optional.ofNullable(squares[position.getRow() - 1][position.getCol() - 1]);
   }
 
   public void initializeBoard() {
