@@ -9,7 +9,7 @@ import java.util.Optional;
 public class Board {
 
   private static final PieceType[] BACK_RANK = {
-      PieceType.ROOK, PieceType.KNIGHT, PieceType.BISHOP, PieceType.ROOK,
+      PieceType.ROOK, PieceType.KNIGHT, PieceType.BISHOP, PieceType.QUEEN,
       PieceType.ROOK, PieceType.ROOK, PieceType.KNIGHT, PieceType.ROOK,
   };
 
