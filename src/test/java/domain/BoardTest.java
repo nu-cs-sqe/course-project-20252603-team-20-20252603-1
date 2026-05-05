@@ -160,6 +160,7 @@ public class BoardTest {
       "5, KING",
       "6, BISHOP",
       "7, KNIGHT",
+      "8, ROOK",
   })
   public void InitializeBoard_Row1ColY_WhiteBackRankCorrect(int col,
                                                             PieceType pieceType) {
