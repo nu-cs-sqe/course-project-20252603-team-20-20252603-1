@@ -10,7 +10,7 @@ public class Board {
 
   private static final PieceType[] BACK_RANK = {
       PieceType.ROOK, PieceType.KNIGHT, PieceType.BISHOP, PieceType.QUEEN,
-      PieceType.ROOK, PieceType.ROOK, PieceType.KNIGHT, PieceType.ROOK,
+      PieceType.KING, PieceType.ROOK, PieceType.KNIGHT, PieceType.ROOK,
   };
 
   private final Piece[][] squares = new Piece[8][8];
