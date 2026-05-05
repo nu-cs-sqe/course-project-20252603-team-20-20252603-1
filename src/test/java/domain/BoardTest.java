@@ -154,6 +154,7 @@ public class BoardTest {
   @ParameterizedTest
   @CsvSource({
       "1, WHITE, ROOK",
+      "2, WHITE, KNIGHT",
   })
   public void InitializeBoard_Row1ColY_WhiteBackRankCorrect(int col,
                                                             Color color,
