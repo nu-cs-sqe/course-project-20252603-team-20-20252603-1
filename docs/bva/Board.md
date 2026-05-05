@@ -33,7 +33,7 @@ The rest of the `false` cases are covered below with getPieceAt.
 
 ### Method under test: `initializeBoard()`
 
-**TC26** — Parameterized over piece positions after `initializeBoard()`:
+**TC20** — Parameterized over piece positions after `initializeBoard()`:
 
 | Position (row, col) | Expected result                              |
 |---------------------|----------------------------------------------|
@@ -58,12 +58,12 @@ The rest of the `false` cases are covered below with getPieceAt.
 
 | ID   | State of the System                                                    | Expected output  | Implemented?       |
 |------|------------------------------------------------------------------------|------------------|--------------------|
-| TC26 | after `initializeBoard()`, All piece positions (parameterized)         | See table above | 24/32              |
-| TC27 | after `initializeBoard()`, Position `(3,1)` (first empty row, min col) | `isEmpty()` is `true` | :white_check_mark: |
-| TC28 | after `initializeBoard()`, Position `(3,8)` (first empty row, max col) | `isEmpty()` is `true` | :white_check_mark: |
-| TC29 | after `initializeBoard()`, Position `(6,1)` (last empty row, min col)  | `isEmpty()` is `true` | :white_check_mark: |
-| TC30 | after `initializeBoard()`, Position `(6,8)` (last empty row, max col)  | `isEmpty()` is `true` | :white_check_mark: |
-| TC31 | after `initializeBoard()`, Position `(4,4)` (interior empty square)    | `isEmpty()` is `true` | :white_check_mark: |
+| TC20 | after `initializeBoard()`, All piece positions (parameterized)         | See table above | :white_check_mark: |
+| TC21 | after `initializeBoard()`, Position `(3,1)` (first empty row, min col) | `isEmpty()` is `true` | :white_check_mark: |
+| TC22 | after `initializeBoard()`, Position `(3,8)` (first empty row, max col) | `isEmpty()` is `true` | :white_check_mark: |
+| TC23 | after `initializeBoard()`, Position `(6,1)` (last empty row, min col)  | `isEmpty()` is `true` | :white_check_mark: |
+| TC24 | after `initializeBoard()`, Position `(6,8)` (last empty row, max col)  | `isEmpty()` is `true` | :white_check_mark: |
+| TC25 | after `initializeBoard()`, Position `(4,4)` (interior empty square)    | `isEmpty()` is `true` | :white_check_mark: |
 
 
 

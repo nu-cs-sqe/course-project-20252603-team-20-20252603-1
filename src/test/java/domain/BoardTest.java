@@ -232,4 +232,24 @@ public class BoardTest {
     assertEquals(pieceType, actual.getPieceType());
     assertFalse(board.isEmpty(position));
   }
+
+  @ParameterizedTest
+  @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8})
+  public void InitializeBoard_Row7_BlackPawns(int col) {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(7);
+    EasyMock.expect(position.getCol()).andStubReturn(col);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    Piece actual = board.getPieceAt(position);
+
+    assertEquals(Color.BLACK, actual.getColor());
+    assertEquals(PieceType.PAWN, actual.getPieceType());
+    assertFalse(board.isEmpty(position));
+  }
 }
