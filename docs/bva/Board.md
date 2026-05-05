@@ -4,7 +4,7 @@
 
 | ID   | State of the System                     | Expected output | Implemented?       |
 |------|-----------------------------------------|-----------------|--------------------|
-| TC1  | new `Board()` created, Position `(0,1)` | `true`          | :white_check_mark: |
+| TC1  | new `Board()` created, Position `(1,1)` | `true`          | :white_check_mark: |
 | TC2  | new `Board()` created, Position `(2,1)` | `true`          | :white_check_mark: |
 | TC3  | new `Board()` created, Position `(7,1)` | `true`          | :white_check_mark: |
 | TC4  | new `Board()` created, Position `(8,1)` | `true`          | :white_check_mark: |
