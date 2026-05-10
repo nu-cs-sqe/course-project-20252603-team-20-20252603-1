@@ -21,6 +21,13 @@
 4. [75% done] Kavi: Board Implementation
 5. [not started] Game Class
 
+# Week 6 (05/04/2026-05/10/2026) 
+**Planning and Progress Tracking**:
+1. [done]: [User Story 2 Writeup](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/issues/9)
+2. [done]: [User Story 3 Writeup](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/issues/10)
+3. [done] Kavi: Design Doc for Knight piece [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/15)
+4. [done] Annabelle: Game class BVA [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/14)
+
 
 # Week X (XX/XX/2026-XX/XX/2026) TEMPLATE (You can change the format to whatever the team likes better)
 **Planning and Progress Tracking**:
