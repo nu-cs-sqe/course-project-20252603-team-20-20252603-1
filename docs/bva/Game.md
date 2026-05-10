@@ -34,6 +34,6 @@
 Since BVA has been done on `getPieceAt` under the `Board` class, we are just verifying that delegating to `Board` works as expected.
 
 TC1 can be combined with any test case.
-TC2 and TC8 can be combined.
 TC3 and TC9 can be combined.
-TC4 and TC5 can be combined.
+TC4 and TC10 can be combined.
+TC5 and TC6 can be combined.
