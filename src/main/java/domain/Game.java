@@ -21,6 +21,10 @@ public class Game {
     }
 
     public Color getCurrentTurn() {
+        if (currentTurn == null) {
+            throw new IllegalStateException("Game has not started yet, no player has a turn");
+        }
+        
         return this.currentTurn;
     }
 

@@ -72,7 +72,7 @@ public class GameTest {
         EasyMock.verify(board);
     }
 
-     @Test
+    @Test
     public void StartGame_GetCurrentTurn() {
         Board board = EasyMock.createMock(Board.class);
         Color color = Color.WHITE;
@@ -86,5 +86,20 @@ public class GameTest {
         Color turn = game.getCurrentTurn();
 
         assertEquals(color, turn);
+    }
+
+     @Test
+    public void BeforeStartGame_TurnInvalid() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+
+        IllegalStateException exception = 
+            assertThrows(IllegalStateException.class, 
+                () -> game.getCurrentTurn());
+
+        assertEquals("Game has not started yet, no player has a turn", exception.getMessage());
+
     }
 }

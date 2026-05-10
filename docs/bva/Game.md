@@ -21,7 +21,7 @@
 | ID   | State of the System      |          Expected output       |    Implemented?    |
 |------|--------------------------|--------------------------------|--------------------|
 | TC6  | `startGame()` called     | returns `WHITE`                | :white_check_mark: |
-| TC7  | `startGame()` not called | throws `IllegalStateException` |         :x:        |
+| TC7  | `startGame()` not called | throws `IllegalStateException` | :white_check_mark: |
 
 ### Method under test: `getPieceAt(Position pos)`
 
