@@ -100,4 +100,18 @@ public class GameTest {
         assertEquals("Game has not started yet, no player has a turn", exception.getMessage());
 
     }
+
+    @Test
+    public void BeforeStartGame_NoPieces() {
+        Board board = EasyMock.createMock(Board.class);
+        Position position = new Position(1,1);
+        Game game = new Game(board);
+
+        IllegalStateException exception = 
+            assertThrows(IllegalStateException.class, 
+                () -> game.getPieceAt(position));
+
+        assertEquals("Game has not started yet, no pieces are on the board", exception.getMessage());
+
+    }
 }

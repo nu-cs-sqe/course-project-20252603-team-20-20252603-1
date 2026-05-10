@@ -24,11 +24,14 @@ public class Game {
         if (currentTurn == null) {
             throw new IllegalStateException("Game has not started yet, no player has a turn");
         }
-        
+
         return this.currentTurn;
     }
 
     public Piece getPieceAt(Position pos) {
+        if (currentTurn == null) {
+            throw new IllegalStateException("Game has not started yet, no pieces are on the board");
+        }
         return board.getPieceAt(pos);
     }
 }

@@ -27,7 +27,7 @@
 
 | ID    | State of the System                            |         Expected output          |    Implemented?    |
 |-------|------------------------------------------------|----------------------------------|--------------------|
-| TC8   | `startGame()` not called, input `Position(1,1)`| throws `IllegalStateException`   |         :x:        |
+| TC8   | `startGame()` not called, input `Position(1,1)`| throws `IllegalStateException`   | :white_check_mark: |
 | TC9   | `startGame()` called, input `Position(1,1)`    | returns `Piece(ROOK, WHITE)`     | :white_check_mark: |
 | TC10  | `startGame()` called, input `Position(4,4)`    | throws  `NoSuchElementException` | :white_check_mark: |
 
