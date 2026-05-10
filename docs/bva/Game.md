@@ -2,10 +2,10 @@
 
 ### Method under test: `Game()`
 
-| ID  | State of the System      |          Expected output          | Implemented? |
-|-----|--------------------------|-----------------------------------|--------------|
-| TC1 | new `Game(board)` called | board is non-null                 |      :x:     |
-| TC2 | new `Game(null)` called  | throws `IllegalArgumentException` |      :x:     |
+| ID  | State of the System      |          Expected output          |    Implemented?    |
+|-----|--------------------------|-----------------------------------|--------------------|
+| TC1 | new `Game(board)` called | board is non-null                 |         :x:        |
+| TC2 | new `Game(null)` called  | throws `IllegalArgumentException` | :white_check_mark: |
 
 
 ### Method under test: `startGame()`
