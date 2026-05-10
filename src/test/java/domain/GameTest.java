@@ -88,12 +88,10 @@ public class GameTest {
         assertEquals(color, turn);
     }
 
-     @Test
+    @Test
     public void BeforeStartGame_TurnInvalid() {
         Board board = EasyMock.createMock(Board.class);
         Game game = new Game(board);
-
-        board.initializeBoard();
 
         IllegalStateException exception = 
             assertThrows(IllegalStateException.class, 
