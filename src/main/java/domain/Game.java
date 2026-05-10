@@ -20,6 +20,10 @@ public class Game {
         this.currentTurn = Color.WHITE;
     }
 
+    public Color getCurrentTurn() {
+        return this.currentTurn;
+    }
+
     public Piece getPieceAt(Position pos) {
         return board.getPieceAt(pos);
     }

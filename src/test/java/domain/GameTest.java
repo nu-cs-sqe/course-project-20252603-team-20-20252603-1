@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.NoSuchElementException;
+
 import org.easymock.EasyMock;
 import org.easymock.TestSubject;
 import org.junit.jupiter.api.Test;
@@ -46,5 +48,43 @@ public class GameTest {
         assertEquals(pieceType, actual.getPieceType());
 
         EasyMock.verify(board);
+    }
+
+    @Test
+    public void StartGame_GetPieceAt_EmptySquare() {
+        Board board = EasyMock.createMock(Board.class);
+        Position position = new Position(4,4);
+
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expect(board.getPieceAt(position)).andThrow(new NoSuchElementException("Cannot get piece at empty position"));
+        EasyMock.replay(board);
+
+        game.startGame();
+
+        NoSuchElementException exception = 
+            assertThrows(NoSuchElementException.class, 
+                () -> game.getPieceAt(position));
+
+        assertEquals("Cannot get piece at empty position", exception.getMessage());
+
+        EasyMock.verify(board);
+    }
+
+     @Test
+    public void StartGame_GetCurrentTurn() {
+        Board board = EasyMock.createMock(Board.class);
+        Color color = Color.WHITE;
+
+        Game game = new Game(board);
+
+        board.initializeBoard();
+
+        game.startGame();
+
+        Color turn = game.getCurrentTurn();
+
+        assertEquals(color, turn);
     }
 }
