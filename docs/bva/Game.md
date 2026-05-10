@@ -2,32 +2,34 @@
 
 ### Method under test: `Game()`
 
-| ID  | State of the System | Expected output   | Implemented? |
-|-----|---------------------|-------------------|--------------|
-| TC1 | new `Game()` called | board is non-null |      :x:     |
+| ID  | State of the System      |          Expected output          | Implemented? |
+|-----|--------------------------|-----------------------------------|--------------|
+| TC1 | new `Game(board)` called | board is non-null                 |      :x:     |
+| TC2 | new `Game(null)` called  | throws `IllegalArgumentException` |      :x:     |
+
 
 ### Method under test: `startGame()`
 
 | ID   | State of the System  |                        Expected output                      | Implemented? |
 |------|----------------------|-------------------------------------------------------------|--------------|
-| TC2  | new `Game()` created | `getPieceAt(Position(1,1)` returns `Piece(ROOK, WHITE)`     |      :x:     |
-| TC3  | new `Game()` created | `getPieceAt(Position(4,4)` throws `NoSuchElementException`  |      :x:     |
-| TC4  | new `Game()` created | `getCurrentTurn()` returns `WHITE`                          |      :x:     |
+| TC3  | new `Game()` created | `getPieceAt(Position(1,1)` returns `Piece(ROOK, WHITE)`     |      :x:     |
+| TC4  | new `Game()` created | `getPieceAt(Position(4,4)` throws `NoSuchElementException`  |      :x:     |
+| TC5  | new `Game()` created | `getCurrentTurn()` returns `WHITE`                          |      :x:     |
 
 ### Method under test: `getCurrentTurn()`
 
-| ID   | State of the System      |  Expected output | Implemented? |
-|------|--------------------------|------------------|--------------|
-| TC5  | `startGame()` called     | returns `WHITE`  |      :x:     |
-| TC6  | `startGame()` not called | returns `null`   |      :x:     |
+| ID   | State of the System      |          Expected output       | Implemented? |
+|------|--------------------------|--------------------------------|--------------|
+| TC6  | `startGame()` called     | returns `WHITE`                |      :x:     |
+| TC7  | `startGame()` not called | throws `IllegalStateException` |      :x:     |
 
 ### Method under test: `getPieceAt(Position pos)`
 
-| ID   | State of the System                            |         Expected output          | Implemented? |
-|------|------------------------------------------------|----------------------------------|--------------|
-| TC7  | `startGame()` not called, input `Position(1,1)`| throws `IllegalStateException`   |      :x:     |
-| TC8  | `startGame()` called, input `Position(1,1)`    | returns `Piece(ROOK, WHITE)`     |      :x:     |
-| TC9  | `startGame()` called, input `Position(4,4)`    | throws  `NoSuchElementException` |      :x:     |
+| ID    | State of the System                            |         Expected output          | Implemented? |
+|-------|------------------------------------------------|----------------------------------|--------------|
+| TC8   | `startGame()` not called, input `Position(1,1)`| throws `IllegalStateException`   |      :x:     |
+| TC9   | `startGame()` called, input `Position(1,1)`    | returns `Piece(ROOK, WHITE)`     |      :x:     |
+| TC10  | `startGame()` called, input `Position(4,4)`    | throws  `NoSuchElementException` |      :x:     |
 
 Since BVA has been done on `getPieceAt` under the `Board` class, we are just verifying that delegating to `Board` works as expected.
 
