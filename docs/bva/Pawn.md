@@ -40,7 +40,7 @@
 
 ### Method under test: `hasMoved()`
 
-| ID   | State of the System            | Expected output            | Implemented? |
-|------|--------------------------------|----------------------------|--------------|
-| TC15 | new Pawn, before `markMoved()` | `hasMoved()` returns false | :x:          |
-| TC16 | after `markMoved()` called     | `hasMoved()` returns true  | :x:          |
+| ID   | State of the System            | Expected output            | Implemented?       |
+|------|--------------------------------|----------------------------|--------------------|
+| TC15 | new Pawn, before `markMoved()` | `hasMoved()` returns false | :white_check_mark: |
+| TC16 | after `markMoved()` called     | `hasMoved()` returns true  | :x:                |
