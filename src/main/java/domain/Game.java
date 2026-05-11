@@ -4,8 +4,9 @@ import domain.piece.Color;
 import domain.piece.Piece;
 
 public class Game {
-    private Board board;
+    private final Board board;
     private Color currentTurn;
+    private boolean gameInProgress = false;
 
     public Game(Board board) {
         if (board == null) {
@@ -16,12 +17,12 @@ public class Game {
 
     public void startGame() {
         board.initializeBoard();
-        
+        this.gameInProgress = true;
         this.currentTurn = Color.WHITE;
     }
 
     public Color getCurrentTurn() {
-        if (currentTurn == null) {
+        if (!this.gameInProgress) {
             throw new IllegalStateException("Game has not started yet, no player has a turn");
         }
 
@@ -29,7 +30,7 @@ public class Game {
     }
 
     public Piece getPieceAt(Position pos) {
-        if (currentTurn == null) {
+        if (!this.gameInProgress) {
             throw new IllegalStateException("Game has not started yet, no pieces are on the board");
         }
         return board.getPieceAt(pos);

@@ -1,13 +1,11 @@
 package domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.NoSuchElementException;
 
 import org.easymock.EasyMock;
-import org.easymock.TestSubject;
 import org.junit.jupiter.api.Test;
 
 import domain.piece.*;
@@ -76,16 +74,16 @@ public class GameTest {
     public void StartGame_GetCurrentTurn() {
         Board board = EasyMock.createMock(Board.class);
         Color color = Color.WHITE;
-
         Game game = new Game(board);
-
         board.initializeBoard();
 
+        EasyMock.replay(board);
+
         game.startGame();
-
         Color turn = game.getCurrentTurn();
-
         assertEquals(color, turn);
+
+        EasyMock.verify(board);
     }
 
     @Test
