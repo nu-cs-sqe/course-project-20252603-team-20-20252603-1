@@ -33,10 +33,10 @@
 
 ### Method under test: `markMoved()`
 
-| ID   | State of the System                                   | Expected output                        | Implemented? |
-|------|-------------------------------------------------------|----------------------------------------|--------------|
-| TC13 | new Pawn, `hasMoved`=false, `markMoved()` called once | `hasMoved()` returns true              | :x:          |
-| TC14 | `markMoved()` called a second time                    | `hasMoved()` returns true (idempotent) | :x:          |
+| ID   | State of the System                                   | Expected output                        | Implemented?       |
+|------|-------------------------------------------------------|----------------------------------------|--------------------|
+| TC13 | new Pawn, `hasMoved`=false, `markMoved()` called once | `hasMoved()` returns true              | :white_check_mark: |
+| TC14 | `markMoved()` called a second time                    | `hasMoved()` returns true (idempotent) | :x:                |
 
 ### Method under test: `hasMoved()`
 

@@ -135,4 +135,13 @@ public class PawnTest {
 
         assertEquals(0, candidates.size());
     }
+
+    @Test
+    public void MarkMoved_CalledOnce_HasMovedReturnsTrue() {
+        Pawn pawn = new Pawn(Color.WHITE);
+
+        pawn.markMoved();
+
+        assertTrue(pawn.hasMoved());
+    }
 }
