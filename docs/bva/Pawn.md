@@ -43,4 +43,4 @@
 | ID   | State of the System            | Expected output            | Implemented?       |
 |------|--------------------------------|----------------------------|--------------------|
 | TC15 | new Pawn, before `markMoved()` | `hasMoved()` returns false | :white_check_mark: |
-| TC16 | after `markMoved()` called     | `hasMoved()` returns true  | :x:                |
+| TC16 | after `markMoved()` called     | `hasMoved()` returns true  | :white_check_mark: |

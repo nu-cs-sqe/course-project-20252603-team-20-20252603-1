@@ -161,4 +161,13 @@ public class PawnTest {
 
         assertFalse(pawn.hasMoved());
     }
+
+    @Test
+    public void HasMoved_AfterMarkMoved_ReturnsTrue() {
+        Pawn pawn = new Pawn(Color.WHITE);
+
+        pawn.markMoved();
+
+        assertTrue(pawn.hasMoved());
+    }
 }
