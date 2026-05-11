@@ -27,7 +27,7 @@
 | ID   | State of the System                                       | Expected output                             | Implemented?       |
 |------|-----------------------------------------------------------|---------------------------------------------|--------------------|
 | TC9  | BLACK pawn, `hasMoved`=false, position=`(7,1)` (min col)  | `[(6,1), (5,1)]` - two candidates           | :white_check_mark: |
-| TC10 | BLACK pawn, `hasMoved`=true, position=`(6,1)`             | `[(5,1)]` - one candidate only              | :x:                |
+| TC10 | BLACK pawn, `hasMoved`=true, position=`(6,1)`             | `[(5,1)]` - one candidate only              | :white_check_mark: |
 | TC11 | BLACK pawn, `hasMoved`=true, position=`(2,1)` (row LOW+1) | `[(1,1)]` - one candidate                   | :x:                |
 | TC12 | BLACK pawn, `hasMoved`=true, position=`(1,1)` (row LOW)   | `[]` - empty list, no forward square exists | :x:                |
 

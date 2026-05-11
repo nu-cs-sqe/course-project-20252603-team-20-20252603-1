@@ -99,4 +99,16 @@ public class PawnTest {
         assertFalse(pawn.hasMoved());
         assertEquals(2, candidates.size());
     }
+
+    @Test
+    public void GetCandidateMoves_BlackHasMoved_ReturnsOneCandidate() {
+        Pawn pawn = new Pawn(Color.BLACK);
+        Position position = new Position(6, 1);
+
+        pawn.markMoved();
+
+        List<Position> candidates = pawn.getCandidateMoves(position);
+
+        assertEquals(1, candidates.size());
+    }
 }
