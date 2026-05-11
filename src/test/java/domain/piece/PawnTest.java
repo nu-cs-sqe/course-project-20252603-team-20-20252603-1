@@ -74,4 +74,16 @@ public class PawnTest {
 
         assertEquals(1, candidates.size());
     }
+
+    @Test
+    public void GetCandidateMoves_WhiteHasMovedRowHigh_ReturnsNoCandidates() {
+        Pawn pawn = new Pawn(Color.WHITE);
+        Position position = new Position(8, 1);
+
+        pawn.markMoved();
+
+        List<Position> candidates = pawn.getCandidateMoves(position);
+
+        assertEquals(0, candidates.size());
+    }
 }
