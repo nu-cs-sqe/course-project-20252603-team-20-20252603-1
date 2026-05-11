@@ -2,8 +2,7 @@ package domain.piece;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PawnTest {
     @Test
@@ -20,7 +19,12 @@ public class PawnTest {
         Pawn pawn = new Pawn(Color.BLACK);
 
         assertEquals(PieceType.PAWN, pawn.getPieceType());
-        assertEquals(Color.WHITE, pawn.getColor());
+        assertEquals(Color.BLACK, pawn.getColor());
         assertFalse(pawn.hasMoved());
+    }
+
+    @Test
+    public void Constructor_NullColor_ThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> { new Pawn(null);});
     }
 }
