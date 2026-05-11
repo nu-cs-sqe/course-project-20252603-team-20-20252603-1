@@ -42,9 +42,19 @@ public class PawnTest {
     }
 
     @Test
-    public void GetCandidateMoves_WhiteHasMoved_ReturnsOneCandidate() {
+    public void GetCandidateMoves_WhiteNotMovedMaxCol_ReturnsTwoCandidates() {
         Pawn pawn = new Pawn(Color.WHITE);
         Position position = new Position(2, 8);
+
+        List<Position> candidates = pawn.getCandidateMoves(position);
+
+        assertEquals(2, candidates.size());
+    }
+
+    @Test
+    public void GetCandidateMoves_WhiteHasMoved_ReturnsOneCandidate() {
+        Pawn pawn = new Pawn(Color.WHITE);
+        Position position = new Position(3, 1);
 
         pawn.markMoved();
 
