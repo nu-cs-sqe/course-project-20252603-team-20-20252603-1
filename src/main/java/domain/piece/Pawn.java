@@ -16,6 +16,10 @@ public class Pawn extends Piece{
         return hasMoved;
     }
 
+    public void markMoved() {
+        hasMoved = true;
+    }
+
     public List<Position> getCandidateMoves(Position position) {
         List<Position> candidates = new ArrayList<>();
         // white moves to higher rows, black to lower rows
