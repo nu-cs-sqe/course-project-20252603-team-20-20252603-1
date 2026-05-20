@@ -35,6 +35,6 @@
 | TC8  | color=`WHITE`, position=`(1,1)` | returns: `[(2,3), (3,2)]`                                           | :white_check_mark: |
 | TC9  | color=`BLACK`, position=`(8,8)` | returns: `[(7,6), (6,7)]`                                           | :white_check_mark: |
 | TC10 | color=`BLACK`, position=`(3,3)` | returns: `[(4,5), (4,1), (5,2), (5,4), (2,5), (2,1), (1,2), (1,4)]` | :white_check_mark: |
-| TC11 | color=`WHITE`, position=`(2,3)` | returns: `[(3,5), (3,1), (4,2), (4,4), (1,5), (1,1)]`               | :x:                |
+| TC11 | color=`WHITE`, position=`(2,3)` | returns: `[(3,5), (3,1), (4,2), (4,4), (1,5), (1,1)]`               | :white_check_mark: |
 | TC12 | color=`BLACK`, position=`(7,6)` | returns: `[(8,8), (8,4), (6,8), (6,4), (5,5), (5,7)]`               | :x:                |
 | TC13 | color=`WHITE`, position=`(6,7)` | returns: `[(7,5), (8,6), (8,8), (5,5), (4,6), (4,8)]`               | :x:                |
