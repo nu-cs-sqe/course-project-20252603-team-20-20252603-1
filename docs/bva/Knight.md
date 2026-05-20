@@ -29,7 +29,7 @@
 | ID   | State of the System             | Expected output                                                     | Implemented?       |
 | ---- | ------------------------------- | ------------------------------------------------------------------- | ------------------ |
 | TC4  | color=`WHITE`, position=`(1,4)` | returns: `[(2,6), (2,2), (3, 3), (3, 5)]`                           | :white_check_mark: |
-| TC5  | color=`BLACK`, position=`(8,4)` | returns: `[(7,6), (7,2), (6,3), (6,5)]`                             | :x:                |
+| TC5  | color=`BLACK`, position=`(8,4)` | returns: `[(7,6), (7,2), (6,3), (6,5)]`                             | :white_check_mark: |
 | TC6  | color=`WHITE`, position=`(4,1)` | returns: `[(5,3), (6,2), (3,3), (2,2)]`                             | :x:                |
 | TC7  | color=`BLACK`, position=`(4,8)` | returns: `[(5,6), (6,7), (3,6), (2,7)]`                             | :x:                |
 | TC8  | color=`WHITE`, position=`(1,1)` | returns: `[(2,3), (3,2)]`                                           | :x:                |

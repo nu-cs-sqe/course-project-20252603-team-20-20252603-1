@@ -64,11 +64,16 @@ public class KnightTest {
 
     static Stream<Arguments> getCandidatesProvider() {
         return Stream.of(
-                Arguments.of(Color.WHITE, 1, 4, List.of(
+                Arguments.of(Color.WHITE, 1, 4, List.of( // TC 4
                         new Position(2, 6),
                         new Position(2, 2),
                         new Position(3, 3),
-                        new Position(3, 5))));
+                        new Position(3, 5))),
+                Arguments.of(Color.BLACK, 8, 4, List.of( // TC 5
+                        new Position(7, 6),
+                        new Position(7, 2),
+                        new Position(6, 3),
+                        new Position(6, 5))));
     }
 
 }
