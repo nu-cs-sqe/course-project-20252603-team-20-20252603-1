@@ -33,6 +33,11 @@ public class Position {
         if (other == null) {
             return false;
         }
+
+        if (!(other instanceof Position)) {
+            return false;
+        }
+
         Position otherPosition = (Position) other;
         return this.row == otherPosition.row && this.col == otherPosition.col;
     }

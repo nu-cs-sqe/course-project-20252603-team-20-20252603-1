@@ -30,7 +30,7 @@
 | TC13 | Two Position objects with different row, same col      | false           | :white_check_mark: |
 | TC14 | Two Position objects with same row, different col      | false           | :white_check_mark: |
 | TC15 | Comparing Position to null                             | false           | :white_check_mark: |
-| TC16 | Comparing Position to object that isn't Position       | false           | :x:                |
+| TC16 | Comparing Position to object that isn't Position       | false           | :white_check_mark: |
 
 ### Method under test: `hashCode()`
 

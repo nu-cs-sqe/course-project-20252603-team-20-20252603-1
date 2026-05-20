@@ -1,8 +1,11 @@
 package domain;
 
+import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.awt.List;
 
 public class PositionTest {
     @Test
@@ -83,14 +86,23 @@ public class PositionTest {
 
     @Test
     void equals_sameRowDifferentCol_returnsFalse() {
-        Position position1 = new Position(1,8);
+        Position position1 = new Position(1, 8);
         Position position2 = new Position(1, 1);
         assertFalse(position1.equals(position2));
     }
 
     @Test
     void equals_null_returnsFalse() {
-        Position position = new Position(1,8);
+        Position position = new Position(1, 8);
         assertFalse(position.equals(null));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        Position position = new Position(1, 8);
+        List other = EasyMock.createMock(List.class);
+        EasyMock.replay(other);
+
+        assertFalse(position.equals(other));
     }
 }
