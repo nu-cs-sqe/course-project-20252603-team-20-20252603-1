@@ -5,9 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import domain.Position;
 
@@ -40,23 +44,31 @@ public class KnightTest {
 
     }
 
-    @Test
-    public void GetCandidates_ColorWhiteRow1Col4_ReturnsFourCandidates() {
-        Knight knight = new Knight(Color.WHITE);
+    @ParameterizedTest
+    @MethodSource("getCandidatesProvider")
+    public void GetCandidates_ColorCRowXColY_ReturnsNCandidates(Color color, int row, int col,
+            List<Position> expected) {
+
+        Knight knight = new Knight(color);
         Position position = EasyMock.createMock(Position.class);
 
-        EasyMock.expect(position.getRow()).andStubReturn(1);
-        EasyMock.expect(position.getCol()).andStubReturn(4);
+        EasyMock.expect(position.getRow()).andStubReturn(row);
+        EasyMock.expect(position.getCol()).andStubReturn(col);
         EasyMock.replay(position);
 
-        List<Position> candidates = knight.getCandidateMoves(position);
+        List<Position> actual = knight.getCandidateMoves(position);
 
-        assertEquals(4, candidates.size());
-        assertTrue(candidates.contains(new Position(2, 6)));
-        assertTrue(candidates.contains(new Position(2, 2)));
-        assertTrue(candidates.contains(new Position(3, 3)));
-        assertTrue(candidates.contains(new Position(3, 5)));
+        assertEquals(expected.size(), actual.size());
+        assertTrue(actual.containsAll(expected));
+    }
 
+    static Stream<Arguments> getCandidatesProvider() {
+        return Stream.of(
+                Arguments.of(Color.WHITE, 1, 4, List.of(
+                        new Position(2, 6),
+                        new Position(2, 2),
+                        new Position(3, 3),
+                        new Position(3, 5))));
     }
 
 }
