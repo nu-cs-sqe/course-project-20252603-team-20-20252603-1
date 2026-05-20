@@ -14,4 +14,12 @@ public class KnightTest {
         assertEquals(PieceType.KNIGHT, knight.getPieceType());
     }
 
+    @Test
+    public void Constructor_ColorBlack_KnightCreated() {
+        Knight knight = new Knight(Color.BLACK);
+
+        assertEquals(Color.BLACK, knight.getColor());
+        assertEquals(PieceType.KNIGHT, knight.getPieceType());
+    }
+
 }
