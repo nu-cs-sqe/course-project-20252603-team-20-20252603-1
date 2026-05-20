@@ -24,7 +24,12 @@ public class Position {
         return col;
     }
 
-    public boolean equals(Position other) {
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
         if (other == null) {
             return false;
         }
