@@ -1,6 +1,7 @@
 package domain.piece;
 
 import domain.Position;
+import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -34,7 +35,10 @@ public class PawnTest {
     @Test
     public void GetCandidateMoves_WhiteNotMoved_ReturnsTwoCandidates() {
         Pawn pawn = new Pawn(Color.WHITE);
-        Position position = new Position (2, 1);
+        Position position = EasyMock.createMock(Position.class);
+        EasyMock.expect(position.getRow()).andStubReturn(2);
+        EasyMock.expect(position.getCol()).andStubReturn(1);
+        EasyMock.replay(position);
 
         List<Position> candidates = pawn.getCandidateMoves(position);
 
@@ -44,7 +48,11 @@ public class PawnTest {
     @Test
     public void GetCandidateMoves_WhiteNotMovedMaxCol_ReturnsTwoCandidates() {
         Pawn pawn = new Pawn(Color.WHITE);
-        Position position = new Position(2, 8);
+        Position position = EasyMock.createMock(Position.class);
+        EasyMock.expect(position.getRow()).andStubReturn(2);
+        EasyMock.expect(position.getCol()).andStubReturn(8);
+        EasyMock.replay(position);
+
 
         List<Position> candidates = pawn.getCandidateMoves(position);
 
@@ -54,7 +62,10 @@ public class PawnTest {
     @Test
     public void GetCandidateMoves_WhiteHasMoved_ReturnsOneCandidate() {
         Pawn pawn = new Pawn(Color.WHITE);
-        Position position = new Position(3, 1);
+        Position position = EasyMock.createMock(Position.class);
+        EasyMock.expect(position.getRow()).andStubReturn(3);
+        EasyMock.expect(position.getCol()).andStubReturn(1);
+        EasyMock.replay(position);
 
         pawn.markMoved();
 
@@ -66,7 +77,10 @@ public class PawnTest {
     @Test
     public void GetCandidateMoves_WhiteHasMovedRowHighMinusOne_ReturnsOneCandidate() {
         Pawn pawn = new Pawn(Color.WHITE);
-        Position position = new Position(7, 1);
+        Position position = EasyMock.createMock(Position.class);
+        EasyMock.expect(position.getRow()).andStubReturn(7);
+        EasyMock.expect(position.getCol()).andStubReturn(1);
+        EasyMock.replay(position);
 
         pawn.markMoved();
 
@@ -78,7 +92,10 @@ public class PawnTest {
     @Test
     public void GetCandidateMoves_WhiteHasMovedRowHigh_ReturnsNoCandidates() {
         Pawn pawn = new Pawn(Color.WHITE);
-        Position position = new Position(8, 1);
+        Position position = EasyMock.createMock(Position.class);
+        EasyMock.expect(position.getRow()).andStubReturn(8);
+        EasyMock.expect(position.getCol()).andStubReturn(1);
+        EasyMock.replay(position);
 
         pawn.markMoved();
 
@@ -90,7 +107,10 @@ public class PawnTest {
     @Test
     public void GetCandidateMoves_BlackNotMoved_ReturnsTwoCandidates() {
         Pawn pawn = new Pawn(Color.BLACK);
-        Position position = new Position(7, 1);
+        Position position = EasyMock.createMock(Position.class);
+        EasyMock.expect(position.getRow()).andStubReturn(7);
+        EasyMock.expect(position.getCol()).andStubReturn(1);
+        EasyMock.replay(position);
 
         List<Position> candidates = pawn.getCandidateMoves(position);
 
@@ -103,7 +123,10 @@ public class PawnTest {
     @Test
     public void GetCandidateMoves_BlackHasMoved_ReturnsOneCandidate() {
         Pawn pawn = new Pawn(Color.BLACK);
-        Position position = new Position(6, 1);
+        Position position = EasyMock.createMock(Position.class);
+        EasyMock.expect(position.getRow()).andStubReturn(6);
+        EasyMock.expect(position.getCol()).andStubReturn(1);
+        EasyMock.replay(position);
 
         pawn.markMoved();
 
@@ -115,7 +138,10 @@ public class PawnTest {
     @Test
     public void GetCandidateMoves_BlackHasMovedRowLowPlusOne_ReturnsOneCandidate() {
         Pawn pawn = new Pawn(Color.BLACK);
-        Position position = new Position(2, 1);
+        Position position = EasyMock.createMock(Position.class);
+        EasyMock.expect(position.getRow()).andStubReturn(2);
+        EasyMock.expect(position.getCol()).andStubReturn(1);
+        EasyMock.replay(position);
 
         pawn.markMoved();
 
@@ -127,7 +153,10 @@ public class PawnTest {
     @Test
     public void GetCandidateMoves_BlackHasMovedRowLow_ReturnsNoCandidates() {
         Pawn pawn = new Pawn(Color.BLACK);
-        Position position = new Position(1, 1);
+        Position position = EasyMock.createMock(Position.class);
+        EasyMock.expect(position.getRow()).andStubReturn(1);
+        EasyMock.expect(position.getCol()).andStubReturn(1);
+        EasyMock.replay(position);
 
         pawn.markMoved();
 
