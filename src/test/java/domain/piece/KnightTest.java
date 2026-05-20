@@ -64,32 +64,48 @@ public class KnightTest {
 
     static Stream<Arguments> getCandidatesProvider() {
         return Stream.of(
-                Arguments.of(Color.WHITE, 1, 4, List.of( // TC 4
+                // TC 4
+                Arguments.of(Color.WHITE, 1, 4, List.of(
                         new Position(2, 6),
                         new Position(2, 2),
                         new Position(3, 3),
                         new Position(3, 5))),
-                Arguments.of(Color.BLACK, 8, 4, List.of( // TC 5
+                // TC 5
+                Arguments.of(Color.BLACK, 8, 4, List.of(
                         new Position(7, 6),
                         new Position(7, 2),
                         new Position(6, 3),
                         new Position(6, 5))),
-                Arguments.of(Color.WHITE, 4, 1, List.of( // TC 6
+                // TC 6
+                Arguments.of(Color.WHITE, 4, 1, List.of(
                         new Position(5, 3),
                         new Position(6, 2),
                         new Position(3, 3),
                         new Position(2, 2))),
-                Arguments.of(Color.BLACK, 4, 8, List.of( // TC 7
+                // TC 7
+                Arguments.of(Color.BLACK, 4, 8, List.of(
                         new Position(5, 6),
                         new Position(6, 7),
                         new Position(3, 6),
                         new Position(2, 7))),
-                Arguments.of(Color.WHITE, 1, 1, List.of( // TC 8
+                // TC 8
+                Arguments.of(Color.WHITE, 1, 1, List.of(
                         new Position(2, 3),
                         new Position(3, 2))),
-                Arguments.of(Color.BLACK, 8, 8, List.of( // TC 9
+                // TC 9
+                Arguments.of(Color.BLACK, 8, 8, List.of(
                         new Position(7, 6),
-                        new Position(6, 7 /* lol */))));
+                        new Position(6, 7 /* lol */))),
+                // TC 10
+                Arguments.of(Color.BLACK, 3, 3, List.of(
+                        new Position(4, 5),
+                        new Position(4, 1),
+                        new Position(5, 2),
+                        new Position(5, 4),
+                        new Position(2, 5),
+                        new Position(2, 1),
+                        new Position(1, 2),
+                        new Position(1, 4))));
     }
 
 }
