@@ -16,9 +16,13 @@ public class Game {
     }
 
     public void startGame() {
-        board.initializeBoard();
-        this.gameInProgress = true;
-        this.currentTurn = Color.WHITE;
+        if (this.gameInProgress) {
+            throw new IllegalStateException("Game has already started, cannot restart");
+        } else {
+            board.initializeBoard();
+            this.gameInProgress = true;
+            this.currentTurn = Color.WHITE;
+        }
     }
 
     public Color getCurrentTurn() {
