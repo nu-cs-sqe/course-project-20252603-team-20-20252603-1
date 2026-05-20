@@ -2,8 +2,14 @@ package domain.piece;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
+import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
+
+import domain.Position;
 
 public class KnightTest {
 
@@ -31,6 +37,25 @@ public class KnightTest {
         });
 
         assertEquals("Color cannot be null", actual.getMessage());
+
+    }
+
+    @Test
+    public void GetCandidates_ColorWhiteRow1Col4_ReturnsFourCandidates() {
+        Knight knight = new Knight(Color.WHITE);
+        Position position = EasyMock.createMock(Position.class);
+
+        EasyMock.expect(position.getRow()).andStubReturn(1);
+        EasyMock.expect(position.getCol()).andStubReturn(4);
+        EasyMock.replay(position);
+
+        List<Position> candidates = knight.getCandidateMoves(position);
+
+        assertEquals(4, candidates.size());
+        assertTrue(candidates.contains(new Position(2, 6)));
+        assertTrue(candidates.contains(new Position(2, 2)));
+        assertTrue(candidates.contains(new Position(3, 3)));
+        assertTrue(candidates.contains(new Position(3, 5)));
 
     }
 
