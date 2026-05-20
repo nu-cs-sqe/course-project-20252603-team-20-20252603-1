@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Objects;
+
 public class Position {
 
     private final int row;
@@ -24,11 +26,26 @@ public class Position {
         return col;
     }
 
-    public boolean equals(Position other) {
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
         if (other == null) {
             return false;
         }
+
+        if (!(other instanceof Position)) {
+            return false;
+        }
+
         Position otherPosition = (Position) other;
         return this.row == otherPosition.row && this.col == otherPosition.col;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(row, col);
     }
 }
