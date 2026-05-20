@@ -105,4 +105,11 @@ public class PositionTest {
 
         assertFalse(position.equals(other));
     }
+
+    @Test
+    public void hashCode_twoPositionsRow1Col8_areSame() {
+        Position position1 = new Position(1, 8);
+        Position position2 = new Position(1, 8);
+        assertEquals(position1.hashCode(), position2.hashCode());
+    }
 }

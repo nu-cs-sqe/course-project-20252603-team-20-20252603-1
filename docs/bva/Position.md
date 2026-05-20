@@ -36,8 +36,8 @@
 
 *Including this as the overriding equals must guarantee hashes are the same.*
 
-| ID   | State of the System           | Expected output     | Implemented? |
-| ---- | ----------------------------- | ------------------- | ------------ |
-| TC18 | Two positions of row=1, col=8 | hashCodes are equal | :x:          |
-| TC19 | Two positions of row=8, col=1 | hashCodes are equal | :x:          |
+| ID   | State of the System           | Expected output     | Implemented?       |
+| ---- | ----------------------------- | ------------------- | ------------------ |
+| TC18 | Two positions of row=1, col=8 | hashCodes are equal | :white_check_mark: |
+| TC19 | Two positions of row=8, col=1 | hashCodes are equal | :x:                |
 
