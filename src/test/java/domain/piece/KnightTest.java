@@ -121,7 +121,15 @@ public class KnightTest {
                         new Position(6, 8),
                         new Position(6, 4),
                         new Position(5, 5),
-                        new Position(5, 7))));
+                        new Position(5, 7))),
+                // TC 13
+                Arguments.of(Color.WHITE, 6, 7, List.of(
+                        new Position(7, 5),
+                        new Position(8, 6),
+                        new Position(8, 8),
+                        new Position(5, 5),
+                        new Position(4, 6),
+                        new Position(4, 8))));
     }
 
 }
