@@ -2,11 +2,11 @@
 
 ### Method under test: `Knight(Color color)`
 
-| ID  | State of the System | Expected output                                             | Implemented? |
-| --- | ------------------- | ----------------------------------------------------------- | ------------ |
-| TC1 | color=`WHITE`       | Knight created, `getPieceType()`=KNIGHT, `getColor()`=WHITE | :x:          |
-| TC2 | color=`BLACK`       | Knight created, `getPieceType()`=KNIGHT, `getColor()`=BLACK | :x:          |
-| TC3 | color=`null`        | `IllegalArgumentException` thrown                           | :x:          |
+| ID  | State of the System | Expected output                                             | Implemented?       |
+| --- | ------------------- | ----------------------------------------------------------- | ------------------ |
+| TC1 | color=`WHITE`       | Knight created, `getPieceType()`=KNIGHT, `getColor()`=WHITE | :white_check_mark: |
+| TC2 | color=`BLACK`       | Knight created, `getPieceType()`=KNIGHT, `getColor()`=BLACK | :x:                |
+| TC3 | color=`null`        | `IllegalArgumentException` thrown                           | :x:                |
 
 ### Method under test: `getCandidateMoves(Position position)`
 
