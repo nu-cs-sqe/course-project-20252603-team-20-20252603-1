@@ -38,6 +38,7 @@ public class PositionTest {
     @Test
     void constructor_colBelowLowerBound_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Position(1, 0));
+        assertFalse(Position.validPosition(1, 0));
     }
 
     @Test
