@@ -16,10 +16,6 @@ public class Knight extends Piece {
         super(PieceType.KNIGHT, color);
     }
 
-    private boolean inBounds(int row, int col) {
-        return 1 <= row && row <= 8 && 1 <= col && col <= 8;
-    }
-
     public List<Position> getCandidateMoves(Position position) {
         List<Position> candidates = new ArrayList<Position>();
 
@@ -27,7 +23,7 @@ public class Knight extends Piece {
             int row = position.getRow() + direction[0];
             int col = position.getCol() + direction[1];
 
-            if (1 <= row && row <= 8 && 1 <= col && col <= 8) {
+            if (Position.validPosition(row, col)) {
                 candidates.add(new Position(row, col));
             }
         }
