@@ -31,6 +31,8 @@ public class PositionTest {
     @Test
     void constructor_rowAboveUpperBound_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Position(9, 1));
+        assertFalse(Position.validPosition(9, 1));
+
     }
 
     @Test

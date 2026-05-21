@@ -27,7 +27,7 @@ public class Position {
     }
 
     public static boolean validPosition(int row, int col) {
-        return row >= 1;
+        return row >= 1 && row <= 8;
     }
 
     @Override
