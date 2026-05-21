@@ -5,6 +5,7 @@ plugins {
     id("java")
     // Source: https://plugins.gradle.org/plugin/com.github.spotbugs
     id("com.github.spotbugs") version "6.5.4"
+    checkstyle
 }
 
 
@@ -63,4 +64,17 @@ tasks.spotbugsTest {
         outputLocation = layout.buildDirectory.file("reports/spotbugs/spotbugs-test.html")
         setStylesheet("fancy-hist.xsl")
     }
+}
+
+// Source: Lab 5 build.gradle.kts
+tasks.withType<Checkstyle>().configureEach {
+    reports {
+        xml.required = false
+        html.required = true
+        html.stylesheet = resources.text.fromFile("config/xsl/checkstyle-noframes-severity-sorted.xsl")
+    }
+}
+
+checkstyle{
+    isIgnoreFailures = false
 }
