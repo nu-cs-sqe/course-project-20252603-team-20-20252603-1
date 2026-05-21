@@ -25,6 +25,7 @@ public class PositionTest {
     @Test
     void constructor_rowBelowLowerBound_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Position(0, 1));
+        assertFalse(Position.validPosition(0, 1));
     }
 
     @Test

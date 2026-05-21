@@ -27,7 +27,7 @@ public class Position {
     }
 
     public static boolean validPosition(int row, int col) {
-        return true;
+        return row >= 1;
     }
 
     @Override
