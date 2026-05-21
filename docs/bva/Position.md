@@ -1,14 +1,14 @@
 # BVA: Position
 
 ### Method under test: `Position(int row, int col)`
-|     | State of the System          | Expected output                 | Implemented?       |
-| --- | ---------------------------- | ------------------------------- | ------------------ |
-| TC1 | row=1, col=1 (both at LOW)   | Position created successfully   | :white_check_mark: |
-| TC2 | row=8, col=8 (both at HIGH)  | Position created successfully   | :white_check_mark: |
-| TC3 | row=0, col=1 (row at LOW-1)  | IllegalArgumentException thrown | :white_check_mark: |
-| TC4 | row=9, col=1 (row at HIGH+1) | IllegalArgumentException thrown | :white_check_mark: |
-| TC5 | row=1, col=0 (col at LOW-1)  | IllegalArgumentException thrown | :white_check_mark: |
-| TC6 | row=1, col=9 (col at HIGH+1) | IllegalArgumentException thrown | :white_check_mark: |
+|     | State of the System          | Expected output                                           | Implemented?       |
+| --- | ---------------------------- | --------------------------------------------------------- | ------------------ |
+| TC1 | row=1, col=1 (both at LOW)   | Position created successfully, validPosition is `true`    | :white_check_mark: |
+| TC2 | row=8, col=8 (both at HIGH)  | Position created successfully, validPosition is `true`    | :white_check_mark: |
+| TC3 | row=0, col=1 (row at LOW-1)  | IllegalArgumentException thrown, validPosition is `false` | :white_check_mark: |
+| TC4 | row=9, col=1 (row at HIGH+1) | IllegalArgumentException thrown, validPosition is `false` | :white_check_mark: |
+| TC5 | row=1, col=0 (col at LOW-1)  | IllegalArgumentException thrown, validPosition is `false` | :white_check_mark: |
+| TC6 | row=1, col=9 (col at HIGH+1) | IllegalArgumentException thrown, validPosition is `false` | :white_check_mark: |
 
 ### Method under test: `getRow()`
 |     | State of the System         | Expected output | Implemented?       |
@@ -41,3 +41,6 @@
 | TC18 | Two positions of row=1, col=8 | hashCodes are equal | :white_check_mark: |
 | TC19 | Two positions of row=8, col=1 | hashCodes are equal | :white_check_mark: |
 
+### Method under test: `Position.validPosition(int row, int col)`
+
+*Covered in constructor tests.*
