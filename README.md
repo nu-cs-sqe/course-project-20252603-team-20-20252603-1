@@ -11,6 +11,10 @@
 - JDK 11
 - JUnit 5.10
 - Gradle 8.10
+- Spotbugs 6.5.4
 
 ## Acknowledgements
-REFERENCES, SOURCE OF HELP ETC
+1. Spotbugs build scripts
+   1. https://plugins.gradle.org/plugin/com.github.spotbugs
+   2. https://github.com/spotbugs/spotbugs-gradle-plugin
+   3. Lab 5 build.gradle.kts
