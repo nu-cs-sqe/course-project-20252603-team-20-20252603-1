@@ -43,6 +43,7 @@ public class PawnTest {
         List<Position> candidates = pawn.getCandidateMoves(position);
 
         assertEquals(2, candidates.size());
+        assertTrue(candidates.containsAll(List.of(new Position(3,1), new Position(4,1))));
     }
 
     @Test
@@ -53,10 +54,10 @@ public class PawnTest {
         EasyMock.expect(position.getCol()).andStubReturn(8);
         EasyMock.replay(position);
 
-
         List<Position> candidates = pawn.getCandidateMoves(position);
 
         assertEquals(2, candidates.size());
+        assertTrue(candidates.containsAll(List.of(new Position(3,8), new Position(4,8))));
     }
 
     @Test
@@ -72,6 +73,7 @@ public class PawnTest {
         List<Position> candidates = pawn.getCandidateMoves(position);
 
         assertEquals(1, candidates.size());
+        assertTrue(candidates.contains(new Position(4,1)));
     }
 
     @Test
@@ -87,6 +89,7 @@ public class PawnTest {
         List<Position> candidates = pawn.getCandidateMoves(position);
 
         assertEquals(1, candidates.size());
+        assertTrue(candidates.contains(new Position(8,1)));
     }
 
     @Test
@@ -114,10 +117,8 @@ public class PawnTest {
 
         List<Position> candidates = pawn.getCandidateMoves(position);
 
-        assertEquals(PieceType.PAWN, pawn.getPieceType());
-        assertEquals(Color.BLACK, pawn.getColor());
-        assertFalse(pawn.hasMoved());
         assertEquals(2, candidates.size());
+        assertTrue(candidates.containsAll(List.of(new Position(6,1), new Position(5,1))));
     }
 
     @Test
@@ -133,6 +134,7 @@ public class PawnTest {
         List<Position> candidates = pawn.getCandidateMoves(position);
 
         assertEquals(1, candidates.size());
+        assertTrue(candidates.contains(new Position(5,1)));
     }
 
     @Test
@@ -148,6 +150,7 @@ public class PawnTest {
         List<Position> candidates = pawn.getCandidateMoves(position);
 
         assertEquals(1, candidates.size());
+        assertTrue(candidates.contains(new Position(1,1)));
     }
 
     @Test
