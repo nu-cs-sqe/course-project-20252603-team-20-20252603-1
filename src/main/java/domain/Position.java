@@ -26,6 +26,10 @@ public class Position {
         return col;
     }
 
+    public static boolean validPosition(int row, int col) {
+        return true;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {

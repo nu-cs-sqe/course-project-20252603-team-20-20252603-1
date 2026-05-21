@@ -5,12 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.awt.List;
+import java.util.List;
 
 public class PositionTest {
     @Test
     void constructor_rowAndColAtLowerBound_createsSuccessfully() {
         Position position = new Position(1, 1);
+        assertTrue(Position.validPosition(1, 1));
         assertNotNull(position);
     }
 
