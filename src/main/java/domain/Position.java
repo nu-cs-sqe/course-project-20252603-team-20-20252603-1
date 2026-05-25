@@ -25,6 +25,11 @@ public class Position {
         this.col = col;
     }
 
+    @Override
+    protected final void finalize() throws Throwable {
+        // SpotBugs: prevent finalizer attacks.
+    }
+
     public int getRow() {
         return row;
     }
