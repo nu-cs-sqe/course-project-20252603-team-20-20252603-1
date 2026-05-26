@@ -30,6 +30,21 @@
 5. [in review] Annabelle: Game class implementation [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/17)
 6. [done] Domingo: Design Doc for Pawn piece [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/18)
 
+# Week 7 (05/11/2026-05/17/2026) 
+**Planning and Progress Tracking**:
+N/A, same status as last week.
+
+# Week 8 (05/18/2026-05/24/2026) 
+**Planning and Progress Tracking**:
+1. [done] Kavi: Knight Movement [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/24)
+2. [done] Kavi: Linter Setup [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/27)
+3. [done] Domingo: Pawn Movement [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/19)
+4. [in-progress]: Linter Consensus
+5. [in-progress]: Coverage and mutation testing: set up on wip-mutation-coverage-setup, remaining work is improving kill rate and coverage gaps before merging
+5. [TODO] Annabelle: GUI Setup
+6. [TODO]: [Queen](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/issues/26) and [Bishop](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/issues/25) Moves
+7. [TODO]: Integrate Pawn and Knight w/ Game class & GUI [US-3](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/issues/10)
+
 
 # Week X (XX/XX/2026-XX/XX/2026) TEMPLATE (You can change the format to whatever the team likes better)
 **Planning and Progress Tracking**:
