@@ -3,6 +3,8 @@ package domain;
 import domain.piece.Color;
 import domain.piece.Piece;
 import domain.piece.PieceType;
+
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -39,5 +41,13 @@ public class Board {
     return pieceAt(position).orElseThrow(
         () -> new NoSuchElementException("Cannot get piece at empty position")
     );
+  }
+
+  public Piece[][] getSnapshot() {
+    Piece[][] copy = new Piece[8][8];
+    for (int i = 0; i < 8; i++) {
+        copy[i] = Arrays.copyOf(squares[i], 8);
+    }
+    return copy;
   }
 }
