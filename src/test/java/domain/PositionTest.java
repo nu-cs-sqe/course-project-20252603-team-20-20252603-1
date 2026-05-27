@@ -126,4 +126,11 @@ public class PositionTest {
         Position position2 = new Position(8, 1);
         assertEquals(position1.hashCode(), position2.hashCode());
     }
+
+    @Test
+    public void hashCode_differentPositions_returnsDifferentHashCodes() {
+        Position position1 = new Position(1, 1);
+        Position position2 = new Position(1, 2);
+        assertNotEquals(position1.hashCode(), position2.hashCode());
+    }
 }
