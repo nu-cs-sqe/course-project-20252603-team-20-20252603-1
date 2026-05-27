@@ -15,6 +15,10 @@ public class Game {
         this.board = board;
     }
 
+    @Override
+    protected final void finalize() throws Throwable {
+    }
+
     public void startGame() {
         if (this.gameInProgress) {
             throw new IllegalStateException("Game has already started, cannot restart");

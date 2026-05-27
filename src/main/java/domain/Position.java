@@ -4,18 +4,29 @@ import java.util.Objects;
 
 public class Position {
 
+    private static final int LOWER_BOUND = 1;
+    private static final int UPPER_BOUND = 8;
+
     private final int row;
     private final int col;
 
+    private static boolean coordinateInBounds(int coord) {
+        return (coord >= LOWER_BOUND) && (coord <= UPPER_BOUND);
+    }
+
     public Position(int row, int col) {
-        if (row < 1 || row > 8) {
+        if (!coordinateInBounds(row)) {
             throw new IllegalArgumentException("Row must be between 1 and 8");
         }
-        if (col < 1 || col > 8) {
+        if (!coordinateInBounds(col)) {
             throw new IllegalArgumentException("Col must be between 1 and 8");
         }
         this.row = row;
         this.col = col;
+    }
+
+    @Override
+    protected final void finalize() throws Throwable {
     }
 
     public int getRow() {
@@ -27,7 +38,7 @@ public class Position {
     }
 
     public static boolean validPosition(int row, int col) {
-        return row >= 1 && row <= 8 && col >= 1 && col <= 8;
+        return coordinateInBounds(row) && coordinateInBounds(col);
     }
 
     @Override
