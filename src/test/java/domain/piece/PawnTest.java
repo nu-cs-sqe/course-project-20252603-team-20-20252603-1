@@ -230,4 +230,32 @@ public class PawnTest {
         assertEquals(1, candidates.size());
         assertTrue(candidates.contains(new Position(1, 1)));
     }
+
+    @Test
+    public void GetCandidateMoves_BlackNotMovedTwoForwardAtLowerBound_ReturnsTwoCandidates() {
+        Pawn pawn = new Pawn(Color.BLACK);
+        Position position = EasyMock.createMock(Position.class);
+        EasyMock.expect(position.getRow()).andStubReturn(3);
+        EasyMock.expect(position.getCol()).andStubReturn(1);
+        EasyMock.replay(position);
+
+        List<Position> candidates = pawn.getCandidateMoves(position);
+
+        assertEquals(2, candidates.size());
+        assertTrue(candidates.containsAll(List.of(new Position(2, 1), new Position(1, 1))));
+    }
+
+    @Test
+    public void GetCandidateMoves_WhiteNotMovedTwoForwardAtUpperBound_ReturnsTwoCandidates() {
+        Pawn pawn = new Pawn(Color.WHITE);
+        Position position = EasyMock.createMock(Position.class);
+        EasyMock.expect(position.getRow()).andStubReturn(6);
+        EasyMock.expect(position.getCol()).andStubReturn(1);
+        EasyMock.replay(position);
+
+        List<Position> candidates = pawn.getCandidateMoves(position);
+
+        assertEquals(2, candidates.size());
+        assertTrue(candidates.containsAll(List.of(new Position(7, 1), new Position(8, 1))));
+    }
 }
