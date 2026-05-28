@@ -16,6 +16,10 @@ public class Piece {
         this.color = color;
     }
 
+    @Override
+    protected final void finalize() throws Throwable {
+    }
+
     public Color getColor() {
         return color;
     }
