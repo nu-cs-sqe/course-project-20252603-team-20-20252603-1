@@ -21,8 +21,6 @@ public class GameTest {
             });
 
 	    assertEquals("No valid board passed", exception.getMessage());
-
-
     }
 
     @Test
@@ -96,7 +94,6 @@ public class GameTest {
                 () -> game.getCurrentTurn());
 
         assertEquals("Game has not started yet, no player has a turn", exception.getMessage());
-
     }
 
     @Test
@@ -110,6 +107,22 @@ public class GameTest {
                 () -> game.getPieceAt(position));
 
         assertEquals("Game has not started yet, no pieces are on the board", exception.getMessage());
+    }
 
+    @Test
+    public void StartGame_AlreadyStarted_ThrowsIllegalState() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.replay(board);
+
+        game.startGame();
+
+        IllegalStateException exception = assertThrows(IllegalStateException.class, () -> game.startGame());
+
+        assertEquals("Game has already started, cannot restart", exception.getMessage());
+
+        EasyMock.verify(board);
     }
 }
