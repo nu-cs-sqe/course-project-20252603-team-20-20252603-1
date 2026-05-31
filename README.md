@@ -23,3 +23,5 @@
    1. Lab 5 `build.gradle.kts`
    2. [XSL sheet](https://github.com/checkstyle/contribution/blob/master/xsl/checkstyle-noframes-severity-sorted.xsl)
    3. [Google config](https://github.com/checkstyle/checkstyle/blob/checkstyle-9.3/src/main/resources/google_checks.xml)
+3. GUI Starter code
+   1. https://github.com/nu-cs-sqe/example-chess-startercode-with-java-swing-20252603-annabellesole2026
