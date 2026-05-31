@@ -16,7 +16,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BoardView extends JPanel {
+public class BoardView extends JPanel implements BoardChangeListener{
     private static final int BOARD_SIZE = 8;
     private static final int TILE_SIZE = 100; // size of each square in pixels
     private final java.awt.Color LIGHT_SQUARE_COLOR = new java.awt.Color(240, 217, 181);
@@ -29,14 +29,22 @@ public class BoardView extends JPanel {
     private Map<PieceType, Image> whitePieceImages;
     private Map<PieceType, Image> blackPieceImages;
 
-    private BoardController boardController;
+    private final BoardController boardController;
 
-    public BoardView(BoardController boardController) {
+    public BoardView() {
         setPreferredSize(new Dimension(BOARD_SIZE * TILE_SIZE, BOARD_SIZE * TILE_SIZE));
         loadPieceImages();
-        this.boardController = boardController;
-        boardController.setBoardView(this);
+        this.boardController = new BoardController(this);
         addMouseListener(new BoardMouseListener());
+    }
+
+    @Override
+    protected final void finalize() throws Throwable {   
+    }
+
+    @Override
+    public void onBoardChanged() {
+        repaint();
     }
 
     @Override

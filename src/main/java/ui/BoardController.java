@@ -5,20 +5,18 @@ import domain.Position;
 import domain.piece.Piece;
 
 public class BoardController {
-    private BoardView boardView;
-    private Board board;
+    private final BoardChangeListener changeListener;
+    private final Board board;
 
-    public BoardController() {
+    public BoardController(BoardChangeListener changeListener) {
+        this.changeListener = changeListener;
         this.board = new Board();
         board.initializeBoard();
     }
 
-    void setBoardView(BoardView boardView) {
-        this.boardView = boardView;
-    }
-
     public void handleSquareClick(Position location) {
         // TODO
+        changeListener.onBoardChanged();;
         System.out.println("TEST: Square clicked at " + location.getRow() + ", " + location.getCol());
     }
 
