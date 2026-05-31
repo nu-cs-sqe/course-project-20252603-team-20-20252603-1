@@ -13,6 +13,8 @@
 - Gradle 8.10
 - Spotbugs 6.5.4
 - Checkstyle 9.3
+- JaCoCo 0.8.x
+- Pitest 1.15.0
 
 ## Acknowledgements
 1. Spotbugs build scripts
@@ -23,3 +25,9 @@
    1. Lab 5 `build.gradle.kts`
    2. [XSL sheet](https://github.com/checkstyle/contribution/blob/master/xsl/checkstyle-noframes-severity-sorted.xsl)
    3. [Google config](https://github.com/checkstyle/checkstyle/blob/checkstyle-9.3/src/main/resources/google_checks.xml)
+3. JaCoCo
+   1. https://docs.gradle.org/current/userguide/jacoco_plugin.html
+   2. Lab 5 `build.gradle.kts`
+4. Pitest
+   1. https://gradle-pitest-plugin.solidsoft.info/
+   2. Lab 5 `build.gradle.kts`
