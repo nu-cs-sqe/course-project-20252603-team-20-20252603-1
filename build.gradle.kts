@@ -6,6 +6,8 @@ plugins {
     // Source: https://plugins.gradle.org/plugin/com.github.spotbugs
     id("com.github.spotbugs") version "6.5.4"
     checkstyle
+    jacoco
+    id("info.solidsoft.pitest") version "1.15.0"
 }
 
 
@@ -33,8 +35,11 @@ tasks.compileJava {
     options.release = 11
 }
 
+// Source: Lab 5 build.gradle.kts
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+    finalizedBy(tasks.pitest)
 }
 
 // Source: https://github.com/spotbugs/spotbugs-gradle-plugin
@@ -67,6 +72,21 @@ tasks.spotbugsTest {
 }
 
 // Source: Lab 5 build.gradle.kts
+// https://docs.gradle.org/current/userguide/jacoco_plugin.html
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir("reports/jacoco")
+    }
+}
+
+tasks.build {
+    dependsOn("pitest")
+}
+
+// Source: Lab 5 build.gradle.kts
 tasks.withType<Checkstyle>().configureEach {
     reports {
         xml.required = false
@@ -77,4 +97,23 @@ tasks.withType<Checkstyle>().configureEach {
 
 checkstyle{
     isIgnoreFailures = false
+}
+
+// Source: Lab 5 build.gradle.kts
+// https://gradle-pitest-plugin.solidsoft.info/
+pitest {
+    targetClasses = setOf("domain.*")
+    targetTests = setOf("domain.*")
+    junit5PluginVersion = "1.2.1"
+    pitestVersion = "1.15.0"
+
+    threads = 4
+    outputFormats = setOf("HTML")
+    timestampedReports = false
+    testSourceSets.set(listOf(sourceSets.test.get()))
+    mainSourceSets.set(listOf(sourceSets.main.get()))
+    jvmArgs.set(listOf("-Xmx1024m"))
+    useClasspathFile.set(true)
+    fileExtensionsToFilter.addAll("xml")
+    exportLineCoverage = true
 }
