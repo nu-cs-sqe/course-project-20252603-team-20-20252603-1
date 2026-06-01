@@ -189,11 +189,35 @@ public class QueenTest {
 
         List<Position> expected = List.of(
                 new Position(5,1), new Position(6,1), new Position(7,1), new Position(8,1),
-                new Position(3,1), new Position(2,1), new Position(1,1),
-                new Position(4,2), new Position(4,3), new Position(4,4),
-                new Position(4,5), new Position(4,6), new Position(4,7), new Position(4,8),
-                new Position(5,2), new Position(6,3), new Position(7,4), new Position(8,5),
-                new Position(3,2), new Position(2,3), new Position(1,4)
+                new Position(3,1), new Position(2,1), new Position(1,1), new Position(4,2),
+                new Position(4,3), new Position(4,4), new Position(4,5), new Position(4,6),
+                new Position(4,7), new Position(4,8), new Position(5,2), new Position(6,3),
+                new Position(7,4), new Position(8,5), new Position(3,2), new Position(2,3),
+                new Position(1,4)
+        );
+
+        assertEquals(21, actual.size());
+        assertTrue(actual.containsAll(expected));
+    }
+
+    @Test
+    public void GetCandidateMoves_Black_Row4_Col8_Returns21Candidates() {
+        Queen queen = new Queen(Color.BLACK);
+        Position position = EasyMock.createMock(Position.class);
+
+        EasyMock.expect(position.getRow()).andStubReturn(4);
+        EasyMock.expect(position.getCol()).andStubReturn(8);
+        EasyMock.replay(position);
+
+        List<Position> actual = queen.getCandidateMoves(position);
+
+        List<Position> expected = List.of(
+                new Position(5,8), new Position(6,8), new Position(7,8), new Position(8,8),
+                new Position(3,8), new Position(2,8), new Position(1,8), new Position(4,7),
+                new Position(4,6), new Position(4,5), new Position(4,4), new Position(4,3),
+                new Position(4,2), new Position(4,1), new Position(5,7), new Position(6,6),
+                new Position(7,5), new Position(8,4), new Position(3,7), new Position(2,6),
+                new Position(1,5)
         );
 
         assertEquals(21, actual.size());
