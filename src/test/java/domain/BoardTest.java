@@ -3,6 +3,8 @@ package domain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import domain.piece.Color;
@@ -251,5 +253,41 @@ public class BoardTest {
     assertEquals(Color.BLACK, actual.getColor());
     assertEquals(PieceType.PAWN, actual.getPieceType());
     assertFalse(board.isEmpty(position));
+  }
+
+  @Test
+  public void GetSnapshot_NewBoard_AllSquaresNull() {
+    Board board = new Board();
+
+    Piece[][] snapshot = board.getSnapshot();
+
+    for (int row = 0; row < 8; row++) {
+      for (int col = 0; col < 8; col++) {
+        assertNull(snapshot[row][col]);
+      }
+    }
+  }
+
+  @ParameterizedTest
+  @CsvSource({
+      "0, 0, WHITE, ROOK",
+      "0, 7, WHITE, ROOK",
+      "7, 0, BLACK, ROOK",
+      "1, 0, WHITE, PAWN",
+      "6, 0, BLACK, PAWN",
+      "0, 1, WHITE, KNIGHT",
+      "0, 4, WHITE, KING",
+  })
+  public void GetSnapshot_AfterInit_CorrectPiecesAt0IndexedPositions(
+      int row, int col, Color color, PieceType pieceType) {
+    Board board = new Board();
+    board.initializeBoard();
+
+    Piece[][] snapshot = board.getSnapshot();
+    Piece actual = snapshot[row][col];
+
+    assertNotNull(actual);
+    assertEquals(color, actual.getColor());
+    assertEquals(pieceType, actual.getPieceType());
   }
 }

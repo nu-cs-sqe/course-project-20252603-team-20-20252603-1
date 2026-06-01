@@ -31,3 +31,5 @@
 4. Pitest
    1. https://gradle-pitest-plugin.solidsoft.info/
    2. Lab 5 `build.gradle.kts`
+5. GUI Starter code
+   1. https://github.com/nu-cs-sqe/example-chess-startercode-with-java-swing-20252603-annabellesole2026
