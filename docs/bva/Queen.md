@@ -6,7 +6,7 @@
 |-----|---------------------|-------------------------------------------------------|--------------------|
 | TC1 | color=WHITE         | Queen created, getPieceType()=QUEEN, getColor()=WHITE | :white_check_mark: |
 | TC2 | color=BLACK         | Queen created, getPieceType()=QUEEN, getColor()=BLACK | :white_check_mark: |
-| TC3 | color=null          | IllegalArgumentException thrown                       | :x:                |
+| TC3 | color=null          | IllegalArgumentException thrown                       | :white_check_mark: |
 
 ### Method under test: getCandidateMoves(Position position)
 

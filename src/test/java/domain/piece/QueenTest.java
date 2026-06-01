@@ -3,6 +3,7 @@ package domain.piece;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class QueenTest {
     @Test
@@ -19,5 +20,12 @@ public class QueenTest {
 
         assertEquals(Color.BLACK, queen.getColor());
         assertEquals(PieceType.QUEEN, queen.getPieceType());
+    }
+
+    @Test
+    public void Constructor_ColorNull_ThrowsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Queen(null);
+        });
     }
 }
