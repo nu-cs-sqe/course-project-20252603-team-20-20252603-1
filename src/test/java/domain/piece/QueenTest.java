@@ -12,4 +12,12 @@ public class QueenTest {
         assertEquals(Color.WHITE, queen.getColor());
         assertEquals(PieceType.QUEEN, queen.getPieceType());
     }
+
+    @Test
+    public void Constructor_ColorBlack_QueenCreated() {
+        Queen queen = new Queen(Color.BLACK);
+
+        assertEquals(Color.BLACK, queen.getColor());
+        assertEquals(PieceType.QUEEN, queen.getPieceType());
+    }
 }
