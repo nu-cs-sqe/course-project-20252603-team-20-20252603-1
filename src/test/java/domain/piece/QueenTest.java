@@ -223,4 +223,29 @@ public class QueenTest {
         assertEquals(21, actual.size());
         assertTrue(actual.containsAll(expected));
     }
+
+    @Test
+    public void GetCandidateMoves_White_Row4_Col4_Returns27Candidates() {
+        Queen queen = new Queen(Color.WHITE);
+        Position position = EasyMock.createMock(Position.class);
+
+        EasyMock.expect(position.getRow()).andStubReturn(4);
+        EasyMock.expect(position.getCol()).andStubReturn(4);
+        EasyMock.replay(position);
+
+        List<Position> actual = queen.getCandidateMoves(position);
+
+        List<Position> expected = List.of(
+                new Position(5,4), new Position(6,4), new Position(7,4), new Position(8,4),
+                new Position(3,4), new Position(2,4), new Position(1,4), new Position(4,5),
+                new Position(4,6), new Position(4,7), new Position(4,8), new Position(4,3),
+                new Position(4,2), new Position(4,1), new Position(5,5), new Position(6,6),
+                new Position(7,7), new Position(8,8), new Position(5,3), new Position(6,2),
+                new Position(7,1), new Position(3,5), new Position(2,6), new Position(1,7),
+                new Position(3,3), new Position(2,2), new Position(1,1)
+        );
+
+        assertEquals(27, actual.size());
+        assertTrue(actual.containsAll(expected));
+    }
 }
