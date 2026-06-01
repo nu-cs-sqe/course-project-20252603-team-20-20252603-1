@@ -5,7 +5,6 @@ import java.awt.*;
 
 public class MainView extends JFrame {
     private BoardView boardView;
-    private BoardController boardController;
 
     private GameStatsView gameStatsView;
     private String player1Name;
@@ -35,8 +34,7 @@ public class MainView extends JFrame {
         add(gameStatsView, BorderLayout.PAGE_START);
     }
     private void addBoardView() {
-        boardController = new BoardController();
-        boardView = new BoardView(boardController);
+        boardView = new BoardView();
         add(boardView, BorderLayout.CENTER);
     }
 }
