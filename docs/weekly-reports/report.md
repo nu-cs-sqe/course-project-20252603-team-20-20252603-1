@@ -45,6 +45,16 @@ N/A, same status as last week.
 6. [TODO]: [Queen](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/issues/26) and [Bishop](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/issues/25) Moves
 7. [TODO]: Integrate Pawn and Knight w/ Game class & GUI [US-3](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/issues/10)
 
+# Week 9 (05/24/2026-05/31/2026) 
+**Planning and Progress Tracking**:
+1. [done] All: US-2 Complete [US-2](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/issues/9)
+2. [done] Domingo: Coverage and Mutation setup, and testing [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/31)
+3. [done] Annabelle: GUI setup [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/30)
+4. [in-progress]: Domingo: Queen Movement
+5. [in-progress]: Kavi: Bishop Movement
+6. [in-progress]: Annabelle: Rook Movement
+7. [TODO]: US-3: Allow user to move a piece
+8. [TODO]: US-3: GUI highlights legal moves of a piece, GUI responds when player moves a piece
 
 # Week X (XX/XX/2026-XX/XX/2026) TEMPLATE (You can change the format to whatever the team likes better)
 **Planning and Progress Tracking**:
