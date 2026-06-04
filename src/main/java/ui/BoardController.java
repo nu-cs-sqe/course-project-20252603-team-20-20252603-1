@@ -17,7 +17,8 @@ public class BoardController {
     public void handleSquareClick(Position location) {
         // TODO
         changeListener.onBoardChanged();;
-        System.out.println("TEST: Square clicked at " + location.getRow() + ", " + location.getCol());
+        System.out.println("TEST: Square clicked at "
+                + location.getRow() + ", " + location.getCol());
     }
 
     public Piece[][] getBoardSnapshot() {
