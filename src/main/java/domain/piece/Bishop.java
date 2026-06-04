@@ -1,9 +1,8 @@
 package domain.piece;
 
+import domain.Position;
 import java.util.ArrayList;
 import java.util.List;
-
-import domain.Position;
 
 public class Bishop extends Piece {
 
@@ -36,8 +35,8 @@ public class Bishop extends Piece {
         List<Position> candidates = new ArrayList<Position>();
 
         for (int[] direction : MOVE_VECTORS) {
-            List<Position> new_moves = getCandidateMovesForDirection(direction, position);
-            candidates.addAll(new_moves);
+            List<Position> newMoves = getCandidateMovesForDirection(direction, position);
+            candidates.addAll(newMoves);
         }
 
         return candidates;
