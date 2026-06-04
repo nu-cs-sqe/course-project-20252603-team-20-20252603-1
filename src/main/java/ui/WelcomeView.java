@@ -1,34 +1,55 @@
 package ui;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class WelcomeView extends JFrame {
+
+    private static final int WINDOW_SIZE = 600;
+    private static final int INSET_SIZE = 10;
+    private static final int FONT_SIZE_TITLE = 28;
+    private static final int FONT_SIZE_LABEL = 16;
+    private static final int FONT_SIZE_BUTTON = 20;
+    private static final int TEXT_FIELD_COLUMNS = 20;
+    private static final int BUTTON_ROW = 3;
+    private static final int BORDER_THICKNESS = 2;
+    private static final Color NU_PURPLE = new Color(104, 76, 150);
 
     private JTextField player1NameField;
     private JTextField player2NameField;
 
     public WelcomeView() {
         setTitle("Welcome Screen!");
-        setSize(600, 600);
+        setSize(WINDOW_SIZE, WINDOW_SIZE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        createWelcomeScreenUI();
+        createWelcomeScreen();
     }
 
-    private void createWelcomeScreenUI() {
+    private void createWelcomeScreen() {
         JPanel welcomePanel = new JPanel(new GridBagLayout());
-        welcomePanel.setBackground(new Color(104, 76, 150)); // NU Purple 80
+        welcomePanel.setBackground(NU_PURPLE);
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.insets = new Insets(INSET_SIZE, INSET_SIZE, INSET_SIZE, INSET_SIZE);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Welcome message
         JLabel welcomeLabel = new JLabel("Welcome to our Chess Game!", SwingConstants.CENTER);
-        welcomeLabel.setFont(new Font("Arial", Font.BOLD, 28));
-        welcomeLabel.setForeground(new Color(255, 255, 255));
+        welcomeLabel.setFont(new Font("Arial", Font.BOLD, FONT_SIZE_TITLE));
+        welcomeLabel.setForeground(Color.WHITE);
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
@@ -39,11 +60,11 @@ public class WelcomeView extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 1;
         JLabel player1NameLabel = new JLabel("Player 1 Name:");
-        player1NameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-        player1NameLabel.setForeground(new Color(255, 255, 255));
+        player1NameLabel.setFont(new Font("Arial", Font.PLAIN, FONT_SIZE_LABEL));
+        player1NameLabel.setForeground(Color.WHITE);
         welcomePanel.add(player1NameLabel, gbc);
-        player1NameField = new JTextField(20);
-        player1NameField.setFont(new Font("Arial", Font.PLAIN, 16));
+        player1NameField = new JTextField(TEXT_FIELD_COLUMNS);
+        player1NameField.setFont(new Font("Arial", Font.PLAIN, FONT_SIZE_LABEL));
         gbc.gridx = 1;
         gbc.gridy = 1;
         welcomePanel.add(player1NameField, gbc);
@@ -52,23 +73,23 @@ public class WelcomeView extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 2;
         JLabel player2NameLabel = new JLabel("Player 2 Name:");
-        player2NameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-        player2NameLabel.setForeground(new Color(255, 255, 255));
+        player2NameLabel.setFont(new Font("Arial", Font.PLAIN, FONT_SIZE_LABEL));
+        player2NameLabel.setForeground(Color.WHITE);
         welcomePanel.add(player2NameLabel, gbc);
-        player2NameField = new JTextField(20);
-        player2NameField.setFont(new Font("Arial", Font.PLAIN, 16));
+        player2NameField = new JTextField(TEXT_FIELD_COLUMNS);
+        player2NameField.setFont(new Font("Arial", Font.PLAIN, FONT_SIZE_LABEL));
         gbc.gridx = 1;
         gbc.gridy = 2;
         welcomePanel.add(player2NameField, gbc);
 
         // Start Game Button
         JButton startGameButton = new JButton("Start Game");
-        startGameButton.setFont(new Font("Arial", Font.BOLD, 20));
+        startGameButton.setFont(new Font("Arial", Font.BOLD, FONT_SIZE_BUTTON));
         startGameButton.setOpaque(true);
         startGameButton.setBackground(Color.WHITE);
         startGameButton.setForeground(Color.BLACK);
-
-        startGameButton.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255), 2, true));
+        startGameButton.setBorder(
+                BorderFactory.createLineBorder(Color.WHITE, BORDER_THICKNESS, true));
         startGameButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Hand cursor on hover
         startGameButton.addActionListener(e -> {
             // Get player names
@@ -86,7 +107,7 @@ public class WelcomeView extends JFrame {
             mainScreen.setVisible(true);
         });
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = BUTTON_ROW;
         gbc.gridwidth = 2; // Span two columns
         gbc.anchor = GridBagConstraints.CENTER; // Center the button
         welcomePanel.add(startGameButton, gbc);
