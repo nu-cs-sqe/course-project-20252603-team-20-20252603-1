@@ -1,13 +1,12 @@
 package ui;
 
 import domain.Position;
-import domain.piece.Piece;
 import domain.piece.Color;
+import domain.piece.Piece;
 import domain.piece.PieceType;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -15,14 +14,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
-public class BoardView extends JPanel implements BoardChangeListener{
+public class BoardView extends JPanel implements BoardChangeListener {
     private static final int BOARD_SIZE = 8;
     private static final int TILE_SIZE = 100; // size of each square in pixels
-    private final java.awt.Color LIGHT_SQUARE_COLOR = new java.awt.Color(240, 217, 181);
-    private final java.awt.Color DARK_SQUARE_COLOR = new java.awt.Color(181, 136, 99);
-
-    private final java.awt.Color SELECTED_SQUARE_COLOR = new java.awt.Color(164, 149, 195); // NU Purple 40
+    private final java.awt.Color lightSquareColor = new java.awt.Color(240, 217, 181);
+    private final java.awt.Color darkSquareColor = new java.awt.Color(181, 136, 99);
+    private final java.awt.Color selectedSquareColor = new java.awt.Color(164, 149, 195);
     private int selectedRow = -1;
     private int selectedCol = -1;
 
@@ -39,7 +39,7 @@ public class BoardView extends JPanel implements BoardChangeListener{
     }
 
     @Override
-    protected final void finalize() throws Throwable {   
+    protected final void finalize() throws Throwable {
     }
 
     @Override
@@ -58,14 +58,15 @@ public class BoardView extends JPanel implements BoardChangeListener{
     private void drawBoard(Graphics g) {
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
-                java.awt.Color squareColor = (row + col) % 2 == 0 ? LIGHT_SQUARE_COLOR : DARK_SQUARE_COLOR;
+                java.awt.Color squareColor = (row + col) % 2 == 0
+                        ? lightSquareColor : darkSquareColor;
                 g.setColor(squareColor);
                 g.fillRect(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
             }
         }
     }
 
-    private void loadPieceImages(){
+    private void loadPieceImages() {
 
         whitePieceImages = new HashMap<>();
         blackPieceImages = new HashMap<>();
@@ -85,7 +86,7 @@ public class BoardView extends JPanel implements BoardChangeListener{
         loadOnePieceImage(PieceType.KING, Color.BLACK, "images/black_king.png");
     }
 
-    private void loadOnePieceImage(PieceType type, Color color, String imagePath){
+    private void loadOnePieceImage(PieceType type, Color color, String imagePath) {
         InputStream imageInputStream = getClass().getClassLoader().getResourceAsStream(imagePath);
         BufferedImage image = null;
         try {
@@ -93,31 +94,33 @@ public class BoardView extends JPanel implements BoardChangeListener{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if (color.equals(Color.BLACK))
+        if (color.equals(Color.BLACK)) {
             blackPieceImages.put(type, image);
-        else
+        } else {
             this.whitePieceImages.put(type, image);
+        }
     }
 
-    private void drawPieces(Graphics g){
+    private void drawPieces(Graphics g) {
 
         Piece[][] boardSnapshot = boardController.getBoardSnapshot();
 
-        for(int row = 0; row < BOARD_SIZE; row++) {
+        for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 Piece piece = boardSnapshot[row][col];
                 if (piece != null) {
-                    Image pieceImage = piece.getColor() == Color.WHITE ?
-                        whitePieceImages.get(piece.getPieceType()) :
-                        blackPieceImages.get(piece.getPieceType());
-                    g.drawImage(pieceImage, col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE, this);
+                    Image pieceImage = piece.getColor() == Color.WHITE
+                            ? whitePieceImages.get(piece.getPieceType())
+                            : blackPieceImages.get(piece.getPieceType());
+                    g.drawImage(pieceImage, col * TILE_SIZE, row * TILE_SIZE,
+                            TILE_SIZE, TILE_SIZE, this);
                 }
             }
         }
     }
 
-    private void drawSelectedSquare(Graphics g){
-        g.setColor(SELECTED_SQUARE_COLOR);
+    private void drawSelectedSquare(Graphics g) {
+        g.setColor(selectedSquareColor);
         g.fillRect(selectedCol * TILE_SIZE, selectedRow * TILE_SIZE, TILE_SIZE, TILE_SIZE);
     }
 

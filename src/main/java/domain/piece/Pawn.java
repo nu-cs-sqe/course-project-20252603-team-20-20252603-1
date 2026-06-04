@@ -1,14 +1,13 @@
 package domain.piece;
 
 import domain.Position;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pawn extends Piece{
+public class Pawn extends Piece {
     private boolean hasMoved = false;
 
-    public Pawn (Color color) {
+    public Pawn(Color color) {
         super(PieceType.PAWN, color);
     }
 
@@ -28,13 +27,13 @@ public class Pawn extends Piece{
         int col = position.getCol();
 
         int oneForward = row + direction;
-        if (oneForward >= 1 && oneForward <= 8) {
+        if (Position.validPosition(oneForward, col)) {
             candidates.add(new Position(oneForward, col));
         }
 
         if (!hasMoved) {
             int twoForward = row + (2 * direction);
-            if (twoForward >= 1 && twoForward <= 8) {
+            if (Position.validPosition(twoForward, col)) {
                 candidates.add(new Position(twoForward, col));
             }
         }

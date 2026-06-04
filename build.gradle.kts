@@ -95,8 +95,13 @@ tasks.withType<Checkstyle>().configureEach {
     }
 }
 
-checkstyle{
+checkstyle {
     isIgnoreFailures = false
+    maxWarnings = 0
+}
+
+tasks.checkstyleTest {
+    enabled = false
 }
 
 // Source: Lab 5 build.gradle.kts

@@ -1,18 +1,21 @@
 package ui;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import javax.swing.JFrame;
 
 public class MainView extends JFrame {
-    private BoardView boardView;
 
+    private static final int WINDOW_WIDTH = 800;
+    private static final int WINDOW_HEIGHT = 1200;
+
+    private BoardView boardView;
     private GameStatsView gameStatsView;
     private String player1Name;
     private String player2Name;
 
-    public MainView(String Player1Name, String Player2Name) {
-        this.player1Name = Player1Name;
-        this.player2Name = Player2Name;
+    public MainView(String player1Name, String player2Name) {
+        this.player1Name = player1Name;
+        this.player2Name = player2Name;
 
         configureMainView();
         addGameStatsView();
@@ -22,17 +25,18 @@ public class MainView extends JFrame {
         validate();
     }
 
-    private void configureMainView(){
-        setTitle("Yiji's Chess Game GUI Example :)!");
+    private void configureMainView() {
+        setTitle("Our Chess Game GUI!");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 1200);
+        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setLocationRelativeTo(null); // Center the window on the screen
     }
 
-    private void addGameStatsView(){
+    private void addGameStatsView() {
         gameStatsView = new GameStatsView(player1Name, player2Name);
         add(gameStatsView, BorderLayout.PAGE_START);
     }
+
     private void addBoardView() {
         boardView = new BoardView();
         add(boardView, BorderLayout.CENTER);
