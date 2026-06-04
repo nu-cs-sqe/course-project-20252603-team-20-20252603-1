@@ -2,11 +2,11 @@
 
 ### Method under test: `Bishop(Color color)`
 
-| ID  | State of the System | Expected output                                             | Implemented? |
-| --- | ------------------- | ----------------------------------------------------------- | ------------ |
-| TC1 | color=`WHITE`       | Bishop created, `getPieceType()`=BISHOP, `getColor()`=WHITE | :x:          |
-| TC2 | color=`BLACK`       | Bishop created, `getPieceType()`=BISHOP, `getColor()`=BLACK | :x:          |
-| TC3 | color=`null`        | `IllegalArgumentException` thrown                           | :x:          |
+| ID  | State of the System | Expected output                                             | Implemented?       |
+| --- | ------------------- | ----------------------------------------------------------- | ------------------ |
+| TC1 | color=`WHITE`       | Bishop created, `getPieceType()`=BISHOP, `getColor()`=WHITE | :white_check_mark: |
+| TC2 | color=`BLACK`       | Bishop created, `getPieceType()`=BISHOP, `getColor()`=BLACK | :x:                |
+| TC3 | color=`null`        | `IllegalArgumentException` thrown                           | :x:                |
 
 ### Method under test: `getCandidateMoves(Position position)`
 
