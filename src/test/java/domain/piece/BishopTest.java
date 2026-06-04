@@ -89,6 +89,15 @@ public class BishopTest {
                         new Position(8, 5),
                         new Position(3, 2),
                         new Position(2, 3),
-                        new Position(1, 4))));
+                        new Position(1, 4))),
+                // TC 6
+                Arguments.of(Color.BLACK, 4, 8, List.of(
+                        new Position(5, 7),
+                        new Position(6, 6),
+                        new Position(7, 5),
+                        new Position(8, 4),
+                        new Position(3, 7),
+                        new Position(2, 6),
+                        new Position(1, 5))));
     }
 }
