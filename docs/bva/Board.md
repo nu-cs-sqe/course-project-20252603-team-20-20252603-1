@@ -56,14 +56,17 @@ The rest of the `false` cases are covered below with getPieceAt.
 | `(8,7)`             | `Piece(KNIGHT, BLACK)`, `isEmpty()` is `false`                       |
 | `(8,8)`             | `Piece(ROOK, BLACK)`, `isEmpty()` is `false`                         |
 
-| ID   | State of the System                                                    | Expected output  | Implemented?       |
-|------|------------------------------------------------------------------------|------------------|--------------------|
-| TC20 | after `initializeBoard()`, All piece positions (parameterized)         | See table above | :white_check_mark: |
-| TC21 | after `initializeBoard()`, Position `(3,1)` (first empty row, min col) | `isEmpty()` is `true` | :white_check_mark: |
-| TC22 | after `initializeBoard()`, Position `(3,8)` (first empty row, max col) | `isEmpty()` is `true` | :white_check_mark: |
-| TC23 | after `initializeBoard()`, Position `(6,1)` (last empty row, min col)  | `isEmpty()` is `true` | :white_check_mark: |
-| TC24 | after `initializeBoard()`, Position `(6,8)` (last empty row, max col)  | `isEmpty()` is `true` | :white_check_mark: |
-| TC25 | after `initializeBoard()`, Position `(4,4)` (interior empty square)    | `isEmpty()` is `true` | :white_check_mark: |
+| ID   | State of the System                                                    | Expected output             | Implemented?       |
+|------|------------------------------------------------------------------------|-----------------------------|--------------------|
+| TC20 | after `initializeBoard()`, All piece positions (parameterized)         | See table above             | :white_check_mark: |
+| TC21 | after `initializeBoard()`, Position `(3,1)` (first empty row, min col) | `isEmpty()` is `true`       | :white_check_mark: |
+| TC22 | after `initializeBoard()`, Position `(3,8)` (first empty row, max col) | `isEmpty()` is `true`       | :white_check_mark: |
+| TC23 | after `initializeBoard()`, Position `(6,1)` (last empty row, min col)  | `isEmpty()` is `true`       | :white_check_mark: |
+| TC24 | after `initializeBoard()`, Position `(6,8)` (last empty row, max col)  | `isEmpty()` is `true`       | :white_check_mark: |
+| TC25 | after `initializeBoard()`, Position `(4,4)` (interior empty square)    | `isEmpty()` is `true`       | :white_check_mark: |
+| TC26 | after initializeBoard(), position (1,4)                                | piece is instance of Queen  | :x:                |
+| TC27 | after initializeBoard(), position (1,2)                                | piece is instance of Knight | :x:                |
+| TC28 | after initializeBoard(), position (2,1)                                | piece is instance of Pawn   | :x:                |
 
 
 
