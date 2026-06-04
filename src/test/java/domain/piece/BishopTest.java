@@ -12,4 +12,12 @@ public class BishopTest {
         assertEquals(Color.WHITE, bishop.getColor());
         assertEquals(PieceType.BISHOP, bishop.getPieceType());
     }
+
+    @Test
+    public void Constructor_ColorBlack_BishopCreated() {
+        Bishop bishop = new Bishop(Color.BLACK);
+
+        assertEquals(Color.BLACK, bishop.getColor());
+        assertEquals(PieceType.BISHOP, bishop.getPieceType());
+    }
 }
