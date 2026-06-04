@@ -7,30 +7,37 @@ import domain.Position;
 
 public class Bishop extends Piece {
 
+    private static final int[][] MOVE_VECTORS = { { 1, 1 }, { -1, -1 }, { -1, 1 }, { 1, -1 } };
+
     public Bishop(Color color) {
         super(PieceType.BISHOP, color);
     }
 
+    private List<Position> getCandidateMovesForDirection(int[] direction, Position position) {
+        List<Position> candidates = new ArrayList<Position>();
+
+        int dx = direction[0];
+        int dy = direction[1];
+
+        int row = position.getRow();
+        int col = position.getCol();
+
+        while (Position.validPosition(row + dx, col + dy)) {
+            candidates.add(new Position(row + dx, col + dy));
+
+            row = row + dx;
+            col = col + dy;
+        }
+
+        return candidates;
+    }
+
     public List<Position> getCandidateMoves(Position position) {
-        List<Position> candidates;
-        if (getColor() == Color.WHITE) {
-            candidates = new ArrayList<Position>(List.of(
-                    new Position(2, 5),
-                    new Position(3, 6),
-                    new Position(4, 7),
-                    new Position(5, 8),
-                    new Position(2, 3),
-                    new Position(3, 2),
-                    new Position(4, 1)));
-        } else {
-            candidates = new ArrayList<Position>(List.of(
-                    new Position(7, 5),
-                    new Position(6, 6),
-                    new Position(5, 7),
-                    new Position(4, 8),
-                    new Position(7, 3),
-                    new Position(6, 2),
-                    new Position(5, 1)));
+        List<Position> candidates = new ArrayList<Position>();
+
+        for (int[] direction : MOVE_VECTORS) {
+            List<Position> new_moves = getCandidateMovesForDirection(direction, position);
+            candidates.addAll(new_moves);
         }
 
         return candidates;
