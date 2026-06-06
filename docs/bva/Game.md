@@ -57,4 +57,4 @@ TC5 and TC6 can be combined.
 | ---- | -------------------------------------------------------------- | --------------------------------- | :----------------- |
 | TC11 | `startGame()` not called                                       | throws `IllegalStateException`    | :white_check_mark: |
 | TC12 | game started, WHITE's turn, `pos=(7,1)` (BLACK pawn)           | throws `IllegalArgumentException` | :white_check_mark: |
-| TC13 | game started, WHITE's turn, `pos=(2,1)` WHITE pawn, path clear | returns `[(3,1),(4,1)]`           | :x:                |
+| TC13 | game started, WHITE's turn, `pos=(2,1)` WHITE pawn, path clear | returns `[(3,1),(4,1)]`           | :white_check_mark: |

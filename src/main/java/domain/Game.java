@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.List;
+
 import domain.piece.Color;
 import domain.piece.Piece;
 
@@ -64,7 +66,7 @@ public class Game {
         switchTurn();
     }
 
-    public void getValidMoves(Position position) {
+    public List<Position> getValidMoves(Position position) {
         if (!this.gameInProgress) {
             throw new IllegalStateException("Cannot get valid moves if the game has not started.");
         }
@@ -75,5 +77,7 @@ public class Game {
         if (pieceColor != this.currentTurn) {
             throw new IllegalArgumentException("Cannot get moves for piece that the current turn's color");
         }
+
+        return board.getValidMoves(position);
     }
 }

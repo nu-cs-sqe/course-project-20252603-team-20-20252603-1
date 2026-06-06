@@ -2,6 +2,7 @@ package domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -290,5 +291,34 @@ public class GameTest {
 
         EasyMock.verify(board, piece);
 
+    }
+
+    @Test
+    public void ValidMoves_WhitePawn_TwoMoves() {
+        Board board = EasyMock.createMock(Board.class);
+        Position position = EasyMock.createMock(Position.class);
+        Piece piece = EasyMock.createMock(Piece.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.getPieceAt(position)).andReturn(piece);
+        EasyMock.expect(piece.getColor()).andReturn(Color.WHITE);
+
+        EasyMock.expect(board.getValidMoves(position)).andReturn(List.of(
+                new Position(3, 1),
+                new Position(4, 1)));
+
+        EasyMock.replay(board, position, piece);
+
+        game.startGame();
+        List<Position> actual = game.getValidMoves(position);
+        List<Position> expected = List.of(new Position(3, 1), new Position(4, 1));
+
+        assertEquals(expected.size(), actual.size());
+        assertTrue(actual.containsAll(expected));
+
+        EasyMock.verify(board, piece);
     }
 }
