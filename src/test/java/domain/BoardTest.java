@@ -468,4 +468,25 @@ public class BoardTest {
     String actual = exception.getMessage();
     assertEquals(expected, actual);
   }
+
+  @Test
+  public void MovePiece_FromRow2Col1ToRow3_PawnVacates() {
+    Board board = new Board();
+    Position from = EasyMock.createMock(Position.class);
+    Position to = new Position(3, 1);
+
+    EasyMock.expect(from.getRow()).andStubReturn(2);
+    EasyMock.expect(from.getCol()).andStubReturn(1);
+
+    EasyMock.replay(from);
+
+    board.initializeBoard();
+    board.movePiece(from, to);
+
+    assertTrue(board.isEmpty(from));
+    assertFalse(board.isEmpty(to));
+
+    Pawn pawn = assertInstanceOf(Pawn.class, board.getPieceAt(to));
+    assertTrue(pawn.hasMoved());
+  }
 }

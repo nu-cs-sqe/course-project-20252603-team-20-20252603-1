@@ -37,4 +37,7 @@ public class Piece {
         return new ArrayList<Position>();
     }
 
+    public void markMoved() {
+    }
+
 }

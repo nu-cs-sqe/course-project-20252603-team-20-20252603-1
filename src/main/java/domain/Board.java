@@ -43,6 +43,10 @@ public class Board {
         return Optional.ofNullable(squares[position.getRow() - 1][position.getCol() - 1]);
     }
 
+    private void setPieceAt(Position position, Piece piece) {
+        squares[position.getRow() - 1][position.getCol() - 1] = piece;
+    }
+
     public void initializeBoard() {
         for (int col = 0; col < NUM_COLS; ++col) {
             // white pieces
@@ -96,5 +100,11 @@ public class Board {
             throw new IllegalArgumentException("Cannot move piece: destination is an illegal move");
         }
 
+        Piece piece = getPieceAt(from);
+
+        piece.markMoved();
+
+        setPieceAt(to, piece);
+        setPieceAt(from, null);
     }
 }
