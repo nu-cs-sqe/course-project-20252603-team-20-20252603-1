@@ -5,7 +5,6 @@ import domain.piece.Knight;
 import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceType;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;

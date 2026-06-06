@@ -130,16 +130,25 @@ public class BoardView extends JPanel implements BoardChangeListener {
 
     private void drawSelectedSquare(Graphics g) {
         Position selection = boardController.getSelectedPosition();
-        if (selection == null)
+        if (selection == null) {
             return;
+        }
         g.setColor(selectedSquareColor);
-        g.fillRect((selection.getCol() - 1) * TILE_SIZE, (selection.getRow() - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        g.fillRect(
+                (selection.getCol() - 1) * TILE_SIZE,
+                (selection.getRow() - 1) * TILE_SIZE,
+                TILE_SIZE,
+                TILE_SIZE);
     }
 
     private void drawValidMoves(Graphics g) {
         g.setColor(validMoveColor);
         for (Position pos : boardController.getValidMoves()) {
-            g.fillRect((pos.getCol() - 1) * TILE_SIZE, (pos.getRow() - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+            g.fillRect(
+                    (pos.getCol() - 1) * TILE_SIZE,
+                    (pos.getRow() - 1) * TILE_SIZE,
+                    TILE_SIZE,
+                    TILE_SIZE);
         }
     }
 

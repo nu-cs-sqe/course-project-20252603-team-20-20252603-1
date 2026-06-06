@@ -1,11 +1,9 @@
 package ui;
 
-import domain.Board;
 import domain.Game;
 import domain.Position;
 import domain.piece.Color;
 import domain.piece.Piece;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;

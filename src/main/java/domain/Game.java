@@ -1,9 +1,8 @@
 package domain;
 
-import java.util.List;
-
 import domain.piece.Color;
 import domain.piece.Piece;
+import java.util.List;
 
 public class Game {
     private final Board board;
@@ -63,7 +62,8 @@ public class Game {
         Color pieceColor = piece.getColor();
 
         if (pieceColor != this.currentTurn) {
-            throw new IllegalArgumentException("Cannot execute move if the current turn is not the piece's color.");
+            throw new IllegalArgumentException(
+                    "Cannot execute move if the current turn is not the piece's color.");
         }
 
         board.movePiece(from, to);
@@ -72,14 +72,16 @@ public class Game {
 
     public List<Position> getValidMoves(Position position) {
         if (!this.gameInProgress) {
-            throw new IllegalStateException("Cannot get valid moves if the game has not started.");
+            throw new IllegalStateException(
+                    "Cannot get valid moves if the game has not started.");
         }
 
         Piece piece = board.getPieceAt(position);
         Color pieceColor = piece.getColor();
 
         if (pieceColor != this.currentTurn) {
-            throw new IllegalArgumentException("Cannot get moves for piece that the current turn's color");
+            throw new IllegalArgumentException(
+                    "Cannot get moves for piece that the current turn's color");
         }
 
         List<Position> validMoves = board.getValidMoves(position);
@@ -89,7 +91,8 @@ public class Game {
 
     public Piece[][] getBoardSnapshot() {
         if (!this.gameInProgress) {
-            throw new IllegalStateException("Cannot get board snapshot if the game has not started.");
+            throw new IllegalStateException(
+                    "Cannot get board snapshot if the game has not started.");
         }
         return board.getSnapshot();
     }
