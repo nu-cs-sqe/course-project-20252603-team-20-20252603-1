@@ -529,6 +529,7 @@ public class BoardTest {
     assertFalse(board.isEmpty(to));
 
     Knight knight = assertInstanceOf(Knight.class, board.getPieceAt(to));
+    assertEquals(Color.WHITE, knight.getColor());
 
   }
 }
