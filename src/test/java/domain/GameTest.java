@@ -260,4 +260,35 @@ public class GameTest {
         EasyMock.verify(board);
 
     }
+
+    @Test
+    public void ValidMoves_WrongColor_ThrowsIllegalArgument() {
+        Board board = EasyMock.createMock(Board.class);
+        Position position = EasyMock.createMock(Position.class);
+        Piece piece = EasyMock.createMock(Piece.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(position.getRow()).andStubReturn(7);
+        EasyMock.expect(position.getRow()).andStubReturn(1);
+
+        EasyMock.expect(board.getPieceAt(position)).andReturn(piece);
+        EasyMock.expect(piece.getColor()).andReturn(Color.BLACK);
+
+        EasyMock.replay(board, position, piece);
+
+        game.startGame();
+
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> game.getValidMoves(position));
+
+        String expected = "Cannot get moves for piece that the current turn's color";
+        String actual = exception.getMessage();
+        assertEquals(expected, actual);
+
+        EasyMock.verify(board, piece);
+
+    }
 }

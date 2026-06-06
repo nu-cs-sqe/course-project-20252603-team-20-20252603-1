@@ -65,6 +65,15 @@ public class Game {
     }
 
     public void getValidMoves(Position position) {
-        throw new IllegalStateException("Cannot get valid moves if the game has not started.");
+        if (!this.gameInProgress) {
+            throw new IllegalStateException("Cannot get valid moves if the game has not started.");
+        }
+
+        Piece piece = board.getPieceAt(position);
+        Color pieceColor = piece.getColor();
+
+        if (pieceColor != this.currentTurn) {
+            throw new IllegalArgumentException("Cannot get moves for piece that the current turn's color");
+        }
     }
 }
