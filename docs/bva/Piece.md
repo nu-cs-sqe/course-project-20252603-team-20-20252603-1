@@ -27,3 +27,9 @@
 | TC14 | Piece created with type=BISHOP | Returns PieceType.BISHOP | :white_check_mark: |
 | TC15 | Piece created with type=KNIGHT | Returns PieceType.KNIGHT | :white_check_mark: |
 | TC16 | Piece created with type=PAWN   | Returns PieceType.PAWN   | :white_check_mark: |
+
+### Method under test: `getSlidingDirections()`
+
+| ID   | State of the System | Expected output               | Implemented? |
+|------|---------------------|-------------------------------|--------------|
+| TC17 | any Piece instance  | returns empty array, length 0 | :x:          |

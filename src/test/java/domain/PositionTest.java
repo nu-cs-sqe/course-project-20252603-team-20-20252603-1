@@ -1,40 +1,50 @@
 package domain;
 
+import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
 
 public class PositionTest {
     @Test
     void constructor_rowAndColAtLowerBound_createsSuccessfully() {
         Position position = new Position(1, 1);
+        assertTrue(Position.validPosition(1, 1));
         assertNotNull(position);
     }
 
     @Test
     void constructor_rowAndColAtUpperBound_createsSuccessfully() {
         Position position = new Position(8, 8);
+        assertTrue(Position.validPosition(8, 8));
         assertNotNull(position);
     }
 
     @Test
     void constructor_rowBelowLowerBound_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Position(0, 1));
+        assertFalse(Position.validPosition(0, 1));
     }
 
     @Test
     void constructor_rowAboveUpperBound_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Position(9, 1));
+        assertFalse(Position.validPosition(9, 1));
+
     }
 
     @Test
     void constructor_colBelowLowerBound_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Position(1, 0));
+        assertFalse(Position.validPosition(1, 0));
     }
 
     @Test
     void constructor_colAboveUpperBound_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Position(1, 9));
+        assertFalse(Position.validPosition(1, 9));
     }
 
     @Test
@@ -83,14 +93,44 @@ public class PositionTest {
 
     @Test
     void equals_sameRowDifferentCol_returnsFalse() {
-        Position position1 = new Position(1,8);
+        Position position1 = new Position(1, 8);
         Position position2 = new Position(1, 1);
         assertFalse(position1.equals(position2));
     }
 
     @Test
     void equals_null_returnsFalse() {
-        Position position = new Position(1,8);
+        Position position = new Position(1, 8);
         assertFalse(position.equals(null));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        Position position = new Position(1, 8);
+        List other = EasyMock.createMock(List.class);
+        EasyMock.replay(other);
+
+        assertFalse(position.equals(other));
+    }
+
+    @Test
+    public void hashCode_twoPositionsRow1Col8_areSame() {
+        Position position1 = new Position(1, 8);
+        Position position2 = new Position(1, 8);
+        assertEquals(position1.hashCode(), position2.hashCode());
+    }
+
+    @Test
+    public void hashCode_twoPositionsRow8Col1_areSame() {
+        Position position1 = new Position(8, 1);
+        Position position2 = new Position(8, 1);
+        assertEquals(position1.hashCode(), position2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentPositions_returnsDifferentHashCodes() {
+        Position position1 = new Position(1, 1);
+        Position position2 = new Position(1, 2);
+        assertNotEquals(position1.hashCode(), position2.hashCode());
     }
 }
