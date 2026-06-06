@@ -13,14 +13,12 @@ import java.util.NoSuchElementException;
 public class BoardController {
     private final BoardChangeListener changeListener;
     private final Game game;
-    private final Board board;
     private Position selectedPosition = null;
     private List<Position> currentValidMoves = Collections.emptyList();
 
     public BoardController(BoardChangeListener changeListener) {
         this.changeListener = changeListener;
-        this.board = new Board();
-        this.game = new Game(board);
+        this.game = new Game();
         game.startGame();
     }
 
@@ -48,7 +46,7 @@ public class BoardController {
     }
 
     public Piece[][] getBoardSnapshot() {
-        return this.board.getSnapshot();
+        return game.getBoardSnapshot();
     }
 
     public Position getSelectedPosition() {
@@ -56,7 +54,7 @@ public class BoardController {
     }
 
     public List<Position> getValidMoves() {
-        return currentValidMoves;
+        return List.copyOf(currentValidMoves);
     }
 
     public Color getCurrentTurn() {
