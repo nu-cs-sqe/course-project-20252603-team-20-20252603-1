@@ -1,5 +1,6 @@
 package domain;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,6 +23,14 @@ public class GameTest {
         });
 
         assertEquals("No valid board passed", exception.getMessage());
+    }
+
+    @Test
+    public void Game_NewGameNoParam_NotNull() {
+
+        Game game = new Game();
+
+        assertDoesNotThrow(() -> game.startGame());
     }
 
     @Test

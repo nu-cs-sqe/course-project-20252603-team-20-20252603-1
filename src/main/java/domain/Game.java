@@ -10,7 +10,11 @@ public class Game {
     private Color currentTurn;
     private boolean gameInProgress = false;
 
-    public Game(Board board) {
+    public Game() {
+        this.board = new Board();
+    }
+
+    Game(Board board) {
         if (board == null) {
             throw new IllegalArgumentException("No valid board passed");
         }
@@ -78,6 +82,12 @@ public class Game {
             throw new IllegalArgumentException("Cannot get moves for piece that the current turn's color");
         }
 
-        return board.getValidMoves(position);
+        List<Position> validMoves = board.getValidMoves(position);
+
+        return validMoves;
+    }
+
+    public Piece[][] getBoardSnapshot() {
+        throw new IllegalStateException();
     }
 }

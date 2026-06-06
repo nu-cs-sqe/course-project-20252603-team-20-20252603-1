@@ -6,7 +6,7 @@
 | ---- | ------------------------ | --------------------------------- | ------------------ |
 | TC1  | new `Game(board)` called | board is non-null                 | :white_check_mark: |
 | TC2  | new `Game(null)` called  | throws `IllegalArgumentException` | :white_check_mark: |
-| TC14 | new `Game()` called      | board is non-null                 | :x:                |
+| TC14 | new `Game()` called      | board is non-null                 | :white_check_mark: |
 
 
 ### Method under test: `startGame()`
