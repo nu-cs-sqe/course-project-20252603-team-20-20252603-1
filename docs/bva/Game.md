@@ -2,10 +2,11 @@
 
 ### Method under test: `Game()`
 
-| ID  | State of the System      | Expected output                   | Implemented?       |
-| --- | ------------------------ | --------------------------------- | ------------------ |
-| TC1 | new `Game(board)` called | board is non-null                 | :white_check_mark: |
-| TC2 | new `Game(null)` called  | throws `IllegalArgumentException` | :white_check_mark: |
+| ID   | State of the System      | Expected output                   | Implemented?       |
+| ---- | ------------------------ | --------------------------------- | ------------------ |
+| TC1  | new `Game(board)` called | board is non-null                 | :white_check_mark: |
+| TC2  | new `Game(null)` called  | throws `IllegalArgumentException` | :white_check_mark: |
+| TC14 | new `Game()` called      | board is non-null                 | :x:                |
 
 
 ### Method under test: `startGame()`
@@ -58,3 +59,12 @@ TC5 and TC6 can be combined.
 | TC11 | `startGame()` not called                                       | throws `IllegalStateException`    | :white_check_mark: |
 | TC12 | game started, WHITE's turn, `pos=(7,1)` (BLACK pawn)           | throws `IllegalArgumentException` | :white_check_mark: |
 | TC13 | game started, WHITE's turn, `pos=(2,1)` WHITE pawn, path clear | returns `[(3,1),(4,1)]`           | :white_check_mark: |
+
+### Method under test: `getBoardSnapshot()`
+
+`Game` adds game state logic to `board.getSnapshot()`
+| ID   | State of the System      | Expected output                      | Implemented? |
+| ---- | ------------------------ | ------------------------------------ | :----------- |
+| TC15 | `startGame()` not called | throws `IllegalStateException`       | :x:          |
+| TC16 | `startGame()` called     | same output as `board.getSnapshot()` | :x:          |
+
