@@ -510,4 +510,25 @@ public class BoardTest {
     Pawn pawn = assertInstanceOf(Pawn.class, board.getPieceAt(to));
     assertTrue(pawn.hasMoved());
   }
+
+  @Test
+  public void MovePiece_FromRow1Col2ToRow3Col3_KnightVacates() {
+    Board board = new Board();
+    Position from = EasyMock.createMock(Position.class);
+    Position to = new Position(3, 3);
+
+    EasyMock.expect(from.getRow()).andStubReturn(1);
+    EasyMock.expect(from.getCol()).andStubReturn(2);
+
+    EasyMock.replay(from);
+
+    board.initializeBoard();
+    board.movePiece(from, to);
+
+    assertTrue(board.isEmpty(from));
+    assertFalse(board.isEmpty(to));
+
+    Knight knight = assertInstanceOf(Knight.class, board.getPieceAt(to));
+
+  }
 }
