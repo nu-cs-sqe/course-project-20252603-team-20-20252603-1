@@ -78,6 +78,10 @@ public class Board {
 
         Piece piece = getPieceAt(position);
 
-        return piece.getCandidateMoves(position);
+        List<Position> validMoves = piece.getCandidateMoves(position);
+
+        validMoves.removeIf(pos -> !isEmpty(pos));
+
+        return validMoves;
     }
 }
