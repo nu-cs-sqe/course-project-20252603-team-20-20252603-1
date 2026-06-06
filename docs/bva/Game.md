@@ -2,34 +2,34 @@
 
 ### Method under test: `Game()`
 
-| ID  | State of the System      |          Expected output          |    Implemented?    |
-|-----|--------------------------|-----------------------------------|--------------------|
+| ID  | State of the System      | Expected output                   | Implemented?       |
+| --- | ------------------------ | --------------------------------- | ------------------ |
 | TC1 | new `Game(board)` called | board is non-null                 | :white_check_mark: |
 | TC2 | new `Game(null)` called  | throws `IllegalArgumentException` | :white_check_mark: |
 
 
 ### Method under test: `startGame()`
 
-| ID   | State of the System  |                        Expected output                      |    Implemented?    |
-|------|----------------------|-------------------------------------------------------------|--------------------|
-| TC3  | new `Game()` created | `getPieceAt(Position(1,1)` returns `Piece(ROOK, WHITE)`     | :white_check_mark: |
-| TC4  | new `Game()` created | `getPieceAt(Position(4,4)` throws `NoSuchElementException`  | :white_check_mark: |
-| TC5  | new `Game()` created | `getCurrentTurn()` returns `WHITE`                          | :white_check_mark: |
+| ID  | State of the System  | Expected output                                            | Implemented?       |
+| --- | -------------------- | ---------------------------------------------------------- | ------------------ |
+| TC3 | new `Game()` created | `getPieceAt(Position(1,1)` returns `Piece(ROOK, WHITE)`    | :white_check_mark: |
+| TC4 | new `Game()` created | `getPieceAt(Position(4,4)` throws `NoSuchElementException` | :white_check_mark: |
+| TC5 | new `Game()` created | `getCurrentTurn()` returns `WHITE`                         | :white_check_mark: |
 
 ### Method under test: `getCurrentTurn()`
 
-| ID   | State of the System      |          Expected output       |    Implemented?    |
-|------|--------------------------|--------------------------------|--------------------|
-| TC6  | `startGame()` called     | returns `WHITE`                | :white_check_mark: |
-| TC7  | `startGame()` not called | throws `IllegalStateException` | :white_check_mark: |
+| ID  | State of the System      | Expected output                | Implemented?       |
+| --- | ------------------------ | ------------------------------ | ------------------ |
+| TC6 | `startGame()` called     | returns `WHITE`                | :white_check_mark: |
+| TC7 | `startGame()` not called | throws `IllegalStateException` | :white_check_mark: |
 
 ### Method under test: `getPieceAt(Position pos)`
 
-| ID    | State of the System                            |         Expected output          |    Implemented?    |
-|-------|------------------------------------------------|----------------------------------|--------------------|
-| TC8   | `startGame()` not called, input `Position(1,1)`| throws `IllegalStateException`   | :white_check_mark: |
-| TC9   | `startGame()` called, input `Position(1,1)`    | returns `Piece(ROOK, WHITE)`     | :white_check_mark: |
-| TC10  | `startGame()` called, input `Position(4,4)`    | throws  `NoSuchElementException` | :white_check_mark: |
+| ID   | State of the System                             | Expected output                  | Implemented?       |
+| ---- | ----------------------------------------------- | -------------------------------- | ------------------ |
+| TC8  | `startGame()` not called, input `Position(1,1)` | throws `IllegalStateException`   | :white_check_mark: |
+| TC9  | `startGame()` called, input `Position(1,1)`     | returns `Piece(ROOK, WHITE)`     | :white_check_mark: |
+| TC10 | `startGame()` called, input `Position(4,4)`     | throws  `NoSuchElementException` | :white_check_mark: |
 
 Since BVA has been done on `getPieceAt` under the `Board` class, we are just verifying that delegating to `Board` works as expected.
 
@@ -37,3 +37,32 @@ TC1 can be combined with any test case.
 TC3 and TC9 can be combined.
 TC4 and TC10 can be combined.
 TC5 and TC6 can be combined.
+
+### Method under test: `executeMove(Position from, Position to)`
+
+`Game` adds turn logic on top of `board.movePiece`.
+
+| ID   | State of the System                                                                 | Expected output                   | Implemented? |
+| ---- | ----------------------------------------------------------------------------------- | --------------------------------- | :----------- |
+| TC14 | `startGame()` not called                                                            | throws `IllegalStateException`    | :x:          |
+| TC15 | game started, WHITE's turn, `from=(7,1)` (BLACK pawn)                               | throws `IllegalArgumentException` | :x:          |
+| TC16 | game started, WHITE's turn, `from=(2,1)` WHITE pawn, `to=(3,1)`                     | `getCurrentTurn()` = BLACK        | :x:          |
+| TC17 | game started, after WHITE's move, BLACK's turn, `from=(7,1)` BLACK pawn, `to=(6,1)` | `getCurrentTurn()` = WHITE        | :x:          |
+
+### Method under test: `getValidMoves(Position pos)`
+
+`Game` adds game state and turn logic to `board.getValidMoves`.
+
+| ID   | State of the System                                            | Expected output                   | Implemented? |
+| ---- | -------------------------------------------------------------- | --------------------------------- | :----------- |
+| TC11 | `startGame()` not called                                       | throws `IllegalStateException`    | :x:          |
+| TC12 | game started, WHITE's turn, `pos=(7,1)` (BLACK pawn)           | throws `IllegalArgumentException` | :x:          |
+| TC13 | game started, WHITE's turn, `pos=(2,1)` WHITE pawn, path clear | returns `[(3,1),(4,1)]`           | :x:          |
+
+### Method under test: `switchTurn()`
+
+| ID   | State of the System                 | Expected output                  | Implemented? |
+| ---- | ----------------------------------- | -------------------------------- | :----------- |
+| TC18 | `startGame()` not called            | throws `IllegalStateException`   | :x:          |
+| TC19 | game started, `currentTurn` = WHITE | `getCurrentTurn()` returns BLACK | :x:          |
+| TC19 | game started, `currentTurn` = BLACK | `getCurrentTurn()` returns WHITE | :x:          |
