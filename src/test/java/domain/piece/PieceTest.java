@@ -4,6 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
+import org.easymock.EasyMock;
+
 public class PieceTest {
     @Test
     public void constructor_kingAndWhite_createsSuccessfully() {
@@ -97,5 +101,12 @@ public class PieceTest {
     public void getPieceType_pieceCreatedWithPawn_returnsPawn() {
         Piece piece = new Piece(PieceType.PAWN, Color.WHITE);
         assertEquals(PieceType.PAWN, piece.getPieceType());
+    }
+
+    @Test
+    public void SlidingDirections_AnyPiece_ReturnsEmptyArray() {
+        Piece piece = new Piece(PieceType.KING, Color.BLACK);
+        int[][] actual = piece.getSlidingDirections();
+        assertEquals(0, actual.length);
     }
 }

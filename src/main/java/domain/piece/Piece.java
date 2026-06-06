@@ -36,6 +36,10 @@ public class Piece {
         return new ArrayList<Position>();
     }
 
+    public int[][] getSlidingDirections() {
+        return new int[0][0];
+    }
+
     public void markMoved() {
     }
 

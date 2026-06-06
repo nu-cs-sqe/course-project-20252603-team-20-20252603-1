@@ -30,9 +30,9 @@
 
 ### Method under test: `getSlidingDirections()`
 
-| ID   | State of the System | Expected output               | Implemented? |
-| ---- | ------------------- | ----------------------------- | ------------ |
-| TC17 | any Piece instance  | returns empty array, length 0 | :x:          |
+| ID   | State of the System | Expected output               | Implemented?       |
+| ---- | ------------------- | ----------------------------- | ------------------ |
+| TC17 | any Piece instance  | returns empty array, length 0 | :white_check_mark: |
 
 ### Method under test: `getCandidateMoves(Position position)`
 
