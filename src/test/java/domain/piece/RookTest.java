@@ -126,7 +126,39 @@ public class RookTest {
                                 new Position(4, 4),
                                 new Position(4, 5),
                                 new Position(4, 6),
-                                new Position(4, 7)))
+                                new Position(4, 7))),
+                        // TC 8
+                        Arguments.of(Color.WHITE, 1, 1, List.of(
+                                new Position(2, 1),
+                                new Position(3, 1),
+                                new Position(4, 1),
+                                new Position(5, 1),
+                                new Position(6, 1),
+                                new Position(7, 1),
+                                new Position(8, 1),
+                                new Position(1, 2),
+                                new Position(1, 3),
+                                new Position(1, 4),
+                                new Position(1, 5),
+                                new Position(1, 6),
+                                new Position(1, 7),
+                                new Position(1, 8))),
+                        // TC 9
+                        Arguments.of(Color.BLACK, 8, 8, List.of(
+                                new Position(1, 8),
+                                new Position(2, 8),
+                                new Position(3, 8),
+                                new Position(4, 8),
+                                new Position(5, 8),
+                                new Position(6, 8),
+                                new Position(7, 8),
+                                new Position(8, 1),
+                                new Position(8, 2),
+                                new Position(8, 3),
+                                new Position(8, 4),
+                                new Position(8, 5),
+                                new Position(8, 6),
+                                new Position(8, 7)))
                         );
         }
 }
