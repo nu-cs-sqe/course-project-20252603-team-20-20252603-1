@@ -365,7 +365,8 @@ public class GameTest {
         game.startGame();
         Piece[][] actual = game.getBoardSnapshot();
 
-        assertEquals(snapshot, actual);
+        // check same pointer
+        assertTrue(snapshot == actual);
 
         EasyMock.verify(board);
     }
