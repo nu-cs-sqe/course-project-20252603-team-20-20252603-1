@@ -45,7 +45,7 @@ TC5 and TC6 can be combined.
 | ID   | State of the System                                                                 | Expected output                   | Implemented?       |
 | ---- | ----------------------------------------------------------------------------------- | --------------------------------- | :----------------- |
 | TC14 | `startGame()` not called                                                            | throws `IllegalStateException`    | :white_check_mark: |
-| TC15 | game started, WHITE's turn, `from=(7,1)` (BLACK pawn)                               | throws `IllegalArgumentException` | :x:                |
+| TC15 | game started, WHITE's turn, `from=(7,1)` (BLACK pawn)                               | throws `IllegalArgumentException` | :white_check_mark: |
 | TC16 | game started, WHITE's turn, `from=(2,1)` WHITE pawn, `to=(3,1)`                     | `getCurrentTurn()` = BLACK        | :x:                |
 | TC17 | game started, after WHITE's move, BLACK's turn, `from=(7,1)` BLACK pawn, `to=(6,1)` | `getCurrentTurn()` = WHITE        | :x:                |
 

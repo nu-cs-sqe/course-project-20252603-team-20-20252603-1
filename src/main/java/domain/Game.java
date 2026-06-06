@@ -45,6 +45,10 @@ public class Game {
     }
 
     public void executeMove(Position from, Position to) {
-        throw new IllegalStateException("Cannot execute move if the game has not started.");
+        if (!this.gameInProgress) {
+            throw new IllegalStateException("Cannot execute move if the game has not started.");
+        }
+
+        throw new IllegalArgumentException("Cannot execute move if the current turn is not the piece's color.");
     }
 }

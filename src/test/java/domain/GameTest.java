@@ -142,4 +142,27 @@ public class GameTest {
         EasyMock.verify(board);
 
     }
+
+    @Test
+    public void ExecuteMove_SelectedBlackOnWhiteTurn_ThrowsIllegalArgument() {
+        Board board = EasyMock.createMock(Board.class);
+        Position from = EasyMock.createMock(Position.class);
+        Position to = EasyMock.createMock(Position.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.replay(board);
+
+        game.startGame();
+
+        Exception exception = assertThrows(IllegalArgumentException.class,
+                () -> game.executeMove(from, to));
+
+        String expected = "Cannot execute move if the current turn is not the piece's color.";
+        String actual = exception.getMessage();
+        assertEquals(expected, actual);
+
+        EasyMock.verify(board);
+
+    }
 }
