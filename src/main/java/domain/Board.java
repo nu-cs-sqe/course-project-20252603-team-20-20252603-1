@@ -86,6 +86,15 @@ public class Board {
     }
 
     public void movePiece(Position from, Position to) {
-        throw new IllegalArgumentException("Cannot move piece from an empty position");
+        if (isEmpty(from)) {
+            throw new IllegalArgumentException("Cannot move piece from an empty position");
+        }
+
+        List<Position> validMoves = getValidMoves(from);
+
+        if (!validMoves.contains(to)) {
+            throw new IllegalArgumentException("Cannot move piece: destination is an illegal move");
+        }
+
     }
 }

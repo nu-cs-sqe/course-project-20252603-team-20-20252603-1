@@ -444,4 +444,28 @@ public class BoardTest {
     String actual = exception.getMessage();
     assertEquals(expected, actual);
   }
+
+  @Test
+  public void MovePiece_IllegalPawnMove_ThrowsException() {
+    Board board = new Board();
+    Position from = EasyMock.createMock(Position.class);
+    Position to = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(from.getRow()).andStubReturn(2);
+    EasyMock.expect(from.getCol()).andStubReturn(1);
+    EasyMock.expect(to.getRow()).andStubReturn(5);
+    EasyMock.expect(to.getCol()).andStubReturn(1);
+
+    EasyMock.replay(from, to);
+
+    board.initializeBoard();
+
+    Exception exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> board.movePiece(from, to));
+
+    String expected = "Cannot move piece: destination is an illegal move";
+    String actual = exception.getMessage();
+    assertEquals(expected, actual);
+  }
 }
