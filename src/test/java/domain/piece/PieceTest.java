@@ -2,6 +2,8 @@ package domain.piece;
 
 import org.junit.jupiter.api.Test;
 
+import domain.Position;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
@@ -108,5 +110,20 @@ public class PieceTest {
         Piece piece = new Piece(PieceType.KING, Color.BLACK);
         int[][] actual = piece.getSlidingDirections();
         assertEquals(0, actual.length);
+    }
+
+    @Test
+    public void GetCandidateMoves_AnyPosition_ReturnsEmptyArray() {
+        Piece piece = new Piece(PieceType.KING, Color.BLACK);
+        Position position = EasyMock.createMock(Position.class);
+
+        EasyMock.replay(position);
+
+        List<Position> actual = piece.getCandidateMoves(position);
+
+        assertTrue(actual.isEmpty());
+
+        EasyMock.verify(position);
+
     }
 }
