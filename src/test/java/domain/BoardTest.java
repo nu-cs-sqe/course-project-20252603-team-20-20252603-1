@@ -532,4 +532,25 @@ public class BoardTest {
     assertEquals(Color.WHITE, knight.getColor());
 
   }
+
+  @Test
+  public void MovePiece_AfterFirstPawnMove_OneMove() {
+    Board board = new Board();
+    Position from = EasyMock.createMock(Position.class);
+    Position to = new Position(3, 1);
+
+    EasyMock.expect(from.getRow()).andStubReturn(2);
+    EasyMock.expect(from.getCol()).andStubReturn(1);
+
+    EasyMock.replay(from);
+
+    board.initializeBoard();
+    board.movePiece(from, to);
+
+    List<Position> actual = board.getValidMoves(to);
+    List<Position> expected = List.of(new Position(4, 1));
+
+    assertEquals(expected.size(), actual.size());
+    assertTrue(actual.containsAll(expected));
+  }
 }
