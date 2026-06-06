@@ -77,7 +77,7 @@ The rest of the `false` cases are covered below with getPieceAt.
 | ID   | State of the System                                                                      | Expected output                                                       | Implemented?       |
 | ---- | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | :----------------- |
 | TC29 | new `Board()`, `pos=(4,4)` (empty square)                                                | throws `IllegalArgumentException`                                     | :white_check_mark: |
-| TC30 | initialized board, `pos=(2,1)` WHITE pawn (unmoved), `(3,1)` and `(4,1)` empty           | returns `[(3,1),(4,1)]`                                               | :x:                |
+| TC30 | initialized board, `pos=(2,1)` WHITE pawn (unmoved), `(3,1)` and `(4,1)` empty           | returns `[(3,1),(4,1)]`                                               | :white_check_mark: |
 | TC31 | initialized board, `pos=(1,2)` WHITE knight                                              | returns `[(3,3),(3,1)]` — candidate `(2,4)` filtered (own pawn there) | :x:                |
 | TC32 | initialized board, `pos=(1,7)` WHITE knight                                              | returns `[(3,6),(3,8)]` — candidate `(2,5)` filtered (own pawn there) | :x:                |
 | TC33 | initialized board, `pos=(2,8)` WHITE pawn (unmoved), `(3,8)` and `(4,8)` empty           | returns `[(3,8),(4,8)]`                                               | :x:                |

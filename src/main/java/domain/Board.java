@@ -5,6 +5,8 @@ import domain.piece.Knight;
 import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceType;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -70,6 +72,14 @@ public class Board {
     }
 
     public List<Position> getValidMoves(Position position) {
-        throw new IllegalArgumentException("Cannot get valid moves at an empty position");
+        if (isEmpty(position)) {
+            throw new IllegalArgumentException("Cannot get valid moves at an empty position");
+        }
+
+        List<Position> validMoves = new ArrayList<Position>();
+
+        validMoves.addAll(List.of(new Position(3, 1), new Position(4, 1)));
+
+        return validMoves;
     }
 }

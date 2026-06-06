@@ -19,6 +19,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class BoardTest {
@@ -345,5 +346,24 @@ public class BoardTest {
     String expected = "Cannot get valid moves at an empty position";
     String actual = exception.getMessage();
     assertEquals(expected, actual);
+  }
+
+  @Test
+  public void GetValidMoves_WhitePawn_TwoMoves() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(2);
+    EasyMock.expect(position.getCol()).andStubReturn(1);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    List<Position> actual = board.getValidMoves(position);
+    List<Position> expected = List.of(new Position(3, 1), new Position(4, 1));
+
+    assertEquals(expected.size(), actual.size());
+    assertTrue(actual.containsAll(expected));
   }
 }
