@@ -1,5 +1,10 @@
 package domain.piece;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import domain.Position;
+
 public class Piece {
     private final PieceType pieceType;
     private final Color color;
@@ -27,4 +32,9 @@ public class Piece {
     public PieceType getPieceType() {
         return pieceType;
     }
+
+    public List<Position> getCandidateMoves(Position position) {
+        return new ArrayList<Position>();
+    }
+
 }

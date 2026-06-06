@@ -349,7 +349,7 @@ public class BoardTest {
   }
 
   @Test
-  public void GetValidMoves_WhitePawn_TwoMoves() {
+  public void GetValidMoves_WhitePawnCol1_TwoMoves() {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
 
@@ -362,6 +362,25 @@ public class BoardTest {
 
     List<Position> actual = board.getValidMoves(position);
     List<Position> expected = List.of(new Position(3, 1), new Position(4, 1));
+
+    assertEquals(expected.size(), actual.size());
+    assertTrue(actual.containsAll(expected));
+  }
+
+  @Test
+  public void GetValidMoves_WhitePawnCol8_TwoMoves() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(2);
+    EasyMock.expect(position.getCol()).andStubReturn(8);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    List<Position> actual = board.getValidMoves(position);
+    List<Position> expected = List.of(new Position(3, 8), new Position(4, 8));
 
     assertEquals(expected.size(), actual.size());
     assertTrue(actual.containsAll(expected));

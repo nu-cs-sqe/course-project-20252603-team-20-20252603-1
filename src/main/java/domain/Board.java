@@ -76,10 +76,8 @@ public class Board {
             throw new IllegalArgumentException("Cannot get valid moves at an empty position");
         }
 
-        List<Position> validMoves = new ArrayList<Position>();
+        Piece piece = getPieceAt(position);
 
-        validMoves.addAll(List.of(new Position(3, 1), new Position(4, 1)));
-
-        return validMoves;
+        return piece.getCandidateMoves(position);
     }
 }
