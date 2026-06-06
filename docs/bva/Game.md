@@ -63,8 +63,8 @@ TC5 and TC6 can be combined.
 ### Method under test: `getBoardSnapshot()`
 
 `Game` adds game state logic to `board.getSnapshot()`
-| ID   | State of the System      | Expected output                      | Implemented? |
-| ---- | ------------------------ | ------------------------------------ | :----------- |
-| TC15 | `startGame()` not called | throws `IllegalStateException`       | :x:          |
-| TC16 | `startGame()` called     | same output as `board.getSnapshot()` | :x:          |
+| ID   | State of the System      | Expected output                      | Implemented?       |
+| ---- | ------------------------ | ------------------------------------ | :----------------- |
+| TC15 | `startGame()` not called | throws `IllegalStateException`       | :white_check_mark: |
+| TC16 | `startGame()` called     | same output as `board.getSnapshot()` | :x:                |
 

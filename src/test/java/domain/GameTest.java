@@ -330,4 +330,22 @@ public class GameTest {
 
         EasyMock.verify(board, piece);
     }
+
+    @Test
+    public void BoardSnapshot_GameNotStarted_ThrowsIllegalState() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        EasyMock.replay(board);
+
+        Exception exception = assertThrows(IllegalStateException.class,
+                () -> game.getBoardSnapshot());
+
+        String expected = "Cannot get board snapshot if the game has not started.";
+        String actual = exception.getMessage();
+        assertEquals(expected, actual);
+
+        EasyMock.verify(board);
+
+    }
 }

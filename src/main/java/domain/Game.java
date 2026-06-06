@@ -88,6 +88,6 @@ public class Game {
     }
 
     public Piece[][] getBoardSnapshot() {
-        throw new IllegalStateException();
+        throw new IllegalStateException("Cannot get board snapshot if the game has not started.");
     }
 }
