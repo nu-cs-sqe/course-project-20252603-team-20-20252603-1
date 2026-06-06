@@ -6,6 +6,7 @@ import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceType;
 import java.util.Arrays;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -66,5 +67,9 @@ public class Board {
 
     public boolean isEmpty(Position position) {
         return pieceAt(position).isEmpty();
+    }
+
+    public List<Position> getValidMoves(Position position) {
+        throw new IllegalArgumentException("Cannot get valid moves at an empty position");
     }
 }

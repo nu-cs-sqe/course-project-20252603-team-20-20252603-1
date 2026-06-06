@@ -325,4 +325,25 @@ public class BoardTest {
 
     assertInstanceOf(Knight.class, actual);
   }
+
+  @Test
+  public void GetValidMoves_EmptyPosition_ThrowsException() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(4);
+    EasyMock.expect(position.getCol()).andStubReturn(4);
+
+    EasyMock.replay(position);
+
+    Exception exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> board.getValidMoves(position));
+
+    assertTrue(board.isEmpty(position));
+
+    String expected = "Cannot get valid moves at an empty position";
+    String actual = exception.getMessage();
+    assertEquals(expected, actual);
+  }
 }
