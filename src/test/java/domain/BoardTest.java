@@ -423,4 +423,25 @@ public class BoardTest {
     assertEquals(expected.size(), actual.size());
     assertTrue(actual.containsAll(expected));
   }
+
+  @Test
+  public void MovePiece_EmptyPosition_ThrowsException() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(2);
+    EasyMock.expect(position.getCol()).andStubReturn(1);
+
+    EasyMock.replay(position);
+
+    Exception exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> board.movePiece(position, position));
+
+    assertTrue(board.isEmpty(position));
+
+    String expected = "Cannot move piece from an empty position";
+    String actual = exception.getMessage();
+    assertEquals(expected, actual);
+  }
 }

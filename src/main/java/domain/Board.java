@@ -84,4 +84,8 @@ public class Board {
 
         return validMoves;
     }
+
+    public void movePiece(Position from, Position to) {
+        throw new IllegalArgumentException("Cannot move piece from an empty position");
+    }
 }
