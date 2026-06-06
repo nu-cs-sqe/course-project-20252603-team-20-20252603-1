@@ -2,7 +2,7 @@
 
 ### Method under test: `Piece(PieceType type, Color color)`
 |     | State of the System      | Expected output                 | Implemented?       |
-|-----|--------------------------|---------------------------------|--------------------|
+| --- | ------------------------ | ------------------------------- | ------------------ |
 | TC1 | type=KING, color=WHITE   | Piece created successfully      | :white_check_mark: |
 | TC2 | type=QUEEN, color=BLACK  | Piece created successfully      | :white_check_mark: |
 | TC3 | type=ROOK, color=WHITE   | Piece created successfully      | :white_check_mark: |
@@ -14,13 +14,13 @@
 
 ### Method under test: `getColor()`
 |      | State of the System            | Expected output     | Implemented?       |
-|------|--------------------------------|---------------------|--------------------|
+| ---- | ------------------------------ | ------------------- | ------------------ |
 | TC9  | Piece created with color=WHITE | Returns Color.WHITE | :white_check_mark: |
 | TC10 | Piece created with color=BLACK | Returns Color.BLACK | :white_check_mark: |
 
 ### Method under test: `getPieceType()`
 |      | State of the System            | Expected output          | Implemented?       |
-|------|--------------------------------|--------------------------|--------------------|
+| ---- | ------------------------------ | ------------------------ | ------------------ |
 | TC11 | Piece created with type=KING   | Returns PieceType.KING   | :white_check_mark: |
 | TC12 | Piece created with type=QUEEN  | Returns PieceType.QUEEN  | :white_check_mark: |
 | TC13 | Piece created with type=ROOK   | Returns PieceType.ROOK   | :white_check_mark: |
@@ -31,5 +31,11 @@
 ### Method under test: `getSlidingDirections()`
 
 | ID   | State of the System | Expected output               | Implemented? |
-|------|---------------------|-------------------------------|--------------|
+| ---- | ------------------- | ----------------------------- | ------------ |
 | TC17 | any Piece instance  | returns empty array, length 0 | :x:          |
+
+### Method under test: `getCandidateMoves(Position position)`
+
+| ID   | State of the System | Expected output               | Implemented? |
+| ---- | ------------------- | ----------------------------- | ------------ |
+| TC18 | any position        | returns empty array, length 0 | :x:          |
