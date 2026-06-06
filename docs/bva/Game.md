@@ -58,11 +58,3 @@ TC5 and TC6 can be combined.
 | TC11 | `startGame()` not called                                       | throws `IllegalStateException`    | :x:          |
 | TC12 | game started, WHITE's turn, `pos=(7,1)` (BLACK pawn)           | throws `IllegalArgumentException` | :x:          |
 | TC13 | game started, WHITE's turn, `pos=(2,1)` WHITE pawn, path clear | returns `[(3,1),(4,1)]`           | :x:          |
-
-### Method under test: `switchTurn()`
-
-| ID   | State of the System                 | Expected output                  | Implemented? |
-| ---- | ----------------------------------- | -------------------------------- | :----------- |
-| TC18 | `startGame()` not called            | throws `IllegalStateException`   | :x:          |
-| TC19 | game started, `currentTurn` = WHITE | `getCurrentTurn()` returns BLACK | :x:          |
-| TC19 | game started, `currentTurn` = BLACK | `getCurrentTurn()` returns WHITE | :x:          |
