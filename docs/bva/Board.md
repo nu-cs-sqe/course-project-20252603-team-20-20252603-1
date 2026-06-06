@@ -65,7 +65,7 @@ The rest of the `false` cases are covered below with getPieceAt.
 | TC24 | after `initializeBoard()`, Position `(6,8)` (last empty row, max col)  | `isEmpty()` is `true`       | :white_check_mark: |
 | TC25 | after `initializeBoard()`, Position `(4,4)` (interior empty square)    | `isEmpty()` is `true`       | :white_check_mark: |
 | TC26 | after initializeBoard(), position (1,4)                                | piece is instance of Queen  | :x:                |
-| TC27 | after initializeBoard(), position (1,2)                                | piece is instance of Knight | :x:                |
+| TC27 | after initializeBoard(), position (1,2)                                | piece is instance of Knight | :white_check_mark: |
 | TC28 | after initializeBoard(), position (2,1)                                | piece is instance of Pawn   | :white_check_mark: |
 
 

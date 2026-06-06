@@ -27,6 +27,8 @@ public class Board {
         switch (type) {
             case PAWN:
                 return new Pawn(color);
+            case KNIGHT:
+                return new Knight(color);
             default:
                 return new Piece(type, color);
         }
@@ -41,10 +43,10 @@ public class Board {
     public void initializeBoard() {
         for (int col = 0; col < NUM_COLS; ++col) {
             // white pieces
-            squares[WHITE_BACK_RANK][col] = new Piece(BACK_RANK[col], Color.WHITE);
+            squares[WHITE_BACK_RANK][col] = createPiece(BACK_RANK[col], Color.WHITE);
             squares[WHITE_PAWN_RANK][col] = createPiece(PieceType.PAWN, Color.WHITE);
             // black pieces
-            squares[BLACK_BACK_RANK][col] = new Piece(BACK_RANK[col], Color.BLACK);
+            squares[BLACK_BACK_RANK][col] = createPiece(BACK_RANK[col], Color.BLACK);
             squares[BLACK_PAWN_RANK][col] = createPiece(PieceType.PAWN, Color.BLACK);
         }
     }

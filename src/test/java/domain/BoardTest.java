@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import domain.piece.Color;
+import domain.piece.Knight;
 import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceType;
@@ -292,7 +293,7 @@ public class BoardTest {
   }
 
   @Test
-  public void InitializeBoard_Row1Col2_IsInstanceOfPawn() {
+  public void InitializeBoard_Row2Col1_IsInstanceOfPawn() {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
 
@@ -306,5 +307,22 @@ public class BoardTest {
     Piece actual = board.getPieceAt(position);
 
     assertInstanceOf(Pawn.class, actual);
+  }
+
+  @Test
+  public void InitializeBoard_Row1Col2_IsInstanceOfKnight() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(1);
+    EasyMock.expect(position.getCol()).andStubReturn(2);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    Piece actual = board.getPieceAt(position);
+
+    assertInstanceOf(Knight.class, actual);
   }
 }
