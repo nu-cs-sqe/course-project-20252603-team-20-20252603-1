@@ -19,6 +19,10 @@ public class Game {
     protected final void finalize() throws Throwable {
     }
 
+    private void switchTurn() {
+        this.currentTurn = (currentTurn == Color.WHITE) ? Color.BLACK : Color.WHITE;
+    }
+
     public void startGame() {
         if (this.gameInProgress) {
             throw new IllegalStateException("Game has already started, cannot restart");
@@ -49,6 +53,14 @@ public class Game {
             throw new IllegalStateException("Cannot execute move if the game has not started.");
         }
 
-        throw new IllegalArgumentException("Cannot execute move if the current turn is not the piece's color.");
+        Piece piece = board.getPieceAt(from);
+        Color pieceColor = piece.getColor();
+
+        if (pieceColor != this.currentTurn) {
+            throw new IllegalArgumentException("Cannot execute move if the current turn is not the piece's color.");
+        }
+
+        board.movePiece(from, to);
+        switchTurn();
     }
 }

@@ -130,7 +130,7 @@ public class GameTest {
         Position to = EasyMock.createMock(Position.class);
         Game game = new Game(board);
 
-        EasyMock.replay(board);
+        EasyMock.replay(board, from, to);
 
         Exception exception = assertThrows(IllegalStateException.class,
                 () -> game.executeMove(from, to));
@@ -148,10 +148,14 @@ public class GameTest {
         Board board = EasyMock.createMock(Board.class);
         Position from = EasyMock.createMock(Position.class);
         Position to = EasyMock.createMock(Position.class);
+        Piece piece = EasyMock.createMock(Piece.class);
         Game game = new Game(board);
 
         board.initializeBoard();
-        EasyMock.replay(board);
+        EasyMock.expectLastCall();
+        EasyMock.expect(board.getPieceAt(from)).andReturn(piece);
+        EasyMock.expect(piece.getColor()).andStubReturn(Color.BLACK);
+        EasyMock.replay(board, piece, from, to);
 
         game.startGame();
 
@@ -162,7 +166,42 @@ public class GameTest {
         String actual = exception.getMessage();
         assertEquals(expected, actual);
 
-        EasyMock.verify(board);
+        EasyMock.verify(board, piece);
+
+    }
+
+    @Test
+    public void ExecuteMove_WhitesTurn_BlacksTurn() {
+        Board board = EasyMock.createMock(Board.class);
+        Position from = EasyMock.createMock(Position.class);
+        Position to = EasyMock.createMock(Position.class);
+        Piece piece = EasyMock.createMock(Piece.class);
+        Game game = new Game(board);
+
+        EasyMock.expect(from.getRow()).andStubReturn(2);
+        EasyMock.expect(from.getRow()).andStubReturn(1);
+        EasyMock.expect(to.getRow()).andStubReturn(3);
+        EasyMock.expect(to.getRow()).andStubReturn(1);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        board.movePiece(from, to);
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.getPieceAt(from)).andReturn(piece);
+        EasyMock.expect(piece.getColor()).andStubReturn(Color.WHITE);
+
+        EasyMock.replay(board, piece, from, to);
+
+        game.startGame();
+        game.executeMove(from, to);
+
+        Color actual = game.getCurrentTurn();
+
+        assertEquals(Color.BLACK, actual);
+
+        EasyMock.verify(board, piece);
 
     }
 }
