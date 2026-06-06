@@ -2,11 +2,11 @@
 
 ### Method under test: `Rook(Color color)`
 
-| ID  | State of the System | Expected output                                         | Implemented? |
-| --- | ------------------- | ------------------------------------------------------- | ------------ |
-| TC1 | color=`WHITE`       | Rook created, `getPieceType()`=ROOK, `getColor()`=WHITE |      :x:     |
-| TC2 | color=`BLACK`       | Rook created, `getPieceType()`=ROOK, `getColor()`=BLACK |      :x:     |
-| TC3 | color=`null`        | `IllegalArgumentException` thrown                       |      :x:     |
+| ID  | State of the System | Expected output                                         |    Implemented?    |
+| --- | ------------------- | ------------------------------------------------------- | ------------------ |
+| TC1 | color=`WHITE`       | Rook created, `getPieceType()`=ROOK, `getColor()`=WHITE | :white_check_mark: |
+| TC2 | color=`BLACK`       | Rook created, `getPieceType()`=ROOK, `getColor()`=BLACK | :white_check_mark: |
+| TC3 | color=`null`        | `IllegalArgumentException` thrown                       |         :x:        |
 
 ### Method under test: `getCandidateMoves(Position position)`
 

@@ -13,4 +13,12 @@ public class RookTest {
                 assertEquals(Color.WHITE, rook.getColor());
                 assertEquals(PieceType.ROOK, rook.getPieceType());
         }
+
+        @Test
+        public void Constructor_ColorBlack_RookCreated() {
+                Rook rook = new Rook(Color.BLACK);
+
+                assertEquals(Color.BLACK, rook.getColor());
+                assertEquals(PieceType.ROOK, rook.getPieceType());
+        }
 }
