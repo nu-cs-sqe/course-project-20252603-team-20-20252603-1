@@ -66,5 +66,5 @@ TC5 and TC6 can be combined.
 | ID   | State of the System      | Expected output                      | Implemented?       |
 | ---- | ------------------------ | ------------------------------------ | :----------------- |
 | TC15 | `startGame()` not called | throws `IllegalStateException`       | :white_check_mark: |
-| TC16 | `startGame()` called     | same output as `board.getSnapshot()` | :x:                |
+| TC16 | `startGame()` called     | same output as `board.getSnapshot()` | :white_check_mark: |
 

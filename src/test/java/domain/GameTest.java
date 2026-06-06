@@ -348,4 +348,25 @@ public class GameTest {
         EasyMock.verify(board);
 
     }
+
+    @Test
+    public void BoardSnapshot_StartGame_CallsBoardSnapshot() {
+        Board board = EasyMock.createMock(Board.class);
+        Piece[][] snapshot = new Piece[8][8];
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.getSnapshot()).andReturn(snapshot);
+
+        EasyMock.replay(board);
+
+        game.startGame();
+        Piece[][] actual = game.getBoardSnapshot();
+
+        assertEquals(snapshot, actual);
+
+        EasyMock.verify(board);
+    }
 }
