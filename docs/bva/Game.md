@@ -53,8 +53,8 @@ TC5 and TC6 can be combined.
 
 `Game` adds game state and turn logic to `board.getValidMoves`.
 
-| ID   | State of the System                                            | Expected output                   | Implemented? |
-| ---- | -------------------------------------------------------------- | --------------------------------- | :----------- |
-| TC11 | `startGame()` not called                                       | throws `IllegalStateException`    | :x:          |
-| TC12 | game started, WHITE's turn, `pos=(7,1)` (BLACK pawn)           | throws `IllegalArgumentException` | :x:          |
-| TC13 | game started, WHITE's turn, `pos=(2,1)` WHITE pawn, path clear | returns `[(3,1),(4,1)]`           | :x:          |
+| ID   | State of the System                                            | Expected output                   | Implemented?       |
+| ---- | -------------------------------------------------------------- | --------------------------------- | :----------------- |
+| TC11 | `startGame()` not called                                       | throws `IllegalStateException`    | :white_check_mark: |
+| TC12 | game started, WHITE's turn, `pos=(7,1)` (BLACK pawn)           | throws `IllegalArgumentException` | :x:                |
+| TC13 | game started, WHITE's turn, `pos=(2,1)` WHITE pawn, path clear | returns `[(3,1),(4,1)]`           | :x:                |

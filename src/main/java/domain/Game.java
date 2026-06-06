@@ -63,4 +63,8 @@ public class Game {
         board.movePiece(from, to);
         switchTurn();
     }
+
+    public void getValidMoves(Position position) {
+        throw new IllegalStateException("Cannot get valid moves if the game has not started.");
+    }
 }

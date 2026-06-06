@@ -241,4 +241,23 @@ public class GameTest {
         assertEquals(Color.WHITE, game.getCurrentTurn());
         EasyMock.verify(board, whitePiece, blackPiece);
     }
+
+    @Test
+    public void ValidMoves_GameNotStarted_ThrowsIllegalState() {
+        Board board = EasyMock.createMock(Board.class);
+        Position position = EasyMock.createMock(Position.class);
+        Game game = new Game(board);
+
+        EasyMock.replay(board, position);
+
+        Exception exception = assertThrows(IllegalStateException.class,
+                () -> game.getValidMoves(position));
+
+        String expected = "Cannot get valid moves if the game has not started.";
+        String actual = exception.getMessage();
+        assertEquals(expected, actual);
+
+        EasyMock.verify(board);
+
+    }
 }
