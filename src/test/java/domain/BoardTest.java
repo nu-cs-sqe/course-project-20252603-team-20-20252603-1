@@ -404,4 +404,23 @@ public class BoardTest {
     assertEquals(expected.size(), actual.size());
     assertTrue(actual.containsAll(expected));
   }
+
+  @Test
+  public void GetValidMoves_WhiteKnightCol7_TwoMoves() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(1);
+    EasyMock.expect(position.getCol()).andStubReturn(7);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    List<Position> actual = board.getValidMoves(position);
+    List<Position> expected = List.of(new Position(3, 6), new Position(3, 8));
+
+    assertEquals(expected.size(), actual.size());
+    assertTrue(actual.containsAll(expected));
+  }
 }
