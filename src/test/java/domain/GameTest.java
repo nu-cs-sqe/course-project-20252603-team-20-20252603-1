@@ -14,19 +14,18 @@ public class GameTest {
 
     @Test
     public void Game_NewGame_Null() {
-        
-        IllegalArgumentException exception =
-            assertThrows(IllegalArgumentException.class, () -> {
-                new Game(null);
-            });
 
-	    assertEquals("No valid board passed", exception.getMessage());
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            new Game(null);
+        });
+
+        assertEquals("No valid board passed", exception.getMessage());
     }
 
     @Test
     public void StartGame_GetPieceAt_PieceExists() {
         Board board = EasyMock.createMock(Board.class);
-        Position position = new Position(1,1);
+        Position position = new Position(1, 1);
         PieceType pieceType = PieceType.ROOK;
         Color color = Color.WHITE;
         Piece expected = new Piece(pieceType, color);
@@ -49,18 +48,18 @@ public class GameTest {
     @Test
     public void StartGame_GetPieceAt_EmptySquare() {
         Board board = EasyMock.createMock(Board.class);
-        Position position = new Position(4,4);
+        Position position = new Position(4, 4);
 
         Game game = new Game(board);
 
         board.initializeBoard();
-        EasyMock.expect(board.getPieceAt(position)).andThrow(new NoSuchElementException("Cannot get piece at empty position"));
+        EasyMock.expect(board.getPieceAt(position))
+                .andThrow(new NoSuchElementException("Cannot get piece at empty position"));
         EasyMock.replay(board);
 
         game.startGame();
 
-        NoSuchElementException exception = 
-            assertThrows(NoSuchElementException.class, 
+        NoSuchElementException exception = assertThrows(NoSuchElementException.class,
                 () -> game.getPieceAt(position));
 
         assertEquals("Cannot get piece at empty position", exception.getMessage());
@@ -89,8 +88,7 @@ public class GameTest {
         Board board = EasyMock.createMock(Board.class);
         Game game = new Game(board);
 
-        IllegalStateException exception = 
-            assertThrows(IllegalStateException.class, 
+        IllegalStateException exception = assertThrows(IllegalStateException.class,
                 () -> game.getCurrentTurn());
 
         assertEquals("Game has not started yet, no player has a turn", exception.getMessage());
@@ -99,11 +97,10 @@ public class GameTest {
     @Test
     public void BeforeStartGame_NoPieces() {
         Board board = EasyMock.createMock(Board.class);
-        Position position = new Position(1,1);
+        Position position = new Position(1, 1);
         Game game = new Game(board);
 
-        IllegalStateException exception = 
-            assertThrows(IllegalStateException.class, 
+        IllegalStateException exception = assertThrows(IllegalStateException.class,
                 () -> game.getPieceAt(position));
 
         assertEquals("Game has not started yet, no pieces are on the board", exception.getMessage());
@@ -124,5 +121,25 @@ public class GameTest {
         assertEquals("Game has already started, cannot restart", exception.getMessage());
 
         EasyMock.verify(board);
+    }
+
+    @Test
+    public void ExecuteMove_GameNotStarted_ThrowsIllegalState() {
+        Board board = EasyMock.createMock(Board.class);
+        Position from = EasyMock.createMock(Position.class);
+        Position to = EasyMock.createMock(Position.class);
+        Game game = new Game(board);
+
+        EasyMock.replay(board);
+
+        Exception exception = assertThrows(IllegalStateException.class,
+                () -> game.executeMove(from, to));
+
+        String expected = "Cannot execute move if the game has not started.";
+        String actual = exception.getMessage();
+        assertEquals(expected, actual);
+
+        EasyMock.verify(board);
+
     }
 }

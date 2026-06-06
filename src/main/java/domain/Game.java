@@ -43,4 +43,8 @@ public class Game {
         }
         return board.getPieceAt(pos);
     }
+
+    public void executeMove(Position from, Position to) {
+        throw new IllegalStateException("Cannot execute move if the game has not started.");
+    }
 }
