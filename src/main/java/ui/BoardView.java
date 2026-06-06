@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -23,13 +24,14 @@ public class BoardView extends JPanel implements BoardChangeListener {
     private final java.awt.Color lightSquareColor = new java.awt.Color(240, 217, 181);
     private final java.awt.Color darkSquareColor = new java.awt.Color(181, 136, 99);
     private final java.awt.Color selectedSquareColor = new java.awt.Color(164, 149, 195);
-    private int selectedRow = -1;
-    private int selectedCol = -1;
+    private final java.awt.Color validMoveColor = new java.awt.Color(100, 200, 100, 160);
 
     private Map<PieceType, Image> whitePieceImages;
     private Map<PieceType, Image> blackPieceImages;
 
     private final BoardController boardController;
+    private Consumer<Color> onTurnChanged = turn -> {
+    };
 
     public BoardView() {
         setPreferredSize(new Dimension(BOARD_SIZE * TILE_SIZE, BOARD_SIZE * TILE_SIZE));
@@ -42,8 +44,13 @@ public class BoardView extends JPanel implements BoardChangeListener {
     protected final void finalize() throws Throwable {
     }
 
+    public void setOnTurnChanged(Consumer<Color> callback) {
+        this.onTurnChanged = callback;
+    }
+
     @Override
     public void onBoardChanged() {
+        onTurnChanged.accept(boardController.getCurrentTurn());
         repaint();
     }
 
@@ -52,14 +59,16 @@ public class BoardView extends JPanel implements BoardChangeListener {
         super.paintComponent(g);
         drawBoard(g);
         drawSelectedSquare(g);
-        drawPieces(g); // draw piece after draw selected square to ensure piece image is on top
+        drawValidMoves(g);
+        drawPieces(g);
     }
 
     private void drawBoard(Graphics g) {
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 java.awt.Color squareColor = (row + col) % 2 == 0
-                        ? lightSquareColor : darkSquareColor;
+                        ? lightSquareColor
+                        : darkSquareColor;
                 g.setColor(squareColor);
                 g.fillRect(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
             }
@@ -120,23 +129,28 @@ public class BoardView extends JPanel implements BoardChangeListener {
     }
 
     private void drawSelectedSquare(Graphics g) {
+        Position selection = boardController.getSelectedPosition();
+        if (selection == null)
+            return;
         g.setColor(selectedSquareColor);
-        g.fillRect(selectedCol * TILE_SIZE, selectedRow * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        g.fillRect((selection.getCol() - 1) * TILE_SIZE, (selection.getRow() - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE);
     }
 
+    private void drawValidMoves(Graphics g) {
+        g.setColor(validMoveColor);
+        for (Position pos : boardController.getValidMoves()) {
+            g.fillRect((pos.getCol() - 1) * TILE_SIZE, (pos.getRow() - 1) * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        }
+    }
 
     private class BoardMouseListener extends MouseAdapter {
         @Override
-        public void mouseClicked(MouseEvent e) {
-
-            selectedCol = e.getX() / TILE_SIZE;
-            selectedRow = e.getY() / TILE_SIZE;
-
-            // FIXME: perform input validation
-
-            repaint();
-
-            boardController.handleSquareClick(new Position(selectedCol, selectedRow));
+        public void mousePressed(MouseEvent e) {
+            int col = e.getX() / TILE_SIZE;
+            int row = e.getY() / TILE_SIZE;
+            if (Position.validPosition(row + 1, col + 1)) {
+                boardController.handleSquareClick(new Position(row + 1, col + 1));
+            }
         }
     }
 
