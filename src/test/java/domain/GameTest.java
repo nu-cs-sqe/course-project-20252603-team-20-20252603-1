@@ -3,6 +3,7 @@ package domain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.easymock.EasyMock;
@@ -203,5 +204,41 @@ public class GameTest {
 
         EasyMock.verify(board, piece);
 
+    }
+
+    @Test
+    public void ExecuteMove_BlackTurn_WhiteTurn() {
+        Board board = EasyMock.createMock(Board.class);
+        Position whiteFrom = EasyMock.createMock(Position.class);
+        Position whiteTo = EasyMock.createMock(Position.class);
+        Position blackFrom = EasyMock.createMock(Position.class);
+        Position blackTo = EasyMock.createMock(Position.class);
+        Piece whitePiece = EasyMock.createMock(Piece.class);
+        Piece blackPiece = EasyMock.createMock(Piece.class);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.getPieceAt(whiteFrom)).andReturn(whitePiece);
+        EasyMock.expect(whitePiece.getColor()).andReturn(Color.WHITE);
+
+        board.movePiece(whiteFrom, whiteTo);
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.getPieceAt(blackFrom)).andReturn(blackPiece);
+        EasyMock.expect(blackPiece.getColor()).andReturn(Color.BLACK);
+
+        board.movePiece(blackFrom, blackTo);
+        EasyMock.expectLastCall();
+
+        EasyMock.replay(board, whitePiece, blackPiece);
+
+        Game game = new Game(board);
+        game.startGame();
+        game.executeMove(whiteFrom, whiteTo);
+        game.executeMove(blackFrom, blackTo);
+
+        assertEquals(Color.WHITE, game.getCurrentTurn());
+        EasyMock.verify(board, whitePiece, blackPiece);
     }
 }
