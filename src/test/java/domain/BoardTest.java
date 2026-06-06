@@ -3,11 +3,13 @@ package domain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import domain.piece.Color;
+import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceType;
 import org.easymock.EasyMock;
@@ -18,12 +20,11 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.NoSuchElementException;
 
-
 public class BoardTest {
 
   /*
    * isEmpty() unit tests
-   * */
+   */
 
   @ParameterizedTest
   @CsvSource({
@@ -68,7 +69,7 @@ public class BoardTest {
 
   /*
    * getPieceAt() SOCIABLE unit tests
-   * */
+   */
 
   @ParameterizedTest
   @CsvSource({
@@ -84,9 +85,9 @@ public class BoardTest {
       "1, 5, WHITE, KING",
   })
   public void GetPieceAt_AfterInitRowXColY_CorrectPiece(int row,
-                                                        int col,
-                                                        Color color,
-                                                        PieceType pieceType) {
+      int col,
+      Color color,
+      PieceType pieceType) {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
 
@@ -116,8 +117,7 @@ public class BoardTest {
 
     Exception exception = assertThrows(
         NoSuchElementException.class,
-        () -> board.getPieceAt(position)
-    );
+        () -> board.getPieceAt(position));
 
     assertTrue(board.isEmpty(position));
 
@@ -129,7 +129,7 @@ public class BoardTest {
 
   /*
    * initializeBoard() unit tests
-   * */
+   */
 
   @ParameterizedTest
   @CsvSource({
@@ -167,7 +167,7 @@ public class BoardTest {
       "8, ROOK",
   })
   public void InitializeBoard_Row1ColY_WhiteBackRankCorrect(int col,
-                                                            PieceType pieceType) {
+      PieceType pieceType) {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
 
@@ -186,7 +186,7 @@ public class BoardTest {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8})
+  @ValueSource(ints = { 1, 2, 3, 4, 5, 6, 7, 8 })
   public void InitializeBoard_Row2_WhitePawns(int col) {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
@@ -217,7 +217,7 @@ public class BoardTest {
       "8, ROOK",
   })
   public void InitializeBoard_Row8ColY_BlackBackRankCorrect(int col,
-                                                            PieceType pieceType) {
+      PieceType pieceType) {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
 
@@ -236,7 +236,7 @@ public class BoardTest {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8})
+  @ValueSource(ints = { 1, 2, 3, 4, 5, 6, 7, 8 })
   public void InitializeBoard_Row7_BlackPawns(int col) {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
@@ -289,5 +289,22 @@ public class BoardTest {
     assertNotNull(actual);
     assertEquals(color, actual.getColor());
     assertEquals(pieceType, actual.getPieceType());
+  }
+
+  @Test
+  public void InitializeBoard_Row1Col2_IsInstanceOfPawn() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(2);
+    EasyMock.expect(position.getCol()).andStubReturn(1);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    Piece actual = board.getPieceAt(position);
+
+    assertInstanceOf(Pawn.class, actual);
   }
 }

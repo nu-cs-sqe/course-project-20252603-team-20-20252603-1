@@ -1,6 +1,8 @@
 package domain;
 
 import domain.piece.Color;
+import domain.piece.Knight;
+import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceType;
 import java.util.Arrays;
@@ -21,6 +23,15 @@ public class Board {
             PieceType.KING, PieceType.BISHOP, PieceType.KNIGHT, PieceType.ROOK,
     };
 
+    private Piece createPiece(PieceType type, Color color) {
+        switch (type) {
+            case PAWN:
+                return new Pawn(color);
+            default:
+                return new Piece(type, color);
+        }
+    }
+
     private final Piece[][] squares = new Piece[NUM_ROWS][NUM_COLS];
 
     private Optional<Piece> pieceAt(Position position) {
@@ -31,10 +42,10 @@ public class Board {
         for (int col = 0; col < NUM_COLS; ++col) {
             // white pieces
             squares[WHITE_BACK_RANK][col] = new Piece(BACK_RANK[col], Color.WHITE);
-            squares[WHITE_PAWN_RANK][col] = new Piece(PieceType.PAWN, Color.WHITE);
+            squares[WHITE_PAWN_RANK][col] = createPiece(PieceType.PAWN, Color.WHITE);
             // black pieces
             squares[BLACK_BACK_RANK][col] = new Piece(BACK_RANK[col], Color.BLACK);
-            squares[BLACK_PAWN_RANK][col] = new Piece(PieceType.PAWN, Color.BLACK);
+            squares[BLACK_PAWN_RANK][col] = createPiece(PieceType.PAWN, Color.BLACK);
         }
     }
 
