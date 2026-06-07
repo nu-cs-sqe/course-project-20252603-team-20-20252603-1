@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -129,14 +130,15 @@ public class BoardView extends JPanel implements BoardChangeListener {
     }
 
     private void drawSelectedSquare(Graphics g) {
-        Position selection = boardController.getSelectedPosition();
-        if (selection == null) {
+        Optional<Position> selection = boardController.getSelectedPosition();
+        if (selection.isEmpty()) {
             return;
         }
+        Position position = selection.get();
         g.setColor(selectedSquareColor);
         g.fillRect(
-                (selection.getCol() - 1) * TILE_SIZE,
-                (selection.getRow() - 1) * TILE_SIZE,
+                (position.getCol() - 1) * TILE_SIZE,
+                (position.getRow() - 1) * TILE_SIZE,
                 TILE_SIZE,
                 TILE_SIZE);
     }

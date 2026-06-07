@@ -7,11 +7,12 @@ import domain.piece.Piece;
 import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class BoardController {
     private final BoardChangeListener changeListener;
     private final Game game;
-    private Position selectedPosition = null;
+    private Optional<Position> selectedPosition = Optional.empty();
     private List<Position> currentValidMoves = Collections.emptyList();
 
     public BoardController(BoardChangeListener changeListener) {
@@ -21,11 +22,11 @@ public class BoardController {
     }
 
     public void handleSquareClick(Position selection) {
-        if (selectedPosition == null) {
+        if (selectedPosition.isEmpty()) {
             trySelect(selection);
         } else if (currentValidMoves.contains(selection)) {
-            game.executeMove(selectedPosition, selection);
-            selectedPosition = null;
+            game.executeMove(selectedPosition.get(), selection);
+            selectedPosition = Optional.empty();
             currentValidMoves = Collections.emptyList();
         } else {
             trySelect(selection);
@@ -36,9 +37,9 @@ public class BoardController {
     private void trySelect(Position pos) {
         try {
             currentValidMoves = game.getValidMoves(pos);
-            selectedPosition = pos;
+            selectedPosition = Optional.of(pos);
         } catch (NoSuchElementException | IllegalArgumentException e) {
-            selectedPosition = null;
+            selectedPosition = Optional.empty();
             currentValidMoves = Collections.emptyList();
         }
     }
@@ -47,7 +48,7 @@ public class BoardController {
         return game.getBoardSnapshot();
     }
 
-    public Position getSelectedPosition() {
+    public Optional<Position> getSelectedPosition() {
         return selectedPosition;
     }
 
