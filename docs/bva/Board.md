@@ -68,6 +68,48 @@ The rest of the `false` cases are covered below with getPieceAt.
 | TC27 | after initializeBoard(), position (1,2)                                | piece is instance of Knight | :x:                |
 | TC28 | after initializeBoard(), position (2,1)                                | piece is instance of Pawn   | :x:                |
 
+### Method under test: `getValidMoves(Position source)`
+
+**Sliding piece (ray-casting) tests** — board state built via `placePieceAt()`:
+
+| ID   | State of the System                                                 | Expected output                                                                           | Implemented? |
+|------|---------------------------------------------------------------------|-------------------------------------------------------------------------------------------|--------------|
+| TC29 | Initialized board, WHITE Bishop at (1,3)                            | Returns `[]` — all four diagonal rays immediately blocked by own pawns at (2,2) and (2,4) | :x:          |
+| TC30 | WHITE Rook at (4,4), all other squares empty                        | Returns 14 squares (full N/S/E/W rays)                                                    | :x:          |
+| TC31 | WHITE Bishop at (4,4), WHITE Pawn at (6,6), all other squares empty | NE ray contains (5,5), stops before (6,6); other 3 rays fully open                        | :x:          |
+| TC32 | WHITE Bishop at (4,4), BLACK Pawn at (6,6), all other squares empty | NE ray contains (5,5) and (6,6) (capture), stops after (6,6); other 3 rays fully open     | :x:          |
+| TC33 | WHITE Rook at (4,4), WHITE Pawn at (4,7), all other squares empty   | East ray: (4,5), (4,6) included; (4,7) excluded (friendly stop); other 3 rays fully open  | :x:          |
+| TC34 | WHITE Rook at (4,4), BLACK Pawn at (4,7), all other squares empty   | East ray: (4,5), (4,6), (4,7) included (capture); (4,8) excluded; other 3 rays fully open | :x:          |
+
+**Non-sliding piece (Knight) tests**:
+
+| ID   | State of the System                            | Expected output                                              | Implemented? |
+|------|------------------------------------------------|--------------------------------------------------------------|--------------|
+| TC35 | WHITE Knight at (4,4), all other squares empty | Returns all 8 L-shaped destinations                          | :x:          |
+| TC36 | WHITE Knight at (4,4), WHITE Pawn at (6,5)     | (6,5) excluded (friendly); all 7 other L-moves included      | :x:          |
+| TC37 | WHITE Knight at (4,4), BLACK Pawn at (6,5)     | (6,5) included (enemy capture); all 7 other L-moves included | :x:          |
+
+**Pawn tests** (WHITE unless noted):
+
+| ID   | State of the System                                                      | Expected output                                       | Implemented? |
+|------|--------------------------------------------------------------------------|-------------------------------------------------------|--------------|
+| TC38 | WHITE Pawn (`hasMoved=true`) at (4,4), all other squares empty           | Returns `[(5,4)]`                                     | :x:          |
+| TC39 | WHITE Pawn (`hasMoved=false`) at (3,4), all other squares empty          | Returns `[(4,4), (5,4)]`                              | :x:          |
+| TC40 | WHITE Pawn (`hasMoved=true`) at (4,4), any piece at (5,4)                | Returns `[]` — forward blocked by any piece           | :x:          |
+| TC41 | WHITE Pawn (`hasMoved=true`) at (4,4), BLACK piece at (5,3), (5,4) empty | Returns `[(5,4), (5,3)]` — forward + diagonal capture | :x:          |
+| TC42 | WHITE Pawn (`hasMoved=true`) at (4,4), (5,3) is empty                    | Returns `[(5,4)]` — diagonal excluded when empty      | :x:          |
+| TC43 | WHITE Pawn (`hasMoved=true`) at (4,4), WHITE piece at (5,3)              | Returns `[(5,4)]` — diagonal excluded for friendly    | :x:          |
+
+### Method under test: `movePiece(Position source, Position destination)`
+
+| ID   | State of the System                                                  | Expected output                                  | Implemented? |
+|------|----------------------------------------------------------------------|--------------------------------------------------|--------------|
+| TC44 | WHITE Knight at (4,4), (5,6) empty, (5,6) in valid moves             | Knight at (5,6); (4,4) is empty                  | :x:          |
+| TC45 | WHITE Knight at (4,4), BLACK Pawn at (5,6), (5,6) in valid moves     | Knight at (5,6); BLACK Pawn removed; (4,4) empty | :x:          |
+| TC46 | Source (4,4) is empty                                                | Throws `NoSuchElementException`                  | :x:          |
+| TC47 | WHITE Knight at (4,4), WHITE Pawn at (5,6) (friendly at destination) | Throws `IllegalArgumentException`                | :x:          |
+| TC48 | WHITE Pawn (`hasMoved=false`) at (2,1), moves to (3,1)               | Pawn at (3,1); `pawn.hasMoved()` returns `true`  | :x:          |
+
 
 
 
