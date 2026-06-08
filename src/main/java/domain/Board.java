@@ -1,6 +1,7 @@
 package domain;
 
 import domain.piece.Color;
+import domain.piece.King;
 import domain.piece.Knight;
 import domain.piece.Pawn;
 import domain.piece.Piece;
@@ -30,6 +31,8 @@ public class Board {
                 return new Pawn(color);
             case KNIGHT:
                 return new Knight(color);
+            case KING:
+                return new King(color);
             default:
                 return new Piece(type, color);
         }

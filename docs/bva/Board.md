@@ -67,7 +67,7 @@ The rest of the `false` cases are covered below with getPieceAt.
 | TC26 | after initializeBoard(), position (1,4)                                | piece is instance of Queen  | :x:                |
 | TC27 | after initializeBoard(), position (1,2)                                | piece is instance of Knight | :white_check_mark: |
 | TC28 | after initializeBoard(), position (2,1)                                | piece is instance of Pawn   | :white_check_mark: |
-| TC40 | after initializeBoard(), position (1,5)                                | piece is instance of King   | :x:                |
+| TC40 | after initializeBoard(), position (1,5)                                | piece is instance of King   | :white_check_mark: |
 
 
 ### Method under test: `getValidMoves(Position pos)`
