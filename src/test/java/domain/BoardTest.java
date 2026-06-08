@@ -12,6 +12,9 @@ import domain.piece.Color;
 import domain.piece.King;
 import domain.piece.Knight;
 import domain.piece.Pawn;
+import domain.piece.Queen;
+import domain.piece.Rook;
+import domain.piece.Bishop;
 import domain.piece.Piece;
 import domain.piece.PieceType;
 import org.easymock.EasyMock;
@@ -602,6 +605,97 @@ public class BoardTest {
 
     assertEquals(expected.size(), actual.size());
     assertTrue(actual.containsAll(expected));
+  }
+
+  @Test
+  public void InitializeBoard_Row1Col4_IsInstanceOfQueen() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(1);
+    EasyMock.expect(position.getCol()).andStubReturn(4);
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    assertInstanceOf(Queen.class, board.getPieceAt(position));
+  }
+
+  @Test
+  public void GetValidMoves_WhiteRookEmptyBoard_Returns14Squares() {
+    Board board = new Board();
+    Position pos = new Position(4, 4);
+    board.placePieceAt(pos, new Rook(Color.WHITE));
+
+    List<Position> moves = board.getValidMoves(pos);
+
+    assertEquals(14, moves.size());
+  }
+
+  @Test
+  public void GetValidMoves_WhiteBishopFriendlyOnRay_StopsBeforeFriendly() {
+    Board board = new Board();
+    board.placePieceAt(new Position(4, 4), new Bishop(Color.WHITE));
+    board.placePieceAt(new Position(6, 6), new Pawn(Color.WHITE));
+
+    List<Position> moves = board.getValidMoves(new Position(4, 4));
+
+    assertTrue(moves.contains(new Position(5, 5)));
+    assertFalse(moves.contains(new Position(6, 6)));
+    assertFalse(moves.contains(new Position(7, 7)));
+    assertEquals(10, moves.size()); // NE:1, SW:3, NW:3, SE:3
+  }
+
+  @Test
+  public void GetValidMoves_WhiteBishopEnemyOnRay_IncludesEnemyAndStops() {
+    Board board = new Board();
+    board.placePieceAt(new Position(4, 4), new Bishop(Color.WHITE));
+    board.placePieceAt(new Position(6, 6), new Pawn(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(4, 4));
+
+    assertTrue(moves.contains(new Position(5, 5)));
+    assertTrue(moves.contains(new Position(6, 6)));
+    assertFalse(moves.contains(new Position(7, 7)));
+    assertEquals(11, moves.size()); // NE:2, SW:3, NW:3, SE:3
+  }
+
+  @Test
+  public void GetValidMoves_WhiteKnightEnemyAtDestination_IncludesCapture() {
+    Board board = new Board();
+    board.placePieceAt(new Position(4, 4), new Knight(Color.WHITE));
+    board.placePieceAt(new Position(6, 5), new Pawn(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(4, 4));
+
+    assertTrue(moves.contains(new Position(6, 5)));
+    assertEquals(8, moves.size());
+  }
+
+  @Test
+  public void GetValidMoves_WhitePawnEnemyBlocksForward_ReturnsEmpty() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.WHITE);
+    pawn.markMoved();
+    board.placePieceAt(new Position(4, 4), pawn);
+    board.placePieceAt(new Position(5, 4), new Pawn(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(4, 4));
+
+    assertEquals(0, moves.size());
+  }
+
+  @Test
+  public void MovePiece_KnightCapturesEnemyPawn_PawnRemovedKnightMoves() {
+    Board board = new Board();
+    board.placePieceAt(new Position(4, 4), new Knight(Color.WHITE));
+    board.placePieceAt(new Position(6, 5), new Pawn(Color.BLACK));
+
+    board.movePiece(new Position(4, 4), new Position(6, 5));
+
+    assertInstanceOf(Knight.class, board.getPieceAt(new Position(6, 5)));
+    assertEquals(Color.WHITE, board.getPieceAt(new Position(6, 5)).getColor());
+    assertTrue(board.isEmpty(new Position(4, 4)));
   }
 
   @Test

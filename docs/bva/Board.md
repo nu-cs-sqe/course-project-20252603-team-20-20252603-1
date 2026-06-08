@@ -57,34 +57,37 @@ The rest of the `false` cases are covered below with getPieceAt.
 | `(8,8)`             | `Piece(ROOK, BLACK)`, `isEmpty()` is `false`   |
 
 | ID   | State of the System                                                    | Expected output             | Implemented?       |
-| ---- | ---------------------------------------------------------------------- | --------------------------- | ------------------ |
+|------|------------------------------------------------------------------------|-----------------------------|--------------------|
 | TC20 | after `initializeBoard()`, All piece positions (parameterized)         | See table above             | :white_check_mark: |
 | TC21 | after `initializeBoard()`, Position `(3,1)` (first empty row, min col) | `isEmpty()` is `true`       | :white_check_mark: |
 | TC22 | after `initializeBoard()`, Position `(3,8)` (first empty row, max col) | `isEmpty()` is `true`       | :white_check_mark: |
 | TC23 | after `initializeBoard()`, Position `(6,1)` (last empty row, min col)  | `isEmpty()` is `true`       | :white_check_mark: |
 | TC24 | after `initializeBoard()`, Position `(6,8)` (last empty row, max col)  | `isEmpty()` is `true`       | :white_check_mark: |
 | TC25 | after `initializeBoard()`, Position `(4,4)` (interior empty square)    | `isEmpty()` is `true`       | :white_check_mark: |
-| TC26 | after initializeBoard(), position (1,4)                                | piece is instance of Queen  | :x:                |
+| TC26 | after initializeBoard(), position (1,4)                                | piece is instance of Queen  | :white_check_mark: |
 | TC27 | after initializeBoard(), position (1,2)                                | piece is instance of Knight | :white_check_mark: |
 | TC28 | after initializeBoard(), position (2,1)                                | piece is instance of Pawn   | :white_check_mark: |
-| TC40 | after initializeBoard(), position (1,5)                                | piece is instance of King   | :white_check_mark: |
-
+| TC46 | after initializeBoard(), position (1,5)                                | piece is instance of King   | :white_check_mark: |
 
 ### Method under test: `getValidMoves(Position pos)`
 
 As these are unit tests, the only new boundary with adding `King` is using the actual `King` instance of `Piece`.
 
-
 | ID   | State of the System                                                                      | Expected output                                                       | Implemented?       |
-| ---- | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | :----------------- |
+|------|------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|--------------------|
 | TC29 | new `Board()`, `pos=(4,4)` (empty square)                                                | throws `IllegalArgumentException`                                     | :white_check_mark: |
-| TC30 | initialized board, `pos=(2,1)` WHITE pawn (unmoved), `(3,1)` and `(4,1)` empty           | returns `[(3,1),(4,1)]`                                               | :white_check_mark: |
+| TC30 | initialized board, `pos=(2,1)` WHITE pawn (unmoved), `(3,1)` and `(4,1)` empty          | returns `[(3,1),(4,1)]`                                               | :white_check_mark: |
 | TC31 | initialized board, `pos=(1,2)` WHITE knight                                              | returns `[(3,3),(3,1)]` — candidate `(2,4)` filtered (own pawn there) | :white_check_mark: |
 | TC32 | initialized board, `pos=(1,7)` WHITE knight                                              | returns `[(3,6),(3,8)]` — candidate `(2,5)` filtered (own pawn there) | :white_check_mark: |
-| TC33 | initialized board, `pos=(2,8)` WHITE pawn (unmoved), `(3,8)` and `(4,8)` empty           | returns `[(3,8),(4,8)]`                                               | :white_check_mark: |
-| TC34 | initialized board, WHITE pawn moved from `(2,1)` to `(3,1)` (hasMoved=true), `pos=(3,1)` | returns `[(4,1)]` — one-step only after first move                    | :white_check_mark: |
-| TC41 | initialized board, WHITE king created, `pos=(1,5)`                                       | returns `[]`                                                          | :white_check_mark: |
-| TC41 | initialized board, BLACK king created, `pos=(8,5)`                                       | returns `[]`                                                          | :white_check_mark: |
+| TC33 | initialized board, `pos=(2,8)` WHITE pawn (unmoved), `(3,8)` and `(4,8)` empty          | returns `[(3,8),(4,8)]`                                               | :white_check_mark: |
+| TC34 | initialized board, WHITE pawn moved from `(2,1)` to `(3,1)` (hasMoved=true), `pos=(3,1)`| returns `[(4,1)]` — one-step only after first move                    | :white_check_mark: |
+| TC40 | WHITE Rook at (4,4), all other squares empty (via `placePieceAt`)                        | returns 14 squares (full N/S/E/W rays)                                | :white_check_mark: |
+| TC41 | WHITE Bishop at (4,4), WHITE Pawn at (6,6), all other squares empty                      | NE ray stops at (5,5); (6,6) excluded (friendly stop)                 | :white_check_mark: |
+| TC42 | WHITE Bishop at (4,4), BLACK Pawn at (6,6), all other squares empty                      | NE ray includes (5,5) and (6,6) (capture); stops after (6,6)          | :white_check_mark: |
+| TC43 | WHITE Knight at (4,4), BLACK Pawn at (6,5), all other squares empty                      | (6,5) included (capture); all 7 other L-moves included                | :white_check_mark: |
+| TC44 | WHITE Pawn (hasMoved=true) at (4,4), BLACK piece at (5,4)                                | returns `[]` — forward blocked by enemy                               | :white_check_mark: |
+| TC47 | initialized board, WHITE king, `pos=(1,5)`                                               | returns `[]` — all surrounding squares occupied by own pieces         | :white_check_mark: |
+| TC48 | initialized board, BLACK king, `pos=(8,5)`                                               | returns `[]` — all surrounding squares occupied by own pieces         | :white_check_mark: |
 
 ### Method under test: `movePiece(Position from, Position to)`
 
@@ -93,11 +96,12 @@ Validates source and destination, physically moves the piece, and calls `piece.m
 As these are unit tests, the only new boundary with adding `King` is using the actual `King` instance of `Piece`.
 
 | ID   | State of the System                                                         | Expected output                                                                                                                 | Implemented?       |
-| ---- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | :----------------- |
+|------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|--------------------|
 | TC35 | new `Board()`, `from=(2,1)` (empty)                                         | throws `IllegalArgumentException`                                                                                               | :white_check_mark: |
 | TC36 | initialized board, `from=(2,1)` WHITE pawn, `to=(5,1)` (not in valid moves) | throws `IllegalArgumentException`                                                                                               | :white_check_mark: |
 | TC37 | initialized board, `from=(2,1)` WHITE pawn, `to=(3,1)` (one step)           | `getPieceAt((3,1))` = WHITE PAWN; piece at `(3,1)` is instance of `Pawn`; `isEmpty((2,1))` = `true`; `pawn.hasMoved()` = `true` | :white_check_mark: |
 | TC38 | initialized board, `from=(2,1)` WHITE pawn, `to=(4,1)` (two steps)          | `getPieceAt((4,1))` = WHITE PAWN; piece at `(4,1)` is instance of `Pawn`; `isEmpty((2,1))` = `true`; `pawn.hasMoved()` = `true` | :white_check_mark: |
-| TC39 | initialized board, `from=(1,2)` WHITE knight, `to=(3,3)`                    | `getPieceAt((3,3))` = WHITE KNIGHT; piece at `(3,3)` is instance of `Knight`; `isEmpty((1,2))` = `true`                         | :white_check_mark: |
-| TC43 | initialized board, f2 is empty, `from=(1,5)`, `to=(2,6)`                    | `getPieceAt((2,6))` = WHITE King; piece at `(2,6)` is instance of `King`; `isEmpty((5,1))` = `true`; `king.hasMoved()` = `true` | :white_check_mark: |
-| TC44 | initialized board, d7 is empty, `from=(8,5)`, `to=(7,4)`                    | `getPieceAt((7,4))` = BLACK King; piece at `(7,4)` is instance of `King`; `isEmpty((8,5))` = `true`; `king.hasMoved()` = `true` | :white_check_mark: |
+| TC39 | initialized board, `from=(1,2)` WHITE knight, `to=(3,3)`                    | `getPieceAt((3,3))` = WHITE KNIGHT; piece at `(3,3)` is instance of `Knight`; `isEmpty((1,2))` = `true`                        | :white_check_mark: |
+| TC45 | WHITE Knight at (4,4), BLACK Pawn at (6,5); knight moves to (6,5)           | Knight at (6,5); BLACK Pawn removed; (4,4) empty                                                                                | :white_check_mark: |
+| TC49 | initialized board, `(2,6)` cleared, `from=(1,5)` WHITE king, `to=(2,6)`     | `getPieceAt((2,6))` = WHITE King; instance of `King`; `isEmpty((1,5))` = `true`; `king.hasMoved()` = `true`                    | :white_check_mark: |
+| TC50 | initialized board, `(7,4)` cleared, `from=(8,5)` BLACK king, `to=(7,4)`     | `getPieceAt((7,4))` = BLACK King; instance of `King`; `isEmpty((8,5))` = `true`; `king.hasMoved()` = `true`                    | :white_check_mark: |

@@ -1,11 +1,15 @@
 package domain;
 
+import domain.piece.Bishop;
 import domain.piece.Color;
 import domain.piece.King;
 import domain.piece.Knight;
 import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceType;
+import domain.piece.Queen;
+import domain.piece.Rook;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -27,14 +31,13 @@ public class Board {
 
     private Piece createPiece(PieceType type, Color color) {
         switch (type) {
-            case PAWN:
-                return new Pawn(color);
-            case KNIGHT:
-                return new Knight(color);
-            case KING:
-                return new King(color);
-            default:
-                return new Piece(type, color);
+            case PAWN:   return new Pawn(color);
+            case KNIGHT: return new Knight(color);
+            case KING:   return new King(color);
+            case BISHOP: return new Bishop(color);
+            case ROOK:   return new Rook(color);
+            case QUEEN:  return new Queen(color);
+            default: throw new IllegalStateException("Unhandled piece type: " + type);
         }
     }
 
@@ -45,6 +48,10 @@ public class Board {
     }
 
     private void setPieceAt(Position position, Piece piece) {
+        squares[position.getRow() - 1][position.getCol() - 1] = piece;
+    }
+
+    void placePieceAt(Position position, Piece piece) {
         squares[position.getRow() - 1][position.getCol() - 1] = piece;
     }
 
@@ -80,13 +87,48 @@ public class Board {
         if (isEmpty(position)) {
             throw new IllegalArgumentException("Cannot get valid moves at an empty position");
         }
-
         Piece piece = getPieceAt(position);
+        int[][] slidingDirections = piece.getSlidingDirections();
+        if (slidingDirections.length > 0) {
+            return getSlidingValidMoves(position, piece, slidingDirections);
+        }
+        return getNonSlidingValidMoves(position, piece);
+    }
 
+    private List<Position> getSlidingValidMoves(Position position, Piece piece,
+            int[][] directions) {
+        List<Position> validMoves = new ArrayList<>();
+        for (int[] dir : directions) {
+            validMoves.addAll(getValidMovesAlongRay(position, piece, dir));
+        }
+        return validMoves;
+    }
+
+    private List<Position> getValidMovesAlongRay(Position origin, Piece piece, int[] dir) {
+        List<Position> ray = new ArrayList<>();
+        int row = origin.getRow() + dir[0];
+        int col = origin.getCol() + dir[1];
+        while (Position.validPosition(row, col)) {
+            Position candidate = new Position(row, col);
+            if (isEmpty(candidate)) {
+                ray.add(candidate);
+            } else if (getPieceAt(candidate).getColor() != piece.getColor()) {
+                ray.add(candidate);
+                break;
+            } else {
+                break;
+            }
+            row += dir[0];
+            col += dir[1];
+        }
+        return ray;
+    }
+
+    private List<Position> getNonSlidingValidMoves(Position position, Piece piece) {
         List<Position> validMoves = piece.getCandidateMoves(position);
-
-        validMoves.removeIf(pos -> !isEmpty(pos));
-
+        boolean isPawn = piece.getPieceType() == PieceType.PAWN;
+        validMoves.removeIf(pos -> !isEmpty(pos)
+                && (isPawn || getPieceAt(pos).getColor() == piece.getColor()));
         return validMoves;
     }
 

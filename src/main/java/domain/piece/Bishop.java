@@ -29,4 +29,12 @@ public class Bishop extends Piece {
         return candidates;
     }
 
+    @Override
+    public int[][] getSlidingDirections() {
+        int[][] copy = new int[DIRECTIONS.length][];
+        for (int i = 0; i < DIRECTIONS.length; i++) {
+            copy[i] = DIRECTIONS[i].clone();
+        }
+        return copy;
+    }
 }
