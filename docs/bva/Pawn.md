@@ -51,12 +51,12 @@ Direction is +1 for WHITE, -1 for BLACK. Returns up to two in-bounds diagonal sq
 
 **WHITE pawn:**
 
-| ID   | State of the System                              | Expected output                                   | Implemented? |
-|------|--------------------------------------------------|---------------------------------------------------|--------------|
-| TC17 | WHITE pawn, position=`(4,4)` (interior)          | `[(5,3),(5,5)]` - both diagonals in bounds        | :x:          |
-| TC18 | WHITE pawn, position=`(4,1)` (min col)           | `[(5,2)]` - col 0 is out of bounds                | :x:          |
-| TC19 | WHITE pawn, position=`(4,8)` (max col)           | `[(5,7)]` - col 9 is out of bounds                | :x:          |
-| TC20 | WHITE pawn, position=`(8,4)` (back rank)         | `[]` - row 9 is out of bounds, no valid diagonals | :x:          |
+| ID   | State of the System                      | Expected output                                   | Implemented?       |
+|------|------------------------------------------|---------------------------------------------------|--------------------|
+| TC17 | WHITE pawn, position=`(4,4)` (interior)  | `[(5,3),(5,5)]` - both diagonals in bounds        | :white_check_mark: |
+| TC18 | WHITE pawn, position=`(4,1)` (min col)   | `[(5,2)]` - col 0 is out of bounds                | :x:                |
+| TC19 | WHITE pawn, position=`(4,8)` (max col)   | `[(5,7)]` - col 9 is out of bounds                | :x:                |
+| TC20 | WHITE pawn, position=`(8,4)` (back rank) | `[]` - row 9 is out of bounds, no valid diagonals | :x:                |
 
 **BLACK pawn:**
 
