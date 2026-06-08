@@ -2,6 +2,9 @@ package domain;
 
 import domain.piece.Color;
 import domain.piece.Knight;
+import domain.piece.Bishop;
+import domain.piece.Queen;
+import domain.piece.Rook;
 import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceType;
@@ -26,12 +29,12 @@ public class Board {
 
     private Piece createPiece(PieceType type, Color color) {
         switch (type) {
-            case PAWN:
-                return new Pawn(color);
-            case KNIGHT:
-                return new Knight(color);
-            default:
-                return new Piece(type, color);
+            case PAWN:   return new Pawn(color);
+            case KNIGHT: return new Knight(color);
+            case BISHOP: return new Bishop(color);
+            case ROOK:   return new Rook(color);
+            case QUEEN:  return new Queen(color);
+            default:     return new Piece(type, color);
         }
     }
 

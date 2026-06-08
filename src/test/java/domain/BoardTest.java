@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import domain.piece.Color;
 import domain.piece.Knight;
 import domain.piece.Pawn;
+import domain.piece.Queen;
 import domain.piece.Piece;
 import domain.piece.PieceType;
 import org.easymock.EasyMock;
@@ -552,5 +553,19 @@ public class BoardTest {
 
     assertEquals(expected.size(), actual.size());
     assertTrue(actual.containsAll(expected));
+  }
+
+  @Test
+  public void InitializeBoard_Row1Col4_IsInstanceOfQueen() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(1);
+    EasyMock.expect(position.getCol()).andStubReturn(4);
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    assertInstanceOf(Queen.class, board.getPieceAt(position));
   }
 }
