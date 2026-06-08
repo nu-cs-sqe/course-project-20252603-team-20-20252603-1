@@ -33,11 +33,11 @@ public class Board {
         switch (type) {
             case PAWN:   return new Pawn(color);
             case KNIGHT: return new Knight(color);
-            case KING: return new King(color);
+            case KING:   return new King(color);
             case BISHOP: return new Bishop(color);
             case ROOK:   return new Rook(color);
             case QUEEN:  return new Queen(color);
-            default:     return new Piece(type, color);
+            default: throw new IllegalStateException("Unhandled piece type: " + type);
         }
     }
 
