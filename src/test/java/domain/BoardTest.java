@@ -634,4 +634,17 @@ public class BoardTest {
 
     assertEquals(0, moves.size());
   }
+
+  @Test
+  public void MovePiece_KnightCapturesEnemyPawn_PawnRemovedKnightMoves() {
+    Board board = new Board();
+    board.placePieceAt(new Position(4, 4), new Knight(Color.WHITE));
+    board.placePieceAt(new Position(6, 5), new Pawn(Color.BLACK));
+
+    board.movePiece(new Position(4, 4), new Position(6, 5));
+
+    assertInstanceOf(Knight.class, board.getPieceAt(new Position(6, 5)));
+    assertEquals(Color.WHITE, board.getPieceAt(new Position(6, 5)).getColor());
+    assertTrue(board.isEmpty(new Position(4, 4)));
+  }
 }
