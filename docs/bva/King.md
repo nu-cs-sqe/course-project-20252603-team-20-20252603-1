@@ -35,3 +35,17 @@
 | TC8  | color=`WHITE`, position=`(1,1)` | returns: `[(2,1), (1,2), (2,2)]`                                    | :white_check_mark: |
 | TC9  | color=`BLACK`, position=`(8,8)` | returns: `[(7,8), (8,7), (7,7)]`                                    | :white_check_mark: |
 | TC10 | color=`BLACK`, position=`(4,4)` | returns: `[(5,4), (3,4), (4,3), (4,5), (5,5), (5,3), (3,5), (3,3)]` | :white_check_mark: |
+
+### Method under test: `markMoved()`
+
+| ID   | State of the System                                   | Expected output                        | Implemented? |
+| ---- | ----------------------------------------------------- | -------------------------------------- | ------------ |
+| TC11 | new King, `hasMoved`=false, `markMoved()` called once | `hasMoved()` returns true              | :x:          |
+| TC12 | `markMoved()` called a second time                    | `hasMoved()` returns true (idempotent) | :x:          |
+
+### Method under test: `hasMoved()`
+
+| ID   | State of the System            | Expected output            | Implemented? |
+| ---- | ------------------------------ | -------------------------- | ------------ |
+| TC13 | new King, before `markMoved()` | `hasMoved()` returns false | :x:          |
+| TC14 | after `markMoved()` called     | `hasMoved()` returns true  | :x:          |
