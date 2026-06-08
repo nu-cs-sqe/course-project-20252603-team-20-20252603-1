@@ -131,7 +131,7 @@ Output boundary: `false`, `true`
 | ID   | State of the System                                                                                         | Expected output | Implemented?       |
 | ---- | ----------------------------------------------------------------------------------------------------------- | --------------- | ------------------ |
 | TC51 | initialized board, `isInCheck(WHITE)`                                                                       | `false`         | :white_check_mark: |
-| TC52 | initialized board, `isInCheck(BLACK)`                                                                       | `false`         | :x:                |
+| TC52 | initialized board, `isInCheck(BLACK)`                                                                       | `false`         | :white_check_mark: |
 | TC53 | WHITE king at `(5,8)`, BLACK rook at `(5,1)`, no other pieces                                               | `true`          | :x:                |
 | TC54 | WHITE king at `(5,5)`, BLACK rook at `(5,1)`, WHITE pawn at `(5,3)`, no other pieces                        | `false`         | :x:                |
 | TC55 | WHITE king at `(5,5)`, BLACK knight at `(3,4)`, no other pieces                                             | `true`          | :x:                |

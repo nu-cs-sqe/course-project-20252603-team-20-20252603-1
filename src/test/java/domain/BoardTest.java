@@ -742,4 +742,11 @@ public class BoardTest {
     board.initializeBoard();
     assertFalse(board.isInCheck(Color.WHITE));
   }
+
+  @Test
+  public void IsInCheck_InitializedBoardBlack_False() {
+    Board board = new Board();
+    board.initializeBoard();
+    assertFalse(board.isInCheck(Color.BLACK));
+  }
 }
