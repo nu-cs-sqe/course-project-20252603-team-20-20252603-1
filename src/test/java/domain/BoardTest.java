@@ -13,6 +13,7 @@ import domain.piece.Knight;
 import domain.piece.Pawn;
 import domain.piece.Queen;
 import domain.piece.Rook;
+import domain.piece.Bishop;
 import domain.piece.Piece;
 import domain.piece.PieceType;
 import org.easymock.EasyMock;
@@ -579,5 +580,19 @@ public class BoardTest {
     List<Position> moves = board.getValidMoves(pos);
 
     assertEquals(14, moves.size());
+  }
+
+  @Test
+  public void GetValidMoves_WhiteBishopFriendlyOnRay_StopsBeforeFriendly() {
+    Board board = new Board();
+    board.placePieceAt(new Position(4, 4), new Bishop(Color.WHITE));
+    board.placePieceAt(new Position(6, 6), new Pawn(Color.WHITE));
+
+    List<Position> moves = board.getValidMoves(new Position(4, 4));
+
+    assertTrue(moves.contains(new Position(5, 5)));
+    assertFalse(moves.contains(new Position(6, 6)));
+    assertFalse(moves.contains(new Position(7, 7)));
+    assertEquals(10, moves.size()); // NE:1, SW:3, NW:3, SE:3
   }
 }

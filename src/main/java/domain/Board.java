@@ -10,6 +10,7 @@ import domain.piece.Piece;
 import domain.piece.PieceType;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -86,11 +87,32 @@ public class Board {
         }
 
         Piece piece = getPieceAt(position);
+        int[][] slidingDirections = piece.getSlidingDirections();
+
+        if (slidingDirections.length > 0) {
+            List<Position> validMoves = new ArrayList<>();
+            for (int[] dir : slidingDirections) {
+                int row = position.getRow() + dir[0];
+                int col = position.getCol() + dir[1];
+                while (Position.validPosition(row, col)) {
+                    Position candidate = new Position(row, col);
+                    if (isEmpty(candidate)) {
+                        validMoves.add(candidate);
+                    } else if (getPieceAt(candidate).getColor() != piece.getColor()) {
+                        validMoves.add(candidate);
+                        break;
+                    } else {
+                        break;
+                    }
+                    row += dir[0];
+                    col += dir[1];
+                }
+            }
+            return validMoves;
+        }
 
         List<Position> validMoves = piece.getCandidateMoves(position);
-
         validMoves.removeIf(pos -> !isEmpty(pos));
-
         return validMoves;
     }
 

@@ -29,4 +29,8 @@ public class Bishop extends Piece {
         return candidates;
     }
 
+    @Override
+    public int[][] getSlidingDirections() {
+        return DIRECTIONS;
+    }
 }

@@ -28,4 +28,9 @@ public class Rook extends Piece {
 
         return candidates;
     }
+
+    @Override
+    public int[][] getSlidingDirections() {
+        return DIRECTIONS;
+    }
 }
