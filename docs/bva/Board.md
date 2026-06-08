@@ -82,10 +82,7 @@ The rest of the `false` cases are covered below with getPieceAt.
 | TC41 | WHITE Bishop at (4,4), WHITE Pawn at (6,6), all other squares empty                      | NE ray stops at (5,5); (6,6) excluded (friendly stop)                 | :white_check_mark: |
 | TC42 | WHITE Bishop at (4,4), BLACK Pawn at (6,6), all other squares empty                      | NE ray includes (5,5) and (6,6) (capture); stops after (6,6)          | :white_check_mark: |
 | TC43 | WHITE Knight at (4,4), BLACK Pawn at (6,5), all other squares empty                      | (6,5) included (capture); all 7 other L-moves included                | :white_check_mark: |
-| TC44 | WHITE Pawn (hasMoved=true) at (4,4), BLACK piece at (5,3), (5,4) empty                   | returns `[(5,4), (5,3)]` — forward + diagonal capture                 | :x:                |
-| TC45 | WHITE Pawn (hasMoved=true) at (4,4), (5,3) empty                                         | returns `[(5,4)]` — empty diagonal excluded                           | :x:                |
-| TC46 | WHITE Pawn (hasMoved=true) at (4,4), WHITE piece at (5,3)                                | returns `[(5,4)]` — friendly diagonal excluded                        | :x:                |
-| TC47 | WHITE Pawn (hasMoved=true) at (4,4), BLACK piece at (5,4)                                | returns `[]` — forward blocked by enemy                               | :x:                |
+| TC44 | WHITE Pawn (hasMoved=true) at (4,4), BLACK piece at (5,4)                                | returns `[]` — forward blocked by enemy                               | :x:                |
 
 ### Method under test: `movePiece(Position from, Position to)`
 
@@ -98,4 +95,4 @@ Validates source and destination, physically moves the piece, and calls `piece.m
 | TC37 | initialized board, `from=(2,1)` WHITE pawn, `to=(3,1)` (one step)           | `getPieceAt((3,1))` = WHITE PAWN; piece at `(3,1)` is instance of `Pawn`; `isEmpty((2,1))` = `true`; `pawn.hasMoved()` = `true` | :white_check_mark: |
 | TC38 | initialized board, `from=(2,1)` WHITE pawn, `to=(4,1)` (two steps)          | `getPieceAt((4,1))` = WHITE PAWN; piece at `(4,1)` is instance of `Pawn`; `isEmpty((2,1))` = `true`; `pawn.hasMoved()` = `true` | :white_check_mark: |
 | TC39 | initialized board, `from=(1,2)` WHITE knight, `to=(3,3)`                    | `getPieceAt((3,3))` = WHITE KNIGHT; piece at `(3,3)` is instance of `Knight`; `isEmpty((1,2))` = `true`                         | :white_check_mark: |
-| TC48 | WHITE Knight at (4,4), BLACK Pawn at (6,5); knight moves to (6,5)           | Knight at (6,5); BLACK Pawn removed; (4,4) empty                                                                                | :x:                |
+| TC45 | WHITE Knight at (4,4), BLACK Pawn at (6,5); knight moves to (6,5)           | Knight at (6,5); BLACK Pawn removed; (4,4) empty                                                                                | :x:                |

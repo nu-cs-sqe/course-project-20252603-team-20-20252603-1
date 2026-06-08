@@ -2,7 +2,7 @@
 
 ## Overview
 
-When a piece moves to a square occupied by an opponent piece, it captures that piece, removing it from the board. Valid moves must exclude friendly squares and include enemy squares, with sliding pieces stopping their ray at any occupied square. This implements getValidMoves and movePiece from prior designs, adds pawn diagonal captures, enforces turn order in Game, and wires up the selection and highlight flow in the UI.
+When a piece moves to a square occupied by an opponent piece, it captures that piece, removing it from the board. Valid moves must exclude friendly squares and include enemy squares, with sliding pieces stopping their ray at any occupied square. This implements getValidMoves and movePiece from prior designs, enforces turn order in Game, and wires up the selection and highlight flow in the UI. Pawn diagonal capture is out of scope and handled in a separate sub-issue.
 
 ## Changes
 
@@ -19,7 +19,7 @@ When a piece moves to a square occupied by an opponent piece, it captures that p
 
 1. Update `createPiece` and `initializeBoard` so pieces stored on the board are proper subclass instances with working getCandidateMoves and getSlidingDirections.
 2. Add `placePieceAt(Position position, Piece piece) -> void` - package-private, sets the array cell directly for test setup.
-3. Implement `getValidMoves(Position source) -> List<Position>` - for sliding pieces, ray-cast each direction: include empty squares, include the first enemy square and stop, stop before the first friendly square. For Knight, filter getCandidateMoves removing friendly destinations. For Pawn, include forward squares only if empty, and diagonal-forward squares only if occupied by an enemy.
+3. Implement `getValidMoves(Position source) -> List<Position>` - for sliding pieces, ray-cast each direction: include empty squares, include the first enemy square and stop, stop before the first friendly square. For Knight, filter getCandidateMoves removing friendly destinations. For Pawn, forward squares are blocked by any piece (friendly or enemy); no diagonal capture logic.
 4. Implement `movePiece(Position source, Position destination) -> void` - validates destination is in getValidMoves(source), moves piece to destination overwriting any captured piece, clears source, calls markMoved.
 
 ### Game
