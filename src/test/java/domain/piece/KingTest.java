@@ -1,6 +1,7 @@
 package domain.piece;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -21,6 +22,7 @@ public class KingTest {
     public void Constructor_ColorWhite_KingCreated() {
         King king = new King(Color.WHITE);
 
+        assertFalse(king.hasMoved());
         assertEquals(Color.WHITE, king.getColor());
         assertEquals(PieceType.KING, king.getPieceType());
     }
