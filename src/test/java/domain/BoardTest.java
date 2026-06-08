@@ -622,4 +622,23 @@ public class BoardTest {
     assertEquals(Color.WHITE, king.getColor());
     assertTrue(king.hasMoved());
   }
+
+  @Test
+  public void MovePiece_BlackKingRow8Col5ToRow7Col4_KingVacates() {
+    Board board = new Board();
+    Position pawnFrom = new Position(7, 4);
+    Position pawnTo = new Position(6, 4);
+    Position kingFrom = new Position(8, 5);
+
+    board.initializeBoard();
+    board.movePiece(pawnFrom, pawnTo);
+    board.movePiece(kingFrom, pawnFrom);
+
+    assertTrue(board.isEmpty(kingFrom));
+    assertFalse(board.isEmpty(pawnFrom));
+
+    King king = assertInstanceOf(King.class, board.getPieceAt(pawnFrom));
+    assertEquals(Color.BLACK, king.getColor());
+    assertTrue(king.hasMoved());
+  }
 }
