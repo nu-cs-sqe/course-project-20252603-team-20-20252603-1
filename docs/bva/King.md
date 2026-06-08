@@ -5,7 +5,7 @@
 | ID  | State of the System | Expected output                                         | Implemented?       |
 | --- | ------------------- | ------------------------------------------------------- | ------------------ |
 | TC1 | color=`WHITE`       | King created, `getPieceType()`=KING, `getColor()`=WHITE | :white_check_mark: |
-| TC2 | color=`BLACK`       | King created, `getPieceType()`=KING, `getColor()`=BLACK | :x:                |
+| TC2 | color=`BLACK`       | King created, `getPieceType()`=KING, `getColor()`=BLACK | :white_check_mark: |
 | TC3 | color=`null`        | `IllegalArgumentException` thrown                       | :x:                |
 
 ### Method under test: `getCandidateMoves(Position position)`

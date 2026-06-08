@@ -13,4 +13,12 @@ public class KingTest {
         assertEquals(Color.WHITE, king.getColor());
         assertEquals(PieceType.KING, king.getPieceType());
     }
+
+    @Test
+    public void Constructor_ColorBlack_KingCreated() {
+        King king = new King(Color.BLACK);
+
+        assertEquals(Color.BLACK, king.getColor());
+        assertEquals(PieceType.KING, king.getPieceType());
+    }
 }
