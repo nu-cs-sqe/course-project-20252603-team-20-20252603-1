@@ -25,7 +25,7 @@ When a piece moves to a square occupied by an opponent piece, it captures that p
 ### Game
 
 1. Add `getValidMoves(Position source) -> List<Position>` - guards gameInProgress, delegates to board.
-2. Add `makeMove(Position source, Position destination) -> void` - guards gameInProgress, rejects source pieces not belonging to currentTurn, calls board.movePiece, toggles currentTurn.
+2. Add `executeMove(Position source, Position destination) -> void` - guards gameInProgress, rejects source pieces not belonging to currentTurn, calls board.movePiece, toggles currentTurn.
 
 ### BoardController
 
