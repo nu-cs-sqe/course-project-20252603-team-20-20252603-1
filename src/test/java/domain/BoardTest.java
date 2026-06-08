@@ -595,4 +595,18 @@ public class BoardTest {
     assertFalse(moves.contains(new Position(7, 7)));
     assertEquals(10, moves.size()); // NE:1, SW:3, NW:3, SE:3
   }
+
+  @Test
+  public void GetValidMoves_WhiteBishopEnemyOnRay_IncludesEnemyAndStops() {
+    Board board = new Board();
+    board.placePieceAt(new Position(4, 4), new Bishop(Color.WHITE));
+    board.placePieceAt(new Position(6, 6), new Pawn(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(4, 4));
+
+    assertTrue(moves.contains(new Position(5, 5)));
+    assertTrue(moves.contains(new Position(6, 6)));
+    assertFalse(moves.contains(new Position(7, 7)));
+    assertEquals(11, moves.size()); // NE:2, SW:3, NW:3, SE:3
+  }
 }
