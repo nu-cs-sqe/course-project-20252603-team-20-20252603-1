@@ -603,4 +603,23 @@ public class BoardTest {
     assertEquals(expected.size(), actual.size());
     assertTrue(actual.containsAll(expected));
   }
+
+  @Test
+  public void MovePiece_WhiteKingRow1Col5ToRow2Col6_KingVacates() {
+    Board board = new Board();
+    Position pawnFrom = new Position(2, 6);
+    Position pawnTo = new Position(3, 6);
+    Position kingFrom = new Position(1, 5);
+
+    board.initializeBoard();
+    board.movePiece(pawnFrom, pawnTo);
+    board.movePiece(kingFrom, pawnFrom);
+
+    assertTrue(board.isEmpty(kingFrom));
+    assertFalse(board.isEmpty(pawnFrom));
+
+    King king = assertInstanceOf(King.class, board.getPieceAt(pawnFrom));
+    assertEquals(Color.WHITE, king.getColor());
+    assertTrue(king.hasMoved());
+  }
 }
