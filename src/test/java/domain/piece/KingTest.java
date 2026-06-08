@@ -51,6 +51,14 @@ public class KingTest {
         assertTrue(king.hasMoved());
     }
 
+    @Test
+    public void MarkMoved_CalledTwice_HasMovedReturnsTrue() {
+        King king = new King(Color.WHITE);
+        king.markMoved();
+        king.markMoved();
+        assertTrue(king.hasMoved());
+    }
+
     @ParameterizedTest
     @MethodSource("getCandidatesProvider")
     public void GetCandidates_ColorCRowXColY_ReturnsNCandidates(Color color, int row, int col,
