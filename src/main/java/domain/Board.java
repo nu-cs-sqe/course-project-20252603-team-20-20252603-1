@@ -1,16 +1,16 @@
 package domain;
 
+import domain.piece.Bishop;
 import domain.piece.Color;
 import domain.piece.Knight;
-import domain.piece.Bishop;
-import domain.piece.Queen;
-import domain.piece.Rook;
 import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceType;
+import domain.piece.Queen;
+import domain.piece.Rook;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
