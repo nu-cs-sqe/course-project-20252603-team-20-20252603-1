@@ -5,7 +5,7 @@
 | ID  | State of the System | Expected output                                                                     | Implemented?       |
 | --- | ------------------- | ----------------------------------------------------------------------------------- | ------------------ |
 | TC1 | color=`WHITE`       | King created, `getPieceType()`=KING, `getColor()`=WHITE, `hasMoved()` returns false | :white_check_mark: |
-| TC2 | color=`BLACK`       | King created, `getPieceType()`=KING, `getColor(),`=BLACK,`hasMoved()` returns false | :x:                |
+| TC2 | color=`BLACK`       | King created, `getPieceType()`=KING, `getColor(),`=BLACK,`hasMoved()` returns false | :white_check_mark: |
 | TC3 | color=`null`        | `IllegalArgumentException` thrown                                                   | :white_check_mark: |
 
 ### Method under test: `getCandidateMoves(Position position)`
@@ -45,4 +45,4 @@
 
 ### Method under test: `hasMoved()`
 
-Boundaries covered in previous test cases
+Boundaries covered in previous test cases.

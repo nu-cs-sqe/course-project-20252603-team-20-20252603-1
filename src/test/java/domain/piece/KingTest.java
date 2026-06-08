@@ -31,6 +31,7 @@ public class KingTest {
     public void Constructor_ColorBlack_KingCreated() {
         King king = new King(Color.BLACK);
 
+        assertFalse(king.hasMoved());
         assertEquals(Color.BLACK, king.getColor());
         assertEquals(PieceType.KING, king.getPieceType());
     }
