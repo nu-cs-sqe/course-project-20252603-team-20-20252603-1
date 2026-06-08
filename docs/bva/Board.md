@@ -67,12 +67,13 @@ The rest of the `false` cases are covered below with getPieceAt.
 | TC26 | after initializeBoard(), position (1,4)                                | piece is instance of Queen  | :x:                |
 | TC27 | after initializeBoard(), position (1,2)                                | piece is instance of Knight | :white_check_mark: |
 | TC28 | after initializeBoard(), position (2,1)                                | piece is instance of Pawn   | :white_check_mark: |
-
-
-
+| TC40 | after initializeBoard(), position (1,5)                                | piece is instance of King   | :x:                |
 
 
 ### Method under test: `getValidMoves(Position pos)`
+
+As these are unit tests, the only new boundary with adding `King` is using the actual `King` instance of `Piece`.
+
 
 | ID   | State of the System                                                                      | Expected output                                                       | Implemented?       |
 | ---- | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | :----------------- |
@@ -82,10 +83,14 @@ The rest of the `false` cases are covered below with getPieceAt.
 | TC32 | initialized board, `pos=(1,7)` WHITE knight                                              | returns `[(3,6),(3,8)]` — candidate `(2,5)` filtered (own pawn there) | :white_check_mark: |
 | TC33 | initialized board, `pos=(2,8)` WHITE pawn (unmoved), `(3,8)` and `(4,8)` empty           | returns `[(3,8),(4,8)]`                                               | :white_check_mark: |
 | TC34 | initialized board, WHITE pawn moved from `(2,1)` to `(3,1)` (hasMoved=true), `pos=(3,1)` | returns `[(4,1)]` — one-step only after first move                    | :white_check_mark: |
+| TC41 | initialized board, WHITE king created, `pos=(1,5)`                                       | returns `[]`                                                          | :x:                |
+| TC41 | initialized board, BLACK king created, `pos=(8,5)`                                       | returns `[]`                                                          | :x:                |
 
 ### Method under test: `movePiece(Position from, Position to)`
 
 Validates source and destination, physically moves the piece, and calls `piece.markMoved()`. All validation throws `IllegalArgumentException`.
+
+As these are unit tests, the only new boundary with adding `King` is using the actual `King` instance of `Piece`.
 
 | ID   | State of the System                                                         | Expected output                                                                                                                 | Implemented?       |
 | ---- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | :----------------- |
@@ -94,3 +99,5 @@ Validates source and destination, physically moves the piece, and calls `piece.m
 | TC37 | initialized board, `from=(2,1)` WHITE pawn, `to=(3,1)` (one step)           | `getPieceAt((3,1))` = WHITE PAWN; piece at `(3,1)` is instance of `Pawn`; `isEmpty((2,1))` = `true`; `pawn.hasMoved()` = `true` | :white_check_mark: |
 | TC38 | initialized board, `from=(2,1)` WHITE pawn, `to=(4,1)` (two steps)          | `getPieceAt((4,1))` = WHITE PAWN; piece at `(4,1)` is instance of `Pawn`; `isEmpty((2,1))` = `true`; `pawn.hasMoved()` = `true` | :white_check_mark: |
 | TC39 | initialized board, `from=(1,2)` WHITE knight, `to=(3,3)`                    | `getPieceAt((3,3))` = WHITE KNIGHT; piece at `(3,3)` is instance of `Knight`; `isEmpty((1,2))` = `true`                         | :white_check_mark: |
+| TC43 | initialized board, f2 is empty, `from=(1,5)`, `to=(2,6)`                    | `getPieceAt((2,6))` = WHITE King; piece at `(2,6)` is instance of `King`; `isEmpty((5,1))` = `true`; `king.hasMoved()` = `true` | :x:                |
+| TC44 | initialized board, d7 is empty, `from=(8,5)`, `to=(7,4)`                    | `getPieceAt((7,4))` = BLACK King; piece at `(7,4)` is instance of `King`; `isEmpty((8,5))` = `true`; `king.hasMoved()` = `true` | :x:                |
