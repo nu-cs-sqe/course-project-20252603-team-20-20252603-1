@@ -370,4 +370,20 @@ public class GameTest {
 
         EasyMock.verify(board);
     }
+
+    @Test
+    public void ExecuteMove_WhiteKnightCapturesBlackPawn_TurnSwitches() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+        board.placePieceAt(new Position(4, 4), new Knight(Color.WHITE));
+        board.placePieceAt(new Position(6, 5), new Pawn(Color.BLACK));
+
+        game.executeMove(new Position(4, 4), new Position(6, 5));
+
+        assertTrue(board.isEmpty(new Position(4, 4)));
+        assertEquals(Color.WHITE, board.getPieceAt(new Position(6, 5)).getColor());
+        assertEquals(PieceType.KNIGHT, board.getPieceAt(new Position(6, 5)).getPieceType());
+        assertEquals(Color.BLACK, game.getCurrentTurn());
+    }
 }
