@@ -36,6 +36,6 @@ Note: getCandidateMoves models an empty board. From every position on an 8x8 boa
 
 ### Method under test: getSlidingDirections()
 
-| ID   | State of the System | Expected output                                                                                  | Implemented? |
-|------|---------------------|--------------------------------------------------------------------------------------------------|--------------|
-| TC13 | any Queen instance  | returns 8 direction vectors: {1,0},{-1,0},{0,1},{0,-1},{1,1},{1,-1},{-1,1},{-1,-1}               | :x:          |
+| ID   | State of the System | Expected output                                                                    | Implemented?       |
+|------|---------------------|------------------------------------------------------------------------------------|--------------------|
+| TC13 | any Queen instance  | returns 8 direction vectors: {1,0},{-1,0},{0,1},{0,-1},{1,1},{1,-1},{-1,1},{-1,-1} | :white_check_mark: |
