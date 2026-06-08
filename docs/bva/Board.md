@@ -137,3 +137,17 @@ Output boundary: `false`, `true`
 | TC55 | WHITE king at `(5,5)`, BLACK knight at `(3,4)`, no other pieces                                             | `true`          | :white_check_mark: |
 | TC56 | BLACK king at `(5,5)`, WHITE queen at `(5,1)`, no other pieces                                              | `true`          | :white_check_mark: |
 | TC57 | WHITE rook at `(1,1)`, BLACK rook at `(4,1)`, BLACK king at `(8,1)`, WHITE king at `(4,5)`, no other pieces | `true`          | :white_check_mark: |
+
+### Method under test: `promotePawn(Position position, PieceType pieceType)`
+
+| ID   | State of the System                                            | Expected output                                                    | Implemented?       |
+|------|----------------------------------------------------------------|--------------------------------------------------------------------|:-------------------|
+| TC63 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), QUEEN)`             | `getPieceAt((8,4))` = QUEEN, WHITE; piece is instance of `Queen`   | :white_check_mark: |
+| TC64 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), ROOK)`              | `getPieceAt((8,4))` = ROOK, WHITE; piece is instance of `Rook`     | :white_check_mark: |
+| TC65 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), BISHOP)`            | `getPieceAt((8,4))` = BISHOP, WHITE; piece is instance of `Bishop` | :white_check_mark: |
+| TC66 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), KNIGHT)`            | `getPieceAt((8,4))` = KNIGHT, WHITE; piece is instance of `Knight` | :white_check_mark: |
+| TC67 | BLACK PAWN at `(1,4)`, `promotePawn((1,4), QUEEN)`             | `getPieceAt((1,4))` = QUEEN, BLACK; piece is instance of `Queen`   | :white_check_mark: |
+| TC68 | WHITE PAWN at `(4,4)` (mid-board), `promotePawn((4,4), QUEEN)` | throws `IllegalArgumentException` - not at promotion rank          | :white_check_mark: |
+| TC69 | WHITE KNIGHT at `(8,4)`, `promotePawn((8,4), QUEEN)`           | throws `IllegalArgumentException` - not a pawn                     | :white_check_mark: |
+| TC70 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), PAWN)`              | throws `IllegalArgumentException` - cannot promote to PAWN         | :white_check_mark: |
+| TC71 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), KING)`              | throws `IllegalArgumentException` - cannot promote to KING         | :white_check_mark: |
