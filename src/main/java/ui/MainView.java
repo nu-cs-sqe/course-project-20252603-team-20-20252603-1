@@ -2,10 +2,10 @@ package ui;
 
 import domain.piece.Color;
 import java.awt.BorderLayout;
-import javax.swing.JFrame;
+import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.text.MessageFormat;
+import javax.swing.JFrame;
 
 public class MainView extends JFrame {
 
@@ -57,8 +57,7 @@ public class MainView extends JFrame {
             String name = (turn == Color.WHITE) ? white : black;
 
             String currentPlayerLabelString = MessageFormat.format("{0}: {1}",
-                currentPlayer, name
-            );
+                    currentPlayer, name);
 
             gameStatsView.currentPlayerLabel.setText(currentPlayerLabelString);
         });
