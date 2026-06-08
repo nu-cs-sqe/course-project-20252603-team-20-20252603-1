@@ -609,4 +609,16 @@ public class BoardTest {
     assertFalse(moves.contains(new Position(7, 7)));
     assertEquals(11, moves.size()); // NE:2, SW:3, NW:3, SE:3
   }
+
+  @Test
+  public void GetValidMoves_WhiteKnightEnemyAtDestination_IncludesCapture() {
+    Board board = new Board();
+    board.placePieceAt(new Position(4, 4), new Knight(Color.WHITE));
+    board.placePieceAt(new Position(6, 5), new Pawn(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(4, 4));
+
+    assertTrue(moves.contains(new Position(6, 5)));
+    assertEquals(8, moves.size());
+  }
 }
