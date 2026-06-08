@@ -3,11 +3,14 @@ package domain;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import domain.piece.Color;
+import domain.piece.Knight;
+import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceType;
 import org.easymock.EasyMock;
@@ -16,14 +19,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
 import java.util.NoSuchElementException;
-
 
 public class BoardTest {
 
   /*
    * isEmpty() unit tests
-   * */
+   */
 
   @ParameterizedTest
   @CsvSource({
@@ -68,7 +71,7 @@ public class BoardTest {
 
   /*
    * getPieceAt() SOCIABLE unit tests
-   * */
+   */
 
   @ParameterizedTest
   @CsvSource({
@@ -84,9 +87,9 @@ public class BoardTest {
       "1, 5, WHITE, KING",
   })
   public void GetPieceAt_AfterInitRowXColY_CorrectPiece(int row,
-                                                        int col,
-                                                        Color color,
-                                                        PieceType pieceType) {
+      int col,
+      Color color,
+      PieceType pieceType) {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
 
@@ -116,8 +119,7 @@ public class BoardTest {
 
     Exception exception = assertThrows(
         NoSuchElementException.class,
-        () -> board.getPieceAt(position)
-    );
+        () -> board.getPieceAt(position));
 
     assertTrue(board.isEmpty(position));
 
@@ -129,7 +131,7 @@ public class BoardTest {
 
   /*
    * initializeBoard() unit tests
-   * */
+   */
 
   @ParameterizedTest
   @CsvSource({
@@ -167,7 +169,7 @@ public class BoardTest {
       "8, ROOK",
   })
   public void InitializeBoard_Row1ColY_WhiteBackRankCorrect(int col,
-                                                            PieceType pieceType) {
+      PieceType pieceType) {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
 
@@ -186,7 +188,7 @@ public class BoardTest {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8})
+  @ValueSource(ints = { 1, 2, 3, 4, 5, 6, 7, 8 })
   public void InitializeBoard_Row2_WhitePawns(int col) {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
@@ -217,7 +219,7 @@ public class BoardTest {
       "8, ROOK",
   })
   public void InitializeBoard_Row8ColY_BlackBackRankCorrect(int col,
-                                                            PieceType pieceType) {
+      PieceType pieceType) {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
 
@@ -236,7 +238,7 @@ public class BoardTest {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8})
+  @ValueSource(ints = { 1, 2, 3, 4, 5, 6, 7, 8 })
   public void InitializeBoard_Row7_BlackPawns(int col) {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
@@ -289,5 +291,266 @@ public class BoardTest {
     assertNotNull(actual);
     assertEquals(color, actual.getColor());
     assertEquals(pieceType, actual.getPieceType());
+  }
+
+  @Test
+  public void InitializeBoard_Row2Col1_IsInstanceOfPawn() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(2);
+    EasyMock.expect(position.getCol()).andStubReturn(1);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    Piece actual = board.getPieceAt(position);
+
+    assertInstanceOf(Pawn.class, actual);
+  }
+
+  @Test
+  public void InitializeBoard_Row1Col2_IsInstanceOfKnight() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(1);
+    EasyMock.expect(position.getCol()).andStubReturn(2);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    Piece actual = board.getPieceAt(position);
+
+    assertInstanceOf(Knight.class, actual);
+  }
+
+  @Test
+  public void GetValidMoves_EmptyPosition_ThrowsException() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(4);
+    EasyMock.expect(position.getCol()).andStubReturn(4);
+
+    EasyMock.replay(position);
+
+    Exception exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> board.getValidMoves(position));
+
+    assertTrue(board.isEmpty(position));
+
+    String expected = "Cannot get valid moves at an empty position";
+    String actual = exception.getMessage();
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void GetValidMoves_WhitePawnCol1_TwoMoves() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(2);
+    EasyMock.expect(position.getCol()).andStubReturn(1);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    List<Position> actual = board.getValidMoves(position);
+    List<Position> expected = List.of(new Position(3, 1), new Position(4, 1));
+
+    assertEquals(expected.size(), actual.size());
+    assertTrue(actual.containsAll(expected));
+  }
+
+  @Test
+  public void GetValidMoves_WhitePawnCol8_TwoMoves() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(2);
+    EasyMock.expect(position.getCol()).andStubReturn(8);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    List<Position> actual = board.getValidMoves(position);
+    List<Position> expected = List.of(new Position(3, 8), new Position(4, 8));
+
+    assertEquals(expected.size(), actual.size());
+    assertTrue(actual.containsAll(expected));
+  }
+
+  @Test
+  public void GetValidMoves_WhiteKnightCol2_TwoMoves() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(1);
+    EasyMock.expect(position.getCol()).andStubReturn(2);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    List<Position> actual = board.getValidMoves(position);
+    List<Position> expected = List.of(new Position(3, 1), new Position(3, 3));
+
+    assertEquals(expected.size(), actual.size());
+    assertTrue(actual.containsAll(expected));
+  }
+
+  @Test
+  public void GetValidMoves_WhiteKnightCol7_TwoMoves() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(1);
+    EasyMock.expect(position.getCol()).andStubReturn(7);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    List<Position> actual = board.getValidMoves(position);
+    List<Position> expected = List.of(new Position(3, 6), new Position(3, 8));
+
+    assertEquals(expected.size(), actual.size());
+    assertTrue(actual.containsAll(expected));
+  }
+
+  @Test
+  public void MovePiece_EmptyPosition_ThrowsException() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(2);
+    EasyMock.expect(position.getCol()).andStubReturn(1);
+
+    EasyMock.replay(position);
+
+    Exception exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> board.movePiece(position, position));
+
+    assertTrue(board.isEmpty(position));
+
+    String expected = "Cannot move piece from an empty position";
+    String actual = exception.getMessage();
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void MovePiece_IllegalPawnMove_ThrowsException() {
+    Board board = new Board();
+    Position from = EasyMock.createMock(Position.class);
+    Position to = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(from.getRow()).andStubReturn(2);
+    EasyMock.expect(from.getCol()).andStubReturn(1);
+    EasyMock.expect(to.getRow()).andStubReturn(5);
+    EasyMock.expect(to.getCol()).andStubReturn(1);
+
+    EasyMock.replay(from, to);
+
+    board.initializeBoard();
+
+    Exception exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> board.movePiece(from, to));
+
+    String expected = "Cannot move piece: destination is an illegal move";
+    String actual = exception.getMessage();
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void MovePiece_FromRow2Col1ToRow3_PawnVacates() {
+    Board board = new Board();
+    Position from = EasyMock.createMock(Position.class);
+    Position to = new Position(3, 1);
+
+    EasyMock.expect(from.getRow()).andStubReturn(2);
+    EasyMock.expect(from.getCol()).andStubReturn(1);
+
+    EasyMock.replay(from);
+
+    board.initializeBoard();
+    board.movePiece(from, to);
+
+    assertTrue(board.isEmpty(from));
+    assertFalse(board.isEmpty(to));
+
+    Pawn pawn = assertInstanceOf(Pawn.class, board.getPieceAt(to));
+    assertTrue(pawn.hasMoved());
+  }
+
+  @Test
+  public void MovePiece_FromRow2Col1ToRow4_PawnVacates() {
+    Board board = new Board();
+    Position from = EasyMock.createMock(Position.class);
+    Position to = new Position(4, 1);
+
+    EasyMock.expect(from.getRow()).andStubReturn(2);
+    EasyMock.expect(from.getCol()).andStubReturn(1);
+
+    EasyMock.replay(from);
+
+    board.initializeBoard();
+    board.movePiece(from, to);
+
+    assertTrue(board.isEmpty(from));
+    assertFalse(board.isEmpty(to));
+
+    Pawn pawn = assertInstanceOf(Pawn.class, board.getPieceAt(to));
+    assertTrue(pawn.hasMoved());
+  }
+
+  @Test
+  public void MovePiece_FromRow1Col2ToRow3Col3_KnightVacates() {
+    Board board = new Board();
+    Position from = EasyMock.createMock(Position.class);
+    Position to = new Position(3, 3);
+
+    EasyMock.expect(from.getRow()).andStubReturn(1);
+    EasyMock.expect(from.getCol()).andStubReturn(2);
+
+    EasyMock.replay(from);
+
+    board.initializeBoard();
+    board.movePiece(from, to);
+
+    assertTrue(board.isEmpty(from));
+    assertFalse(board.isEmpty(to));
+
+    Knight knight = assertInstanceOf(Knight.class, board.getPieceAt(to));
+    assertEquals(Color.WHITE, knight.getColor());
+
+  }
+
+  @Test
+  public void MovePiece_AfterFirstPawnMove_OneMove() {
+    Board board = new Board();
+    Position from = EasyMock.createMock(Position.class);
+    Position to = new Position(3, 1);
+
+    EasyMock.expect(from.getRow()).andStubReturn(2);
+    EasyMock.expect(from.getCol()).andStubReturn(1);
+
+    EasyMock.replay(from);
+
+    board.initializeBoard();
+    board.movePiece(from, to);
+
+    List<Position> actual = board.getValidMoves(to);
+    List<Position> expected = List.of(new Position(4, 1));
+
+    assertEquals(expected.size(), actual.size());
+    assertTrue(actual.containsAll(expected));
   }
 }

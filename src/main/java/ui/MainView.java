@@ -1,5 +1,6 @@
 package ui;
 
+import domain.piece.Color;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
@@ -40,5 +41,9 @@ public class MainView extends JFrame {
     private void addBoardView() {
         boardView = new BoardView();
         add(boardView, BorderLayout.CENTER);
+        boardView.setOnTurnChanged(turn -> {
+            String name = (turn == Color.WHITE) ? "White" : "Black";
+            gameStatsView.currentPlayerLabel.setText("Current Player: " + name);
+        });
     }
 }

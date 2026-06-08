@@ -1,5 +1,9 @@
 package domain.piece;
 
+import domain.Position;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Piece {
     private final PieceType pieceType;
     private final Color color;
@@ -27,4 +31,16 @@ public class Piece {
     public PieceType getPieceType() {
         return pieceType;
     }
+
+    public List<Position> getCandidateMoves(Position position) {
+        return new ArrayList<Position>();
+    }
+
+    public int[][] getSlidingDirections() {
+        return new int[0][0];
+    }
+
+    public void markMoved() {
+    }
+
 }
