@@ -77,7 +77,40 @@ public class KingTest {
                         new Position(8, 3),
                         new Position(8, 5),
                         new Position(7, 5),
-                        new Position(7, 3))));
-
+                        new Position(7, 3))),
+                // TC 6
+                Arguments.of(Color.WHITE, 4, 1, List.of(
+                        new Position(5, 1),
+                        new Position(3, 1),
+                        new Position(4, 2),
+                        new Position(5, 2),
+                        new Position(3, 2))),
+                // TC 7
+                Arguments.of(Color.BLACK, 4, 8, List.of(
+                        new Position(5, 8),
+                        new Position(3, 8),
+                        new Position(4, 7),
+                        new Position(5, 7),
+                        new Position(3, 7))),
+                // TC 8
+                Arguments.of(Color.WHITE, 1, 1, List.of(
+                        new Position(2, 1),
+                        new Position(1, 2),
+                        new Position(2, 2))),
+                // TC 9
+                Arguments.of(Color.BLACK, 8, 8, List.of(
+                        new Position(7, 8),
+                        new Position(8, 7),
+                        new Position(7, 7))),
+                // TC 10
+                Arguments.of(Color.BLACK, 4, 4, List.of(
+                        new Position(5, 4),
+                        new Position(3, 4),
+                        new Position(4, 3),
+                        new Position(4, 5),
+                        new Position(5, 5),
+                        new Position(5, 3),
+                        new Position(3, 5),
+                        new Position(3, 3))));
     }
 }

@@ -30,8 +30,8 @@
 | ---- | ------------------------------- | ------------------------------------------------------------------- | ------------------ |
 | TC4  | color=`WHITE`, position=`(1,4)` | returns: `[(2,4), (1,3), (1,5), (2,5), (2,3)]`                      | :white_check_mark: |
 | TC5  | color=`BLACK`, position=`(8,4)` | returns: `[(7,4), (8,3), (8,5), (7,5), (7,3)]`                      | :white_check_mark: |
-| TC6  | color=`WHITE`, position=`(4,1)` | returns: `[(5,1), (3,1), (4,2), (5,2), (3,2)]`                      | :x:                |
-| TC7  | color=`BLACK`, position=`(4,8)` | returns: `[(5,8), (3,8), (4,7), (5,7), (3,7)]`                      | :x:                |
-| TC8  | color=`WHITE`, position=`(1,1)` | returns: `[(2,1), (1,2), (2,2)]`                                    | :x:                |
-| TC9  | color=`BLACK`, position=`(8,8)` | returns: `[(7,8), (8,7), (7,7)]`                                    | :x:                |
-| TC10 | color=`BLACK`, position=`(4,4)` | returns: `[(5,4), (3,4), (4,3), (4,5), (5,5), (5,3), (3,5), (3,3)]` | :x:                |
+| TC6  | color=`WHITE`, position=`(4,1)` | returns: `[(5,1), (3,1), (4,2), (5,2), (3,2)]`                      | :white_check_mark: |
+| TC7  | color=`BLACK`, position=`(4,8)` | returns: `[(5,8), (3,8), (4,7), (5,7), (3,7)]`                      | :white_check_mark: |
+| TC8  | color=`WHITE`, position=`(1,1)` | returns: `[(2,1), (1,2), (2,2)]`                                    | :white_check_mark: |
+| TC9  | color=`BLACK`, position=`(8,8)` | returns: `[(7,8), (8,7), (7,7)]`                                    | :white_check_mark: |
+| TC10 | color=`BLACK`, position=`(4,4)` | returns: `[(5,4), (3,4), (4,3), (4,5), (5,5), (5,3), (3,5), (3,3)]` | :white_check_mark: |
