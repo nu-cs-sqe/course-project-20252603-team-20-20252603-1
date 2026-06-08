@@ -48,6 +48,10 @@ public class Board {
         squares[position.getRow() - 1][position.getCol() - 1] = piece;
     }
 
+    void placePieceAt(Position position, Piece piece) {
+        squares[position.getRow() - 1][position.getCol() - 1] = piece;
+    }
+
     public void initializeBoard() {
         for (int col = 0; col < NUM_COLS; ++col) {
             // white pieces

@@ -78,7 +78,7 @@ The rest of the `false` cases are covered below with getPieceAt.
 | TC32 | initialized board, `pos=(1,7)` WHITE knight                                              | returns `[(3,6),(3,8)]` — candidate `(2,5)` filtered (own pawn there) | :white_check_mark: |
 | TC33 | initialized board, `pos=(2,8)` WHITE pawn (unmoved), `(3,8)` and `(4,8)` empty           | returns `[(3,8),(4,8)]`                                               | :white_check_mark: |
 | TC34 | initialized board, WHITE pawn moved from `(2,1)` to `(3,1)` (hasMoved=true), `pos=(3,1)` | returns `[(4,1)]` — one-step only after first move                    | :white_check_mark: |
-| TC40 | WHITE Rook at (4,4), all other squares empty (via `placePieceAt`)                        | returns 14 squares (full N/S/E/W rays)                                | :x:                |
+| TC40 | WHITE Rook at (4,4), all other squares empty (via `placePieceAt`)                        | returns 14 squares (full N/S/E/W rays)                                | :white_check_mark: |
 | TC41 | WHITE Bishop at (4,4), WHITE Pawn at (6,6), all other squares empty                      | NE ray stops at (5,5); (6,6) excluded (friendly stop)                 | :x:                |
 | TC42 | WHITE Bishop at (4,4), BLACK Pawn at (6,6), all other squares empty                      | NE ray includes (5,5) and (6,6) (capture); stops after (6,6)          | :x:                |
 | TC43 | WHITE Knight at (4,4), BLACK Pawn at (6,5), all other squares empty                      | (6,5) included (capture); all 7 other L-moves included                | :x:                |
