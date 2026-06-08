@@ -85,32 +85,44 @@ public class Board {
         if (isEmpty(position)) {
             throw new IllegalArgumentException("Cannot get valid moves at an empty position");
         }
-
         Piece piece = getPieceAt(position);
         int[][] slidingDirections = piece.getSlidingDirections();
-
         if (slidingDirections.length > 0) {
-            List<Position> validMoves = new ArrayList<>();
-            for (int[] dir : slidingDirections) {
-                int row = position.getRow() + dir[0];
-                int col = position.getCol() + dir[1];
-                while (Position.validPosition(row, col)) {
-                    Position candidate = new Position(row, col);
-                    if (isEmpty(candidate)) {
-                        validMoves.add(candidate);
-                    } else if (getPieceAt(candidate).getColor() != piece.getColor()) {
-                        validMoves.add(candidate);
-                        break;
-                    } else {
-                        break;
-                    }
-                    row += dir[0];
-                    col += dir[1];
-                }
-            }
-            return validMoves;
+            return getSlidingValidMoves(position, piece, slidingDirections);
         }
+        return getNonSlidingValidMoves(position, piece);
+    }
 
+    private List<Position> getSlidingValidMoves(Position position, Piece piece,
+            int[][] directions) {
+        List<Position> validMoves = new ArrayList<>();
+        for (int[] dir : directions) {
+            validMoves.addAll(getValidMovesAlongRay(position, piece, dir));
+        }
+        return validMoves;
+    }
+
+    private List<Position> getValidMovesAlongRay(Position origin, Piece piece, int[] dir) {
+        List<Position> ray = new ArrayList<>();
+        int row = origin.getRow() + dir[0];
+        int col = origin.getCol() + dir[1];
+        while (Position.validPosition(row, col)) {
+            Position candidate = new Position(row, col);
+            if (isEmpty(candidate)) {
+                ray.add(candidate);
+            } else if (getPieceAt(candidate).getColor() != piece.getColor()) {
+                ray.add(candidate);
+                break;
+            } else {
+                break;
+            }
+            row += dir[0];
+            col += dir[1];
+        }
+        return ray;
+    }
+
+    private List<Position> getNonSlidingValidMoves(Position position, Piece piece) {
         List<Position> validMoves = piece.getCandidateMoves(position);
         boolean isPawn = piece.getPieceType() == PieceType.PAWN;
         validMoves.removeIf(pos -> !isEmpty(pos)
