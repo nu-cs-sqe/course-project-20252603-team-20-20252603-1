@@ -70,7 +70,14 @@ public class KingTest {
                         new Position(1, 3),
                         new Position(1, 5),
                         new Position(2, 5),
-                        new Position(2, 3))));
+                        new Position(2, 3))),
+                // TC 5
+                Arguments.of(Color.BLACK, 8, 4, List.of(
+                        new Position(7, 4),
+                        new Position(8, 3),
+                        new Position(8, 5),
+                        new Position(7, 5),
+                        new Position(7, 3))));
 
     }
 }
