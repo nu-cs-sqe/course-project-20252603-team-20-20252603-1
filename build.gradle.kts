@@ -3,6 +3,7 @@ import com.github.spotbugs.snom.Effort
 
 plugins {
     id("java")
+    application
     // Source: https://plugins.gradle.org/plugin/com.github.spotbugs
     id("com.github.spotbugs") version "6.5.4"
     checkstyle
@@ -16,6 +17,10 @@ version = "1.0"
 
 repositories {
     mavenCentral()
+}
+
+application {
+    mainClass = "ui.Main"
 }
 
 dependencies {
