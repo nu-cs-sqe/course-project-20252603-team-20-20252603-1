@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import domain.piece.Color;
+import domain.piece.King;
 import domain.piece.Knight;
 import domain.piece.Pawn;
 import domain.piece.Queen;
@@ -331,6 +332,23 @@ public class BoardTest {
   }
 
   @Test
+  public void InitializeBoard_Row1Col5_IsInstanceOfKing() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(1);
+    EasyMock.expect(position.getCol()).andStubReturn(5);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    Piece actual = board.getPieceAt(position);
+
+    assertInstanceOf(King.class, actual);
+  }
+
+  @Test
   public void GetValidMoves_EmptyPosition_ThrowsException() {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
@@ -425,6 +443,38 @@ public class BoardTest {
 
     assertEquals(expected.size(), actual.size());
     assertTrue(actual.containsAll(expected));
+  }
+
+  @Test
+  public void GetValidMoves_WhiteKing_EmptyList() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(1);
+    EasyMock.expect(position.getCol()).andStubReturn(5);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    List<Position> actual = board.getValidMoves(position);
+    assertTrue(actual.isEmpty());
+  }
+
+  @Test
+  public void GetValidMoves_BlackKing_EmptyList() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(8);
+    EasyMock.expect(position.getCol()).andStubReturn(5);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    List<Position> actual = board.getValidMoves(position);
+    assertTrue(actual.isEmpty());
   }
 
   @Test
@@ -646,5 +696,43 @@ public class BoardTest {
     assertInstanceOf(Knight.class, board.getPieceAt(new Position(6, 5)));
     assertEquals(Color.WHITE, board.getPieceAt(new Position(6, 5)).getColor());
     assertTrue(board.isEmpty(new Position(4, 4)));
+  }
+
+  @Test
+  public void MovePiece_WhiteKingRow1Col5ToRow2Col6_KingVacates() {
+    Board board = new Board();
+    Position pawnFrom = new Position(2, 6);
+    Position pawnTo = new Position(3, 6);
+    Position kingFrom = new Position(1, 5);
+
+    board.initializeBoard();
+    board.movePiece(pawnFrom, pawnTo);
+    board.movePiece(kingFrom, pawnFrom);
+
+    assertTrue(board.isEmpty(kingFrom));
+    assertFalse(board.isEmpty(pawnFrom));
+
+    King king = assertInstanceOf(King.class, board.getPieceAt(pawnFrom));
+    assertEquals(Color.WHITE, king.getColor());
+    assertTrue(king.hasMoved());
+  }
+
+  @Test
+  public void MovePiece_BlackKingRow8Col5ToRow7Col4_KingVacates() {
+    Board board = new Board();
+    Position pawnFrom = new Position(7, 4);
+    Position pawnTo = new Position(6, 4);
+    Position kingFrom = new Position(8, 5);
+
+    board.initializeBoard();
+    board.movePiece(pawnFrom, pawnTo);
+    board.movePiece(kingFrom, pawnFrom);
+
+    assertTrue(board.isEmpty(kingFrom));
+    assertFalse(board.isEmpty(pawnFrom));
+
+    King king = assertInstanceOf(King.class, board.getPieceAt(pawnFrom));
+    assertEquals(Color.BLACK, king.getColor());
+    assertTrue(king.hasMoved());
   }
 }
