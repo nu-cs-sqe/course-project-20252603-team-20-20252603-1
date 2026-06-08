@@ -735,4 +735,11 @@ public class BoardTest {
     assertEquals(Color.BLACK, king.getColor());
     assertTrue(king.hasMoved());
   }
+
+  @Test
+  public void IsInCheck_InitializedBoardWhite_False() {
+    Board board = new Board();
+    board.initializeBoard();
+    assertFalse(board.isInCheck(Color.WHITE));
+  }
 }
