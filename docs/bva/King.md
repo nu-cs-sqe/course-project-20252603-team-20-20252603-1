@@ -2,11 +2,11 @@
 
 ### Method under test: `King(Color color)`
 
-| ID  | State of the System | Expected output                                         | Implemented?       |
-| --- | ------------------- | ------------------------------------------------------- | ------------------ |
-| TC1 | color=`WHITE`       | King created, `getPieceType()`=KING, `getColor()`=WHITE | :white_check_mark: |
-| TC2 | color=`BLACK`       | King created, `getPieceType()`=KING, `getColor()`=BLACK | :white_check_mark: |
-| TC3 | color=`null`        | `IllegalArgumentException` thrown                       | :white_check_mark: |
+| ID  | State of the System | Expected output                                                                     | Implemented?       |
+| --- | ------------------- | ----------------------------------------------------------------------------------- | ------------------ |
+| TC1 | color=`WHITE`       | King created, `getPieceType()`=KING, `getColor()`=WHITE, `hasMoved()` returns false | :x:                |
+| TC2 | color=`BLACK`       | King created, `getPieceType()`=KING, `getColor(),`=BLACK,`hasMoved()` returns false | :x:                |
+| TC3 | color=`null`        | `IllegalArgumentException` thrown                                                   | :white_check_mark: |
 
 ### Method under test: `getCandidateMoves(Position position)`
 
@@ -45,7 +45,4 @@
 
 ### Method under test: `hasMoved()`
 
-| ID   | State of the System            | Expected output            | Implemented? |
-| ---- | ------------------------------ | -------------------------- | ------------ |
-| TC13 | new King, before `markMoved()` | `hasMoved()` returns false | :x:          |
-| TC14 | after `markMoved()` called     | `hasMoved()` returns true  | :x:          |
+Boundaries covered in previous test cases
