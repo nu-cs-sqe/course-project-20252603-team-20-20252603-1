@@ -443,6 +443,22 @@ public class BoardTest {
   }
 
   @Test
+  public void GetValidMoves_WhiteKing_EmptyList() {
+    Board board = new Board();
+    Position position = EasyMock.createMock(Position.class);
+
+    EasyMock.expect(position.getRow()).andStubReturn(1);
+    EasyMock.expect(position.getCol()).andStubReturn(5);
+
+    EasyMock.replay(position);
+
+    board.initializeBoard();
+
+    List<Position> actual = board.getValidMoves(position);
+    assertTrue(actual.isEmpty());
+  }
+
+  @Test
   public void MovePiece_EmptyPosition_ThrowsException() {
     Board board = new Board();
     Position position = EasyMock.createMock(Position.class);
