@@ -112,7 +112,9 @@ public class Board {
         }
 
         List<Position> validMoves = piece.getCandidateMoves(position);
-        validMoves.removeIf(pos -> !isEmpty(pos) && getPieceAt(pos).getColor() == piece.getColor());
+        boolean isPawn = piece.getPieceType() == PieceType.PAWN;
+        validMoves.removeIf(pos -> !isEmpty(pos)
+                && (isPawn || getPieceAt(pos).getColor() == piece.getColor()));
         return validMoves;
     }
 

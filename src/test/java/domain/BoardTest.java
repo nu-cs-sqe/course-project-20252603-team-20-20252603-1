@@ -621,4 +621,17 @@ public class BoardTest {
     assertTrue(moves.contains(new Position(6, 5)));
     assertEquals(8, moves.size());
   }
+
+  @Test
+  public void GetValidMoves_WhitePawnEnemyBlocksForward_ReturnsEmpty() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.WHITE);
+    pawn.markMoved();
+    board.placePieceAt(new Position(4, 4), pawn);
+    board.placePieceAt(new Position(5, 4), new Pawn(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(4, 4));
+
+    assertEquals(0, moves.size());
+  }
 }

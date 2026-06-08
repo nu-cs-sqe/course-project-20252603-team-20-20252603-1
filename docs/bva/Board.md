@@ -82,7 +82,7 @@ The rest of the `false` cases are covered below with getPieceAt.
 | TC41 | WHITE Bishop at (4,4), WHITE Pawn at (6,6), all other squares empty                      | NE ray stops at (5,5); (6,6) excluded (friendly stop)                 | :white_check_mark: |
 | TC42 | WHITE Bishop at (4,4), BLACK Pawn at (6,6), all other squares empty                      | NE ray includes (5,5) and (6,6) (capture); stops after (6,6)          | :white_check_mark: |
 | TC43 | WHITE Knight at (4,4), BLACK Pawn at (6,5), all other squares empty                      | (6,5) included (capture); all 7 other L-moves included                | :white_check_mark: |
-| TC44 | WHITE Pawn (hasMoved=true) at (4,4), BLACK piece at (5,4)                                | returns `[]` — forward blocked by enemy                               | :x:                |
+| TC44 | WHITE Pawn (hasMoved=true) at (4,4), BLACK piece at (5,4)                                | returns `[]` — forward blocked by enemy                               | :white_check_mark: |
 
 ### Method under test: `movePiece(Position from, Position to)`
 
