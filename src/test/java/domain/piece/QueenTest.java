@@ -256,5 +256,9 @@ public class QueenTest {
         int[][] directions = queen.getSlidingDirections();
 
         assertEquals(8, directions.length);
+        for (int[] direction : directions) {
+            assertNotNull(direction);
+            assertEquals(2, direction.length);
+        }
     }
 }
