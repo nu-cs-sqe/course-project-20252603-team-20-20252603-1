@@ -84,7 +84,7 @@ As these are unit tests, the only new boundary with adding `King` is using the a
 | TC33 | initialized board, `pos=(2,8)` WHITE pawn (unmoved), `(3,8)` and `(4,8)` empty           | returns `[(3,8),(4,8)]`                                               | :white_check_mark: |
 | TC34 | initialized board, WHITE pawn moved from `(2,1)` to `(3,1)` (hasMoved=true), `pos=(3,1)` | returns `[(4,1)]` — one-step only after first move                    | :white_check_mark: |
 | TC41 | initialized board, WHITE king created, `pos=(1,5)`                                       | returns `[]`                                                          | :white_check_mark: |
-| TC41 | initialized board, BLACK king created, `pos=(8,5)`                                       | returns `[]`                                                          | :x:                |
+| TC41 | initialized board, BLACK king created, `pos=(8,5)`                                       | returns `[]`                                                          | :white_check_mark: |
 
 ### Method under test: `movePiece(Position from, Position to)`
 
