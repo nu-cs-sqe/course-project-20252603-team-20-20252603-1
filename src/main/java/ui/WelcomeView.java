@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 
 public class WelcomeView extends JFrame {
 
@@ -28,9 +31,14 @@ public class WelcomeView extends JFrame {
 
     private JTextField player1NameField;
     private JTextField player2NameField;
+    private Locale locale;
+    private ResourceBundle bundle;
 
-    public WelcomeView() {
-        setTitle("Welcome Screen!");
+    public WelcomeView(Locale locale) {
+        this.locale = locale;
+        this.bundle = ResourceBundle.getBundle("labels/labels", locale);
+
+        setTitle(bundle.getString("welcomeTitle"));
         setSize(WINDOW_SIZE, WINDOW_SIZE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -47,7 +55,8 @@ public class WelcomeView extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Welcome message
-        JLabel welcomeLabel = new JLabel("Welcome to our Chess Game!", SwingConstants.CENTER);
+        String welcomeMessage = bundle.getString("welcomeMessage");
+        JLabel welcomeLabel = new JLabel(welcomeMessage, SwingConstants.CENTER);
         welcomeLabel.setFont(new Font("Arial", Font.BOLD, FONT_SIZE_TITLE));
         welcomeLabel.setForeground(Color.WHITE);
         gbc.gridx = 0;
@@ -59,7 +68,8 @@ public class WelcomeView extends JFrame {
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 1;
-        JLabel player1NameLabel = new JLabel("Player 1 Name:");
+        String player1NamePrompt = bundle.getString("player1NamePrompt");
+        JLabel player1NameLabel = new JLabel(player1NamePrompt);
         player1NameLabel.setFont(new Font("Arial", Font.PLAIN, FONT_SIZE_LABEL));
         player1NameLabel.setForeground(Color.WHITE);
         welcomePanel.add(player1NameLabel, gbc);
@@ -72,7 +82,8 @@ public class WelcomeView extends JFrame {
         // Player 2 Name Input
         gbc.gridx = 0;
         gbc.gridy = 2;
-        JLabel player2NameLabel = new JLabel("Player 2 Name:");
+        String player2NamePrompt = bundle.getString("player2NamePrompt");
+        JLabel player2NameLabel = new JLabel(player2NamePrompt);
         player2NameLabel.setFont(new Font("Arial", Font.PLAIN, FONT_SIZE_LABEL));
         player2NameLabel.setForeground(Color.WHITE);
         welcomePanel.add(player2NameLabel, gbc);
@@ -83,7 +94,8 @@ public class WelcomeView extends JFrame {
         welcomePanel.add(player2NameField, gbc);
 
         // Start Game Button
-        JButton startGameButton = new JButton("Start Game");
+        String startGame = bundle.getString("startGame");
+        JButton startGameButton = new JButton(startGame);
         startGameButton.setFont(new Font("Arial", Font.BOLD, FONT_SIZE_BUTTON));
         startGameButton.setOpaque(true);
         startGameButton.setBackground(Color.WHITE);
@@ -103,7 +115,7 @@ public class WelcomeView extends JFrame {
             dispose(); // Dispose of this frame to free up resources
 
             // Create and show the main game screen
-            MainView mainScreen = new MainView(player1Name, player2Name);
+            MainView mainScreen = new MainView(player1Name, player2Name, locale);
             mainScreen.setVisible(true);
         });
         gbc.gridx = 0;
