@@ -1018,4 +1018,17 @@ public class BoardTest {
 
     EasyMock.verify(blackBishop);
   }
+
+  @Test
+  public void PromotePawn_WhitePawnAtRank8ToQueen_ReplacesWithQueen() {
+    Board board = new Board();
+    board.placePieceAt(new Position(8, 4), new Pawn(Color.WHITE));
+
+    board.promotePawn(new Position(8, 4), PieceType.QUEEN);
+
+    Piece piece = board.getPieceAt(new Position(8, 4));
+    assertEquals(PieceType.QUEEN, piece.getPieceType());
+    assertEquals(Color.WHITE, piece.getColor());
+    assertInstanceOf(Queen.class, piece);
+  }
 }

@@ -23,6 +23,8 @@ public class Board {
     private static final int BLACK_BACK_RANK = 7;
     private static final int WHITE_PAWN_RANK = 1;
     private static final int BLACK_PAWN_RANK = 6;
+    private static final int WHITE_PROMOTION_ROW = NUM_ROWS; // row 8
+    private static final int BLACK_PROMOTION_ROW = 1;
 
     private static final PieceType[] BACK_RANK = {
             PieceType.ROOK, PieceType.KNIGHT, PieceType.BISHOP, PieceType.QUEEN,
@@ -232,5 +234,35 @@ public class Board {
         boardAfterMove.setPieceAt(to, piece);
 
         return boardAfterMove.isInCheck(color);
+    }
+
+    public void promotePawn(Position position, PieceType pieceType) {
+        validatePromotion(position, pieceType);
+        Piece pawn = getPieceAt(position);
+        setPieceAt(position, createPiece(pieceType, pawn.getColor()));
+    }
+
+    private void validatePromotion(Position position, PieceType pieceType) {
+        if (isEmpty(position)) {
+            throw new IllegalArgumentException("No piece at promotion position");
+        }
+        if (getPieceAt(position).getPieceType() != PieceType.PAWN) {
+            throw new IllegalArgumentException("Piece at position is not a pawn");
+        }
+        if (!isAtPromotionRank(getPieceAt(position), position)) {
+            throw new IllegalArgumentException("Pawn is not at promotion rank");
+        }
+        if (!isValidPromotionTarget(pieceType)) {
+            throw new IllegalArgumentException("Cannot promote to " + pieceType);
+        }
+    }
+
+    private boolean isAtPromotionRank(Piece piece, Position position) {
+        return (piece.getColor() == Color.WHITE && position.getRow() == WHITE_PROMOTION_ROW)
+                || (piece.getColor() == Color.BLACK && position.getRow() == BLACK_PROMOTION_ROW);
+    }
+
+    private boolean isValidPromotionTarget(PieceType pieceType) {
+        return pieceType != PieceType.PAWN && pieceType != PieceType.KING;
     }
 }

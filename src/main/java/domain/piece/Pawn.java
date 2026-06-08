@@ -40,19 +40,4 @@ public class Pawn extends Piece {
 
         return candidates;
     }
-
-    @Override
-    public List<Position> getCapturePositions(Position position) {
-        List<Position> captures = new ArrayList<>();
-        int direction = (getColor() == Color.WHITE) ? 1 : -1;
-        int row = position.getRow() + direction;
-        int col = position.getCol();
-        if (Position.validPosition(row, col - 1)) {
-            captures.add(new Position(row, col - 1));
-        }
-        if (Position.validPosition(row, col + 1)) {
-            captures.add(new Position(row, col + 1));
-        }
-        return captures;
-    }
 }
