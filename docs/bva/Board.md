@@ -115,7 +115,6 @@ As these are unit tests, the only new boundary with adding `King` is using the a
 | TC45 | WHITE Knight at (4,4), BLACK Pawn at (6,5); knight moves to (6,5)           | Knight at (6,5); BLACK Pawn removed; (4,4) empty                                                                                | :white_check_mark: |
 | TC49 | initialized board, `(2,6)` cleared, `from=(1,5)` WHITE king, `to=(2,6)`     | `getPieceAt((2,6))` = WHITE King; instance of `King`; `isEmpty((1,5))` = `true`; `king.hasMoved()` = `true`                     | :white_check_mark: |
 | TC50 | initialized board, `(7,4)` cleared, `from=(8,5)` BLACK king, `to=(7,4)`     | `getPieceAt((7,4))` = BLACK King; instance of `King`; `isEmpty((8,5))` = `true`; `king.hasMoved()` = `true`                     | :white_check_mark: |
-<<<<<<< HEAD
 
 
 ### Method under test: `public boolean isInCheck(Color player)`
@@ -152,19 +151,3 @@ Output boundary: `false`, `true`
 | TC69 | WHITE KNIGHT at `(8,4)`, `promotePawn((8,4), QUEEN)`           | throws `IllegalArgumentException` - not a pawn                     | :white_check_mark: |
 | TC70 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), PAWN)`              | throws `IllegalArgumentException` - cannot promote to PAWN         | :white_check_mark: |
 | TC71 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), KING)`              | throws `IllegalArgumentException` - cannot promote to KING         | :white_check_mark: |
-=======
-
-### Method under test: `promotePawn(Position position, PieceType pieceType)`
-
-| ID   | State of the System                                            | Expected output                                                    | Implemented? |
-|------|----------------------------------------------------------------|--------------------------------------------------------------------|--------------|
-| TC51 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), QUEEN)`             | `getPieceAt((8,4))` = QUEEN, WHITE; piece is instance of `Queen`   | :x:          |
-| TC52 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), ROOK)`              | `getPieceAt((8,4))` = ROOK, WHITE; piece is instance of `Rook`     | :x:          |
-| TC53 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), BISHOP)`            | `getPieceAt((8,4))` = BISHOP, WHITE; piece is instance of `Bishop` | :x:          |
-| TC54 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), KNIGHT)`            | `getPieceAt((8,4))` = KNIGHT, WHITE; piece is instance of `Knight` | :x:          |
-| TC55 | BLACK PAWN at `(1,4)`, `promotePawn((1,4), QUEEN)`             | `getPieceAt((1,4))` = QUEEN, BLACK; piece is instance of `Queen`   | :x:          |
-| TC56 | WHITE PAWN at `(4,4)` (mid-board), `promotePawn((4,4), QUEEN)` | throws `IllegalArgumentException` - not at promotion rank          | :x:          |
-| TC57 | WHITE KNIGHT at `(8,4)`, `promotePawn((8,4), QUEEN)`           | throws `IllegalArgumentException` - not a pawn                     | :x:          |
-| TC58 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), PAWN)`              | throws `IllegalArgumentException` - cannot promote to PAWN         | :x:          |
-| TC59 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), KING)`              | throws `IllegalArgumentException` - cannot promote to KING         | :x:          |
->>>>>>> d89ffea (PromotePawn_WhitePawnAtRank8ToQueen_ReplacesWithQueen passes)
