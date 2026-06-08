@@ -7,6 +7,8 @@ import domain.Position;
 
 public class King extends Piece {
 
+    private boolean hasMoved = false;
+
     private static final int[][] DIRECTIONS = {
             { 1, 1 },
             { -1, -1 },
@@ -20,6 +22,14 @@ public class King extends Piece {
 
     public King(Color color) {
         super(PieceType.KING, color);
+    }
+
+    public boolean hasMoved() {
+        return hasMoved;
+    }
+
+    public void markMoved() {
+        hasMoved = true;
     }
 
     public List<Position> getCandidateMoves(Position position) {
