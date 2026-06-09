@@ -58,7 +58,11 @@ public class ChessClock {
 
     // package-private for testing
     void tick() {
-        this.whiteTimeRemaining -= 1000;
+        if (this.activeColor == Color.WHITE) {
+            this.whiteTimeRemaining -= 1000;
+        } else {
+            this.blackTimeRemaining -= 1000;
+        } 
         listener.onTimerTick(this.activeColor, getTimeRemaining(this.activeColor));
     }
 

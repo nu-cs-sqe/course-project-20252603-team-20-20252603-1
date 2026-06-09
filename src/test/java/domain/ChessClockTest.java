@@ -192,13 +192,27 @@ public class ChessClockTest {
 
 
     @Test 
-    public void TickWhite_OnTimerTick() {
+    public void TickWhite_OnTimerTick_AtBoundary() {
         ClockListener listener = EasyMock.createMock(ClockListener.class);
         listener.onTimerTick(Color.WHITE, 1000);
         EasyMock.replay(listener);
 
         ChessClock clock = new ChessClock(300000, listener);
         clock.setTime(2000, Color.WHITE);
+        clock.tick();
+
+        EasyMock.verify(listener);
+    }
+
+    @Test 
+    public void TickBlack_OnTimerTick_AtBoundary() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        listener.onTimerTick(Color.BLACK, 1000);
+        EasyMock.replay(listener);
+
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.switchClock();
+        clock.setTime(2000, Color.BLACK);
         clock.tick();
 
         EasyMock.verify(listener);
