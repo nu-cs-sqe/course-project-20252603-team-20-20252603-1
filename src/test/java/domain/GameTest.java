@@ -205,6 +205,8 @@ public class GameTest {
 
         EasyMock.expect(board.getPieceAt(from)).andReturn(piece);
         EasyMock.expect(piece.getColor()).andStubReturn(Color.WHITE);
+        EasyMock.expect(board.getPieceAt(to)).andReturn(piece);
+        EasyMock.expect(piece.getPieceType()).andReturn(PieceType.KNIGHT);
 
         EasyMock.replay(board, piece, from, to);
 
@@ -243,6 +245,11 @@ public class GameTest {
 
         board.movePiece(blackFrom, blackTo);
         EasyMock.expectLastCall();
+
+        EasyMock.expect(board.getPieceAt(whiteTo)).andReturn(whitePiece);
+        EasyMock.expect(whitePiece.getPieceType()).andReturn(PieceType.KNIGHT);
+        EasyMock.expect(board.getPieceAt(blackTo)).andReturn(blackPiece);
+        EasyMock.expect(blackPiece.getPieceType()).andReturn(PieceType.KNIGHT);
 
         EasyMock.replay(board, whitePiece, blackPiece);
 
@@ -497,5 +504,22 @@ public class GameTest {
         game.startGame();
 
         assertFalse(game.isPromotionPending());
+    }
+
+    @Test
+    public void ExecuteMove_WhitePawnReachesRank8_PromotionPendingTrue() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        // clear BLACK queen at (8,4) and place WHITE pawn at (7,4)
+        board.placePieceAt(new Position(8, 4), null);
+        Pawn pawn = new Pawn(Color.WHITE);
+        pawn.markMoved();
+        board.placePieceAt(new Position(7, 4), pawn);
+
+        game.executeMove(new Position(7, 4), new Position(8, 4));
+
+        assertTrue(game.isPromotionPending());
     }
 }
