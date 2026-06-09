@@ -60,6 +60,11 @@ public class ChessClock {
     void tick() {
         if (this.activeColor == Color.WHITE) {
             this.whiteTimeRemaining -= 1000;
+            if (this.whiteTimeRemaining <= 0) {
+                stop();
+                listener.onTimeout(Color.WHITE);
+                return;
+            }
         } else {
             this.blackTimeRemaining -= 1000;
         } 

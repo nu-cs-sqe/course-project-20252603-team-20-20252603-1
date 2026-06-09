@@ -217,4 +217,17 @@ public class ChessClockTest {
 
         EasyMock.verify(listener);
     }
+
+    @Test 
+    public void TickWhite_OnTimeout() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        listener.onTimeout(Color.WHITE);
+        EasyMock.replay(listener);
+
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.setTime(1000, Color.WHITE);
+        clock.tick();
+
+        EasyMock.verify(listener);
+    }
 }
