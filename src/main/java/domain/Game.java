@@ -96,4 +96,13 @@ public class Game {
         }
         return board.getSnapshot();
     }
+
+    public boolean playerInCheck(Color player) {
+        if (!this.gameInProgress) {
+            throw new IllegalStateException(
+                    "Cannot check if players are in check if the game has not started.");
+        }
+
+        return board.isInCheck(player);
+    }
 }
