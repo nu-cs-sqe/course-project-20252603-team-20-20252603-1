@@ -27,27 +27,27 @@
 |       | `whiteTimeRemaining`=299999 | `getTimeRemaining(WHITE)` = 299999 |                    |
 |       | `blackTimeRemaining`=300000 | `getTimeRemaining(BLACK)` = 300000 |                    |
 | ----  | --------------------------- | ---------------------------------- | ------------------ |
-| TC10  | `activeColor`= `BLACK`      | `getActiveColor()` = `WHITE`       |         :x:        |
+| TC10  | `activeColor`= `BLACK`      | `getActiveColor()` = `WHITE`       | :white_check_mark: |
 |       | `blackTimeRemaining`=299999 | `getTimeRemaining(BLACK)` = 299999 |                    |
 |       | `whiteTimeRemaining`=1      | `getTimeRemaining(WHITE)` = 1      |                    | 
 | ----  | --------------------------- | ---------------------------------- | ------------------ |
-| TC11  | `activeColor`= `BLACK`      | `getActiveColor()` = `WHITE`       |         :x:        |
+| TC11  | `activeColor`= `BLACK`      | `getActiveColor()` = `WHITE`       | :white_check_mark: |
 |       | `blackTimeRemaining`=1      | `getTimeRemaining(WHITE)` = 299999 |                    |
 |       | `whiteTimeRemaining`=299999 | `getTimeRemaining(BLACK)` = 1      |                    |       
 | ----  | --------------------------- | ---------------------------------- | ------------------ |
-| TC12  | `activeColor`= `WHITE`      | `getActiveColor()` = `BLACK`       |         :x:        |
+| TC12  | `activeColor`= `WHITE`      | `getActiveColor()` = `BLACK`       | :white_check_mark: |
 |       | `whiteTimeRemaining`=1      | `getTimeRemaining(WHITE)` = 1      |                    |
 |       | `blackTimeRemaining`=1      | `getTimeRemaining(BLACK)` = 1      |                    |   
 | ----  | --------------------------- | ---------------------------------- | ------------------ |
 
 ### Method under test: `getTimeRemaining(Color color)`
-| ID   | State of the System                         | Expected output            | Implemented? |
-| ---- | ------------------------------------------- | -------------------------- | ------------ |
-| TC13 | color= `WHITE`, `whiteTimeRemaining`=299999 | 299999                     |      :x:     |
-| TC14 | color= `BLACK`, `blackTimeRemaining`=299999 | 299999                     |      :x:     |
-| TC15 | color= `WHITE`, `whiteTimeRemaining`=0      | 0                          |      :x:     |
-| TC16 | color= `BLACK`, `blackTimeRemaining`=0      | 0                          |      :x:     |
-| TC17 | color= `null`                               | `IllegalArugmentException` |      :x:     |
+| ID   | State of the System                         | Expected output            | Implemented?       |
+| ---- | ------------------------------------------- | -------------------------- | ------------------ |
+| TC13 | color= `WHITE`, `whiteTimeRemaining`=299999 | 299999                     | :white_check_mark: | *Covered by TC11*
+| TC14 | color= `BLACK`, `blackTimeRemaining`=299999 | 299999                     | :white_check_mark: | *Covered by TC10*
+| TC15 | color= `WHITE`, `whiteTimeRemaining`=0      | 0                          | :white_check_mark: |
+| TC16 | color= `BLACK`, `blackTimeRemaining`=0      | 0                          | :white_check_mark: |
+| TC17 | color= `null`                               | `IllegalArugmentException` |         :x:        |
 
 ### Method under test: `isRunning()`
 | ID   | State of the System                             | Expected output | Implemented? |

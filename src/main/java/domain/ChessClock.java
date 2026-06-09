@@ -21,7 +21,13 @@ public class ChessClock {
     }
 
     public long getTimeRemaining(Color color) {
-        return (color == Color.WHITE) ? this.whiteTimeRemaining : this.blackTimeRemaining;
+        if (color == Color.WHITE) {
+            return this.whiteTimeRemaining;
+        } else if (color == Color.BLACK) {
+            return this.blackTimeRemaining;
+        } else {
+            throw new IllegalArgumentException("No color passed");
+        }
     }
 
     public void start() {
