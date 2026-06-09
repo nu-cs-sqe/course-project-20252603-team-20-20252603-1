@@ -814,4 +814,22 @@ public class BoardTest {
     EasyMock.verify(rook);
 
   }
+
+  @Test
+  public void IsInCheck_WhiteKingBlackKnight_ReturnsTrue() {
+    Board board = new Board();
+    Piece king = stubPiece(Color.WHITE, PieceType.KING, List.of());
+    Piece knight = mockPiece(Color.BLACK, PieceType.KNIGHT, List.of(
+        new Position(5, 5),
+        new Position(5, 3)));
+    board.placePieceAt(new Position(5, 5), king);
+    board.placePieceAt(new Position(3, 4), knight);
+
+    EasyMock.replay(king, knight);
+
+    assertTrue(board.isInCheck(Color.WHITE));
+
+    EasyMock.verify(knight);
+
+  }
 }
