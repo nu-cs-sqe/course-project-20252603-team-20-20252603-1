@@ -443,4 +443,23 @@ public class GameTest {
         EasyMock.verify(board);
 
     }
+
+    @Test
+    public void PlayerInCheck_BlackInCheck_ReturnsTrue() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(true);
+        EasyMock.replay(board);
+
+        game.startGame();
+
+        assertTrue(game.playerInCheck(Color.BLACK));
+
+        EasyMock.verify(board);
+
+    }
 }
