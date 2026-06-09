@@ -10,6 +10,8 @@ public class ChessClock {
     private Color activeColor = Color.WHITE;
     private Timer timer;
     private ClockListener listener;
+    private static final int MILLISECONDS_IN_SECOND = 1000;
+
 
     public ChessClock(long initialTime, ClockListener listener) {
         if (listener == null) {
@@ -36,7 +38,7 @@ public class ChessClock {
 
     public void start() {
         this.running = true;
-        this.timer = new Timer(1000, e -> tick());
+        this.timer = new Timer(MILLISECONDS_IN_SECOND, e -> tick());
         this.timer.start();
     }
 
@@ -59,14 +61,14 @@ public class ChessClock {
     // package-private for testing
     void tick() {
         if (this.activeColor == Color.WHITE) {
-            this.whiteTimeRemaining -= 1000;
+            this.whiteTimeRemaining -= MILLISECONDS_IN_SECOND;
             if (this.whiteTimeRemaining <= 0) {
                 stop();
                 listener.onTimeout(Color.WHITE);
                 return;
             }
         } else {
-            this.blackTimeRemaining -= 1000;
+            this.blackTimeRemaining -= MILLISECONDS_IN_SECOND;
             if (this.blackTimeRemaining <= 0) {
                 stop();
                 listener.onTimeout(Color.BLACK);
