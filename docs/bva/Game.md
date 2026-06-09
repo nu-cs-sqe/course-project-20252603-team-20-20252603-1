@@ -84,6 +84,6 @@ Output boundaries: `throws IllegalStateException`, `false`, `true`
 | ---- | ------------------------------------------------------------------------------------------------ | ------------------------------ | ------------------ |
 | TC19 | `startGame()` not called, `player=WHITE`                                                         | throws `IllegalStateException` | :white_check_mark: |
 | TC20 | `startGame()` called, initial board, `player=WHITE`                                              | `false`                        | :white_check_mark: |
-| TC21 | `startGame()` called, initial board, `player=BLACK`                                              | `false`                        | :x:                |
-| TC22 | game started, WHITE king on same rank as attacking BLACK rook, no pieces between, `player=WHITE` | `true`                         | :x:                |
+| TC21 | `startGame()` called, initial board, `player=BLACK`                                              | `false`                        | :white_check_mark: |
+| TC22 | game started, WHITE king on same rank as attacking BLACK rook, no pieces between, `player=WHITE` | `true`                         | :white_check_mark: |
 | TC23 | game started, BLACK king on same rank as attacking WHITE rook, no pieces between, `player=BLACK` | `true`                         | :x:                |
