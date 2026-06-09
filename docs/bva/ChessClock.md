@@ -12,13 +12,13 @@
 | ID  | State of the System        | Expected output            | Implemented?       |
 | --- | -------------------------- | -------------------------- | ------------------ |
 | TC5 | new `ChessClock()` created | `isRunning()` returns true | :white_check_mark: |
-| TC6 | `start()` already called   | `isRunning()` returns true |         :x:        |
+| TC6 | `start()` already called   | `isRunning()` returns true | :white_check_mark: |
 
 ### Method under test: `stop()`
-| ID  | State of the System                              | Expected output             | Implemented? |
-| --- | ------------------------------------------------ | --------------------------- | ------------ |
-| TC7 | new `ChessClock()` created, `start()` called     | `isRunning()` returns false |      :x:     |
-| TC8 | new `ChessClock()` created, `start()` not called | `isRunning()` returns false |      :x:     |
+| ID  | State of the System                              | Expected output             | Implemented?       |
+| --- | ------------------------------------------------ | --------------------------- | ------------------ |
+| TC7 | new `ChessClock()` created, `start()` called     | `isRunning()` returns false | :white_check_mark: |
+| TC8 | new `ChessClock()` created, `start()` not called | `isRunning()` returns false |         :x:        |
 
 ### Method under test: `switchClock()`
 | ID    | State of the System         | Expected output                    | Implemented? |
