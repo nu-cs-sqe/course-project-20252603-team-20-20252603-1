@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import domain.Position;
 
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
@@ -458,6 +459,32 @@ public class GameTest {
         game.startGame();
 
         assertTrue(game.playerInCheck(Color.BLACK));
+
+        EasyMock.verify(board);
+
+    }
+
+    @Test
+    public void ExecuteMove_KnightMove_BlacksTurn() {
+        Board board = EasyMock.createMock(Board.class);
+        Piece piece = EasyMock.createMock(Knight.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.getPieceAt(new Position(4, 4))).andReturn(piece);
+        EasyMock.expect(piece.getColor()).andStubReturn(Color.WHITE);
+
+        board.movePiece(new Position(4, 4), new Position(6, 5));
+        EasyMock.expectLastCall();
+
+        EasyMock.replay(board, piece);
+
+        game.startGame();
+        game.executeMove(new Position(4, 4), new Position(6, 5));
+
+        assertEquals(Color.BLACK, game.getCurrentTurn());
 
         EasyMock.verify(board);
 
