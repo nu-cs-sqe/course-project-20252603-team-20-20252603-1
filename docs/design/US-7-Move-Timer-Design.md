@@ -24,7 +24,8 @@ Methods:
 - `switchClock(): void`: switches `activeColor`
 - `getTimeRemaining(Color color): long`: gets `whiteTimeRemaining` or `blackTimeRemaining`
 - `isRunning(): boolean`: returns value of `running`.
-
+- `onTimerTick()`: communicates with listener every second
+- `onTimeout()`: handles when a payer runs out of time
 
 ### GUI Updates
 
