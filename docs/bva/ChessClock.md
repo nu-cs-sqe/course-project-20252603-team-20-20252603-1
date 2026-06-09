@@ -4,9 +4,9 @@
 | ID  | State of the System   | Expected output                                                                 | Implemented?       |
 | --- | ----------------------| ------------------------------------------------------------------------------- | ------------------ |
 | TC1 | initialTime = 300000  | ChessClock created, `getTimeRemaining(WHITE)`=`getTimeRemaining(BLACK)`=300000  | :white_check_mark: |
-| TC2 | initialTime = 600000  | ChessClock created, `getTimeRemaining(WHITE)`=`getTimeRemaining(BLACK)`=600000  |         :x:        |
-| TC3 | initialTime = 3600000 | ChessClock created, `getTimeRemaining(WHITE)`=`getTimeRemaining(BLACK)`=3600000 |         :x:        |
-| TC4 | listener = `null`     | `IllegalArgumentException` thrown                                               |         :x:        |
+| TC2 | initialTime = 600000  | ChessClock created, `getTimeRemaining(WHITE)`=`getTimeRemaining(BLACK)`=600000  | :white_check_mark: |
+| TC3 | initialTime = 3600000 | ChessClock created, `getTimeRemaining(WHITE)`=`getTimeRemaining(BLACK)`=3600000 | :white_check_mark: |
+| TC4 | listener = `null`     | `IllegalArgumentException` thrown                                               | :white_check_mark: |
  
 ### Method under test: `start()`
 | ID  | State of the System        | Expected output            | Implemented? |
