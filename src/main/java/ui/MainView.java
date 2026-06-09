@@ -74,8 +74,6 @@ public class MainView extends JFrame implements BoardChangeListener, ClockListen
 
     @Override
     public void onTimerTick(Color color, long timeRemainingMillis) {
-        System.out.println("tick: " + color + " " + timeRemainingMillis);
-
         gameStatsView.updateTimer(color, timeRemainingMillis);
     }
 
