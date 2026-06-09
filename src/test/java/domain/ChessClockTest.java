@@ -189,4 +189,18 @@ public class ChessClockTest {
         });
         assertEquals("No color passed", exception.getMessage());
     }
+
+
+    @Test 
+    public void TickWhite_OnTimerTick() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        listener.onTimerTick(Color.WHITE, 1000);
+        EasyMock.replay(listener);
+
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.setTime(2000, Color.WHITE);
+        clock.tick();
+
+        EasyMock.verify(listener);
+    }
 }

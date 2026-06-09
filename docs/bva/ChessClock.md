@@ -59,7 +59,7 @@
 ### Method under test: `tick()`
 | ID   | State of the System                               | Expected output                                      | Implemented?       |
 | ---- | ------------------------------------------------- | ---------------------------------------------------- | ------------------ |
-| TC21 | `whiteTimeRemaining`=2000, activeColor=`WHITE`    | `whiteTimeRemaining`=1000, onTimerTick() is called   |         :x:        | 
+| TC21 | `whiteTimeRemaining`=2000, activeColor=`WHITE`    | `whiteTimeRemaining`=1000, onTimerTick() is called   | :white_check_mark: | 
 | TC22 | `blackTimeRemaining`=2000, activeColor=`BLACK`    | `blackTimeRemaining`=1000, onTimerTick() is called   |         :x:        |
 | TC23 | `whiteTimeRemaining`=1000, activeColor=`WHITE`    | `whiteTimeRemaining`=0, onTimeout() is called        |         :x:        | 
 | TC24 | `blackTimeRemaining`=1000, activeColor=`BLACK`    | `blackTimeRemaining`=0, onTimeout() is called        |         :x:        | 
