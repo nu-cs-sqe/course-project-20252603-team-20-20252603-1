@@ -98,6 +98,10 @@ public class Game {
     }
 
     public boolean playerInCheck(Color player) {
-        throw new IllegalStateException("Cannot check if players are in check if the game has not started.");
+        if (!this.gameInProgress) {
+            throw new IllegalStateException("Cannot check if players are in check if the game has not started.");
+        }
+
+        return board.isInCheck(player);
     }
 }

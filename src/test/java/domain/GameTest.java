@@ -2,6 +2,7 @@ package domain;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -400,6 +401,25 @@ public class GameTest {
         String expected = "Cannot check if players are in check if the game has not started.";
         String actual = exception.getMessage();
         assertEquals(expected, actual);
+
+        EasyMock.verify(board);
+
+    }
+
+    @Test
+    public void PlayerInCheck_FirstTurnWhite_ReturnsFalse() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.isInCheck(Color.WHITE)).andReturn(false);
+        EasyMock.replay(board);
+
+        game.startGame();
+
+        assertFalse(game.playerInCheck(Color.WHITE));
 
         EasyMock.verify(board);
 
