@@ -2,20 +2,13 @@
 
 ## Overview
 
-When a pawn reaches the opponent's back rank (row 8 for WHITE, row 1 for BLACK) it must be replaced by a QUEEN, ROOK, BISHOP, or KNIGHT. The promoting move can be a forward push or a diagonal capture. Pawn diagonal captures are introduced here as they were deferred from US-4.
+When a pawn reaches the opponent's back rank (row 8 for WHITE, row 1 for BLACK) it must be replaced by a QUEEN, ROOK, BISHOP, or KNIGHT. This story covers promotion via a forward push only. Promotion via diagonal capture will be supported in US-9 when pawn diagonal captures are introduced.
 
 After the move, the game enters a promotion-pending state and pauses the turn until the player selects a piece. The UI shows a modal dialog for piece selection.
 
 ## Changes
 
-### Piece
-- Add `getCapturePositions(Position position): List<Position>` - non-abstract, returns empty list by default; Pawn overrides
-
-### Pawn
-- Override `getCapturePositions(Position position): List<Position>` - returns forward-diagonal squares (col +/- 1 in movement direction) that are in bounds; does not check occupancy
-
 ### Board
-- Modify `getNonSlidingValidMoves` - for pawns, include squares from `getCapturePositions` that contain an enemy piece
 - Add `promotePawn(Position position, PieceType pieceType): void` - replaces the pawn at `position` with a new piece of the same color; throws `IllegalArgumentException` if position is not a pawn at the promotion rank, or if `pieceType` is PAWN or KING
 
 ### Game
