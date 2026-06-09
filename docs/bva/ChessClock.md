@@ -18,27 +18,27 @@
 | ID  | State of the System                              | Expected output             | Implemented?       |
 | --- | ------------------------------------------------ | --------------------------- | ------------------ |
 | TC7 | new `ChessClock()` created, `start()` called     | `isRunning()` returns false | :white_check_mark: |
-| TC8 | new `ChessClock()` created, `start()` not called | `isRunning()` returns false |         :x:        |
+| TC8 | new `ChessClock()` created, `start()` not called | `isRunning()` returns false | :white_check_mark: |
 
 ### Method under test: `switchClock()`
-| ID    | State of the System         | Expected output                    | Implemented? |
-| ----  | --------------------------- | ---------------------------------- | ------------ |
-| TC9   | `activeColor`= `WHITE`      | activeColor= `BLACK`               |      :x:     |
-|       | `whiteTimeRemaining`=299999 | `getTimeRemaining(WHITE)` = 299999 |              |
-|       | `blackTimeRemaining`=300000 | `getTimeRemaining(BLACK)` = 300000 |              |
-| ----  | --------------------------- | ---------------------------------- | ------------ |
-| TC10  | `activeColor`= `BLACK`      | activeColor= `WHITE`               |      :x:     |
-|       | `blackTimeRemaining`=299999 | `getTimeRemaining(BLACK)` = 299999 |              |
-|       | `whiteTimeRemaining`=1      | `getTimeRemaining(WHITE)` = 1      |              | 
-| ----  | --------------------------- | ---------------------------------- | ------------ |
-| TC11  | `activeColor`= `BLACK`      | activeColor= `WHITE`               |      :x:     |
-|       | `blackTimeRemaining`=1      | `getTimeRemaining(WHITE)` = 299999 |              |
-|       | `whiteTimeRemaining`=299999 | `getTimeRemaining(BLACK)` = 1      |              |       
-| ----  | --------------------------- | ---------------------------------- | ------------ |
-| TC12  | `activeColor`= `WHITE`      | activeColor= `BLACK`               |      :x:     |
-|       | `whiteTimeRemaining`=1      | `getTimeRemaining(WHITE)` = 1      |              |
-|       | `blackTimeRemaining`=1      | `getTimeRemaining(BLACK)` = 1      |              |   
-| ----  | --------------------------- | ---------------------------------- | ------------ |
+| ID    | State of the System         | Expected output                    | Implemented?       |
+| ----  | --------------------------- | ---------------------------------- | ------------------ |
+| TC9   | `activeColor`= `WHITE`      | `getActiveColor()` = `BLACK`       | :white_check_mark: |
+|       | `whiteTimeRemaining`=299999 | `getTimeRemaining(WHITE)` = 299999 |                    |
+|       | `blackTimeRemaining`=300000 | `getTimeRemaining(BLACK)` = 300000 |                    |
+| ----  | --------------------------- | ---------------------------------- | ------------------ |
+| TC10  | `activeColor`= `BLACK`      | `getActiveColor()` = `WHITE`       |         :x:        |
+|       | `blackTimeRemaining`=299999 | `getTimeRemaining(BLACK)` = 299999 |                    |
+|       | `whiteTimeRemaining`=1      | `getTimeRemaining(WHITE)` = 1      |                    | 
+| ----  | --------------------------- | ---------------------------------- | ------------------ |
+| TC11  | `activeColor`= `BLACK`      | `getActiveColor()` = `WHITE`       |         :x:        |
+|       | `blackTimeRemaining`=1      | `getTimeRemaining(WHITE)` = 299999 |                    |
+|       | `whiteTimeRemaining`=299999 | `getTimeRemaining(BLACK)` = 1      |                    |       
+| ----  | --------------------------- | ---------------------------------- | ------------------ |
+| TC12  | `activeColor`= `WHITE`      | `getActiveColor()` = `BLACK`       |         :x:        |
+|       | `whiteTimeRemaining`=1      | `getTimeRemaining(WHITE)` = 1      |                    |
+|       | `blackTimeRemaining`=1      | `getTimeRemaining(BLACK)` = 1      |                    |   
+| ----  | --------------------------- | ---------------------------------- | ------------------ |
 
 ### Method under test: `getTimeRemaining(Color color)`
 | ID   | State of the System                         | Expected output            | Implemented? |

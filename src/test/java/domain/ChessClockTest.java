@@ -89,4 +89,27 @@ public class ChessClockTest {
         assertFalse(clock.isRunning());
 
     }
+
+    @Test 
+    public void Stop_ClockNotStarted() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        ChessClock clock = new ChessClock(3600000, listener);
+
+        clock.stop();
+        assertFalse(clock.isRunning());
+
+    }
+
+    @Test 
+    public void SwitchClock_WhiteHighTime() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.start();
+        clock.setTime(299999, Color.WHITE);
+        clock.switchClock();
+        assertEquals(clock.getActiveColor(), Color.BLACK);
+        assertEquals(clock.getTimeRemaining(Color.WHITE), 299999);
+        assertEquals(clock.getTimeRemaining(Color.BLACK), 300000);
+
+    }
 }
