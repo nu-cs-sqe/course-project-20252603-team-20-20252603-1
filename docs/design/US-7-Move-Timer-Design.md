@@ -15,7 +15,7 @@ Fields:
 - `activeColor: Color` (private) - initialized to `WHITE`
 - `running: boolean` (private) - initialized to True, changed to False when a timer runs out
 - `timer: Timer` (private) - fires the countdown ticks
-- `listener: BoardChangeListener` (private): allows updates to UI, and receives when a turn changes
+- `listener: ClockListener` (private): allows updates to UI, and receives when a turn changes
 
 Methods:
 - `ChessClock(long initialTime, BoardChangeListener)`-  constructor 
@@ -29,8 +29,8 @@ Methods:
 ### GUI Updates
 
 #### MainView
-- Take on `BoardChangeListener`. This way, the clock and board can be updated with the same listener
-- `BoardController` moves here
+-  Now also implements `ClockListener`
+- `BoardController` construction moves here instead of `BoardView`
 - `onTimerTick()` updates timer labels in GameStatsView
 - `onTimeout()` ends the game
 
