@@ -192,7 +192,8 @@ public class Board {
                 return position;
             }
         }
-        throw new IllegalStateException("cannot locateKing: king of specified color is not on the board.");
+        throw new IllegalStateException(
+                "cannot locateKing: king of specified color is not on the board.");
     }
 
     private boolean isPositionAttacked(Position position) {
