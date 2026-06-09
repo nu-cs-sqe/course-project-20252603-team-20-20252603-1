@@ -43,13 +43,15 @@ TC5 and TC6 can be combined.
 
 `Game` adds turn logic on top of `board.movePiece`.
 
-| ID   | State of the System                                                                 | Expected output                   | Implemented?       |
-| ---- | ----------------------------------------------------------------------------------- | --------------------------------- | :----------------- |
-| TC14 | `startGame()` not called                                                            | throws `IllegalStateException`    | :white_check_mark: |
-| TC15 | game started, WHITE's turn, `from=(7,1)` (BLACK pawn)                               | throws `IllegalArgumentException` | :white_check_mark: |
-| TC16 | game started, WHITE's turn, `from=(2,1)` WHITE pawn, `to=(3,1)`                     | `getCurrentTurn()` = BLACK        | :white_check_mark: |
-| TC17 | game started, after WHITE's move, BLACK's turn, `from=(7,1)` BLACK pawn, `to=(6,1)` | `getCurrentTurn()` = WHITE        | :white_check_mark: |
-| TC18 | game started, WHITE knight at (4,4), BLACK pawn at (6,5); WHITE moves knight to (6,5) | BLACK pawn gone, knight at (6,5), `getCurrentTurn()` = BLACK | :x: |
+| ID   | State of the System                                                                                   | Expected output                                              | Implemented?       |
+| ---- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | :----------------- |
+| TC14 | `startGame()` not called                                                                              | throws `IllegalStateException`                               | :white_check_mark: |
+| TC15 | game started, WHITE's turn, `from=(7,1)` (BLACK pawn)                                                 | throws `IllegalArgumentException`                            | :white_check_mark: |
+| TC16 | game started, WHITE's turn, `from=(2,1)` WHITE pawn, `to=(3,1)`                                       | `getCurrentTurn()` = BLACK                                   | :white_check_mark: |
+| TC17 | game started, after WHITE's move, BLACK's turn, `from=(7,1)` BLACK pawn, `to=(6,1)`                   | `getCurrentTurn()` = WHITE                                   | :white_check_mark: |
+| TC18 | game started, WHITE knight at (4,4), BLACK pawn at (6,5); WHITE moves knight to (6,5)                 | BLACK pawn gone, knight at (6,5), `getCurrentTurn()` = BLACK | :x:                |
+| TC24 | game started, WHITE executes a pawn push that does not expose BLACK king, then `playerInCheck(BLACK)` | `false`                                                      | :x:                |
+| TC25 | game started, WHITE executes a move that delivers check to BLACK king, then `playerInCheck(BLACK)`    | `true`                                                       | :x:                |
 
 ### Method under test: `getValidMoves(Position pos)`
 
@@ -69,3 +71,19 @@ TC5 and TC6 can be combined.
 | TC15 | `startGame()` not called | throws `IllegalStateException`       | :white_check_mark: |
 | TC16 | `startGame()` called     | same output as `board.getSnapshot()` | :white_check_mark: |
 
+### Method under test: `playerInCheck(Color player)`
+
+Input boundaries:
+- `gameInProgress`: `false`, `true`
+- `player`: `WHITE`, `BLACK`
+- Board state: player not in check, player in check
+
+Output boundaries: `throws IllegalStateException`, `false`, `true`
+
+| ID   | State of the System                                                                              | Expected output                | Implemented? |
+| ---- | ------------------------------------------------------------------------------------------------ | ------------------------------ | ------------ |
+| TC19 | `startGame()` not called, `player=WHITE`                                                         | throws `IllegalStateException` | :x:          |
+| TC20 | `startGame()` called, initial board, `player=WHITE`                                              | `false`                        | :x:          |
+| TC21 | `startGame()` called, initial board, `player=BLACK`                                              | `false`                        | :x:          |
+| TC22 | game started, WHITE king on same rank as attacking BLACK rook, no pieces between, `player=WHITE` | `true`                         | :x:          |
+| TC23 | game started, BLACK king on same rank as attacking WHITE rook, no pieces between, `player=BLACK` | `true`                         | :x:          |
