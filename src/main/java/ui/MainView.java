@@ -20,12 +20,14 @@ public class MainView extends JFrame implements BoardChangeListener, ClockListen
     private String player2Name;
     private Locale locale;
     private ResourceBundle bundle;
+    private long timeControl;
 
-    public MainView(String player1Name, String player2Name, Locale locale) {
+    public MainView(String player1Name, String player2Name, Locale locale, long timeControl) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
         this.locale = locale;
         this.bundle = ResourceBundle.getBundle("labels/labels", locale);
+        this.timeControl = timeControl;
 
         configureMainView();
         addGameStatsView();
@@ -44,14 +46,13 @@ public class MainView extends JFrame implements BoardChangeListener, ClockListen
     }
 
     private void addGameStatsView() {
-        // TODO: replace initialtime with user preference
-        gameStatsView = new GameStatsView(player1Name, player2Name, locale, 300000);
+        gameStatsView = new GameStatsView(player1Name, player2Name, locale, timeControl);
         add(gameStatsView, BorderLayout.PAGE_START);
     }
 
     private void addBoardView() {
         boardController = new BoardController(this, this);
-        boardController.startGame(300000); // TODO replace with user selection
+        boardController.startGame(timeControl);
         boardView = new BoardView(boardController);
         add(boardView, BorderLayout.CENTER);
     }
