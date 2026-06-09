@@ -936,4 +936,33 @@ public class BoardTest {
 
     EasyMock.verify(blackRook);
   }
+
+  @Test
+  public void GetValidMoves_WhiteKnightBlocksCheckByBlackRook_IncludesBlockExcludesNonBlock() {
+    Board board = new Board();
+
+    Piece whiteKing = stubPiece(Color.WHITE, PieceType.KING, List.of());
+    Piece whiteKnight = stubPiece(Color.WHITE, PieceType.KNIGHT, List.of(
+        new Position(5, 4), new Position(5, 2),
+        new Position(1, 4), new Position(1, 2),
+        new Position(4, 5), new Position(4, 1),
+        new Position(2, 5), new Position(2, 1)));
+    Piece blackRook = stubPiece(Color.BLACK, PieceType.ROOK, List.of());
+
+    int[][] rookDirections = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+    EasyMock.expect(blackRook.getSlidingDirections()).andReturn(rookDirections).times(8);
+
+    EasyMock.replay(whiteKing, whiteKnight, blackRook);
+
+    board.placePieceAt(new Position(5, 8), whiteKing);
+    board.placePieceAt(new Position(3, 3), whiteKnight);
+    board.placePieceAt(new Position(5, 1), blackRook);
+
+    List<Position> moves = board.getValidMoves(new Position(3, 3));
+
+    assertTrue(moves.contains(new Position(5, 4)));
+    assertFalse(moves.contains(new Position(1, 2)));
+
+    EasyMock.verify(blackRook);
+  }
 }
