@@ -568,4 +568,23 @@ public class GameTest {
         assertFalse(game.isPromotionPending());
         assertEquals(Color.BLACK, game.getCurrentTurn());
     }
+
+    @Test
+    public void ExecutePromotion_WhitePawnToRook_ReplacesAndSwitchesTurn() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        board.placePieceAt(new Position(8, 4), null);
+        Pawn pawn = new Pawn(Color.WHITE);
+        pawn.markMoved();
+        board.placePieceAt(new Position(7, 4), pawn);
+
+        game.executeMove(new Position(7, 4), new Position(8, 4));
+        game.executePromotion(PieceType.ROOK);
+
+        assertEquals(PieceType.ROOK, board.getPieceAt(new Position(8, 4)).getPieceType());
+        assertEquals(Color.WHITE, board.getPieceAt(new Position(8, 4)).getColor());
+        assertEquals(Color.BLACK, game.getCurrentTurn());
+    }
 }
