@@ -659,4 +659,24 @@ public class GameTest {
         assertThrows(IllegalArgumentException.class,
                 () -> game.executePromotion(PieceType.KING));
     }
+
+    @Test
+    public void ExecutePromotion_BlackPawnToQueen_ReplacesAndSwitchesTurn() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        board.placePieceAt(new Position(1, 4), null);
+        Pawn pawn = new Pawn(Color.BLACK);
+        pawn.markMoved();
+        board.placePieceAt(new Position(2, 4), pawn);
+
+        game.executeMove(new Position(2, 1), new Position(3, 1));
+        game.executeMove(new Position(2, 4), new Position(1, 4));
+        game.executePromotion(PieceType.QUEEN);
+
+        assertEquals(PieceType.QUEEN, board.getPieceAt(new Position(1, 4)).getPieceType());
+        assertEquals(Color.BLACK, board.getPieceAt(new Position(1, 4)).getColor());
+        assertEquals(Color.WHITE, game.getCurrentTurn());
+    }
 }
