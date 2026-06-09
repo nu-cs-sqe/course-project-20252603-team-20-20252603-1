@@ -5,6 +5,7 @@ import domain.piece.Color;
 public class ChessClock {
     private long whiteTimeRemaining;
     private long blackTimeRemaining;
+    private boolean running;
     
     public ChessClock(long initialTime, ClockListener listener) {
         if (listener == null) {
@@ -20,5 +21,13 @@ public class ChessClock {
 
     public long getTimeRemaining(Color color) {
         return (color == Color.WHITE) ? this.whiteTimeRemaining : this.blackTimeRemaining;
+    }
+
+    public void start() {
+        this.running = true;
+    }
+    
+    public boolean isRunning() {
+        return this.running;
     }
 }

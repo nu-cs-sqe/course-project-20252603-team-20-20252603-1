@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.easymock.EasyMock;
 import domain.piece.Color;
@@ -53,5 +54,15 @@ public class ChessClockTest {
             new ChessClock(300000, null);
         });
         assertEquals("No valid listener passed", exception.getMessage());
+    }
+
+    @Test 
+    public void Start_NewClock() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        ChessClock clock = new ChessClock(3600000, listener);
+
+        clock.start();
+        assertTrue(clock.isRunning());
+
     }
 }

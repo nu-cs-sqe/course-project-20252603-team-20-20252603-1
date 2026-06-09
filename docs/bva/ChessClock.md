@@ -9,10 +9,10 @@
 | TC4 | listener = `null`     | `IllegalArgumentException` thrown                                               | :white_check_mark: |
  
 ### Method under test: `start()`
-| ID  | State of the System        | Expected output            | Implemented? |
-| --- | -------------------------- | -------------------------- | ------------ |
-| TC5 | new `ChessClock()` created | `isRunning()` returns true |      :x:     |
-| TC6 | `start()` already called   | `isRunning()` returns true |      :x:     |
+| ID  | State of the System        | Expected output            | Implemented?       |
+| --- | -------------------------- | -------------------------- | ------------------ |
+| TC5 | new `ChessClock()` created | `isRunning()` returns true | :white_check_mark: |
+| TC6 | `start()` already called   | `isRunning()` returns true |         :x:        |
 
 ### Method under test: `stop()`
 | ID  | State of the System                              | Expected output             | Implemented? |
