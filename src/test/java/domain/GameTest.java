@@ -696,4 +696,21 @@ public class GameTest {
         assertThrows(IllegalStateException.class,
                 () -> game.executeMove(new Position(2, 1), new Position(3, 1)));
     }
+
+    @Test
+    public void ExecuteMove_WhitePawnReachesRank8_TurnDoesNotSwitch() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        board.placePieceAt(new Position(8, 4), null);
+        Pawn pawn = new Pawn(Color.WHITE);
+        pawn.markMoved();
+        board.placePieceAt(new Position(7, 4), pawn);
+
+        game.executeMove(new Position(7, 4), new Position(8, 4));
+
+        assertTrue(game.isPromotionPending());
+        assertEquals(Color.WHITE, game.getCurrentTurn());
+    }
 }
