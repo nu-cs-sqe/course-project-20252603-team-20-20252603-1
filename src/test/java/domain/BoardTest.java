@@ -990,4 +990,32 @@ public class BoardTest {
 
     EasyMock.verify(blackRook);
   }
+
+  @Test
+  public void GetValidMoves_WhiteKnightFullyPinnedByBlackBishop_ReturnsEmpty() {
+    Board board = new Board();
+
+    Piece whiteKing = stubPiece(Color.WHITE, PieceType.KING, List.of());
+    Piece whiteKnight = stubPiece(Color.WHITE, PieceType.KNIGHT, List.of(
+        new Position(5, 4), new Position(5, 2),
+        new Position(1, 4), new Position(1, 2),
+        new Position(4, 5), new Position(4, 1),
+        new Position(2, 5), new Position(2, 1)));
+    Piece blackBishop = stubPiece(Color.BLACK, PieceType.BISHOP, List.of());
+
+    int[][] bishopDirections = { { 1, 1 }, { 1, -1 }, { -1, 1 }, { -1, -1 } };
+    EasyMock.expect(blackBishop.getSlidingDirections()).andReturn(bishopDirections).times(8);
+
+    EasyMock.replay(whiteKing, whiteKnight, blackBishop);
+
+    board.placePieceAt(new Position(1, 5), whiteKing);
+    board.placePieceAt(new Position(3, 3), whiteKnight);
+    board.placePieceAt(new Position(5, 1), blackBishop);
+
+    List<Position> moves = board.getValidMoves(new Position(3, 3));
+
+    assertTrue(moves.isEmpty());
+
+    EasyMock.verify(blackBishop);
+  }
 }
