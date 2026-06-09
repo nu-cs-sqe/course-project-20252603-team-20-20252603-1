@@ -790,4 +790,28 @@ public class BoardTest {
     EasyMock.verify(rook);
 
   }
+
+  @Test
+  public void IsInCheck_WhiteKingBlackRookWhitePawn_ReturnsFalse() {
+    Board board = new Board();
+    Piece king = stubPiece(Color.WHITE, PieceType.KING, List.of());
+    Piece pawn = stubPiece(Color.WHITE, PieceType.PAWN, List.of());
+    Piece rook = stubPiece(Color.BLACK, PieceType.ROOK, List.of(
+        new Position(5, 2),
+        new Position(5, 3),
+        new Position(5, 4),
+        new Position(5, 5)));
+    int[][] slidingDirections = { { 0, 1 } };
+    EasyMock.expect(rook.getSlidingDirections()).andReturn(slidingDirections);
+    board.placePieceAt(new Position(5, 5), king);
+    board.placePieceAt(new Position(5, 3), pawn);
+    board.placePieceAt(new Position(5, 1), rook);
+
+    EasyMock.replay(king, rook, pawn);
+
+    assertFalse(board.isInCheck(Color.WHITE));
+
+    EasyMock.verify(rook);
+
+  }
 }
