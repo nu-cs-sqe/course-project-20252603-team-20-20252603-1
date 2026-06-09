@@ -4,9 +4,6 @@
 
 ### Additions
 
-#### `private Board(Piece[][] snapshot)` — private copy constructor
-Constructs a board from an existing snapshot. Used by `moveLeavesPlayerInCheck` to simulate a move without mutating the live board.
-
 #### `private List<Position> getGeometricMoves(Position position)`
 Returns candidate moves using only board geometric and piece movement rules. I.e. does not apply check filtering. 
 
@@ -38,7 +35,3 @@ Now delegates to `getGeometricMoves` for raw move generation, then applies `filt
 #### `public boolean playerInCheck(Color player)`
 Returns true if player is in check.
 
-### Changes
-
-#### `executeMove()`
-After moving the piece, calls `board.isInCheck()` and stores in `this.playerInCheck`.
