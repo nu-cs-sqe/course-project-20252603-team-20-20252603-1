@@ -128,6 +128,16 @@ public class Game {
                 || (piece.getColor() == Color.BLACK && position.getRow() == BLACK_PROMOTION_ROW);
     }
 
+    public void executePromotion(PieceType pieceType) {
+        if (!this.promotionPending) {
+            throw new IllegalStateException("No promotion is pending.");
+        }
+        board.promotePawn(promotionPosition.get(), pieceType);
+        this.promotionPending = false;
+        this.promotionPosition = Optional.empty();
+        switchTurn();
+    }
+
     public boolean playerInCheck(Color player) {
         if (!this.gameInProgress) {
             throw new IllegalStateException(

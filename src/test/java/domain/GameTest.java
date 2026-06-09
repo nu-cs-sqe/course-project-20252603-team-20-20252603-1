@@ -522,4 +522,21 @@ public class GameTest {
 
         assertTrue(game.isPromotionPending());
     }
+
+    @Test
+    public void ExecutePromotion_AfterPromotion_IsPromotionPendingFalse() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        board.placePieceAt(new Position(8, 4), null);
+        Pawn pawn = new Pawn(Color.WHITE);
+        pawn.markMoved();
+        board.placePieceAt(new Position(7, 4), pawn);
+
+        game.executeMove(new Position(7, 4), new Position(8, 4));
+        game.executePromotion(PieceType.QUEEN);
+
+        assertFalse(game.isPromotionPending());
+    }
 }
