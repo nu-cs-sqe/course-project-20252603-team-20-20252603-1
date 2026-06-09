@@ -1083,4 +1083,13 @@ public class BoardTest {
     assertEquals(Color.BLACK, piece.getColor());
     assertInstanceOf(Queen.class, piece);
   }
+
+  @Test
+  public void PromotePawn_WhitePawnAtMidBoard_ThrowsIllegalArgumentException() {
+    Board board = new Board();
+    board.placePieceAt(new Position(4, 4), new Pawn(Color.WHITE));
+
+    assertThrows(IllegalArgumentException.class,
+            () -> board.promotePawn(new Position(4, 4), PieceType.QUEEN));
+  }
 }
