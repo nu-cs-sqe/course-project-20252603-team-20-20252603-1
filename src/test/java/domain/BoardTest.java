@@ -1092,4 +1092,13 @@ public class BoardTest {
     assertThrows(IllegalArgumentException.class,
             () -> board.promotePawn(new Position(4, 4), PieceType.QUEEN));
   }
+
+  @Test
+  public void PromotePawn_NonPawnAtRank8_ThrowsIllegalArgumentException() {
+    Board board = new Board();
+    board.placePieceAt(new Position(8, 4), new Knight(Color.WHITE));
+
+    assertThrows(IllegalArgumentException.class,
+            () -> board.promotePawn(new Position(8, 4), PieceType.QUEEN));
+  }
 }
