@@ -651,6 +651,7 @@ public class BoardTest {
     Board board = new Board();
     Position pos = new Position(4, 4);
     board.placePieceAt(pos, new Rook(Color.WHITE));
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
 
     List<Position> moves = board.getValidMoves(pos);
 
@@ -662,6 +663,7 @@ public class BoardTest {
     Board board = new Board();
     board.placePieceAt(new Position(4, 4), new Bishop(Color.WHITE));
     board.placePieceAt(new Position(6, 6), new Pawn(Color.WHITE));
+    board.placePieceAt(new Position(7, 7), new King(Color.WHITE));
 
     List<Position> moves = board.getValidMoves(new Position(4, 4));
 
@@ -676,6 +678,7 @@ public class BoardTest {
     Board board = new Board();
     board.placePieceAt(new Position(4, 4), new Bishop(Color.WHITE));
     board.placePieceAt(new Position(6, 6), new Pawn(Color.BLACK));
+    board.placePieceAt(new Position(7, 7), new King(Color.WHITE));
 
     List<Position> moves = board.getValidMoves(new Position(4, 4));
 
@@ -690,6 +693,7 @@ public class BoardTest {
     Board board = new Board();
     board.placePieceAt(new Position(4, 4), new Knight(Color.WHITE));
     board.placePieceAt(new Position(6, 5), new Pawn(Color.BLACK));
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
 
     List<Position> moves = board.getValidMoves(new Position(4, 4));
 
@@ -715,6 +719,7 @@ public class BoardTest {
     Board board = new Board();
     board.placePieceAt(new Position(4, 4), new Knight(Color.WHITE));
     board.placePieceAt(new Position(6, 5), new Pawn(Color.BLACK));
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
 
     board.movePiece(new Position(4, 4), new Position(6, 5));
 
@@ -880,5 +885,29 @@ public class BoardTest {
 
     EasyMock.verify(blackRook, whiteRook);
 
+  }
+
+  @Test
+  public void GetValidMoves_WhiteRookPinnedAlongRankByBlackRook_IncludesPinRayExcludesOffRay() {
+    Board board = new Board();
+
+    Piece whiteKing = stubPiece(Color.WHITE, PieceType.KING, List.of());
+    Piece whiteRook = stubPiece(Color.WHITE, PieceType.ROOK, List.of());
+    Piece blackRook = stubPiece(Color.BLACK, PieceType.ROOK, List.of());
+
+    int[][] rookDirections = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+    EasyMock.expect(whiteRook.getSlidingDirections()).andReturn(rookDirections);
+    EasyMock.expect(blackRook.getSlidingDirections()).andReturn(rookDirections).times(9);
+
+    EasyMock.replay(whiteKing, whiteRook, blackRook);
+
+    board.placePieceAt(new Position(1, 5), whiteKing);
+    board.placePieceAt(new Position(1, 3), whiteRook);
+    board.placePieceAt(new Position(1, 1), blackRook);
+
+    List<Position> moves = board.getValidMoves(new Position(1, 3));
+
+    assertTrue(moves.contains(new Position(1, 2)));
+    assertFalse(moves.contains(new Position(2, 3)));
   }
 }

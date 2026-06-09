@@ -93,7 +93,7 @@ As these are unit tests, the only new boundary with adding `King` is using the a
 | TC44 | WHITE Pawn (hasMoved=true) at (4,4), BLACK piece at (5,4)                                             | returns `[]` — forward blocked by enemy                               | :white_check_mark: |
 | TC47 | initialized board, WHITE king, `pos=(1,5)`                                                            | returns `[]` — all surrounding squares occupied by own pieces         | :white_check_mark: |
 | TC48 | initialized board, BLACK king, `pos=(8,5)`                                                            | returns `[]` — all surrounding squares occupied by own pieces         | :white_check_mark: |
-| TC58 | WHITE king at `(1,5)`, WHITE rook at `(1,3)`, BLACK rook at `(1,1)`, no other pieces, `pos=(1,3)`     | `(1, 2)` included, `(2,3)` excluded                                   | :x:                |
+| TC58 | WHITE king at `(1,5)`, WHITE rook at `(1,3)`, BLACK rook at `(1,1)`, no other pieces, `pos=(1,3)`     | `(1, 2)` included, `(2,3)` excluded                                   | :white_check_mark: |
 | TC59 | WHITE king at `(5,5)`, BLACK rook at `(5,1)`, no other pieces, `pos=(5,5)` (king in check)            | does not include `(5,6)`, does include `(6,5)`                        | :x:                |
 | TC60 | BLACK rook at `(5,1)`, WHITE king at `(5,8)`, WHITE knight at `(3,3)`, no other pieces, `pos=(3,3)`   | includes `(5,4)`, does not include `(1,2)`                            | :x:                |
 | TC61 | BLACK rook at `(6,5)`, WHITE king at `(5,5)`, no other pieces, `pos=(5,5)`                            | includes `(6,5)`                                                      | :x:                |

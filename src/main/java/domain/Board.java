@@ -64,10 +64,8 @@ public class Board {
 
     public void initializeBoard() {
         for (int col = 0; col < NUM_COLS; ++col) {
-            // white pieces
             squares[WHITE_BACK_RANK][col] = createPiece(BACK_RANK[col], Color.WHITE);
             squares[WHITE_PAWN_RANK][col] = createPiece(PieceType.PAWN, Color.WHITE);
-            // black pieces
             squares[BLACK_BACK_RANK][col] = createPiece(BACK_RANK[col], Color.BLACK);
             squares[BLACK_PAWN_RANK][col] = createPiece(PieceType.PAWN, Color.BLACK);
         }
@@ -94,6 +92,22 @@ public class Board {
         if (isEmpty(position)) {
             throw new IllegalArgumentException("Cannot get valid moves at an empty position");
         }
+
+        List<Position> geometricMoves = getGeometricMoves(position);
+
+        List<Position> legalMoves = filterMovesByCheckRule(position, geometricMoves);
+
+        return legalMoves;
+    }
+
+    private List<Position> filterMovesByCheckRule(Position from, List<Position> candidates) {
+        Color color = getPieceAt(from).getColor();
+        List<Position> filtered = new ArrayList<Position>(candidates);
+        filtered.removeIf((to) -> moveLeavesPlayerInCheck(from, to, color));
+        return filtered;
+    }
+
+    private List<Position> getGeometricMoves(Position position) {
         Piece piece = getPieceAt(position);
         int[][] slidingDirections = piece.getSlidingDirections();
         if (slidingDirections.length > 0) {
@@ -181,20 +195,41 @@ public class Board {
         throw new IllegalStateException("cannot locateKing: king of specified color is not on the board.");
     }
 
-    public boolean isInCheck(Color player) {
-        Position kingPosition = locateKing(player);
-        List<Position> attackedSquares = new ArrayList<>();
+    private boolean isPositionAttacked(Position position) {
 
-        for (Position position : allPositions()) {
-            if (pieceAt(position).isEmpty()) {
+        Color color = getPieceAt(position).getColor();
+
+        for (Position square : allPositions()) {
+            if (pieceAt(square).isEmpty()) {
                 continue;
             }
-            Piece piece = getPieceAt(position);
-            if (piece.getColor() != player) {
-                attackedSquares.addAll(getValidMoves(position));
+            Piece piece = getPieceAt(square);
+            if (piece.getColor() != color && getGeometricMoves(square).contains(position)) {
+                return true;
             }
         }
+        return false;
+    }
 
-        return attackedSquares.contains(kingPosition);
+    public boolean isInCheck(Color player) {
+        Position kingPosition = locateKing(player);
+        return isPositionAttacked(kingPosition);
+    }
+
+    private void copyFromBoard(Piece[][] other) {
+        for (int row = 0; row < NUM_ROWS; row++) {
+            this.squares[row] = Arrays.copyOf(other[row], NUM_COLS);
+        }
+    }
+
+    private boolean moveLeavesPlayerInCheck(Position from, Position to, Color color) {
+        Board boardAfterMove = new Board();
+        boardAfterMove.copyFromBoard(getSnapshot());
+
+        Piece piece = boardAfterMove.getPieceAt(from);
+        boardAfterMove.setPieceAt(from, null);
+        boardAfterMove.setPieceAt(to, piece);
+
+        return boardAfterMove.isInCheck(color);
     }
 }
