@@ -965,4 +965,29 @@ public class BoardTest {
 
     EasyMock.verify(blackRook);
   }
+
+  @Test
+  public void GetValidMoves_WhiteKingCapturesAttackingBlackRook_IncludesCaptureSquare() {
+    Board board = new Board();
+
+    Piece whiteKing = stubPiece(Color.WHITE, PieceType.KING, List.of(
+        new Position(4, 4), new Position(4, 5), new Position(4, 6),
+        new Position(5, 4), new Position(5, 6),
+        new Position(6, 4), new Position(6, 5), new Position(6, 6)));
+    Piece blackRook = stubPiece(Color.BLACK, PieceType.ROOK, List.of());
+
+    int[][] rookDirections = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+    EasyMock.expect(blackRook.getSlidingDirections()).andReturn(rookDirections).times(7);
+
+    EasyMock.replay(whiteKing, blackRook);
+
+    board.placePieceAt(new Position(5, 5), whiteKing);
+    board.placePieceAt(new Position(6, 5), blackRook);
+
+    List<Position> moves = board.getValidMoves(new Position(5, 5));
+
+    assertTrue(moves.contains(new Position(6, 5)));
+
+    EasyMock.verify(blackRook);
+  }
 }

@@ -96,7 +96,7 @@ As these are unit tests, the only new boundary with adding `King` is using the a
 | TC58 | WHITE king at `(1,5)`, WHITE rook at `(1,3)`, BLACK rook at `(1,1)`, no other pieces, `pos=(1,3)`     | `(1, 2)` included, `(2,3)` excluded                                   | :white_check_mark: |
 | TC59 | WHITE king at `(5,5)`, BLACK rook at `(5,1)`, no other pieces, `pos=(5,5)` (king in check)            | does not include `(5,6)`, does include `(6,5)`                        | :white_check_mark: |
 | TC60 | BLACK rook at `(5,1)`, WHITE king at `(5,8)`, WHITE knight at `(3,3)`, no other pieces, `pos=(3,3)`   | includes `(5,4)`, does not include `(1,2)`                            | :white_check_mark: |
-| TC61 | BLACK rook at `(6,5)`, WHITE king at `(5,5)`, no other pieces, `pos=(5,5)`                            | includes `(6,5)`                                                      | :x:                |
+| TC61 | BLACK rook at `(6,5)`, WHITE king at `(5,5)`, no other pieces, `pos=(5,5)`                            | includes `(6,5)`                                                      | :white_check_mark: |
 | TC62 | WHITE king at `(1,5)`, WHITE knight at `(3,3)`, BLACK bishop at `(5,1)`, no other pieces, `pos=(3,3)` | returns `[]`                                                          | :x:                |
 
 ### Method under test: `movePiece(Position from, Position to)`
