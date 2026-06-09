@@ -8,6 +8,7 @@ public class Game {
     private final Board board;
     private Color currentTurn;
     private boolean gameInProgress = false;
+    private boolean promotionPending = false;
 
     public Game() {
         this.board = new Board();
@@ -95,6 +96,10 @@ public class Game {
                     "Cannot get board snapshot if the game has not started.");
         }
         return board.getSnapshot();
+    }
+
+    public boolean isPromotionPending() {
+        return this.promotionPending;
     }
 
     public boolean playerInCheck(Color player) {
