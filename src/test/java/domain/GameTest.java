@@ -642,4 +642,21 @@ public class GameTest {
         assertThrows(IllegalArgumentException.class,
                 () -> game.executePromotion(PieceType.PAWN));
     }
+
+    @Test
+    public void ExecutePromotion_PromoteToKing_ThrowsIllegalArgumentException() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        board.placePieceAt(new Position(8, 4), null);
+        Pawn pawn = new Pawn(Color.WHITE);
+        pawn.markMoved();
+        board.placePieceAt(new Position(7, 4), pawn);
+
+        game.executeMove(new Position(7, 4), new Position(8, 4));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> game.executePromotion(PieceType.KING));
+    }
 }
