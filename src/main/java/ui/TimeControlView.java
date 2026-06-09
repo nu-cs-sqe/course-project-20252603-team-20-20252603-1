@@ -3,7 +3,6 @@ package ui;
 import java.awt.GridBagConstraints;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -12,6 +11,9 @@ public class TimeControlView extends BaseView {
     private static final long FIVE_MINUTES = 300000L;
     private static final long TEN_MINUTES = 600000L;
     private static final long ONE_HOUR = 3600000L;
+    private static final int LEFT_TIME_CONTROL = 1;
+    private static final int CENTER_TIME_CONTROL = 2;
+    private static final int RIGHT_TIME_CONTROL = 3;
 
     private final ResourceBundle bundle;
     private final String player1Name;
@@ -39,17 +41,17 @@ public class TimeControlView extends BaseView {
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.CENTER;
 
-        gbc.gridy = 1;
+        gbc.gridy = LEFT_TIME_CONTROL;
         JButton fiveMin = createStyledButton("5:00");
         fiveMin.addActionListener(e -> startGame(FIVE_MINUTES));
         panel.add(fiveMin, gbc);
 
-        gbc.gridy = 2;
+        gbc.gridy = CENTER_TIME_CONTROL;
         JButton tenMin = createStyledButton("10:00");
         tenMin.addActionListener(e -> startGame(TEN_MINUTES));
         panel.add(tenMin, gbc);
 
-        gbc.gridy = 3;
+        gbc.gridy = RIGHT_TIME_CONTROL;
         JButton oneHour = createStyledButton("60:00");
         oneHour.addActionListener(e -> startGame(ONE_HOUR));
         panel.add(oneHour, gbc);
@@ -58,6 +60,12 @@ public class TimeControlView extends BaseView {
     }
 
     private void startGame(long timeControl) {
-        transitionTo(new MainView(player1Name, player2Name, locale, timeControl));
+        GameConfig config = new GameConfig.Builder()
+                .player1Name(player1Name)
+                .player2Name(player2Name)
+                .locale(locale)
+                .timeControl(timeControl)
+                .build();
+        transitionTo(new MainView(config));
     }
 }

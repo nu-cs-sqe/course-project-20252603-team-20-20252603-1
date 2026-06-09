@@ -14,6 +14,8 @@ public class GameStatsView extends JPanel {
     private static final int FONT_SIZE_HEADER = 30;
     private static final int FONT_SIZE_LABEL = 20;
     private static final Color NU_PURPLE = new Color(104, 76, 150);
+    private static final int MILLISECONDS_IN_SEC = 1000;
+    private static final int SECS_IN_MINUTE = 60;
     private Locale locale;
 
     public JLabel currentPlayerLabel;
@@ -21,10 +23,18 @@ public class GameStatsView extends JPanel {
     public JLabel blackTimerLabel;
     private final String whiteLocale;
     private final String blackLocale;
+    private final String player1Name;
+    private final String player2Name;
+    private final GameConfig config;
+    private final long initialTime;
 
 
-    public GameStatsView(String player1Name, String player2Name, Locale locale, long initialTime) {
-        this.locale = locale;
+    public GameStatsView(GameConfig config) {
+        this.config = config;
+        this.player1Name = config.getPlayer1Name();
+        this.player2Name = config.getPlayer2Name();
+        this.locale = config.getLocale();
+        this.initialTime = config.getTimeControl();
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setOpaque(true);
@@ -63,8 +73,8 @@ public class GameStatsView extends JPanel {
         currentPlayerLabel.setFont(new Font("Arial", Font.BOLD, FONT_SIZE_HEADER));
         currentPlayerLabel.setForeground(Color.WHITE);
 
-        long seconds = initialTime / 1000;
-        String formatted = String.format("%02d:%02d", seconds / 60, seconds % 60);
+        long secs = initialTime / MILLISECONDS_IN_SEC;
+        String formatted = String.format("%02d:%02d", secs / SECS_IN_MINUTE, secs % SECS_IN_MINUTE);
         
         String whiteTimerText = MessageFormat.format("{0}: {1}", this.whiteLocale, formatted);
         whiteTimerLabel = new JLabel(whiteTimerText);
@@ -85,14 +95,14 @@ public class GameStatsView extends JPanel {
     }
 
     public void updateTimer(domain.piece.Color color, long timeRemainingMillis) {
-        long seconds = timeRemainingMillis / 1000;
-        String formatted = String.format("%02d:%02d", seconds / 60, seconds % 60);
+        long secs = timeRemainingMillis / MILLISECONDS_IN_SEC;
+        String formatted = String.format("%02d:%02d", secs / SECS_IN_MINUTE, secs % SECS_IN_MINUTE);
         if (color == domain.piece.Color.WHITE) {
-            String newWhiteTimerText = MessageFormat.format("{0}: {1}", this.whiteLocale, formatted);
-            whiteTimerLabel.setText(newWhiteTimerText);
+            String newWhiteTimerTxt = MessageFormat.format("{0}: {1}", this.whiteLocale, formatted);
+            whiteTimerLabel.setText(newWhiteTimerTxt);
         } else {
-            String newBlackTimerText = MessageFormat.format("{0}: {1}", this.blackLocale, formatted);
-            blackTimerLabel.setText(newBlackTimerText);
+            String newBlackTimerTxt = MessageFormat.format("{0}: {1}", this.blackLocale, formatted);
+            blackTimerLabel.setText(newBlackTimerTxt);
         }
     }
 }

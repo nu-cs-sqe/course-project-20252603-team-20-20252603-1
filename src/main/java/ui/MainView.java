@@ -21,13 +21,15 @@ public class MainView extends JFrame implements BoardChangeListener, ClockListen
     private Locale locale;
     private ResourceBundle bundle;
     private long timeControl;
+    private GameConfig config; 
 
-    public MainView(String player1Name, String player2Name, Locale locale, long timeControl) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
-        this.locale = locale;
+    public MainView(GameConfig config) {
+        this.config = config;
+        this.player1Name = config.getPlayer1Name();
+        this.player2Name = config.getPlayer2Name();
+        this.locale = config.getLocale();
         this.bundle = ResourceBundle.getBundle("labels/labels", locale);
-        this.timeControl = timeControl;
+        this.timeControl = config.getTimeControl();
 
         configureMainView();
         addGameStatsView();
@@ -46,7 +48,7 @@ public class MainView extends JFrame implements BoardChangeListener, ClockListen
     }
 
     private void addGameStatsView() {
-        gameStatsView = new GameStatsView(player1Name, player2Name, locale, timeControl);
+        gameStatsView = new GameStatsView(this.config);
         add(gameStatsView, BorderLayout.PAGE_START);
     }
 
