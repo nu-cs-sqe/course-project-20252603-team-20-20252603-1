@@ -244,4 +244,29 @@ public class ChessClockTest {
 
         EasyMock.verify(listener);
     }
+    
+    @Test 
+    public void TickWhite_AtStart() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        listener.onTimerTick(Color.WHITE, 299000);
+        EasyMock.replay(listener);
+
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.tick();
+
+        EasyMock.verify(listener);
+    }
+
+    @Test 
+    public void TickBlack_AtStart() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        listener.onTimerTick(Color.BLACK, 299000);
+        EasyMock.replay(listener);
+
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.switchClock();
+        clock.tick();
+
+        EasyMock.verify(listener);
+    }
 }
