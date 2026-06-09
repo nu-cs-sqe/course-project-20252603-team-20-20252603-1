@@ -230,4 +230,18 @@ public class ChessClockTest {
 
         EasyMock.verify(listener);
     }
+
+    @Test 
+    public void TickBlack_OnTimeout() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        listener.onTimeout(Color.BLACK);
+        EasyMock.replay(listener);
+
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.switchClock();
+        clock.setTime(1000, Color.BLACK);
+        clock.tick();
+
+        EasyMock.verify(listener);
+    }
 }

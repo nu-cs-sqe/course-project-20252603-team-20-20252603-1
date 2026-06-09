@@ -67,6 +67,11 @@ public class ChessClock {
             }
         } else {
             this.blackTimeRemaining -= 1000;
+            if (this.blackTimeRemaining <= 0) {
+                stop();
+                listener.onTimeout(Color.BLACK);
+                return;
+            }
         } 
         listener.onTimerTick(this.activeColor, getTimeRemaining(this.activeColor));
     }
