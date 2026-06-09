@@ -1057,4 +1057,17 @@ public class BoardTest {
     assertEquals(Color.WHITE, piece.getColor());
     assertInstanceOf(Bishop.class, piece);
   }
+
+  @Test
+  public void PromotePawn_WhitePawnAtRank8ToKnight_ReplacesWithKnight() {
+    Board board = new Board();
+    board.placePieceAt(new Position(8, 4), new Pawn(Color.WHITE));
+
+    board.promotePawn(new Position(8, 4), PieceType.KNIGHT);
+
+    Piece piece = board.getPieceAt(new Position(8, 4));
+    assertEquals(PieceType.KNIGHT, piece.getPieceType());
+    assertEquals(Color.WHITE, piece.getColor());
+    assertInstanceOf(Knight.class, piece);
+  }
 }
