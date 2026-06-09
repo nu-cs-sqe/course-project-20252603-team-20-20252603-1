@@ -26,6 +26,7 @@ public class BoardView extends JPanel implements BoardChangeListener {
     private final java.awt.Color darkSquareColor = new java.awt.Color(181, 136, 99);
     private final java.awt.Color selectedSquareColor = new java.awt.Color(164, 149, 195);
     private final java.awt.Color validMoveColor = new java.awt.Color(100, 200, 100, 160);
+    private final java.awt.Color checkHighlightColor = new java.awt.Color(220, 50, 50, 200);
 
     private Map<PieceType, Image> whitePieceImages;
     private Map<PieceType, Image> blackPieceImages;
@@ -59,6 +60,7 @@ public class BoardView extends JPanel implements BoardChangeListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         drawBoard(g);
+        drawCheckHighlight(g);
         drawSelectedSquare(g);
         drawValidMoves(g);
         drawPieces(g);
@@ -108,6 +110,25 @@ public class BoardView extends JPanel implements BoardChangeListener {
             blackPieceImages.put(type, image);
         } else {
             this.whitePieceImages.put(type, image);
+        }
+    }
+
+    private void drawCheckHighlight(Graphics g) {
+        Piece[][] boardSnapshot = boardController.getBoardSnapshot();
+        for (Color color : new Color[]{Color.WHITE, Color.BLACK}) {
+            if (!boardController.playerInCheck(color)) {
+                continue;
+            }
+            for (int row = 0; row < BOARD_SIZE; row++) {
+                for (int col = 0; col < BOARD_SIZE; col++) {
+                    Piece piece = boardSnapshot[row][col];
+                    if (piece != null && piece.getColor() == color
+                            && piece.getPieceType() == PieceType.KING) {
+                        g.setColor(checkHighlightColor);
+                        g.fillRect(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                    }
+                }
+            }
         }
     }
 

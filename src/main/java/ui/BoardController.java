@@ -59,4 +59,8 @@ public class BoardController {
     public Color getCurrentTurn() {
         return game.getCurrentTurn();
     }
+
+    public boolean playerInCheck(Color color) {
+        return game.playerInCheck(color);
+    }
 }
