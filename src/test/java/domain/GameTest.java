@@ -386,4 +386,22 @@ public class GameTest {
         assertEquals(PieceType.KNIGHT, board.getPieceAt(new Position(6, 5)).getPieceType());
         assertEquals(Color.BLACK, game.getCurrentTurn());
     }
+
+    @Test
+    public void PlayerInCheck_GameNotStarted_ThrowsIllegalState() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        EasyMock.replay(board);
+
+        Exception exception = assertThrows(IllegalStateException.class,
+                () -> game.playerInCheck(Color.WHITE));
+
+        String expected = "Cannot check if players are in check if the game has not started.";
+        String actual = exception.getMessage();
+        assertEquals(expected, actual);
+
+        EasyMock.verify(board);
+
+    }
 }

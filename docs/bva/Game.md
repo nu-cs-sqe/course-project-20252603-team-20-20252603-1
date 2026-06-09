@@ -80,10 +80,10 @@ Input boundaries:
 
 Output boundaries: `throws IllegalStateException`, `false`, `true`
 
-| ID   | State of the System                                                                              | Expected output                | Implemented? |
-| ---- | ------------------------------------------------------------------------------------------------ | ------------------------------ | ------------ |
-| TC19 | `startGame()` not called, `player=WHITE`                                                         | throws `IllegalStateException` | :x:          |
-| TC20 | `startGame()` called, initial board, `player=WHITE`                                              | `false`                        | :x:          |
-| TC21 | `startGame()` called, initial board, `player=BLACK`                                              | `false`                        | :x:          |
-| TC22 | game started, WHITE king on same rank as attacking BLACK rook, no pieces between, `player=WHITE` | `true`                         | :x:          |
-| TC23 | game started, BLACK king on same rank as attacking WHITE rook, no pieces between, `player=BLACK` | `true`                         | :x:          |
+| ID   | State of the System                                                                              | Expected output                | Implemented?       |
+| ---- | ------------------------------------------------------------------------------------------------ | ------------------------------ | ------------------ |
+| TC19 | `startGame()` not called, `player=WHITE`                                                         | throws `IllegalStateException` | :white_check_mark: |
+| TC20 | `startGame()` called, initial board, `player=WHITE`                                              | `false`                        | :x:                |
+| TC21 | `startGame()` called, initial board, `player=BLACK`                                              | `false`                        | :x:                |
+| TC22 | game started, WHITE king on same rank as attacking BLACK rook, no pieces between, `player=WHITE` | `true`                         | :x:                |
+| TC23 | game started, BLACK king on same rank as attacking WHITE rook, no pieces between, `player=BLACK` | `true`                         | :x:                |
