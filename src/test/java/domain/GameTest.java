@@ -539,4 +539,13 @@ public class GameTest {
 
         assertFalse(game.isPromotionPending());
     }
+
+    @Test
+    public void ExecutePromotion_NoPendingPromotion_ThrowsIllegalStateException() {
+        Game game = new Game();
+        game.startGame();
+
+        assertThrows(IllegalStateException.class,
+                () -> game.executePromotion(PieceType.QUEEN));
+    }
 }
