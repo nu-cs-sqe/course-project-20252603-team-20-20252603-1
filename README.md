@@ -15,6 +15,7 @@
 - Checkstyle 9.3
 - JaCoCo 0.8.x
 - Pitest 1.15.0
+- Cucumber 7.20.1
 
 ## Acknowledgements
 1. Spotbugs build scripts
@@ -33,3 +34,5 @@
    2. Lab 5 `build.gradle.kts`
 5. GUI Starter code
    1. https://github.com/nu-cs-sqe/example-chess-startercode-with-java-swing-20252603-annabellesole2026
+6. Cucumber Build
+   1. Lab 6 `build.gradle.kts`
