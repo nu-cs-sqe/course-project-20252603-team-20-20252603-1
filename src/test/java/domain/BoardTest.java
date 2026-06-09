@@ -780,10 +780,11 @@ public class BoardTest {
     Board board = new Board();
     Piece king = stubPiece(Color.WHITE, PieceType.KING, List.of());
     Piece rook = mockPiece(Color.BLACK, PieceType.ROOK, List.of(new Position(5, 8)));
-    board.placePieceAt(new Position(5, 8), king);
-    board.placePieceAt(new Position(5, 1), rook);
 
     EasyMock.replay(king, rook);
+
+    board.placePieceAt(new Position(5, 8), king);
+    board.placePieceAt(new Position(5, 1), rook);
 
     assertTrue(board.isInCheck(Color.WHITE));
 
@@ -803,11 +804,12 @@ public class BoardTest {
         new Position(5, 5)));
     int[][] slidingDirections = { { 0, 1 } };
     EasyMock.expect(rook.getSlidingDirections()).andReturn(slidingDirections);
+
+    EasyMock.replay(king, rook, pawn);
+
     board.placePieceAt(new Position(5, 5), king);
     board.placePieceAt(new Position(5, 3), pawn);
     board.placePieceAt(new Position(5, 1), rook);
-
-    EasyMock.replay(king, rook, pawn);
 
     assertFalse(board.isInCheck(Color.WHITE));
 
@@ -822,14 +824,35 @@ public class BoardTest {
     Piece knight = mockPiece(Color.BLACK, PieceType.KNIGHT, List.of(
         new Position(5, 5),
         new Position(5, 3)));
-    board.placePieceAt(new Position(5, 5), king);
-    board.placePieceAt(new Position(3, 4), knight);
 
     EasyMock.replay(king, knight);
+
+    board.placePieceAt(new Position(5, 5), king);
+    board.placePieceAt(new Position(3, 4), knight);
 
     assertTrue(board.isInCheck(Color.WHITE));
 
     EasyMock.verify(knight);
+
+  }
+
+  @Test
+  public void IsInCheck_BlackKingWhiteQueen_ReturnsTrue() {
+    Board board = new Board();
+    Piece king = stubPiece(Color.BLACK, PieceType.KING, List.of());
+    Piece queen = stubPiece(Color.WHITE, PieceType.QUEEN, List.of());
+
+    int[][] slidingDirections = { { 0, 1 }, { 1, 1 } };
+    EasyMock.expect(queen.getSlidingDirections()).andReturn(slidingDirections);
+
+    EasyMock.replay(king, queen);
+
+    board.placePieceAt(new Position(5, 5), king);
+    board.placePieceAt(new Position(5, 1), queen);
+
+    assertTrue(board.isInCheck(Color.BLACK));
+
+    EasyMock.verify(queen);
 
   }
 }
