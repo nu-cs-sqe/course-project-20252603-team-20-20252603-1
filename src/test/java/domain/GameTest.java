@@ -2,11 +2,13 @@ package domain;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import domain.Position;
 
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
@@ -385,5 +387,106 @@ public class GameTest {
         assertEquals(Color.WHITE, board.getPieceAt(new Position(6, 5)).getColor());
         assertEquals(PieceType.KNIGHT, board.getPieceAt(new Position(6, 5)).getPieceType());
         assertEquals(Color.BLACK, game.getCurrentTurn());
+    }
+
+    @Test
+    public void PlayerInCheck_GameNotStarted_ThrowsIllegalState() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        EasyMock.replay(board);
+
+        Exception exception = assertThrows(IllegalStateException.class,
+                () -> game.playerInCheck(Color.WHITE));
+
+        String expected = "Cannot check if players are in check if the game has not started.";
+        String actual = exception.getMessage();
+        assertEquals(expected, actual);
+
+        EasyMock.verify(board);
+
+    }
+
+    @Test
+    public void PlayerInCheck_FirstTurnWhite_ReturnsFalse() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.isInCheck(Color.WHITE)).andReturn(false);
+        EasyMock.replay(board);
+
+        game.startGame();
+
+        assertFalse(game.playerInCheck(Color.WHITE));
+
+        EasyMock.verify(board);
+
+    }
+
+    @Test
+    public void PlayerInCheck_WhiteInCheck_ReturnsTrue() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.isInCheck(Color.WHITE)).andReturn(true);
+        EasyMock.replay(board);
+
+        game.startGame();
+
+        assertTrue(game.playerInCheck(Color.WHITE));
+
+        EasyMock.verify(board);
+
+    }
+
+    @Test
+    public void PlayerInCheck_BlackInCheck_ReturnsTrue() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(true);
+        EasyMock.replay(board);
+
+        game.startGame();
+
+        assertTrue(game.playerInCheck(Color.BLACK));
+
+        EasyMock.verify(board);
+
+    }
+
+    @Test
+    public void ExecuteMove_KnightMove_BlacksTurn() {
+        Board board = EasyMock.createMock(Board.class);
+        Piece piece = EasyMock.createMock(Knight.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.getPieceAt(new Position(4, 4))).andReturn(piece);
+        EasyMock.expect(piece.getColor()).andStubReturn(Color.WHITE);
+
+        board.movePiece(new Position(4, 4), new Position(6, 5));
+        EasyMock.expectLastCall();
+
+        EasyMock.replay(board, piece);
+
+        game.startGame();
+        game.executeMove(new Position(4, 4), new Position(6, 5));
+
+        assertEquals(Color.BLACK, game.getCurrentTurn());
+
+        EasyMock.verify(board);
+
     }
 }
