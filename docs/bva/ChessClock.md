@@ -47,11 +47,11 @@
 | TC14 | color= `BLACK`, `blackTimeRemaining`=299999 | 299999                     | :white_check_mark: | *Covered by TC10*
 | TC15 | color= `WHITE`, `whiteTimeRemaining`=0      | 0                          | :white_check_mark: |
 | TC16 | color= `BLACK`, `blackTimeRemaining`=0      | 0                          | :white_check_mark: |
-| TC17 | color= `null`                               | `IllegalArugmentException` |         :x:        |
+| TC17 | color= `null`                               | `IllegalArugmentException` | :white_check_mark: |
 
 ### Method under test: `isRunning()`
-| ID   | State of the System                             | Expected output | Implemented? |
-| ---- | ----------------------------------------------- | --------------- | ------------ |
-| TC18 | `start()` called                                | true            |      :x:     |
-| TC19 | `start()` not called                            | false           |      :x:     |
-| TC20 | `start()` and `stop()` both called successively | false           |      :x:     |
+| ID   | State of the System                             | Expected output | Implemented?       |
+| ---- | ----------------------------------------------- | --------------- | ------------------ |
+| TC18 | `start()` called                                | true            | :white_check_mark: | *Covered by TC5*
+| TC19 | `start()` not called                            | false           | :white_check_mark: | *Covered by TC8*
+| TC20 | `start()` and `stop()` both called successively | false           | :white_check_mark: | *Covered by TC7*
