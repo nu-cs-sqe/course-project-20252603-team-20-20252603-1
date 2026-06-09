@@ -43,15 +43,13 @@ TC5 and TC6 can be combined.
 
 `Game` adds turn logic on top of `board.movePiece`.
 
-| ID   | State of the System                                                                                   | Expected output                                              | Implemented?       |
-| ---- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | :----------------- |
-| TC14 | `startGame()` not called                                                                              | throws `IllegalStateException`                               | :white_check_mark: |
-| TC15 | game started, WHITE's turn, `from=(7,1)` (BLACK pawn)                                                 | throws `IllegalArgumentException`                            | :white_check_mark: |
-| TC16 | game started, WHITE's turn, `from=(2,1)` WHITE pawn, `to=(3,1)`                                       | `getCurrentTurn()` = BLACK                                   | :white_check_mark: |
-| TC17 | game started, after WHITE's move, BLACK's turn, `from=(7,1)` BLACK pawn, `to=(6,1)`                   | `getCurrentTurn()` = WHITE                                   | :white_check_mark: |
-| TC18 | game started, WHITE knight at (4,4), BLACK pawn at (6,5); WHITE moves knight to (6,5)                 | BLACK pawn gone, knight at (6,5), `getCurrentTurn()` = BLACK | :x:                |
-| TC24 | game started, WHITE executes a pawn push that does not expose BLACK king, then `playerInCheck(BLACK)` | `false`                                                      | :x:                |
-| TC25 | game started, WHITE executes a move that delivers check to BLACK king, then `playerInCheck(BLACK)`    | `true`                                                       | :x:                |
+| ID   | State of the System                                                                   | Expected output                                              | Implemented?       |
+| ---- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------ | :----------------- |
+| TC14 | `startGame()` not called                                                              | throws `IllegalStateException`                               | :white_check_mark: |
+| TC15 | game started, WHITE's turn, `from=(7,1)` (BLACK pawn)                                 | throws `IllegalArgumentException`                            | :white_check_mark: |
+| TC16 | game started, WHITE's turn, `from=(2,1)` WHITE pawn, `to=(3,1)`                       | `getCurrentTurn()` = BLACK                                   | :white_check_mark: |
+| TC17 | game started, after WHITE's move, BLACK's turn, `from=(7,1)` BLACK pawn, `to=(6,1)`   | `getCurrentTurn()` = WHITE                                   | :white_check_mark: |
+| TC18 | game started, WHITE knight at (4,4), BLACK pawn at (6,5); WHITE moves knight to (6,5) | BLACK pawn gone, knight at (6,5), `getCurrentTurn()` = BLACK | :x:                |
 
 ### Method under test: `getValidMoves(Position pos)`
 
