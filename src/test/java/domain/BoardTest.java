@@ -23,10 +23,35 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 public class BoardTest {
+
+  private Piece mockPiece(Color color, PieceType type, List<Position> candidateMoves) {
+    Piece piece = EasyMock.createMock(Piece.class);
+    EasyMock.expect(piece.getColor()).andStubReturn(color);
+    EasyMock.expect(piece.getPieceType()).andStubReturn(type);
+    EasyMock.expect(piece.getSlidingDirections()).andStubReturn(new int[0][]);
+
+    EasyMock.expect(piece.getCandidateMoves(EasyMock.anyObject()))
+        .andReturn(new ArrayList<>(candidateMoves));
+
+    return piece;
+  }
+
+  private Piece stubPiece(Color color, PieceType type, List<Position> candidateMoves) {
+    Piece piece = EasyMock.createMock(Piece.class);
+    EasyMock.expect(piece.getColor()).andStubReturn(color);
+    EasyMock.expect(piece.getPieceType()).andStubReturn(type);
+    EasyMock.expect(piece.getSlidingDirections()).andStubReturn(new int[0][]);
+
+    EasyMock.expect(piece.getCandidateMoves(EasyMock.anyObject()))
+        .andStubReturn(new ArrayList<>(candidateMoves));
+
+    return piece;
+  }
 
   /*
    * isEmpty() unit tests
@@ -737,16 +762,32 @@ public class BoardTest {
   }
 
   @Test
-  public void IsInCheck_InitializedBoardWhite_False() {
+  public void IsInCheck_InitializedBoardWhite_ReturnsFalse() {
     Board board = new Board();
     board.initializeBoard();
     assertFalse(board.isInCheck(Color.WHITE));
   }
 
   @Test
-  public void IsInCheck_InitializedBoardBlack_False() {
+  public void IsInCheck_InitializedBoardBlack_ReturnsFalse() {
     Board board = new Board();
     board.initializeBoard();
     assertFalse(board.isInCheck(Color.BLACK));
+  }
+
+  @Test
+  public void IsInCheck_WhiteKing58BlackRook51_ReturnsTrue() {
+    Board board = new Board();
+    Piece king = stubPiece(Color.WHITE, PieceType.KING, List.of());
+    Piece rook = mockPiece(Color.BLACK, PieceType.ROOK, List.of(new Position(5, 8)));
+    board.placePieceAt(new Position(5, 8), king);
+    board.placePieceAt(new Position(5, 1), rook);
+
+    EasyMock.replay(king, rook);
+
+    assertTrue(board.isInCheck(Color.WHITE));
+
+    EasyMock.verify(rook);
+
   }
 }

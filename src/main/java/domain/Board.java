@@ -158,7 +158,43 @@ public class Board {
         setPieceAt(from, null);
     }
 
+    private List<Position> allPositions() {
+        List<Position> positions = new ArrayList<>();
+        for (int row = 1; row <= NUM_ROWS; ++row) {
+            for (int col = 1; col <= NUM_COLS; ++col) {
+                positions.add(new Position(row, col));
+            }
+        }
+        return positions;
+    }
+
+    private Position locateKing(Color color) {
+        for (Position position : allPositions()) {
+            if (pieceAt(position).isEmpty()) {
+                continue;
+            }
+            Piece piece = getPieceAt(position);
+            if (piece.getColor() == color && piece.getPieceType() == PieceType.KING) {
+                return position;
+            }
+        }
+        throw new IllegalStateException("cannot locateKing: king of specified color is not on the board.");
+    }
+
     public boolean isInCheck(Color player) {
-        return false;
+        Position kingPosition = locateKing(player);
+        List<Position> attackedSquares = new ArrayList<>();
+
+        for (Position position : allPositions()) {
+            if (pieceAt(position).isEmpty()) {
+                continue;
+            }
+            Piece piece = getPieceAt(position);
+            if (piece.getColor() != player) {
+                attackedSquares.addAll(getValidMoves(position));
+            }
+        }
+
+        return attackedSquares.contains(kingPosition);
     }
 }
