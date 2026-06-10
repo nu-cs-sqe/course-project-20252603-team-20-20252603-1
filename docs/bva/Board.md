@@ -79,7 +79,7 @@ As these are unit tests, the only new boundary with adding `King` is using the a
 - Fully pinned: when every move of a piece exposes the king, the result is `[]`
 
 | ID   | State of the System                                                                                   | Expected output                                                       | Implemented?       |
-| ---- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------ |
+|------|-------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|--------------------|
 | TC29 | new `Board()`, `pos=(4,4)` (empty square)                                                             | throws `IllegalArgumentException`                                     | :white_check_mark: |
 | TC30 | initialized board, `pos=(2,1)` WHITE pawn (unmoved), `(3,1)` and `(4,1)` empty                        | returns `[(3,1),(4,1)]`                                               | :white_check_mark: |
 | TC31 | initialized board, `pos=(1,2)` WHITE knight                                                           | returns `[(3,3),(3,1)]` — candidate `(2,4)` filtered (own pawn there) | :white_check_mark: |
@@ -98,6 +98,8 @@ As these are unit tests, the only new boundary with adding `King` is using the a
 | TC60 | BLACK rook at `(5,1)`, WHITE king at `(5,8)`, WHITE knight at `(3,3)`, no other pieces, `pos=(3,3)`   | includes `(5,4)`, does not include `(1,2)`                            | :white_check_mark: |
 | TC61 | BLACK rook at `(6,5)`, WHITE king at `(5,5)`, no other pieces, `pos=(5,5)`                            | includes `(6,5)`                                                      | :white_check_mark: |
 | TC62 | WHITE king at `(1,5)`, WHITE knight at `(3,3)`, BLACK bishop at `(5,1)`, no other pieces, `pos=(3,3)` | returns `[]`                                                          | :white_check_mark: |
+| TC72 | WHITE Pawn (hasMoved=false) at `(2,1)`, BLACK piece at `(3,1)`, `(4,1)` empty                         | returns `[]` — one-square blocked prevents two-square jump            | :x:                |
+| TC73 | BLACK Pawn (hasMoved=false) at `(7,1)`, WHITE piece at `(6,1)`, `(5,1)` empty                         | returns `[]` — one-square blocked prevents two-square jump            | :x:                |
 
 ### Method under test: `movePiece(Position from, Position to)`
 
@@ -128,15 +130,16 @@ Input boundaries:
 
 Output boundary: `false`, `true`
 
-| ID   | State of the System                                                                                         | Expected output | Implemented?       |
-| ---- | ----------------------------------------------------------------------------------------------------------- | --------------- | ------------------ |
-| TC51 | initialized board, `isInCheck(WHITE)`                                                                       | `false`         | :white_check_mark: |
-| TC52 | initialized board, `isInCheck(BLACK)`                                                                       | `false`         | :white_check_mark: |
-| TC53 | WHITE king at `(5,8)`, BLACK rook at `(5,1)`, no other pieces                                               | `true`          | :white_check_mark: |
-| TC54 | WHITE king at `(5,5)`, BLACK rook at `(5,1)`, WHITE pawn at `(5,3)`, no other pieces                        | `false`         | :white_check_mark: |
-| TC55 | WHITE king at `(5,5)`, BLACK knight at `(3,4)`, no other pieces                                             | `true`          | :white_check_mark: |
-| TC56 | BLACK king at `(5,5)`, WHITE queen at `(5,1)`, no other pieces                                              | `true`          | :white_check_mark: |
-| TC57 | WHITE rook at `(1,1)`, BLACK rook at `(4,1)`, BLACK king at `(8,1)`, WHITE king at `(4,5)`, no other pieces | `true`          | :white_check_mark: |
+| ID   | State of the System                                                                                         | Expected output                | Implemented?       |
+|------|-------------------------------------------------------------------------------------------------------------|--------------------------------|--------------------|
+| TC51 | initialized board, `isInCheck(WHITE)`                                                                       | `false`                        | :white_check_mark: |
+| TC52 | initialized board, `isInCheck(BLACK)`                                                                       | `false`                        | :white_check_mark: |
+| TC53 | WHITE king at `(5,8)`, BLACK rook at `(5,1)`, no other pieces                                               | `true`                         | :white_check_mark: |
+| TC54 | WHITE king at `(5,5)`, BLACK rook at `(5,1)`, WHITE pawn at `(5,3)`, no other pieces                        | `false`                        | :white_check_mark: |
+| TC55 | WHITE king at `(5,5)`, BLACK knight at `(3,4)`, no other pieces                                             | `true`                         | :white_check_mark: |
+| TC56 | BLACK king at `(5,5)`, WHITE queen at `(5,1)`, no other pieces                                              | `true`                         | :white_check_mark: |
+| TC57 | WHITE rook at `(1,1)`, BLACK rook at `(4,1)`, BLACK king at `(8,1)`, WHITE king at `(4,5)`, no other pieces | `true`                         | :white_check_mark: |
+| TC74 | no WHITE king on board, `isInCheck(WHITE)` called                                                           | throws `IllegalStateException` | :x:                |
 
 ### Method under test: `promotePawn(Position position, PieceType pieceType)`
 
@@ -151,4 +154,4 @@ Output boundary: `false`, `true`
 | TC69 | WHITE KNIGHT at `(8,4)`, `promotePawn((8,4), QUEEN)`                        | throws `IllegalArgumentException` - not a pawn                     | :white_check_mark: |
 | TC70 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), PAWN)`                           | throws `IllegalArgumentException` - cannot promote to PAWN         | :white_check_mark: |
 | TC71 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), KING)`                           | throws `IllegalArgumentException` - cannot promote to KING         | :white_check_mark: |
-| TC72 | WHITE Pawn (hasMoved=false) at `(2,1)`, any piece at `(3,1)`, `(4,1)` empty | returns `[]` — one-square blocked prevents two-square jump         | :white_check_mark: |
+| TC75 | empty position `(8,4)`, `promotePawn((8,4), QUEEN)`                         | throws `IllegalArgumentException` - no piece at position           | :x:                |
