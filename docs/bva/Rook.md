@@ -41,7 +41,7 @@
 
 ### Method under test: `markMoved()`
 
-| ID   | State of the System                 | Expected output                          | Implemented? |
-|------|-------------------------------------|------------------------------------------|--------------|
-| TC11 | new Rook, `markMoved()` called once | `hasMoved()` returns `true`              | :x:          |
-| TC12 | `markMoved()` called a second time  | `hasMoved()` returns `true` (idempotent) | :x:          |
+| ID   | State of the System                 | Expected output                          | Implemented?       |
+|------|-------------------------------------|------------------------------------------|--------------------|
+| TC11 | new Rook, `markMoved()` called once | `hasMoved()` returns `true`              | :white_check_mark: |
+| TC12 | `markMoved()` called a second time  | `hasMoved()` returns `true` (idempotent) | :x:                |

@@ -42,4 +42,9 @@ public class Rook extends Piece {
     public boolean hasMoved() {
         return hasMoved;
     }
+
+    @Override
+    public void markMoved() {
+        hasMoved = true;
+    }
 }
