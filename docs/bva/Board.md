@@ -105,7 +105,7 @@ As these are unit tests, the only new boundary with adding `King` is using the a
 | TC84 | WHITE Pawn (`hasMoved=true`) at `(4,4)`, WHITE Pawn at `(5,5)`, no EP target                          | does not include `(5,5)` — friendly piece                             | :white_check_mark: |
 | TC85 | BLACK Pawn (`hasMoved=true`) at `(5,4)`, WHITE Pawn at `(4,5)`, no EP target                          | includes `(4,5)` — BLACK diagonal capture                             | :white_check_mark: |
 | TC86 | WHITE Pawn (`hasMoved=true`) at `(5,4)`, BLACK Pawn at `(5,5)`, EP target=`(6,5)`                     | includes `(6,4)` and `(6,5)` — forward + en passant                   | :white_check_mark: |
-| TC87 | WHITE Pawn (`hasMoved=true`) at `(5,4)`, BLACK Pawn at `(5,3)`, EP target=`(6,3)`                     | includes `(6,4)` and `(6,3)` — forward + en passant (left)            | :x:                |
+| TC87 | WHITE Pawn (`hasMoved=true`) at `(5,4)`, BLACK Pawn at `(5,3)`, EP target=`(6,3)`                     | includes `(6,4)` and `(6,3)` — forward + en passant (left)            | :white_check_mark: |
 | TC88 | WHITE Pawn (`hasMoved=true`) at `(5,1)`, BLACK Pawn at `(5,2)`, EP target=`(6,2)`                     | includes `(6,1)` and `(6,2)` — col LOW edge                           | :x:                |
 | TC89 | WHITE Pawn (`hasMoved=true`) at `(5,8)`, BLACK Pawn at `(5,7)`, EP target=`(6,7)`                     | includes `(6,8)` and `(6,7)` — col HIGH edge                          | :x:                |
 | TC90 | BLACK Pawn (`hasMoved=true`) at `(4,4)`, WHITE Pawn at `(4,5)`, EP target=`(3,5)`                     | includes `(3,4)` and `(3,5)` — BLACK en passant                       | :x:                |
