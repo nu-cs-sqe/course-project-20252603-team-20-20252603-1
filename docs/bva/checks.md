@@ -105,7 +105,7 @@ See `src/test/resources/features/DetectCheck.feature` for the Scenario Outlines.
 | `(1, 4)` | :white_check_mark: |
 | `(4, 1)` | :white_check_mark: |
 | `(8, 4)` | :white_check_mark: |
-| `(4, 8)` | :x:                |
+| `(4, 8)` | :white_check_mark: |
 
 #### PieceType of Attacker
 
@@ -114,13 +114,15 @@ See `src/test/resources/features/DetectCheck.feature` for the Scenario Outlines.
 | `Rook`   | :white_check_mark: |
 | `Bishop` | :white_check_mark: |
 | `Queen`  | :white_check_mark: |
-| `Knight` | :x:                |
+| `Knight` | :white_check_mark: |
+| `Pawn`   | :x:                |
+
 
 #### Attacker Position
 
 | Value    | Covered            |
 | -------- | ------------------ |
-| `(1, 4)` | :x:                |
+| `(1, 4)` | :white_check_mark: |
 | `(4, 1)` | :white_check_mark: |
 | `(8, 4)` | :white_check_mark: |
 | `(4, 8)` | :white_check_mark: |
