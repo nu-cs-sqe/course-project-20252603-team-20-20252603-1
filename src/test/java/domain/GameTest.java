@@ -206,6 +206,9 @@ public class GameTest {
         EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
         EasyMock.expect(board.getPieceAt(to)).andReturn(piece);
         EasyMock.expect(piece.getPieceType()).andReturn(PieceType.KNIGHT);
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
+        EasyMock.expect(board.getValidMovesForPlayer(Color.BLACK)).andReturn(List.of(from));
+        EasyMock.expect(board.hasInsufficientMaterial(Color.BLACK)).andReturn(false);
 
         EasyMock.replay(board, piece, from, to);
 
@@ -239,6 +242,9 @@ public class GameTest {
         board.movePiece(whiteFrom, whiteTo);
         EasyMock.expectLastCall();
         EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
+        EasyMock.expect(board.getValidMovesForPlayer(Color.BLACK)).andReturn(List.of(whiteFrom));
+        EasyMock.expect(board.hasInsufficientMaterial(Color.BLACK)).andReturn(false);
 
         EasyMock.expect(board.getPieceAt(blackFrom)).andReturn(blackPiece);
         EasyMock.expect(blackPiece.getColor()).andReturn(Color.BLACK);
@@ -246,6 +252,10 @@ public class GameTest {
         board.movePiece(blackFrom, blackTo);
         EasyMock.expectLastCall();
         EasyMock.expect(board.isInCheck(Color.WHITE)).andReturn(false);
+        EasyMock.expect(board.isInCheck(Color.WHITE)).andReturn(false);
+        EasyMock.expect(board.getValidMovesForPlayer(Color.WHITE)).andReturn(List.of(whiteFrom));
+        EasyMock.expect(board.hasInsufficientMaterial(Color.BLACK)).andReturn(false);
+
 
         EasyMock.expect(board.getPieceAt(whiteTo)).andReturn(whitePiece);
         EasyMock.expect(whitePiece.getPieceType()).andReturn(PieceType.KNIGHT);
@@ -488,6 +498,10 @@ public class GameTest {
         board.movePiece(new Position(4, 4), new Position(6, 5));
         EasyMock.expectLastCall();
         EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
+        EasyMock.expect(board.getValidMovesForPlayer(Color.BLACK)).andReturn(List.of(new Position(1, 1)));
+        EasyMock.expect(board.hasInsufficientMaterial(Color.BLACK)).andReturn(false);
+
 
         EasyMock.expect(board.getPieceAt(new Position(6, 5))).andReturn(piece);
         EasyMock.expect(piece.getPieceType()).andReturn(PieceType.KNIGHT);
@@ -586,8 +600,11 @@ public class GameTest {
         EasyMock.expectLastCall();
         EasyMock.expect(board.getPieceAt(to)).andReturn(whitePiece);
         EasyMock.expect(whitePiece.getPieceType()).andReturn(PieceType.KNIGHT);
-        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(true);
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
         EasyMock.expect(board.getValidMovesForPlayer(Color.BLACK)).andReturn(List.of(new Position(1, 1)));
+        EasyMock.expect(board.hasInsufficientMaterial(Color.BLACK)).andReturn(false);
+
 
         EasyMock.replay(board, whitePiece);
 
