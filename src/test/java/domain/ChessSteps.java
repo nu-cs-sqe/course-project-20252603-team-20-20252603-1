@@ -69,4 +69,9 @@ public class ChessSteps {
         assertTrue(inCheck);
     }
 
+    @Then("the player is not in check")
+    public void the_player_is_not_in_check() {
+        assertFalse(inCheck);
+    }
+
 }

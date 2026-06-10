@@ -33,7 +33,16 @@ Feature: Detect Check
             | "BLACK" | 8       | 4       | "WHITE"        | "QUEEN"      | 1          | 4          | "KNIGHT"     | 7          | 2          |
             | "WHITE" | 4       | 1       | "BLACK"        | "ROOK"       | 4          | 8          | "QUEEN"      | 5          | 2          |
             | "BLACK" | 4       | 8       | "WHITE"        | "QUEEN"      | 4          | 1          | "BISHOP"     | 3          | 7          |
-# | "WHITE" | 4       | 4       | "BLACK"        | "PAWN"       | 5          | 3          | "PAWN"       | 5          | 5          |
+    # | "WHITE" | 4       | 4       | "BLACK"        | "PAWN"       | 5          | 3          | "PAWN"       | 5          | 5          |
 
 
+    Scenario Outline: <player> is not in check
+        Given the game is in progress
+        And the <player> King is at row <kingRow> col <kingCol>
+        And a <opposingPlayer> <attackingPiece> is at row <attackerRow> col <attackerCol>
+        When I check if the player is in check
+        Then the player is not in check
 
+        Examples:
+            | player  | kingRow | kingCol | opposingPlayer | attackingPiece | attackerRow | attackerCol |
+            | "WHITE" | 1       | 4       | "BLACK"        | "ROOK"         | 4           | 8           |
