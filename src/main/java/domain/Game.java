@@ -172,7 +172,7 @@ public class Game {
     }
 
     public void handleTimeout(Color loserOnTime) {
-        if (this.gameState == GameState.NOT_STARTED) {
+        if (this.gameState == GameState.NOT_STARTED || !isGameOver()) {
             throw new IllegalStateException("No timeout, game has not started");
         }
         else {
