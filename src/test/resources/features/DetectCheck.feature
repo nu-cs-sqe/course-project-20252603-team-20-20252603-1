@@ -32,5 +32,6 @@ Feature: Detect Check
             | "WHITE" | 1       | 4       | "BLACK"        | "ROOK"       | 8          | 4          | "BISHOP"     | 2          | 5          |
             | "BLACK" | 8       | 4       | "WHITE"        | "QUEEN"      | 1          | 4          | "KNIGHT"     | 7          | 2          |
             | "WHITE" | 4       | 1       | "BLACK"        | "ROOK"       | 4          | 8          | "QUEEN"      | 5          | 2          |
+            | "BLACK" | 4       | 8       | "WHITE"        | "QUEEN"      | 4          | 1          | "BISHOP"     | 3          | 7          |
 
 
