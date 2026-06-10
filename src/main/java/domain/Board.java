@@ -25,6 +25,7 @@ public class Board {
     private static final int BLACK_PAWN_RANK = 6;
     private static final int WHITE_PROMOTION_ROW = NUM_ROWS; // row 8
     private static final int BLACK_PROMOTION_ROW = 1;
+    private Optional<Position> enPassantTarget = Optional.empty();
 
     private static final PieceType[] BACK_RANK = {
             PieceType.ROOK, PieceType.KNIGHT, PieceType.BISHOP, PieceType.QUEEN,
@@ -280,5 +281,9 @@ public class Board {
 
     private boolean isValidPromotionTarget(PieceType pieceType) {
         return pieceType != PieceType.PAWN && pieceType != PieceType.KING;
+    }
+
+    Optional<Position> getEnPassantTarget() {
+        return enPassantTarget;
     }
 }

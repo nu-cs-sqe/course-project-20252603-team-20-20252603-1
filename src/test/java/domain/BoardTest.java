@@ -26,6 +26,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class BoardTest {
 
@@ -1158,5 +1159,12 @@ public class BoardTest {
 
     assertThrows(IllegalArgumentException.class,
             () -> board.promotePawn(new Position(8, 4), PieceType.QUEEN));
+  }
+
+  @Test
+  public void GetEnPassantTarget_NewBoard_ReturnsEmpty() {
+    Board board = new Board();
+
+    assertTrue(board.getEnPassantTarget().isEmpty());
   }
 }

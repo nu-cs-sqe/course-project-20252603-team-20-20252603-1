@@ -172,11 +172,11 @@ Output boundary: `false`, `true`
 
 ### Method under test: `getEnPassantTarget()`
 
-| ID   | State of the System                                                            | Expected output      | Implemented? |
-|------|--------------------------------------------------------------------------------|----------------------|--------------|
-| TC76 | new `Board()`                                                                  | `Optional.empty()`   | :x:          |
-| TC77 | WHITE Pawn at `(2,4)`, `movePiece((2,4),(4,4))` (double advance)               | `Optional.of((3,4))` | :x:          |
-| TC78 | BLACK Pawn at `(7,3)`, `movePiece((7,3),(5,3))` (double advance)               | `Optional.of((6,3))` | :x:          |
-| TC79 | WHITE Pawn (`hasMoved=true`) at `(3,4)`, `movePiece((3,4),(4,4))` (one square) | `Optional.empty()`   | :x:          |
-| TC80 | initialized board, WHITE knight `movePiece((1,2),(3,3))`                       | `Optional.empty()`   | :x:          |
-| TC81 | after TC77, BLACK Pawn `movePiece((7,1),(6,1))` (next move clears target)      | `Optional.empty()`   | :x:          |
+| ID   | State of the System                                                            | Expected output      | Implemented?       |
+|------|--------------------------------------------------------------------------------|----------------------|--------------------|
+| TC76 | new `Board()`                                                                  | `Optional.empty()`   | :white_check_mark: |
+| TC77 | WHITE Pawn at `(2,4)`, `movePiece((2,4),(4,4))` (double advance)               | `Optional.of((3,4))` | :x:                |
+| TC78 | BLACK Pawn at `(7,3)`, `movePiece((7,3),(5,3))` (double advance)               | `Optional.of((6,3))` | :x:                |
+| TC79 | WHITE Pawn (`hasMoved=true`) at `(3,4)`, `movePiece((3,4),(4,4))` (one square) | `Optional.empty()`   | :x:                |
+| TC80 | initialized board, WHITE knight `movePiece((1,2),(3,3))`                       | `Optional.empty()`   | :x:                |
+| TC81 | after TC77, BLACK Pawn `movePiece((7,1),(6,1))` (next move clears target)      | `Optional.empty()`   | :x:                |
