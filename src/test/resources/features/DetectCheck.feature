@@ -69,3 +69,4 @@ Feature: Detect Check
             | player  | kingRow | kingCol | opposingPlayer | blocker  | blockRow | blockCol | attacker | attackRow | attackCol |
             | "WHITE" | 1       | 4       | "BLACK"        | "ROOK"   | 6        | 4        | "ROOK"   | 8         | 4         |
             | "BLACK" | 4       | 1       | "WHITE"        | "BISHOP" | 4        | 4        | "QUEEN"  | 4         | 8         |
+            | "WHITE" | 8       | 4       | "BLACK"        | "QUEEN"  | 7        | 3        | "BISHOP" | 5         | 1         |
