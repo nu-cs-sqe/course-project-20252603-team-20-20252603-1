@@ -76,3 +76,23 @@ Feature: Detect Check
             | "WHITE" | 1       | 1       | "BLACK"        | "KNIGHT" | 4        | 1        | "QUEEN"  | 8         | 1         |
             | "BLACK" | 8       | 8       | "WHITE"        | "PAWN"   | 8        | 4        | "ROOK"   | 8         | 1         |
             | "WHITE" | 1       | 8       | "BLACK"        | "KNIGHT" | 4        | 8        | "QUEEN"  | 8         | 8         |
+
+    Scenario Outline: <opposingPlayer> is blocking check
+        Given the game is in progress
+        And the <player> King is at row <kingRow> col <kingCol>
+        And a <opposingPlayer> <blocker> is at row <blockRow> col <blockCol>
+        And a <opposingPlayer> <attacker> is at row <attackRow> col <attackCol>
+        When I check if the player is in check
+        Then the player is not in check
+
+        Examples:
+            | player  | kingRow | kingCol | opposingPlayer | blocker  | blockRow | blockCol | attacker | attackRow | attackCol |
+            | "WHITE" | 1       | 4       | "BLACK"        | "PAWN"   | 6        | 4        | "ROOK"   | 8         | 4         |
+            | "BLACK" | 4       | 1       | "WHITE"        | "PAWN"   | 4        | 4        | "QUEEN"  | 4         | 8         |
+            | "WHITE" | 8       | 4       | "BLACK"        | "ROOK"   | 7        | 3        | "BISHOP" | 5         | 1         |
+            | "BLACK" | 4       | 8       | "WHITE"        | "BISHOP" | 4        | 4        | "ROOK"   | 4         | 1         |
+            | "WHITE" | 8       | 4       | "BLACK"        | "PAWN"   | 6        | 4        | "ROOK"   | 1         | 4         |
+            | "BLACK" | 1       | 8       | "WHITE"        | "PAWN"   | 1        | 4        | "ROOK"   | 1         | 1         |
+            | "WHITE" | 1       | 1       | "BLACK"        | "KNIGHT" | 4        | 1        | "QUEEN"  | 8         | 1         |
+            | "BLACK" | 8       | 8       | "WHITE"        | "BISHOP" | 8        | 4        | "ROOK"   | 8         | 1         |
+            | "WHITE" | 1       | 8       | "BLACK"        | "KNIGHT" | 4        | 8        | "QUEEN"  | 8         | 8         |
