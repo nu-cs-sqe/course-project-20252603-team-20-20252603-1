@@ -32,5 +32,5 @@
 ### Board
 1. `public boolean hasInsufficientMaterial(Color color)`
     1. Throws IllegalArgumentException if color is null
-    2. Returns true if the given color has only a king, or king + single bishop or knight
+    2. Returns true if the given color has only a king, or king + single bishop or knight, or king + two knights
     3. Returns false otherwise
