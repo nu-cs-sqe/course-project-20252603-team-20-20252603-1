@@ -1235,4 +1235,18 @@ public class BoardTest {
 
     assertTrue(moves.contains(new Position(5, 5)));
   }
+
+  @Test
+  public void GetValidMoves_WhitePawnEnemyDiagonalLeft_IncludesDiagonalCapture() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.WHITE);
+    pawn.markMoved();
+    board.placePieceAt(new Position(4, 4), pawn);
+    board.placePieceAt(new Position(5, 3), new Pawn(Color.BLACK));
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+
+    List<Position> moves = board.getValidMoves(new Position(4, 4));
+
+    assertTrue(moves.contains(new Position(5, 3)));
+  }
 }
