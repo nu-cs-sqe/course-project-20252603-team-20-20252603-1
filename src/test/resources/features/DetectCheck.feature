@@ -66,5 +66,6 @@ Feature: Detect Check
         Then the player is not in check
 
         Examples:
-            | player  | kingRow | kingCol | opposingPlayer | blocker | blockRow | blockCol | attacker | attackRow | attackCol |
-            | "WHITE" | 1       | 4       | "BLACK"        | "ROOK"  | 6        | 4        | "ROOK"   | 8         | 4         |
+            | player  | kingRow | kingCol | opposingPlayer | blocker  | blockRow | blockCol | attacker | attackRow | attackCol |
+            | "WHITE" | 1       | 4       | "BLACK"        | "ROOK"   | 6        | 4        | "ROOK"   | 8         | 4         |
+            | "BLACK" | 4       | 1       | "WHITE"        | "BISHOP" | 4        | 4        | "QUEEN"  | 4         | 8         |
