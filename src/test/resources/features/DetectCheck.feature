@@ -50,3 +50,8 @@ Feature: Detect Check
             | "WHITE" | 8       | 4       | "BLACK"        | "BISHOP"       | 4           | 1           |
             | "BLACK" | 4       | 8       | "WHITE"        | "KNIGHT"       | 1           | 4           |
             | "WHITE" | 8       | 4       | "BLACK"        | "PAWN"         | 4           | 1           |
+
+    Scenario: game has not started
+        Given an empty chessboard
+        When I check if either player is in check
+        Then I am told I cannot cannot do this

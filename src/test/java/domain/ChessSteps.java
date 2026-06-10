@@ -13,13 +13,18 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ChessSteps {
+    Game game;
     Board board;
     Color player;
     boolean inCheck;
+    Exception whiteException;
+    Exception blackException;
 
     private Piece createPiece(PieceType type, Color color) {
         switch (type) {
@@ -38,6 +43,11 @@ public class ChessSteps {
             default:
                 throw new IllegalStateException("Unhandled piece type: " + type);
         }
+    }
+
+    @Given("an empty chessboard")
+    public void an_empty_chessboard() {
+        this.game = new Game();
     }
 
     @Given("the game is in progress")
@@ -64,6 +74,21 @@ public class ChessSteps {
         inCheck = board.isInCheck(this.player);
     }
 
+    @When("I check if either player is in check")
+    public void i_check_if_either_player_is_in_check() {
+        try {
+            game.playerInCheck(Color.WHITE);
+        } catch (Exception white) {
+            this.whiteException = white;
+        }
+
+        try {
+            game.playerInCheck(Color.BLACK);
+        } catch (Exception black) {
+            this.blackException = black;
+        }
+    }
+
     @Then("the player is in check")
     public void the_player_is_in_check() {
         assertTrue(inCheck);
@@ -74,4 +99,14 @@ public class ChessSteps {
         assertFalse(inCheck);
     }
 
+    @Then("I am told I cannot cannot do this")
+    public void i_am_told_i_cannot_cannot_do_this() {
+        assertInstanceOf(IllegalStateException.class, whiteException);
+        assertInstanceOf(IllegalStateException.class, blackException);
+
+        String expected = "Cannot check if players are in check if the game has not started.";
+
+        assertEquals(expected, whiteException.getMessage());
+        assertEquals(expected, blackException.getMessage());
+    }
 }

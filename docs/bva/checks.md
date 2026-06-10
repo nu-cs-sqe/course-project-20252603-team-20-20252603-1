@@ -96,7 +96,7 @@ See `src/test/resources/features/DetectCheck.feature` for the Scenario Outlines.
 | Value   | Covered            |
 | ------- | ------------------ |
 | `true`  | :white_check_mark: |
-| `false` | :x:                |
+| `false` | :white_check_mark: |
 
 #### King Position (row, col)
 
