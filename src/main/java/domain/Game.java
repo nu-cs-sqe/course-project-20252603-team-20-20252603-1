@@ -171,8 +171,14 @@ public class Game {
         }
     }
 
-    public void handleTimeout() {
-        this.gameState = GameState.TIMEOUT;
+    public void handleTimeout(Color loserOnTime) {
+        Color winnerOnTime = (currentTurn == Color.WHITE) ? Color.BLACK : Color.WHITE;
+        if (board.hasInsufficientMaterial(winnerOnTime)) {
+            this.gameState = GameState.TIMEOUT_VS_INSUFFICIENT_MATERIAL;
+        }
+        else {
+            this.gameState = GameState.TIMEOUT;
+        }
     }
 
     private void checkForGameEnd() {

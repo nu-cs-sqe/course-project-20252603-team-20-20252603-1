@@ -959,11 +959,31 @@ public class GameTest {
 
         board.initializeBoard();
         EasyMock.expectLastCall();
+        EasyMock.expect(board.hasInsufficientMaterial(Color.BLACK)).andReturn(true);
 
         EasyMock.replay(board);
 
         game.startGame();
-        game.handleTimeout();
+        game.handleTimeout(Color.WHITE);
+
+        assertTrue(game.isGameOver());
+
+        EasyMock.verify(board);
+    }
+
+    @Test
+    public void isGameOver_AfterTimeout_InsufficientMaterial() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+        EasyMock.expect(board.hasInsufficientMaterial(Color.BLACK)).andReturn(false);
+
+        EasyMock.replay(board);
+
+        game.startGame();
+        game.handleTimeout(Color.WHITE);
 
         assertTrue(game.isGameOver());
 
