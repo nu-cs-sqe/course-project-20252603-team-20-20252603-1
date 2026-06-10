@@ -487,6 +487,9 @@ public class GameTest {
         board.movePiece(new Position(4, 4), new Position(6, 5));
         EasyMock.expectLastCall();
 
+        EasyMock.expect(board.getPieceAt(new Position(6, 5))).andReturn(piece);
+        EasyMock.expect(piece.getPieceType()).andReturn(PieceType.KNIGHT);
+
         EasyMock.replay(board, piece);
 
         game.startGame();
@@ -494,8 +497,7 @@ public class GameTest {
 
         assertEquals(Color.BLACK, game.getCurrentTurn());
 
-        EasyMock.verify(board);
-
+        EasyMock.verify(board, piece);
     }
 
     @Test

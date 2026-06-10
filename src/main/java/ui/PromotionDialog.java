@@ -24,6 +24,10 @@ public class PromotionDialog extends JDialog {
 
     private PieceType selectedPieceType;
 
+    @Override
+    protected final void finalize() throws Throwable {
+    }
+
     public PromotionDialog(Frame parent, Color pawnColor, Locale locale) {
         super(parent, ResourceBundle.getBundle("labels/labels", locale)
                 .getString("promotionTitle"), true);
@@ -51,7 +55,8 @@ public class PromotionDialog extends JDialog {
                 throw new RuntimeException(e);
             }
         }
-        button.setPreferredSize(new Dimension(BUTTON_SIZE + BUTTON_PADDING, BUTTON_SIZE + BUTTON_PADDING));
+        button.setPreferredSize(
+                new Dimension(BUTTON_SIZE + BUTTON_PADDING, BUTTON_SIZE + BUTTON_PADDING));
         button.addActionListener(e -> {
             this.selectedPieceType = type;
             dispose();
