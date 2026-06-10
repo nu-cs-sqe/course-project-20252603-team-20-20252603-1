@@ -14,4 +14,5 @@ Feature: Detect Check
             | player  | kingRow | kingCol | opposingPlayer | attackingPiece | attackerRow | attackerCol |
             | "WHITE" | 1       | 4       | "BLACK"        | "ROOK"         | 8           | 4           |
             | "BLACK" | 8       | 4       | "WHITE"        | "QUEEN"        | 1           | 4           |
+            | "WHITE" | 4       | 1       | "BLACK"        | "BISHOP"       | 8           | 5           |
 
