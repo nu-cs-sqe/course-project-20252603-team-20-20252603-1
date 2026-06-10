@@ -85,3 +85,34 @@ Output boundaries: `throws IllegalStateException`, `false`, `true`
 | TC21 | `startGame()` called, initial board, `player=BLACK`                                              | `false`                        | :white_check_mark: |
 | TC22 | game started, WHITE king on same rank as attacking BLACK rook, no pieces between, `player=WHITE` | `true`                         | :white_check_mark: |
 | TC23 | game started, BLACK king on same rank as attacking WHITE rook, no pieces between, `player=BLACK` | `true`                         | :white_check_mark: |
+
+
+### Method under test: `isGameOver()`
+
+Input boundaries:
+- enum values for `GameState`.
+
+Output boundaries: `throws IllegalStateException`, `false`, `true`
+
+| ID   | State of the System         | Expected output                | Implemented? |
+| ---- | --------------------------- | ------------------------------ | ------------ |
+| TC25 | `startGame()` not called    | throws `IllegalStateException` | :x:          |
+| TC25 | game state is `IN_PROGRESS` | returns `False`                | :x:          |
+| TC26 | game state is `CHECKMATE`   | returns `True`                 | :x:          |
+
+**Add more once draw conditions are done and move timer is done**
+
+### Method under test: `whyIsGameOver()`
+
+Input boundaries:
+- enum values for `GameState`.
+
+Output boundaries: `IllegalStateException`, `GameState` enums that correspond to game end
+
+| ID   | State of the System         | Expected output                 | Implemented? |
+| ---- | --------------------------- | ------------------------------- | ------------ |
+| TC27 | `startGame()` not called    | throws `IllegalStateException`  | :x:          |
+| TC28 | game state is `IN_PROGRESS` | returns `IllegalStateException` | :x:          |
+| TC29 | game state is `CHECKMATE`   | returns `CHECKMATE`             | :x:          |
+
+**Add more once draw conditions are done and move timer is done**
