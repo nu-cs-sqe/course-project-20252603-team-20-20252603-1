@@ -270,8 +270,12 @@ public class Board {
         boardAfterMove.copyFromBoard(getSnapshot());
 
         Piece piece = boardAfterMove.getPieceAt(from);
+        final boolean epCapture = isEnPassantCapture(piece, from, to);
         boardAfterMove.setPieceAt(from, null);
         boardAfterMove.setPieceAt(to, piece);
+        if (epCapture) {
+            boardAfterMove.setPieceAt(new Position(from.getRow(), to.getCol()), null);
+        }
 
         return boardAfterMove.isInCheck(color);
     }
