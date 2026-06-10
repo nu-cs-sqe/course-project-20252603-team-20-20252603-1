@@ -30,4 +30,6 @@ Feature: Detect Check
         Examples:
             | player  | kingRow | kingCol | opposingPlayer | attackPiece1 | attackRow1 | attackCol1 | attackPiece2 | attackRow2 | attackCol2 |
             | "WHITE" | 1       | 4       | "BLACK"        | "ROOK"       | 8          | 4          | "BISHOP"     | 2          | 5          |
+            | "BLACK" | 8       | 4       | "WHITE"        | "QUEEN"      | 1          | 4          | "KNIGHT"     | 7          | 2          |
+
 
