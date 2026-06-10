@@ -1151,4 +1151,12 @@ public class BoardTest {
 
     assertThrows(IllegalStateException.class, () -> board.isInCheck(Color.WHITE));
   }
+
+  @Test
+  public void PromotePawn_EmptyPosition_ThrowsIllegalArgumentException() {
+    Board board = new Board();
+
+    assertThrows(IllegalArgumentException.class,
+            () -> board.promotePawn(new Position(8, 4), PieceType.QUEEN));
+  }
 }
