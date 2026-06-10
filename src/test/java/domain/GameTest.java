@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import domain.Position;
 
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
@@ -204,6 +203,7 @@ public class GameTest {
 
         EasyMock.expect(board.getPieceAt(from)).andReturn(piece);
         EasyMock.expect(piece.getColor()).andStubReturn(Color.WHITE);
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
 
         EasyMock.replay(board, piece, from, to);
 
@@ -236,12 +236,14 @@ public class GameTest {
 
         board.movePiece(whiteFrom, whiteTo);
         EasyMock.expectLastCall();
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
 
         EasyMock.expect(board.getPieceAt(blackFrom)).andReturn(blackPiece);
         EasyMock.expect(blackPiece.getColor()).andReturn(Color.BLACK);
 
         board.movePiece(blackFrom, blackTo);
         EasyMock.expectLastCall();
+        EasyMock.expect(board.isInCheck(Color.WHITE)).andReturn(false);
 
         EasyMock.replay(board, whitePiece, blackPiece);
 
@@ -478,6 +480,7 @@ public class GameTest {
 
         board.movePiece(new Position(4, 4), new Position(6, 5));
         EasyMock.expectLastCall();
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
 
         EasyMock.replay(board, piece);
 
@@ -523,6 +526,35 @@ public class GameTest {
         assertFalse(game.isGameOver());
 
         EasyMock.verify(board);
+
+    }
+
+    @Test
+    public void IsGameOver_AfterCheckMatingMove_ReturnsTrue() {
+        Board board = EasyMock.createMock(Board.class);
+        Piece whitePiece = EasyMock.createMock(Piece.class);
+        Position from = new Position(1, 1);
+        Position to = new Position(2, 2);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.getPieceAt(from)).andReturn(whitePiece);
+        EasyMock.expect(whitePiece.getColor()).andReturn(Color.WHITE);
+        board.movePiece(from, to);
+        EasyMock.expectLastCall();
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(true);
+        EasyMock.expect(board.getValidMovesForPlayer(Color.BLACK)).andReturn(List.of());
+
+        EasyMock.replay(board, whitePiece);
+
+        game.startGame();
+        game.executeMove(from, to);
+
+        assertTrue(game.isGameOver());
+
+        EasyMock.verify(board, whitePiece);
 
     }
 

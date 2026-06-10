@@ -98,7 +98,7 @@ Output boundaries: `throws IllegalStateException`, `false`, `true`
 | ---- | --------------------------- | ------------------------------ | ------------------ |
 | TC25 | `startGame()` not called    | throws `IllegalStateException` | :white_check_mark: |
 | TC25 | game state is `IN_PROGRESS` | returns `False`                | :white_check_mark: |
-| TC26 | game state is `CHECKMATE`   | returns `True`                 | :x:                |
+| TC26 | game state is `CHECKMATE`   | returns `True`                 | :white_check_mark: |
 
 **Add more once draw conditions are done and move timer is done**
 

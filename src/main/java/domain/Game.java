@@ -26,6 +26,7 @@ public class Game {
 
     private void switchTurn() {
         this.currentTurn = (currentTurn == Color.WHITE) ? Color.BLACK : Color.WHITE;
+        checkForGameEnd();
     }
 
     public void startGame() {
@@ -110,7 +111,7 @@ public class Game {
         if (this.gameState == GameState.NOT_STARTED) {
             throw new IllegalStateException("Cannot check if game is over if the game has not started.");
         }
-        return false;
+        return this.gameState != GameState.IN_PROGRESS;
     }
 
     public GameState whyIsGameOver() {
@@ -120,5 +121,16 @@ public class Game {
             default:
                 throw new IllegalStateException("Cannot answer why game is over if the game is in progress.");
         }
+    }
+
+    private void checkForGameEnd() {
+        if (checkForCheckmate()) {
+            this.gameState = GameState.CHECKMATE;
+        }
+    }
+
+    private boolean checkForCheckmate() {
+        return board.isInCheck(currentTurn)
+                && board.getValidMovesForPlayer(currentTurn).isEmpty();
     }
 }
