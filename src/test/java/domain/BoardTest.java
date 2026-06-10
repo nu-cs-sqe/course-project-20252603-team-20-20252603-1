@@ -1032,4 +1032,14 @@ public class BoardTest {
     assertEquals(expected, actual);
 
   }
+
+  @Test
+  public void GetValidMovesForPlayer_AfterInitColorWhite_NonEmptyList() {
+    Board board = new Board();
+    board.initializeBoard();
+
+    List<Position> actual = board.getValidMovesForPlayer(Color.WHITE);
+
+    assertFalse(actual.isEmpty());
+  }
 }
