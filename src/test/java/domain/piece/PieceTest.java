@@ -221,4 +221,17 @@ public class PieceTest {
         assertEquals(1, captures.size());
         assertTrue(captures.contains(new Position(4, 2)));
     }
+
+    @Test
+    public void GetCaptureMoves_BlackRowLow_ReturnsNoDiagonals() {
+        Pawn pawn = new Pawn(Color.BLACK);
+        Position position = EasyMock.createMock(Position.class);
+        EasyMock.expect(position.getRow()).andStubReturn(1);
+        EasyMock.expect(position.getCol()).andStubReturn(4);
+        EasyMock.replay(position);
+
+        List<Position> captures = pawn.getCaptureMoves(position);
+
+        assertEquals(0, captures.size());
+    }
 }

@@ -64,4 +64,4 @@ Returns at-most two diagonal forward squares in bounds. WHITE moves toward highe
 |------|----------------------------------------|--------------------------------------------|--------------------|
 | TC21 | BLACK pawn, position=`(5,4)`           | `[(4,3),(4,5)]` — both diagonals in bounds | :white_check_mark: |
 | TC22 | BLACK pawn, position=`(5,1)` (col LOW) | `[(4,2)]` — `(4,0)` out of bounds          | :white_check_mark: |
-| TC23 | BLACK pawn, position=`(1,4)` (row LOW) | `[]` — row 0 out of bounds                 | :x:                |
+| TC23 | BLACK pawn, position=`(1,4)` (row LOW) | `[]` — row 0 out of bounds                 | :white_check_mark: |
