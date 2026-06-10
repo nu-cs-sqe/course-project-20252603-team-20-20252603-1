@@ -3,6 +3,7 @@ package ui;
 import domain.ChessClock;
 import domain.ClockListener;
 import domain.Game;
+import domain.GameState;
 import domain.Position;
 import domain.piece.Color;
 import domain.piece.Piece;
@@ -38,6 +39,9 @@ public class BoardController {
     }
 
     public void handleSquareClick(Position selection) {
+        if (game.isGameOver()) {
+            return;
+        }
         if (selectedPosition.isEmpty()) {
             trySelect(selection);
         } else if (currentValidMoves.contains(selection)) {
@@ -51,6 +55,9 @@ public class BoardController {
             clock.switchClock();
             selectedPosition = Optional.empty();
             currentValidMoves = Collections.emptyList();
+            if (game.isGameOver()) {
+                clock.stop();
+            }
         } else {
             trySelect(selection);
         }
@@ -90,5 +97,13 @@ public class BoardController {
 
     public boolean playerInCheck(Color color) {
         return game.playerInCheck(color);
+    }
+
+    public boolean isGameOver() {
+        return game.isGameOver();
+    }
+
+    public boolean isCheckmate() {
+        return game.isGameOver() && game.whyIsGameOver() == GameState.CHECKMATE;
     }
 }

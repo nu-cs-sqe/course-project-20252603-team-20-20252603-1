@@ -56,7 +56,7 @@ TC5 and TC6 can be combined.
 `Game` adds game state and turn logic to `board.getValidMoves`.
 
 | ID   | State of the System                                            | Expected output                   | Implemented?       |
-|------|----------------------------------------------------------------|-----------------------------------|:-------------------|
+| ---- | -------------------------------------------------------------- | --------------------------------- | :----------------- |
 | TC11 | `startGame()` not called                                       | throws `IllegalStateException`    | :white_check_mark: |
 | TC12 | game started, WHITE's turn, `pos=(7,1)` (BLACK pawn)           | throws `IllegalArgumentException` | :white_check_mark: |
 | TC13 | game started, WHITE's turn, `pos=(2,1)` WHITE pawn, path clear | returns `[(3,1),(4,1)]`           | :white_check_mark: |
@@ -89,7 +89,7 @@ Output boundaries: `throws IllegalStateException`, `false`, `true`
 ### Method under test: `isPromotionPending()`
 
 | ID   | State of the System                                                     | Expected output | Implemented?       |
-|------|-------------------------------------------------------------------------|-----------------|:-------------------|
+| ---- | ----------------------------------------------------------------------- | --------------- | :----------------- |
 | TC24 | game started, no moves made                                             | `false`         | :white_check_mark: |
 | TC25 | WHITE pawn at `(7,4)`, `(8,4)` empty, `executeMove((7,4),(8,4))` called | `true`          | :white_check_mark: |
 | TC26 | after TC25, `executePromotion(QUEEN)` called                            | `false`         | :white_check_mark: |
@@ -97,7 +97,7 @@ Output boundaries: `throws IllegalStateException`, `false`, `true`
 ### Method under test: `executePromotion(PieceType pieceType)`
 
 | ID   | State of the System                                                             | Expected output                                                                            | Implemented?       |
-|------|---------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|:-------------------|
+| ---- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | :----------------- |
 | TC27 | no promotion pending, `executePromotion(QUEEN)` called                          | throws `IllegalStateException`                                                             | :white_check_mark: |
 | TC28 | WHITE pawn moved to `(8,4)`, `promotionPending`=true, `executePromotion(QUEEN)` | `getPieceAt((8,4))` = QUEEN(WHITE); `isPromotionPending()`=false; `getCurrentTurn()`=BLACK | :white_check_mark: |
 | TC29 | same setup as TC28, `executePromotion(ROOK)`                                    | `getPieceAt((8,4))` = ROOK(WHITE); `getCurrentTurn()`=BLACK                                | :white_check_mark: |
@@ -122,3 +122,33 @@ Output boundaries: `throws IllegalStateException`, `false`, `true`
 | TC37 | game started, WHITE Pawn at `(2,4)`, BLACK Pawn placed at `(4,5)`, `executeMove((2,4),(4,4))` | `getCurrentTurn()`=BLACK; `getValidMoves((4,5))` includes `(3,4)` (EP available)       | :white_check_mark: |
 | TC38 | after TC37 (BLACK's turn), `executeMove((4,5),(3,4))` (en passant capture)                    | BLACK Pawn at `(3,4)`; `isEmpty((4,4))`=`true`; `getCurrentTurn()`=WHITE               | :white_check_mark: |
 | TC39 | after TC37, BLACK makes a non-EP move instead; WHITE Pawn remains at `(4,4)`                  | `getValidMoves` for adjacent BLACK Pawn no longer includes `(3,4)` (EP target expired) | :white_check_mark: |
+
+### Method under test: `isGameOver()`
+
+Input boundaries:
+- enum values for `GameState`.
+
+Output boundaries: `throws IllegalStateException`, `false`, `true`
+
+| ID   | State of the System         | Expected output                | Implemented?       |
+| ---- | --------------------------- | ------------------------------ | ------------------ |
+| TC41 | `startGame()` not called    | throws `IllegalStateException` | :white_check_mark: |
+| TC42 | game state is `IN_PROGRESS` | returns `False`                | :white_check_mark: |
+| TC43 | game state is `CHECKMATE`   | returns `True`                 | :white_check_mark: |
+
+**Add more once draw conditions are done and move timer is done**
+
+### Method under test: `whyIsGameOver()`
+
+Input boundaries:
+- enum values for `GameState`.
+
+Output boundaries: `IllegalStateException`, `GameState` enums that correspond to game end
+
+| ID   | State of the System         | Expected output                 | Implemented?       |
+| ---- | --------------------------- | ------------------------------- | ------------------ |
+| TC44 | `startGame()` not called    | throws `IllegalStateException`  | :white_check_mark: |
+| TC45 | game state is `IN_PROGRESS` | returns `IllegalStateException` | :white_check_mark: |
+| TC46 | game state is `CHECKMATE`   | returns `CHECKMATE`             | :white_check_mark: |
+
+**Add more once draw conditions are done and move timer is done**

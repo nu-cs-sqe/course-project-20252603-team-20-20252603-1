@@ -9,7 +9,7 @@ import java.util.Optional;
 public class Game {
     private final Board board;
     private Color currentTurn;
-    private boolean gameInProgress = false;
+    private GameState gameState = GameState.NOT_STARTED;
     private boolean promotionPending = false;
     private static final int WHITE_PROMOTION_ROW = 8;
     private static final int BLACK_PROMOTION_ROW = 1;
@@ -32,20 +32,21 @@ public class Game {
 
     private void switchTurn() {
         this.currentTurn = (currentTurn == Color.WHITE) ? Color.BLACK : Color.WHITE;
+        checkForGameEnd();
     }
 
     public void startGame() {
-        if (this.gameInProgress) {
+        if (this.gameState != GameState.NOT_STARTED) {
             throw new IllegalStateException("Game has already started, cannot restart");
         } else {
             board.initializeBoard();
-            this.gameInProgress = true;
+            this.gameState = GameState.IN_PROGRESS;
             this.currentTurn = Color.WHITE;
         }
     }
 
     public Color getCurrentTurn() {
-        if (!this.gameInProgress) {
+        if (this.gameState == GameState.NOT_STARTED) {
             throw new IllegalStateException("Game has not started yet, no player has a turn");
         }
 
@@ -53,14 +54,28 @@ public class Game {
     }
 
     public Piece getPieceAt(Position pos) {
-        if (!this.gameInProgress) {
+        if (this.gameState == GameState.NOT_STARTED) {
             throw new IllegalStateException("Game has not started yet, no pieces are on the board");
         }
         return board.getPieceAt(pos);
     }
 
+    public void executeMove(Position from, Position to) {
+        if (this.gameState == GameState.NOT_STARTED) {
+            throw new IllegalStateException("Cannot execute move if the game has not started.");
+        }
+
+        validateTurn(from);
+
+        if (this.promotionPending) {
+            throw new IllegalStateException("Cannot execute move while promotion is pending.");
+        }
+        board.movePiece(from, to);
+        handlePostMove(to);
+    }
+
     public List<Position> getValidMoves(Position position) {
-        if (!this.gameInProgress) {
+        if (this.gameState == GameState.NOT_STARTED) {
             throw new IllegalStateException(
                     "Cannot get valid moves if the game has not started.");
         }
@@ -79,7 +94,7 @@ public class Game {
     }
 
     public Piece[][] getBoardSnapshot() {
-        if (!this.gameInProgress) {
+        if (this.gameState == GameState.NOT_STARTED) {
             throw new IllegalStateException(
                     "Cannot get board snapshot if the game has not started.");
         }
@@ -88,18 +103,6 @@ public class Game {
 
     public boolean isPromotionPending() {
         return this.promotionPending;
-    }
-
-    public void executeMove(Position from, Position to) {
-        if (!this.gameInProgress) {
-            throw new IllegalStateException("Cannot execute move if the game has not started.");
-        }
-        if (this.promotionPending) {
-            throw new IllegalStateException("Cannot execute move while promotion is pending.");
-        }
-        validateTurn(from);
-        board.movePiece(from, to);
-        handlePostMove(to);
     }
 
     private void validateTurn(Position from) {
@@ -139,11 +142,43 @@ public class Game {
     }
 
     public boolean playerInCheck(Color player) {
-        if (!this.gameInProgress) {
+        if (this.gameState == GameState.NOT_STARTED) {
             throw new IllegalStateException(
                     "Cannot check if players are in check if the game has not started.");
         }
 
         return board.isInCheck(player);
+    }
+
+    public boolean isGameOver() {
+        if (this.gameState == GameState.NOT_STARTED) {
+            throw new IllegalStateException(
+                    "Cannot check if game is over if the game has not started.");
+        }
+        return this.gameState != GameState.IN_PROGRESS;
+    }
+
+    public GameState whyIsGameOver() {
+        switch (this.gameState) {
+            case NOT_STARTED:
+                throw new IllegalStateException(
+                        "Cannot answer why game is over if the game has not started.");
+            case IN_PROGRESS:
+                throw new IllegalStateException(
+                        "Cannot answer why game is over if the game is in progress.");
+            default:
+                return this.gameState;
+        }
+    }
+
+    private void checkForGameEnd() {
+        if (checkForCheckmate()) {
+            this.gameState = GameState.CHECKMATE;
+        }
+    }
+
+    private boolean checkForCheckmate() {
+        return board.isInCheck(currentTurn)
+                && board.getValidMovesForPlayer(currentTurn).isEmpty();
     }
 }
