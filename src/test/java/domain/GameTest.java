@@ -717,4 +717,17 @@ public class GameTest {
         assertTrue(game.isPromotionPending());
         assertEquals(Color.WHITE, game.getCurrentTurn());
     }
+
+    @Test
+    public void ExecuteMove_WhitePawnDoubleAdvance_EPAvailableForAdjacentBlackPawn() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+        board.placePieceAt(new Position(4, 5), new Pawn(Color.BLACK));
+
+        game.executeMove(new Position(2, 4), new Position(4, 4));
+
+        assertEquals(Color.BLACK, game.getCurrentTurn());
+        assertTrue(game.getValidMoves(new Position(4, 5)).contains(new Position(3, 4)));
+    }
 }

@@ -117,8 +117,8 @@ Output boundaries: `throws IllegalStateException`, `false`, `true`
 
 ### Method under test: `executeMove` - en passant extension
 
-| ID   | State of the System                                                                           | Expected output                                                                        | Implemented? |
-|------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|--------------|
-| TC37 | game started, WHITE Pawn at `(2,4)`, BLACK Pawn placed at `(4,5)`, `executeMove((2,4),(4,4))` | `getCurrentTurn()`=BLACK; `getValidMoves((4,5))` includes `(3,4)` (EP available)       | :x:          |
-| TC38 | after TC37 (BLACK's turn), `executeMove((4,5),(3,4))` (en passant capture)                    | BLACK Pawn at `(3,4)`; `isEmpty((4,4))`=`true`; `getCurrentTurn()`=WHITE               | :x:          |
-| TC39 | after TC37, BLACK makes a non-EP move instead; WHITE Pawn remains at `(4,4)`                  | `getValidMoves` for adjacent BLACK Pawn no longer includes `(3,4)` (EP target expired) | :x:          |
+| ID   | State of the System                                                                           | Expected output                                                                        | Implemented?       |
+|------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|--------------------|
+| TC37 | game started, WHITE Pawn at `(2,4)`, BLACK Pawn placed at `(4,5)`, `executeMove((2,4),(4,4))` | `getCurrentTurn()`=BLACK; `getValidMoves((4,5))` includes `(3,4)` (EP available)       | :white_check_mark: |
+| TC38 | after TC37 (BLACK's turn), `executeMove((4,5),(3,4))` (en passant capture)                    | BLACK Pawn at `(3,4)`; `isEmpty((4,4))`=`true`; `getCurrentTurn()`=WHITE               | :x:                |
+| TC39 | after TC37, BLACK makes a non-EP move instead; WHITE Pawn remains at `(4,4)`                  | `getValidMoves` for adjacent BLACK Pawn no longer includes `(3,4)` (EP target expired) | :x:                |
