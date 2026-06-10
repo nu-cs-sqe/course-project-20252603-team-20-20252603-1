@@ -171,14 +171,43 @@ public class Game {
         }
     }
 
+    public void handleTimeout(Color loserOnTime) {
+        if (this.gameState == GameState.NOT_STARTED) {
+            throw new IllegalStateException("No timeout, game has not started");
+        } else if (isGameOver()) {
+            throw new IllegalStateException("Game is already over");
+        } else {
+            Color winnerOnTime = (loserOnTime == Color.WHITE) ? Color.BLACK : Color.WHITE;
+            if (board.hasInsufficientMaterial(winnerOnTime)) {
+                this.gameState = GameState.TIMEOUT_VS_INSUFFICIENT_MATERIAL;
+            } else {
+                this.gameState = GameState.TIMEOUT;
+            }
+        }
+    }
+
     private void checkForGameEnd() {
         if (checkForCheckmate()) {
             this.gameState = GameState.CHECKMATE;
+        } else if (checkForStalemate()) {
+            this.gameState = GameState.STALEMATE;
+        } else if (checkForInsufficientMaterial()) {
+            this.gameState = GameState.INSUFFICIENT_MATERIAL;
         }
     }
 
     private boolean checkForCheckmate() {
         return board.isInCheck(currentTurn)
                 && board.getValidMovesForPlayer(currentTurn).isEmpty();
+    }
+
+    private boolean checkForStalemate() {
+        return !board.isInCheck(currentTurn)
+                && board.getValidMovesForPlayer(currentTurn).isEmpty();
+    }
+
+    private boolean checkForInsufficientMaterial() {
+        return board.hasInsufficientMaterial(Color.BLACK)
+                && board.hasInsufficientMaterial(Color.WHITE);
     }
 }

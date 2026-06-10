@@ -170,3 +170,34 @@ Output boundaries: `IllegalArgumentException`, empty list, non-empty list
 | TC76 | initialized board, `color=BLACK`                                                                    | non-empty list  | :white_check_mark: |
 | TC77 | WHITE king at `(1,1)`, BLACK rook at `(2,8)`, BLACK rook at `(8,2)`, no other pieces, `color=WHITE` | `[]`            | :white_check_mark: |
 | TC78 | BLACK king at `(8,8)`, WHITE rook at `(7,1)`, WHITE rook at `(1,7)`, no other pieces, `color=BLACK` | `[]`            | :white_check_mark: |
+
+### Method under test: `public List<Position> validMovesForPlayer(Color color)`
+
+Input boundaries:
+- `color`: `null`, `WHITE`, `BLACK`
+- Board state: valid moves, no valid moves
+
+Output boundaries: `IllegalArgumentException`, empty list, non-empty list
+
+| ID   | State of the System                                                                                 | Expected output | Implemented?       |
+| ---- | --------------------------------------------------------------------------------------------------- | --------------- | ------------------ |
+| TC75 | initialized board, `color=WHITE`                                                                    | non-empty list  | :white_check_mark: |
+| TC76 | initialized board, `color=BLACK`                                                                    | non-empty list  | :white_check_mark: |
+| TC77 | WHITE king at `(1,1)`, BLACK rook at `(2,8)`, BLACK rook at `(8,2)`, no other pieces, `color=WHITE` | `[]`            | :white_check_mark: |
+| TC78 | BLACK king at `(8,8)`, WHITE rook at `(7,1)`, WHITE rook at `(1,7)`, no other pieces, `color=BLACK` | `[]`            | :white_check_mark: |
+
+
+### Method under test: `public boolean hasInsufficientMaterial(Color color)`
+Input boundaries: `color`: `null`, `WHITE`, `BLACK`
+
+Output boundaries: `IllegalArgumentException`, true, false
+
+| ID   | State of the System                              |           Expected output         |    Implemented?    |
+| ---- | ------------------------------------------------ | --------------------------------- | ------------------ |
+| TC79 | `color=null`                                     | throws `IllegalArgumentException` | :white_check_mark: |
+| TC80 | `color=WHITE`, white only has king               |                 true              | :white_check_mark: |
+| TC81 | `color=BLACK`, black only has king & knight      |                 true              | :white_check_mark: |
+| TC82 | `color=WHITE`, white only has king & bishop      |                 true              | :white_check_mark: |
+| TC83 | `color=BLACK`, black only has king & two knights |                 true              | :white_check_mark: |
+| TC84 | `color=WHITE`, white has king & rook             |                false              | :white_check_mark: |
+| TC85 | `color=BLACK`, black has king & two bishops      |                false              | :white_check_mark: |
