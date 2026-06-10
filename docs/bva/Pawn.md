@@ -44,3 +44,24 @@
 |------|--------------------------------|----------------------------|--------------------|
 | TC15 | new Pawn, before `markMoved()` | `hasMoved()` returns false | :white_check_mark: |
 | TC16 | after `markMoved()` called     | `hasMoved()` returns true  | :white_check_mark: |
+
+### Method under test: `getCaptureMoves(Position position)`
+
+Returns at-most two diagonal forward squares in bounds. WHITE moves toward higher rows, BLACK toward lower rows. Does not consider board occupancy.
+
+**WHITE pawn:**
+
+| ID   | State of the System                     | Expected output                            | Implemented? |
+|------|-----------------------------------------|--------------------------------------------|--------------|
+| TC17 | WHITE pawn, position=`(4,4)`            | `[(5,3),(5,5)]` — both diagonals in bounds | :x:          |
+| TC18 | WHITE pawn, position=`(4,1)` (col LOW)  | `[(5,2)]` — `(5,0)` out of bounds          | :x:          |
+| TC19 | WHITE pawn, position=`(4,8)` (col HIGH) | `[(5,7)]` — `(5,9)` out of bounds          | :x:          |
+| TC20 | WHITE pawn, position=`(8,4)` (row HIGH) | `[]` — row 9 out of bounds                 | :x:          |
+
+**BLACK pawn:**
+
+| ID   | State of the System                    | Expected output                            | Implemented? |
+|------|----------------------------------------|--------------------------------------------|--------------|
+| TC21 | BLACK pawn, position=`(5,4)`           | `[(4,3),(4,5)]` — both diagonals in bounds | :x:          |
+| TC22 | BLACK pawn, position=`(5,1)` (col LOW) | `[(4,2)]` — `(4,0)` out of bounds          | :x:          |
+| TC23 | BLACK pawn, position=`(1,4)` (row LOW) | `[]` — row 0 out of bounds                 | :x:          |

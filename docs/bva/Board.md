@@ -100,6 +100,16 @@ As these are unit tests, the only new boundary with adding `King` is using the a
 | TC62 | WHITE king at `(1,5)`, WHITE knight at `(3,3)`, BLACK bishop at `(5,1)`, no other pieces, `pos=(3,3)` | returns `[]`                                                          | :white_check_mark: |
 | TC72 | WHITE Pawn (hasMoved=false) at `(2,1)`, BLACK piece at `(3,1)`, `(4,1)` empty                         | returns `[]` — one-square blocked prevents two-square jump            | :white_check_mark: |
 | TC73 | BLACK Pawn (hasMoved=false) at `(7,1)`, WHITE piece at `(6,1)`, `(5,1)` empty                         | returns `[]` — one-square blocked prevents two-square jump            | :white_check_mark: |
+| TC82 | WHITE Pawn (`hasMoved=true`) at `(4,4)`, BLACK Pawn at `(5,5)`, no EP target                          | includes `(5,5)` — regular diagonal capture                           | :x:                |
+| TC83 | WHITE Pawn (`hasMoved=true`) at `(4,4)`, BLACK Pawn at `(5,3)`, no EP target                          | includes `(5,3)` — regular diagonal capture (left)                    | :x:                |
+| TC84 | WHITE Pawn (`hasMoved=true`) at `(4,4)`, WHITE Pawn at `(5,5)`, no EP target                          | does not include `(5,5)` — friendly piece                             | :x:                |
+| TC85 | BLACK Pawn (`hasMoved=true`) at `(5,4)`, WHITE Pawn at `(4,5)`, no EP target                          | includes `(4,5)` — BLACK diagonal capture                             | :x:                |
+| TC86 | WHITE Pawn (`hasMoved=true`) at `(5,4)`, BLACK Pawn at `(5,5)`, EP target=`(6,5)`                     | includes `(6,4)` and `(6,5)` — forward + en passant                   | :x:                |
+| TC87 | WHITE Pawn (`hasMoved=true`) at `(5,4)`, BLACK Pawn at `(5,3)`, EP target=`(6,3)`                     | includes `(6,4)` and `(6,3)` — forward + en passant (left)            | :x:                |
+| TC88 | WHITE Pawn (`hasMoved=true`) at `(5,1)`, BLACK Pawn at `(5,2)`, EP target=`(6,2)`                     | includes `(6,1)` and `(6,2)` — col LOW edge                           | :x:                |
+| TC89 | WHITE Pawn (`hasMoved=true`) at `(5,8)`, BLACK Pawn at `(5,7)`, EP target=`(6,7)`                     | includes `(6,8)` and `(6,7)` — col HIGH edge                          | :x:                |
+| TC90 | BLACK Pawn (`hasMoved=true`) at `(4,4)`, WHITE Pawn at `(4,5)`, EP target=`(3,5)`                     | includes `(3,4)` and `(3,5)` — BLACK en passant                       | :x:                |
+| TC91 | WHITE Pawn (`hasMoved=true`) at `(5,4)`, EP target=`(6,5)`, `(6,5)` empty                             | includes `(6,5)` — EP capture to empty square                         | :x:                |
 
 ### Method under test: `movePiece(Position from, Position to)`
 
@@ -117,6 +127,8 @@ As these are unit tests, the only new boundary with adding `King` is using the a
 | TC45 | WHITE Knight at (4,4), BLACK Pawn at (6,5); knight moves to (6,5)           | Knight at (6,5); BLACK Pawn removed; (4,4) empty                                                                                | :white_check_mark: |
 | TC49 | initialized board, `(2,6)` cleared, `from=(1,5)` WHITE king, `to=(2,6)`     | `getPieceAt((2,6))` = WHITE King; instance of `King`; `isEmpty((1,5))` = `true`; `king.hasMoved()` = `true`                     | :white_check_mark: |
 | TC50 | initialized board, `(7,4)` cleared, `from=(8,5)` BLACK king, `to=(7,4)`     | `getPieceAt((7,4))` = BLACK King; instance of `King`; `isEmpty((8,5))` = `true`; `king.hasMoved()` = `true`                     | :white_check_mark: |
+| TC92 | WHITE Pawn at `(5,4)`, BLACK Pawn at `(5,5)`, EP target=`(6,5)`: `movePiece((5,4),(6,5))` | WHITE Pawn at `(6,5)`; `isEmpty((5,4))`=`true`; `isEmpty((5,5))`=`true` — captured pawn removed | ☐ |
+| TC93 | BLACK Pawn at `(4,5)`, WHITE Pawn at `(4,4)`, EP target=`(3,4)`: `movePiece((4,5),(3,4))` | BLACK Pawn at `(3,4)`; `isEmpty((4,5))`=`true`; `isEmpty((4,4))`=`true` — captured pawn removed | ☐ |
 
 
 ### Method under test: `public boolean isInCheck(Color player)`
@@ -155,3 +167,14 @@ Output boundary: `false`, `true`
 | TC70 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), PAWN)`              | throws `IllegalArgumentException` - cannot promote to PAWN         | :white_check_mark: |
 | TC71 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), KING)`              | throws `IllegalArgumentException` - cannot promote to KING         | :white_check_mark: |
 | TC75 | empty position `(8,4)`, `promotePawn((8,4), QUEEN)`            | throws `IllegalArgumentException` - no piece at position           | :white_check_mark: |
+
+### Method under test: `getEnPassantTarget()`
+
+| ID   | State of the System                                                            | Expected output      | Implemented? |
+|------|--------------------------------------------------------------------------------|----------------------|--------------|
+| TC76 | new `Board()`                                                                  | `Optional.empty()`   | :x:          |
+| TC77 | WHITE Pawn at `(2,4)`, `movePiece((2,4),(4,4))` (double advance)               | `Optional.of((3,4))` | :x:          |
+| TC78 | BLACK Pawn at `(7,3)`, `movePiece((7,3),(5,3))` (double advance)               | `Optional.of((6,3))` | :x:          |
+| TC79 | WHITE Pawn (`hasMoved=true`) at `(3,4)`, `movePiece((3,4),(4,4))` (one square) | `Optional.empty()`   | :x:          |
+| TC80 | initialized board, WHITE knight `movePiece((1,2),(3,3))`                       | `Optional.empty()`   | :x:          |
+| TC81 | after TC77, BLACK Pawn `movePiece((7,1),(6,1))` (next move clears target)      | `Optional.empty()`   | :x:          |
