@@ -107,6 +107,9 @@ public class Game {
     }
 
     public boolean isGameOver() {
-        throw new IllegalStateException("Cannot check if game is over if the game has not started.");
+        if (this.gameState == GameState.NOT_STARTED) {
+            throw new IllegalStateException("Cannot check if game is over if the game has not started.");
+        }
+        return false;
     }
 }

@@ -507,4 +507,22 @@ public class GameTest {
         EasyMock.verify(board);
 
     }
+
+    @Test
+    public void IsGameOver_GameInProgress_ReturnsFalse() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.replay(board);
+
+        game.startGame();
+
+        assertFalse(game.isGameOver());
+
+        EasyMock.verify(board);
+
+    }
 }
