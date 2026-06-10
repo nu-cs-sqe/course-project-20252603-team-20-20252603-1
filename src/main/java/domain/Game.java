@@ -175,10 +175,18 @@ public class Game {
         if (checkForCheckmate()) {
             this.gameState = GameState.CHECKMATE;
         }
+        else if (checkForStalemate()) {
+            this.gameState = GameState.STALEMATE;
+        }
     }
 
     private boolean checkForCheckmate() {
         return board.isInCheck(currentTurn)
+                && board.getValidMovesForPlayer(currentTurn).isEmpty();
+    }
+
+    private boolean checkForStalemate() {
+        return !board.isInCheck(currentTurn)
                 && board.getValidMovesForPlayer(currentTurn).isEmpty();
     }
 }

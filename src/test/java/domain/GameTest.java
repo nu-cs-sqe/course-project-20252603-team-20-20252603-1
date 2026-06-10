@@ -887,4 +887,35 @@ public class GameTest {
         assertTrue(game.isPromotionPending());
         assertEquals(Color.WHITE, game.getCurrentTurn());
     }
+
+    @Test
+    public void isGameOver_AfterStalematingMove() {
+        Board board = EasyMock.createMock(Board.class);
+        Piece whiteQueen = EasyMock.createMock(Piece.class);
+        Position from = new Position(8, 5);
+        Position to = new Position(8, 6);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.getPieceAt(from)).andReturn(whiteQueen);
+        EasyMock.expect(whiteQueen.getColor()).andReturn(Color.WHITE);
+        board.movePiece(from, to);
+        EasyMock.expectLastCall();
+        EasyMock.expect(board.getPieceAt(to)).andReturn(whiteQueen);
+        EasyMock.expect(whiteQueen.getPieceType()).andReturn(PieceType.QUEEN);
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
+        EasyMock.expect(board.getValidMovesForPlayer(Color.BLACK)).andReturn(List.of());
+
+        EasyMock.replay(board, whiteQueen);
+
+        game.startGame();
+        game.executeMove(from, to);
+
+        assertTrue(game.isGameOver());
+
+        EasyMock.verify(board, whiteQueen);
+    }
 }
