@@ -85,6 +85,46 @@ public class MainView extends JFrame implements BoardChangeListener, ClockListen
             return;
         }
 
+        if (boardController.isTimeout()) {
+            String white = bundle.getString("white");
+            String black = bundle.getString("black");
+            String timeout = bundle.getString("timeout");
+            String wins = bundle.getString("wins");
+            if (boardController.isDraw()) {
+                String draw = bundle.getString("draw");
+                String timeoutDraw = bundle.getString("timeoutVsInsufficientMaterial");
+                String labelText = MessageFormat.format("{0}: {1}", draw, timeoutDraw);
+                gameStatsView.currentPlayerLabel.setText(labelText);
+                JOptionPane.showMessageDialog(this, labelText, timeout, JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                Color loser = boardController.getCurrentTurn();
+                String winnerColorName = (loser == Color.WHITE) ? black : white;
+                String winnerPlayerName = (loser == Color.WHITE) ? player2Name : player1Name;
+                String labelText = MessageFormat.format("{0} {1}!", timeout, winnerColorName);
+                gameStatsView.currentPlayerLabel.setText(labelText);
+                String dialogMsg = MessageFormat.format(
+                        "{0} ({1}) {2}!", winnerColorName, winnerPlayerName, wins);
+                JOptionPane.showMessageDialog(this, dialogMsg, timeout, JOptionPane.INFORMATION_MESSAGE);
+            }
+            return;
+        }
+
+        if (boardController.isDraw()) {
+            String draw = bundle.getString("draw");
+            String drawReason;
+            if (boardController.isStalemate()) {
+                drawReason = bundle.getString("stalemate");
+            } else if (boardController.isInsufficientMaterial()) {
+                drawReason = bundle.getString("insufficientMaterial");
+            } else {
+                drawReason = draw;
+            }
+            String labelText = MessageFormat.format("{0}: {1}", draw, drawReason);
+            gameStatsView.currentPlayerLabel.setText(labelText);
+            JOptionPane.showMessageDialog(this, labelText, draw, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
         Color turn = boardController.getCurrentTurn();
         String white = bundle.getString("white");
         String black = bundle.getString("black");
