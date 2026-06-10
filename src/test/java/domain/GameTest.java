@@ -759,4 +759,21 @@ public class GameTest {
 
         assertFalse(board.getValidMoves(new Position(4, 5)).contains(new Position(3, 4)));
     }
+
+    @Test
+    public void ExecuteMove_DiagonalCaptureToPromotionRank_PromotionPending() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        Pawn whitePawn = new Pawn(Color.WHITE);
+        whitePawn.markMoved();
+        board.placePieceAt(new Position(7, 4), whitePawn);
+        board.placePieceAt(new Position(8, 5), new Rook(Color.BLACK));
+
+        game.executeMove(new Position(7, 4), new Position(8, 5));
+
+        assertTrue(game.isPromotionPending());
+        assertEquals(Color.WHITE, game.getCurrentTurn());
+    }
 }
