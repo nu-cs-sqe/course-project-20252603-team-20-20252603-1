@@ -55,3 +55,16 @@ Feature: Detect Check
         Given an empty chessboard
         When I check if either player is in check
         Then I am told I cannot cannot do this
+
+
+    Scenario Outline: <player> is blocking check
+        Given the game is in progress
+        And the <player> King is at row <kingRow> col <kingCol>
+        And a <player> <blocker> is at row <blockRow> col <blockCol>
+        And a <opposingPlayer> <attacker> is at row <attackRow> col <attackCol>
+        When I check if the player is in check
+        Then the player is not in check
+
+        Examples:
+            | player  | kingRow | kingCol | opposingPlayer | blocker | blockRow | blockCol | attacker | attackRow | attackCol |
+            | "WHITE" | 1       | 4       | "BLACK"        | "ROOK"  | 6        | 4        | "ROOK"   | 8         | 4         |

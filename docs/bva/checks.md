@@ -133,47 +133,47 @@ See `src/test/resources/features/DetectCheck.feature` for the Scenario Outlines.
 
 #### `player`
 
-| Value   | Covered? |
-| ------- | -------- |
-| `White` | :x:      |
-| `Black` | :x:      |
+| Value   | Covered?           |
+| ------- | ------------------ |
+| `White` | :white_check_mark: |
+| `Black` | :x:                |
 
 #### King Position
 
-| Value    | Covered |
-| -------- | ------- |
-| `(1, 4)` | :x:     |
-| `(4, 1)` | :x:     |
-| `(8, 4)` | :x:     |
-| `(4, 8)` | :x:     |
+| Value    | Covered            |
+| -------- | ------------------ |
+| `(1, 4)` | :white_check_mark: |
+| `(4, 1)` | :x:                |
+| `(8, 4)` | :x:                |
+| `(4, 8)` | :x:                |
 
 #### PieceType of Attacker
 
-| Value    | Covered |
-| -------- | ------- |
-| `Rook`   | :x:     |
-| `Bishop` | :x:     |
-| `Queen`  | :x:     |
+| Value    | Covered            |
+| -------- | ------------------ |
+| `Rook`   | :white_check_mark: |
+| `Bishop` | :x:                |
+| `Queen`  | :x:                |
 
 #### Attacker Position
 
-| Value    | Covered |
-| -------- | ------- |
-| `(1, 4)` | :x:     |
-| `(4, 1)` | :x:     |
-| `(8, 4)` | :x:     |
-| `(4, 8)` | :x:     |
+| Value    | Covered            |
+| -------- | ------------------ |
+| `(1, 4)` | :x:                |
+| `(4, 1)` | :x:                |
+| `(8, 4)` | :white_check_mark: |
+| `(4, 8)` | :x:                |
 
 
 #### PieceType of Blocker
 
-| Value    | Covered |
-| -------- | ------- |
-| `Rook`   | :x:     |
-| `Bishop` | :x:     |
-| `Queen`  | :x:     |
-| `Knight` | :x:     |
-| `Pawn`   | :x:     |
+| Value    | Covered            |
+| -------- | ------------------ |
+| `Rook`   | :white_check_mark: |
+| `Bishop` | :x:                |
+| `Queen`  | :x:                |
+| `Knight` | :x:                |
+| `Pawn`   | :x:                |
 
 #### Blocker Position
 
