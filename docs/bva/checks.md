@@ -177,9 +177,9 @@ See `src/test/resources/features/DetectCheck.feature` for the Scenario Outlines.
 
 #### Blocker Position
 
-| Value    | Covered |
-| -------- | ------- |
-| `(1, 4)` | :x:     |
-| `(4, 1)` | :x:     |
-| `(8, 4)` | :x:     |
-| `(4, 8)` | :x:     |
+| Value    | Covered            |
+| -------- | ------------------ |
+| `(1, 4)` | :white_check_mark: |
+| `(4, 1)` | :x:                |
+| `(8, 4)` | :x:                |
+| `(4, 8)` | :x:                |
