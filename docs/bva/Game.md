@@ -130,7 +130,7 @@ Output boundaries: `throws IllegalStateException`, `false`, `true`
 | TC39 | game state is `CHECKMATE`                        | returns `True`                 | :white_check_mark: |
 | TC40 | game state is `STALEMATE`                        | returns `True`                 | :white_check_mark: |
 | TC41 | game state is `INSUFFICIENT_MATERIAL`            | returns `True`                 | :white_check_mark: |
-| TC42 | game state is `TIMEOUT`                          | returns `True`                 |          :x:       |
+| TC42 | game state is `TIMEOUT`                          | returns `True`                 | :white_check_mark: |
 | TC43 | game state is `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | returns `True`                 |          :x:       |
 
 ### Method under test: `whyIsGameOver()`

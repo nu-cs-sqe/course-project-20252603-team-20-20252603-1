@@ -5,5 +5,6 @@ public enum GameState {
     STALEMATE,
     INSUFFICIENT_MATERIAL,
     IN_PROGRESS,
-    NOT_STARTED
+    NOT_STARTED,
+    TIMEOUT
 }

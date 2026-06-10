@@ -951,4 +951,22 @@ public class GameTest {
 
         EasyMock.verify(board, whiteKing);
     }
+
+    @Test
+    public void isGameOver_AfterTimeout_SufficientMaterial() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.replay(board);
+
+        game.startGame();
+        game.handleTimeout();
+
+        assertTrue(game.isGameOver());
+
+        EasyMock.verify(board);
+    }
 }

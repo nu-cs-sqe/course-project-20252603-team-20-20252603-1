@@ -171,6 +171,10 @@ public class Game {
         }
     }
 
+    public void handleTimeout() {
+        this.gameState = GameState.TIMEOUT;
+    }
+
     private void checkForGameEnd() {
         if (checkForCheckmate()) {
             this.gameState = GameState.CHECKMATE;
