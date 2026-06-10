@@ -22,7 +22,7 @@ public class MainView extends JFrame implements BoardChangeListener, ClockListen
     private Locale locale;
     private ResourceBundle bundle;
     private long timeControl;
-    private GameConfig config; 
+    private GameConfig config;
 
     public MainView(GameConfig config) {
         this.config = config;
@@ -74,8 +74,14 @@ public class MainView extends JFrame implements BoardChangeListener, ClockListen
             String winnerPlayerName = (loser == Color.WHITE) ? player2Name : player1Name;
             String labelText = MessageFormat.format("{0} {1}!", checkmate, winnerColorName);
             gameStatsView.currentPlayerLabel.setText(labelText);
-            String dialogMsg = MessageFormat.format("{0} ({1}) {2}!", winnerColorName, winnerPlayerName, wins);
-            JOptionPane.showMessageDialog(this, dialogMsg, checkmate, JOptionPane.INFORMATION_MESSAGE);
+            String dialogMsg = MessageFormat.format(
+                    "{0} ({1}) {2}!",
+                    winnerColorName, winnerPlayerName, wins);
+            JOptionPane.showMessageDialog(
+                    this,
+                    dialogMsg,
+                    checkmate,
+                    JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
