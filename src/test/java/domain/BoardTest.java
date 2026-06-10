@@ -1020,6 +1020,97 @@ public class BoardTest {
   }
 
   @Test
+  public void GetValidMovesForPlayer_AfterInitColorWhite_NonEmptyList() {
+    Board board = new Board();
+    board.initializeBoard();
+
+    List<Position> actual = board.getValidMovesForPlayer(Color.WHITE);
+
+    assertFalse(actual.isEmpty());
+  }
+
+  @Test
+  public void GetValidMovesForPlayer_AfterInitColorBlack_NonEmptyList() {
+    Board board = new Board();
+    board.initializeBoard();
+
+    List<Position> actual = board.getValidMovesForPlayer(Color.BLACK);
+
+    assertFalse(actual.isEmpty());
+  }
+
+  @Test
+  public void GetValidMovesForPlayer_WhiteKingTrappedByBlackRooks_EmptyList() {
+    Board board = new Board();
+    Piece king = stubPiece(Color.WHITE, PieceType.KING, List.of(
+        new Position(2, 1), new Position(1, 2), new Position(2, 2)));
+    Piece rook1 = stubPiece(Color.BLACK, PieceType.ROOK, List.of(
+        new Position(2, 1), new Position(2, 2)));
+    Piece rook2 = stubPiece(Color.BLACK, PieceType.ROOK, List.of(
+        new Position(1, 2), new Position(2, 2)));
+
+    EasyMock.replay(king, rook1, rook2);
+
+    board.placePieceAt(new Position(1, 1), king);
+    board.placePieceAt(new Position(2, 8), rook1);
+    board.placePieceAt(new Position(8, 2), rook2);
+
+    List<Position> actual = board.getValidMovesForPlayer(Color.WHITE);
+
+    assertTrue(actual.isEmpty());
+
+    EasyMock.verify(king, rook1, rook2);
+  }
+
+  @Test
+  public void GetValidMovesForPlayer_BlackKingTrappedByWhiteRooks_EmptyList() {
+    Board board = new Board();
+    Piece king = stubPiece(Color.BLACK, PieceType.KING, List.of(
+        new Position(7, 8), new Position(8, 7), new Position(7, 7)));
+    Piece rook1 = stubPiece(Color.WHITE, PieceType.ROOK, List.of(
+        new Position(7, 8), new Position(7, 7)));
+    Piece rook2 = stubPiece(Color.WHITE, PieceType.ROOK, List.of(
+        new Position(8, 7), new Position(7, 7)));
+
+    EasyMock.replay(king, rook1, rook2);
+
+    board.placePieceAt(new Position(8, 8), king);
+    board.placePieceAt(new Position(7, 1), rook1);
+    board.placePieceAt(new Position(1, 7), rook2);
+
+    List<Position> actual = board.getValidMovesForPlayer(Color.BLACK);
+
+    assertTrue(actual.isEmpty());
+
+    EasyMock.verify(king, rook1, rook2);
+  }
+
+  @Test
+  public void CreatePiece_OnNull_ThrowsException() {
+    Board board = new Board();
+
+    Exception exception = assertThrows(
+        IllegalStateException.class,
+        () -> board.createPiece(null, null));
+
+    String expected = "Unhandled piece type: " + null;
+    String actual = exception.getMessage();
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void IsInCheck_OnEmptyBoard_ThrowsException() {
+    Board board = new Board();
+
+    Exception exception = assertThrows(
+        IllegalStateException.class,
+        () -> board.isInCheck(Color.WHITE));
+
+    String expected = "cannot locateKing: king of specified color is not on the board.";
+    String actual = exception.getMessage();
+    assertEquals(expected, actual);
+  }
+
   public void PromotePawn_WhitePawnAtRank8ToQueen_ReplacesWithQueen() {
     Board board = new Board();
     board.placePieceAt(new Position(8, 4), new Pawn(Color.WHITE));
@@ -1090,7 +1181,7 @@ public class BoardTest {
     board.placePieceAt(new Position(4, 4), new Pawn(Color.WHITE));
 
     assertThrows(IllegalArgumentException.class,
-            () -> board.promotePawn(new Position(4, 4), PieceType.QUEEN));
+        () -> board.promotePawn(new Position(4, 4), PieceType.QUEEN));
   }
 
   @Test
@@ -1099,7 +1190,7 @@ public class BoardTest {
     board.placePieceAt(new Position(8, 4), new Knight(Color.WHITE));
 
     assertThrows(IllegalArgumentException.class,
-            () -> board.promotePawn(new Position(8, 4), PieceType.QUEEN));
+        () -> board.promotePawn(new Position(8, 4), PieceType.QUEEN));
   }
 
   @Test
@@ -1108,7 +1199,7 @@ public class BoardTest {
     board.placePieceAt(new Position(8, 4), new Pawn(Color.WHITE));
 
     assertThrows(IllegalArgumentException.class,
-            () -> board.promotePawn(new Position(8, 4), PieceType.PAWN));
+        () -> board.promotePawn(new Position(8, 4), PieceType.PAWN));
   }
 
   @Test
@@ -1117,7 +1208,7 @@ public class BoardTest {
     board.placePieceAt(new Position(8, 4), new Pawn(Color.WHITE));
 
     assertThrows(IllegalArgumentException.class,
-            () -> board.promotePawn(new Position(8, 4), PieceType.KING));
+        () -> board.promotePawn(new Position(8, 4), PieceType.KING));
   }
 
   @Test
@@ -1157,6 +1248,6 @@ public class BoardTest {
     Board board = new Board();
 
     assertThrows(IllegalArgumentException.class,
-            () -> board.promotePawn(new Position(8, 4), PieceType.QUEEN));
+        () -> board.promotePawn(new Position(8, 4), PieceType.QUEEN));
   }
 }

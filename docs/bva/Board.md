@@ -79,7 +79,7 @@ As these are unit tests, the only new boundary with adding `King` is using the a
 - Fully pinned: when every move of a piece exposes the king, the result is `[]`
 
 | ID   | State of the System                                                                                   | Expected output                                                       | Implemented?       |
-|------|-------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|--------------------|
+| ---- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ------------------ |
 | TC29 | new `Board()`, `pos=(4,4)` (empty square)                                                             | throws `IllegalArgumentException`                                     | :white_check_mark: |
 | TC30 | initialized board, `pos=(2,1)` WHITE pawn (unmoved), `(3,1)` and `(4,1)` empty                        | returns `[(3,1),(4,1)]`                                               | :white_check_mark: |
 | TC31 | initialized board, `pos=(1,2)` WHITE knight                                                           | returns `[(3,3),(3,1)]` — candidate `(2,4)` filtered (own pawn there) | :white_check_mark: |
@@ -131,7 +131,7 @@ Input boundaries:
 Output boundary: `false`, `true`
 
 | ID   | State of the System                                                                                         | Expected output                | Implemented?       |
-|------|-------------------------------------------------------------------------------------------------------------|--------------------------------|--------------------|
+| ---- | ----------------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------ |
 | TC51 | initialized board, `isInCheck(WHITE)`                                                                       | `false`                        | :white_check_mark: |
 | TC52 | initialized board, `isInCheck(BLACK)`                                                                       | `false`                        | :white_check_mark: |
 | TC53 | WHITE king at `(5,8)`, BLACK rook at `(5,1)`, no other pieces                                               | `true`                         | :white_check_mark: |
@@ -144,7 +144,7 @@ Output boundary: `false`, `true`
 ### Method under test: `promotePawn(Position position, PieceType pieceType)`
 
 | ID   | State of the System                                            | Expected output                                                    | Implemented?       |
-|------|----------------------------------------------------------------|--------------------------------------------------------------------|:-------------------|
+| ---- | -------------------------------------------------------------- | ------------------------------------------------------------------ | :----------------- |
 | TC63 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), QUEEN)`             | `getPieceAt((8,4))` = QUEEN, WHITE; piece is instance of `Queen`   | :white_check_mark: |
 | TC64 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), ROOK)`              | `getPieceAt((8,4))` = ROOK, WHITE; piece is instance of `Rook`     | :white_check_mark: |
 | TC65 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), BISHOP)`            | `getPieceAt((8,4))` = BISHOP, WHITE; piece is instance of `Bishop` | :white_check_mark: |
@@ -155,3 +155,18 @@ Output boundary: `false`, `true`
 | TC70 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), PAWN)`              | throws `IllegalArgumentException` - cannot promote to PAWN         | :white_check_mark: |
 | TC71 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), KING)`              | throws `IllegalArgumentException` - cannot promote to KING         | :white_check_mark: |
 | TC75 | empty position `(8,4)`, `promotePawn((8,4), QUEEN)`            | throws `IllegalArgumentException` - no piece at position           | :white_check_mark: |
+
+### Method under test: `public List<Position> validMovesForPlayer(Color color)`
+
+Input boundaries:
+- `color`: `null`, `WHITE`, `BLACK`
+- Board state: valid moves, no valid moves
+
+Output boundaries: `IllegalArgumentException`, empty list, non-empty list
+
+| ID   | State of the System                                                                                 | Expected output | Implemented?       |
+| ---- | --------------------------------------------------------------------------------------------------- | --------------- | ------------------ |
+| TC75 | initialized board, `color=WHITE`                                                                    | non-empty list  | :white_check_mark: |
+| TC76 | initialized board, `color=BLACK`                                                                    | non-empty list  | :white_check_mark: |
+| TC77 | WHITE king at `(1,1)`, BLACK rook at `(2,8)`, BLACK rook at `(8,2)`, no other pieces, `color=WHITE` | `[]`            | :white_check_mark: |
+| TC78 | BLACK king at `(8,8)`, WHITE rook at `(7,1)`, WHITE rook at `(1,7)`, no other pieces, `color=BLACK` | `[]`            | :white_check_mark: |

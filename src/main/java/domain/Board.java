@@ -17,8 +17,8 @@ import java.util.Optional;
 
 public class Board {
 
-    private static final int NUM_COLS = 8;
-    private static final int NUM_ROWS = 8;
+    public static final int NUM_COLS = 8;
+    public static final int NUM_ROWS = 8;
     private static final int WHITE_BACK_RANK = 0;
     private static final int BLACK_BACK_RANK = 7;
     private static final int WHITE_PAWN_RANK = 1;
@@ -31,23 +31,26 @@ public class Board {
             PieceType.KING, PieceType.BISHOP, PieceType.KNIGHT, PieceType.ROOK,
     };
 
-    private Piece createPiece(PieceType type, Color color) {
-        switch (type) {
-            case PAWN:
-                return new Pawn(color);
-            case KNIGHT:
-                return new Knight(color);
-            case KING:
-                return new King(color);
-            case BISHOP:
-                return new Bishop(color);
-            case ROOK:
-                return new Rook(color);
-            case QUEEN:
-                return new Queen(color);
-            default:
-                throw new IllegalStateException("Unhandled piece type: " + type);
+    Piece createPiece(PieceType type, Color color) {
+        if (type == PieceType.PAWN) {
+            return new Pawn(color);
         }
+        if (type == PieceType.KNIGHT) {
+            return new Knight(color);
+        }
+        if (type == PieceType.KING) {
+            return new King(color);
+        }
+        if (type == PieceType.BISHOP) {
+            return new Bishop(color);
+        }
+        if (type == PieceType.ROOK) {
+            return new Rook(color);
+        }
+        if (type == PieceType.QUEEN) {
+            return new Queen(color);
+        }
+        throw new IllegalStateException("Unhandled piece type: " + type);
     }
 
     private final Piece[][] squares = new Piece[NUM_ROWS][NUM_COLS];
@@ -159,7 +162,7 @@ public class Board {
     }
 
     private void removeBlockedPawnTwoSquareMove(Position position, Piece piece,
-                                                List<Position> validMoves) {
+            List<Position> validMoves) {
         int direction = (piece.getColor() == Color.WHITE) ? 1 : -1;
         int oneForwardRow = position.getRow() + direction;
         int twoForwardRow = position.getRow() + (2 * direction);
@@ -250,6 +253,21 @@ public class Board {
         boardAfterMove.setPieceAt(to, piece);
 
         return boardAfterMove.isInCheck(color);
+    }
+
+    public List<Position> getValidMovesForPlayer(Color player) {
+
+        List<Position> moves = new ArrayList<Position>();
+        for (Position position : allPositions()) {
+            if (pieceAt(position).isEmpty()) {
+                continue;
+            }
+            Piece piece = getPieceAt(position);
+            if (piece.getColor() == player) {
+                moves.addAll(getValidMoves(position));
+            }
+        }
+        return moves;
     }
 
     public void promotePawn(Position position, PieceType pieceType) {
