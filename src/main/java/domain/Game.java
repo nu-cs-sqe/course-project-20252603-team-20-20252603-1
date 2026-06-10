@@ -172,15 +172,15 @@ public class Game {
     }
 
     public void handleTimeout(Color loserOnTime) {
-        if (this.gameState == GameState.NOT_STARTED || !isGameOver()) {
+        if (this.gameState == GameState.NOT_STARTED) {
             throw new IllegalStateException("No timeout, game has not started");
-        }
-        else {
+        } else if (isGameOver()) {
+            throw new IllegalStateException("Game is already over");
+        } else {
             Color winnerOnTime = (currentTurn == Color.WHITE) ? Color.BLACK : Color.WHITE;
             if (board.hasInsufficientMaterial(winnerOnTime)) {
                 this.gameState = GameState.TIMEOUT_VS_INSUFFICIENT_MATERIAL;
-            }
-            else {
+            } else {
                 this.gameState = GameState.TIMEOUT;
             }
         }
@@ -189,11 +189,9 @@ public class Game {
     private void checkForGameEnd() {
         if (checkForCheckmate()) {
             this.gameState = GameState.CHECKMATE;
-        }
-        else if (checkForStalemate()) {
+        } else if (checkForStalemate()) {
             this.gameState = GameState.STALEMATE;
-        }
-        else if (checkForInsufficientMaterial()) {
+        } else if (checkForInsufficientMaterial()) {
             this.gameState = GameState.INSUFFICIENT_MATERIAL;
         }
     }
@@ -209,6 +207,7 @@ public class Game {
     }
 
     private boolean checkForInsufficientMaterial() {
-        return board.hasInsufficientMaterial(Color.BLACK) && board.hasInsufficientMaterial(Color.WHITE);
+        return board.hasInsufficientMaterial(Color.BLACK)
+                && board.hasInsufficientMaterial(Color.WHITE);
     }
 }
