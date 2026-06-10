@@ -559,6 +559,35 @@ public class GameTest {
     }
 
     @Test
+    public void IsGameOver_AfterNonCheckMatingMove_ReturnsFalse() {
+        Board board = EasyMock.createMock(Board.class);
+        Piece whitePiece = EasyMock.createMock(Piece.class);
+        Position from = new Position(1, 1);
+        Position to = new Position(2, 2);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.getPieceAt(from)).andReturn(whitePiece);
+        EasyMock.expect(whitePiece.getColor()).andReturn(Color.WHITE);
+        board.movePiece(from, to);
+        EasyMock.expectLastCall();
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(true);
+        EasyMock.expect(board.getValidMovesForPlayer(Color.BLACK)).andReturn(List.of(new Position(1, 1)));
+
+        EasyMock.replay(board, whitePiece);
+
+        game.startGame();
+        game.executeMove(from, to);
+
+        assertFalse(game.isGameOver());
+
+        EasyMock.verify(board, whitePiece);
+
+    }
+
+    @Test
     public void WhyIsGameOver_GameNotStarted_ThrowsIllegalState() {
         Board board = EasyMock.createMock(Board.class);
         Game game = new Game(board);
