@@ -160,6 +160,6 @@ Output boundaries: `IllegalStateException`, `GameState` enums that correspond to
 | ---- | ----------------------------------------------- | ------------------------------------------------ | ------------------ |
 | TC51 | `startGame()` not called                        | throws `IllegalStateException`                   | :white_check_mark: |
 | TC52 | `isGameOver()` is false                         | throws `IllegalStateException`                   | :white_check_mark: |
-| TC53 | `board.hasInsufficientMaterial(loser)` is true  | sets state to `TIMEOUT_VS_INSUFFICIENT_MATERIAL` |          :x:       |
-| TC54 | `board.hasInsufficientMaterial(loser)` is false | sets state to `TIMEOUT`                          |          :x:       |
+| TC53 | `board.hasInsufficientMaterial(loser)` is true  | sets state to `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | :white_check_mark: | *Covered by TC50*
+| TC54 | `board.hasInsufficientMaterial(loser)` is false | sets state to `TIMEOUT`                          | :white_check_mark: | *Covered by TC49*
 
