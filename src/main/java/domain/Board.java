@@ -17,8 +17,8 @@ import java.util.Optional;
 
 public class Board {
 
-    private static final int NUM_COLS = 8;
-    private static final int NUM_ROWS = 8;
+    public static final int NUM_COLS = 8;
+    public static final int NUM_ROWS = 8;
     private static final int WHITE_BACK_RANK = 0;
     private static final int BLACK_BACK_RANK = 7;
     private static final int WHITE_PAWN_RANK = 1;
@@ -232,5 +232,9 @@ public class Board {
         boardAfterMove.setPieceAt(to, piece);
 
         return boardAfterMove.isInCheck(color);
+    }
+
+    public List<Position> getValidMovesForPlayer(Color player) {
+        throw new IllegalArgumentException("Cannot get valid moves for null player");
     }
 }

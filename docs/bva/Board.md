@@ -146,10 +146,10 @@ Input boundaries:
 
 Output boundaries: `IllegalArgumentException`, empty list, non-empty list
 
-| ID   | State of the System                                                                                 | Expected output                   | Implemented? |
-| ---- | --------------------------------------------------------------------------------------------------- | --------------------------------- | ------------ |
-| TC63 | any board state, `color=null`                                                                       | throws `IllegalArgumentException` | :x:          |
-| TC64 | initialized board, `color=WHITE`                                                                    | non-empty list                    | :x:          |
-| TC65 | initialized board, `color=BLACK`                                                                    | non-empty list                    | :x:          |
-| TC66 | WHITE king at `(1,1)`, BLACK rook at `(2,8)`, BLACK rook at `(8,2)`, no other pieces, `color=WHITE` | `[]`                              | :x:          |
-| TC67 | BLACK king at `(8,8)`, WHITE rook at `(7,1)`, WHITE rook at `(1,7)`, no other pieces, `color=BLACK` | `[]`                              | :x:          |
+| ID   | State of the System                                                                                 | Expected output                   | Implemented?       |
+| ---- | --------------------------------------------------------------------------------------------------- | --------------------------------- | ------------------ |
+| TC63 | any board state, `color=null`                                                                       | throws `IllegalArgumentException` | :white_check_mark: |
+| TC64 | initialized board, `color=WHITE`                                                                    | non-empty list                    | :x:                |
+| TC65 | initialized board, `color=BLACK`                                                                    | non-empty list                    | :x:                |
+| TC66 | WHITE king at `(1,1)`, BLACK rook at `(2,8)`, BLACK rook at `(8,2)`, no other pieces, `color=WHITE` | `[]`                              | :x:                |
+| TC67 | BLACK king at `(8,8)`, WHITE rook at `(7,1)`, WHITE rook at `(1,7)`, no other pieces, `color=BLACK` | `[]`                              | :x:                |

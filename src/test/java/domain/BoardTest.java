@@ -1018,4 +1018,18 @@ public class BoardTest {
 
     EasyMock.verify(blackBishop);
   }
+
+  @Test
+  public void GetValidMovesForPlayer_ColorNull_ThrowsException() {
+    Board board = new Board();
+
+    Exception exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> board.getValidMovesForPlayer(null));
+
+    String expected = "Cannot get valid moves for null player";
+    String actual = exception.getMessage();
+    assertEquals(expected, actual);
+
+  }
 }
