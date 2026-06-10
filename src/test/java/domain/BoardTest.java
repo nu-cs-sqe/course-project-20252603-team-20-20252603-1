@@ -1374,4 +1374,18 @@ public class BoardTest {
     assertTrue(moves.contains(new Position(6, 5)));
     assertTrue(board.isEmpty(new Position(6, 5)));
   }
+
+  @Test
+  public void GetValidMoves_WhitePawnDiagonalCaptureToPromotionRank_IncludesCapture() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.WHITE);
+    pawn.markMoved();
+    board.placePieceAt(new Position(7, 4), pawn);
+    board.placePieceAt(new Position(8, 5), new Rook(Color.BLACK));
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
+
+    List<Position> moves = board.getValidMoves(new Position(7, 4));
+
+    assertTrue(moves.contains(new Position(8, 5)));
+  }
 }
