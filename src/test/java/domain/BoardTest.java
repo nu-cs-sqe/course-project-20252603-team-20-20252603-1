@@ -1177,4 +1177,14 @@ public class BoardTest {
 
     assertEquals(Optional.of(new Position(3, 4)), board.getEnPassantTarget());
   }
+
+  @Test
+  public void GetEnPassantTarget_AfterBlackPawnDoubleAdvance_ReturnsPassedSquare() {
+    Board board = new Board();
+    board.initializeBoard();
+
+    board.movePiece(new Position(7, 3), new Position(5, 3));
+
+    assertEquals(Optional.of(new Position(6, 3)), board.getEnPassantTarget());
+  }
 }
