@@ -1259,4 +1259,12 @@ public class BoardTest {
         () -> board.hasInsufficientMaterial(null));
 
   }
+
+  @Test
+  public void hasInsufficientMaterial_White_OnlyKing() {
+    Board board = new Board();
+    Piece king = stubPiece(Color.WHITE, PieceType.KING, List.of());
+
+    assertTrue(board.hasInsufficientMaterial(Color.WHITE));
+  }
 }

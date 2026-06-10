@@ -277,7 +277,12 @@ public class Board {
     }
 
     public boolean hasInsufficientMaterial(Color color) {
-        throw new IllegalArgumentException();
+        if (color == Color.WHITE){
+            return true;
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
     }
 
     private void validatePromotion(Position position, PieceType pieceType) {
