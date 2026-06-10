@@ -1358,4 +1358,20 @@ public class BoardTest {
     assertTrue(moves.contains(new Position(3, 5)));
   }
 
+  @Test
+  public void GetValidMoves_WhitePawnEPTargetIsEmptySquare_IncludesEPSquare() {
+    Board board = new Board();
+    Pawn white = new Pawn(Color.WHITE);
+    white.markMoved();
+    board.placePieceAt(new Position(5, 4), white);
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 8), new King(Color.BLACK));
+    board.placePieceAt(new Position(7, 5), new Pawn(Color.BLACK));
+    board.movePiece(new Position(7, 5), new Position(5, 5));
+
+    List<Position> moves = board.getValidMoves(new Position(5, 4));
+
+    assertTrue(moves.contains(new Position(6, 5)));
+    assertTrue(board.isEmpty(new Position(6, 5)));
+  }
 }
