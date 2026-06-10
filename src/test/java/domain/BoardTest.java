@@ -1250,4 +1250,13 @@ public class BoardTest {
     assertThrows(IllegalArgumentException.class,
         () -> board.promotePawn(new Position(8, 4), PieceType.QUEEN));
   }
+
+  @Test
+  public void hasInsufficientMaterial_NullColor_ThrowsExcception() {
+    Board board = new Board();
+    
+    assertThrows(IllegalArgumentException.class,
+        () -> board.hasInsufficientMaterial(null));
+
+  }
 }

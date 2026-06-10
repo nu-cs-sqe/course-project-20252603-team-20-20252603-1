@@ -276,6 +276,10 @@ public class Board {
         setPieceAt(position, createPiece(pieceType, pawn.getColor()));
     }
 
+    public boolean hasInsufficientMaterial(Color color) {
+        throw new IllegalArgumentException();
+    }
+
     private void validatePromotion(Position position, PieceType pieceType) {
         if (isEmpty(position)) {
             throw new IllegalArgumentException("No piece at promotion position");
