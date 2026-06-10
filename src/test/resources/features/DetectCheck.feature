@@ -73,3 +73,4 @@ Feature: Detect Check
             | "BLACK" | 4       | 8       | "WHITE"        | "KNIGHT" | 4        | 4        | "ROOK"   | 4         | 1         |
             | "WHITE" | 8       | 4       | "BLACK"        | "PAWN"   | 6        | 4        | "ROOK"   | 1         | 4         |
             | "BLACK" | 1       | 8       | "WHITE"        | "PAWN"   | 1        | 4        | "ROOK"   | 1         | 1         |
+            | "WHITE" | 1       | 1       | "BLACK"        | "KNIGHT" | 4        | 1        | "QUEEN"  | 8         | 1         |
