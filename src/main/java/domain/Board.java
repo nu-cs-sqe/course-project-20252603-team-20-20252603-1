@@ -189,6 +189,7 @@ public class Board {
 
         setPieceAt(to, piece);
         setPieceAt(from, null);
+        updateEnPassantTarget(piece, from, to);
     }
 
     private List<Position> allPositions() {
@@ -285,5 +286,15 @@ public class Board {
 
     Optional<Position> getEnPassantTarget() {
         return enPassantTarget;
+    }
+
+    private void updateEnPassantTarget(Piece piece, Position from, Position to) {
+        if (piece.getPieceType() == PieceType.PAWN
+                && Math.abs(from.getRow() - to.getRow()) == 2) {
+            enPassantTarget = Optional.of(
+                    new Position((from.getRow() + to.getRow()) / 2, from.getCol()));
+        } else {
+            enPassantTarget = Optional.empty();
+        }
     }
 }

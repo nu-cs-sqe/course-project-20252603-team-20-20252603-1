@@ -1167,4 +1167,14 @@ public class BoardTest {
 
     assertTrue(board.getEnPassantTarget().isEmpty());
   }
+
+  @Test
+  public void GetEnPassantTarget_AfterWhitePawnDoubleAdvance_ReturnsPassedSquare() {
+    Board board = new Board();
+    board.initializeBoard();
+
+    board.movePiece(new Position(2, 4), new Position(4, 4));
+
+    assertEquals(Optional.of(new Position(3, 4)), board.getEnPassantTarget());
+  }
 }
