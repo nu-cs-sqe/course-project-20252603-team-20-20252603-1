@@ -94,11 +94,11 @@ Input boundaries:
 
 Output boundaries: `throws IllegalStateException`, `false`, `true`
 
-| ID   | State of the System         | Expected output                | Implemented? |
-| ---- | --------------------------- | ------------------------------ | ------------ |
-| TC25 | `startGame()` not called    | throws `IllegalStateException` | :x:          |
-| TC25 | game state is `IN_PROGRESS` | returns `False`                | :x:          |
-| TC26 | game state is `CHECKMATE`   | returns `True`                 | :x:          |
+| ID   | State of the System         | Expected output                | Implemented?       |
+| ---- | --------------------------- | ------------------------------ | ------------------ |
+| TC25 | `startGame()` not called    | throws `IllegalStateException` | :white_check_mark: |
+| TC25 | game state is `IN_PROGRESS` | returns `False`                | :x:                |
+| TC26 | game state is `CHECKMATE`   | returns `True`                 | :x:                |
 
 **Add more once draw conditions are done and move timer is done**
 

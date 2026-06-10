@@ -105,4 +105,8 @@ public class Game {
 
         return board.isInCheck(player);
     }
+
+    public boolean isGameOver() {
+        throw new IllegalStateException("Cannot check if game is over if the game has not started.");
+    }
 }

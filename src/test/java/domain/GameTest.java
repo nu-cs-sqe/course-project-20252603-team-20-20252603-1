@@ -489,4 +489,22 @@ public class GameTest {
         EasyMock.verify(board);
 
     }
+
+    @Test
+    public void IsGameOver_GameNotStarted_ThrowsIllegalState() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        EasyMock.replay(board);
+
+        Exception exception = assertThrows(IllegalStateException.class,
+                () -> game.isGameOver());
+
+        String expected = "Cannot check if game is over if the game has not started.";
+        String actual = exception.getMessage();
+        assertEquals(expected, actual);
+
+        EasyMock.verify(board);
+
+    }
 }
