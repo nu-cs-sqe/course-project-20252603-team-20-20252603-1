@@ -51,12 +51,12 @@ Returns at-most two diagonal forward squares in bounds. WHITE moves toward highe
 
 **WHITE pawn:**
 
-| ID   | State of the System                     | Expected output                            | Implemented? |
-|------|-----------------------------------------|--------------------------------------------|--------------|
-| TC17 | WHITE pawn, position=`(4,4)`            | `[(5,3),(5,5)]` — both diagonals in bounds | :x:          |
-| TC18 | WHITE pawn, position=`(4,1)` (col LOW)  | `[(5,2)]` — `(5,0)` out of bounds          | :x:          |
-| TC19 | WHITE pawn, position=`(4,8)` (col HIGH) | `[(5,7)]` — `(5,9)` out of bounds          | :x:          |
-| TC20 | WHITE pawn, position=`(8,4)` (row HIGH) | `[]` — row 9 out of bounds                 | :x:          |
+| ID   | State of the System                     | Expected output                            | Implemented?       |
+|------|-----------------------------------------|--------------------------------------------|--------------------|
+| TC17 | WHITE pawn, position=`(4,4)`            | `[(5,3),(5,5)]` — both diagonals in bounds | :white_check_mark: |
+| TC18 | WHITE pawn, position=`(4,1)` (col LOW)  | `[(5,2)]` — `(5,0)` out of bounds          | :x:                |
+| TC19 | WHITE pawn, position=`(4,8)` (col HIGH) | `[(5,7)]` — `(5,9)` out of bounds          | :x:                |
+| TC20 | WHITE pawn, position=`(8,4)` (row HIGH) | `[]` — row 9 out of bounds                 | :x:                |
 
 **BLACK pawn:**
 
