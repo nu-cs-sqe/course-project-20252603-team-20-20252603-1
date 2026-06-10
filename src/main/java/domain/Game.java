@@ -112,4 +112,8 @@ public class Game {
         }
         return false;
     }
+
+    public GameState whyIsGameOver() {
+        throw new IllegalStateException("Cannot answer why game is over if the game has not started.");
+    }
 }
