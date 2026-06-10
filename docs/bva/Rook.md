@@ -35,9 +35,9 @@
 
 ### Method under test: `hasMoved()`
 
-| ID   | State of the System       | Expected output | Implemented? |
-|------|---------------------------|-----------------|--------------|
-| TC10 | new `Rook(WHITE)` created | returns `false` | :x:          |
+| ID   | State of the System       | Expected output | Implemented?       |
+|------|---------------------------|-----------------|--------------------|
+| TC10 | new `Rook(WHITE)` created | returns `false` | :white_check_mark: |
 
 ### Method under test: `markMoved()`
 

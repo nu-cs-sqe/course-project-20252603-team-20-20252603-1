@@ -1,9 +1,5 @@
 package domain.piece;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -14,6 +10,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import domain.Position;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RookTest {
 
@@ -160,5 +158,12 @@ public class RookTest {
                                 new Position(8, 6),
                                 new Position(8, 7)))
                         );
+        }
+
+        @Test
+        public void HasMoved_NewRook_ReturnsFalse() {
+                Rook rook = new Rook(Color.WHITE);
+
+                assertFalse(rook.hasMoved());
         }
 }
