@@ -746,4 +746,17 @@ public class GameTest {
         assertTrue(board.isEmpty(new Position(4, 4)));
         assertEquals(Color.WHITE, game.getCurrentTurn());
     }
+
+    @Test
+    public void ExecuteMove_BlackMakesNonEPMove_EPTargetExpires() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+        board.placePieceAt(new Position(4, 5), new Pawn(Color.BLACK));
+        game.executeMove(new Position(2, 4), new Position(4, 4));
+
+        game.executeMove(new Position(7, 1), new Position(6, 1));
+
+        assertFalse(board.getValidMoves(new Position(4, 5)).contains(new Position(3, 4)));
+    }
 }
