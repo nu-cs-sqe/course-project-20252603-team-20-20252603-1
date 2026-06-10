@@ -177,7 +177,7 @@ public class Game {
         } else if (isGameOver()) {
             throw new IllegalStateException("Game is already over");
         } else {
-            Color winnerOnTime = (currentTurn == Color.WHITE) ? Color.BLACK : Color.WHITE;
+            Color winnerOnTime = (loserOnTime == Color.WHITE) ? Color.BLACK : Color.WHITE;
             if (board.hasInsufficientMaterial(winnerOnTime)) {
                 this.gameState = GameState.TIMEOUT_VS_INSUFFICIENT_MATERIAL;
             } else {
