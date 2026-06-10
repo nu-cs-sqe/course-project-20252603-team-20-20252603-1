@@ -918,4 +918,37 @@ public class GameTest {
 
         EasyMock.verify(board, whiteQueen);
     }
+
+    @Test
+    public void isGameOver_AfterInsufficientMaterialMove() {
+        Board board = EasyMock.createMock(Board.class);
+        Piece whiteKing = EasyMock.createMock(Piece.class);
+        Position from = new Position(8, 5);
+        Position to = new Position(8, 6);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.getPieceAt(from)).andReturn(whiteKing);
+        EasyMock.expect(whiteKing.getColor()).andReturn(Color.WHITE);
+        board.movePiece(from, to);
+        EasyMock.expectLastCall();
+        EasyMock.expect(board.getPieceAt(to)).andReturn(whiteKing);
+        EasyMock.expect(whiteKing.getPieceType()).andReturn(PieceType.KING);
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
+        EasyMock.expect(board.getValidMovesForPlayer(Color.BLACK)).andReturn(List.of(from));
+        EasyMock.expect(board.hasInsufficientMaterial(Color.BLACK)).andReturn(true);
+        EasyMock.expect(board.hasInsufficientMaterial(Color.WHITE)).andReturn(true);
+
+        EasyMock.replay(board, whiteKing);
+
+        game.startGame();
+        game.executeMove(from, to);
+
+        assertTrue(game.isGameOver());
+
+        EasyMock.verify(board, whiteKing);
+    }
 }

@@ -129,7 +129,7 @@ Output boundaries: `throws IllegalStateException`, `false`, `true`
 | TC38 | game state is `IN_PROGRESS`                      | returns `False`                | :white_check_mark: |
 | TC39 | game state is `CHECKMATE`                        | returns `True`                 | :white_check_mark: |
 | TC40 | game state is `STALEMATE`                        | returns `True`                 | :white_check_mark: |
-| TC41 | game state is `INSUFFICIENT_MATERIAL`            | returns `True`                 |          :x:       |
+| TC41 | game state is `INSUFFICIENT_MATERIAL`            | returns `True`                 | :white_check_mark: |
 | TC42 | game state is `TIMEOUT`                          | returns `True`                 |          :x:       |
 | TC43 | game state is `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | returns `True`                 |          :x:       |
 

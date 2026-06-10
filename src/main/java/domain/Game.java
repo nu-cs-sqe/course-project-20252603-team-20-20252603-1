@@ -178,6 +178,9 @@ public class Game {
         else if (checkForStalemate()) {
             this.gameState = GameState.STALEMATE;
         }
+        else if (checkForInsufficientMaterial()) {
+            this.gameState = GameState.INSUFFICIENT_MATERIAL;
+        }
     }
 
     private boolean checkForCheckmate() {
@@ -188,5 +191,9 @@ public class Game {
     private boolean checkForStalemate() {
         return !board.isInCheck(currentTurn)
                 && board.getValidMovesForPlayer(currentTurn).isEmpty();
+    }
+
+    private boolean checkForInsufficientMaterial() {
+        return board.hasInsufficientMaterial(Color.BLACK) && board.hasInsufficientMaterial(Color.WHITE);
     }
 }
