@@ -118,8 +118,10 @@ public class Game {
         switch (this.gameState) {
             case NOT_STARTED:
                 throw new IllegalStateException("Cannot answer why game is over if the game has not started.");
-            default:
+            case IN_PROGRESS:
                 throw new IllegalStateException("Cannot answer why game is over if the game is in progress.");
+            default:
+                return this.gameState;
         }
     }
 
