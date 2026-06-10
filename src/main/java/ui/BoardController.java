@@ -7,8 +7,11 @@ import domain.GameState;
 import domain.Position;
 import domain.piece.Color;
 import domain.piece.Piece;
+import domain.piece.PieceType;
+import java.awt.Frame;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -16,13 +19,16 @@ public class BoardController {
     private final BoardChangeListener changeListener;
     private final ClockListener clockListener;
     private final Game game;
+    private final Locale locale;
     private ChessClock clock;
     private Optional<Position> selectedPosition = Optional.empty();
     private List<Position> currentValidMoves = Collections.emptyList();
 
-    public BoardController(BoardChangeListener changeListener, ClockListener clockListener) {
+    public BoardController(BoardChangeListener changeListener, ClockListener clockListener,
+            Locale locale) {
         this.changeListener = changeListener;
         this.clockListener = clockListener;
+        this.locale = locale;
         this.game = new Game();
     }
 
@@ -40,6 +46,12 @@ public class BoardController {
             trySelect(selection);
         } else if (currentValidMoves.contains(selection)) {
             game.executeMove(selectedPosition.get(), selection);
+            if (game.isPromotionPending()) {
+                Frame frame = (changeListener instanceof Frame) ? (Frame) changeListener : null;
+                PieceType chosen = new PromotionDialog(
+                        frame, game.getCurrentTurn(), locale).showAndGetResult();
+                game.executePromotion(chosen);
+            }
             clock.switchClock();
             selectedPosition = Optional.empty();
             currentValidMoves = Collections.emptyList();

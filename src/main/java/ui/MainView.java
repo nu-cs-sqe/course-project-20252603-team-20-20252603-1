@@ -54,7 +54,7 @@ public class MainView extends JFrame implements BoardChangeListener, ClockListen
     }
 
     private void addBoardView() {
-        boardController = new BoardController(this, this);
+        boardController = new BoardController(this, this, locale);
         boardController.startGame(timeControl);
         boardView = new BoardView(boardController);
         add(boardView, BorderLayout.CENTER);

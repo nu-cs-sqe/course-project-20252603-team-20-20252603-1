@@ -204,6 +204,8 @@ public class GameTest {
         EasyMock.expect(board.getPieceAt(from)).andReturn(piece);
         EasyMock.expect(piece.getColor()).andStubReturn(Color.WHITE);
         EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
+        EasyMock.expect(board.getPieceAt(to)).andReturn(piece);
+        EasyMock.expect(piece.getPieceType()).andReturn(PieceType.KNIGHT);
 
         EasyMock.replay(board, piece, from, to);
 
@@ -244,6 +246,11 @@ public class GameTest {
         board.movePiece(blackFrom, blackTo);
         EasyMock.expectLastCall();
         EasyMock.expect(board.isInCheck(Color.WHITE)).andReturn(false);
+
+        EasyMock.expect(board.getPieceAt(whiteTo)).andReturn(whitePiece);
+        EasyMock.expect(whitePiece.getPieceType()).andReturn(PieceType.KNIGHT);
+        EasyMock.expect(board.getPieceAt(blackTo)).andReturn(blackPiece);
+        EasyMock.expect(blackPiece.getPieceType()).andReturn(PieceType.KNIGHT);
 
         EasyMock.replay(board, whitePiece, blackPiece);
 
@@ -482,6 +489,9 @@ public class GameTest {
         EasyMock.expectLastCall();
         EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
 
+        EasyMock.expect(board.getPieceAt(new Position(6, 5))).andReturn(piece);
+        EasyMock.expect(piece.getPieceType()).andReturn(PieceType.KNIGHT);
+
         EasyMock.replay(board, piece);
 
         game.startGame();
@@ -489,8 +499,7 @@ public class GameTest {
 
         assertEquals(Color.BLACK, game.getCurrentTurn());
 
-        EasyMock.verify(board);
-
+        EasyMock.verify(board, piece);
     }
 
     @Test
@@ -544,6 +553,8 @@ public class GameTest {
         EasyMock.expect(whitePiece.getColor()).andReturn(Color.WHITE);
         board.movePiece(from, to);
         EasyMock.expectLastCall();
+        EasyMock.expect(board.getPieceAt(to)).andReturn(whitePiece);
+        EasyMock.expect(whitePiece.getPieceType()).andReturn(PieceType.KNIGHT);
         EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(true);
         EasyMock.expect(board.getValidMovesForPlayer(Color.BLACK)).andReturn(List.of());
 
@@ -573,6 +584,8 @@ public class GameTest {
         EasyMock.expect(whitePiece.getColor()).andReturn(Color.WHITE);
         board.movePiece(from, to);
         EasyMock.expectLastCall();
+        EasyMock.expect(board.getPieceAt(to)).andReturn(whitePiece);
+        EasyMock.expect(whitePiece.getPieceType()).andReturn(PieceType.KNIGHT);
         EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(true);
         EasyMock.expect(board.getValidMovesForPlayer(Color.BLACK)).andReturn(List.of(new Position(1, 1)));
 
@@ -643,6 +656,8 @@ public class GameTest {
         EasyMock.expect(whitePiece.getColor()).andReturn(Color.WHITE);
         board.movePiece(from, to);
         EasyMock.expectLastCall();
+        EasyMock.expect(board.getPieceAt(to)).andReturn(whitePiece);
+        EasyMock.expect(whitePiece.getPieceType()).andReturn(PieceType.KNIGHT);
         EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(true);
         EasyMock.expect(board.getValidMovesForPlayer(Color.BLACK)).andReturn(List.of());
 
@@ -655,5 +670,221 @@ public class GameTest {
 
         EasyMock.verify(board, whitePiece);
 
+    }
+
+    @Test
+    public void IsPromotionPending_AfterStart_ReturnsFalse() {
+        Game game = new Game();
+        game.startGame();
+
+        assertFalse(game.isPromotionPending());
+    }
+
+    @Test
+    public void ExecuteMove_WhitePawnReachesRank8_PromotionPendingTrue() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        // clear BLACK queen at (8,4) and place WHITE pawn at (7,4)
+        board.placePieceAt(new Position(8, 4), null);
+        Pawn pawn = new Pawn(Color.WHITE);
+        pawn.markMoved();
+        board.placePieceAt(new Position(7, 4), pawn);
+
+        game.executeMove(new Position(7, 4), new Position(8, 4));
+
+        assertTrue(game.isPromotionPending());
+    }
+
+    @Test
+    public void ExecutePromotion_AfterPromotion_IsPromotionPendingFalse() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        board.placePieceAt(new Position(8, 4), null);
+        Pawn pawn = new Pawn(Color.WHITE);
+        pawn.markMoved();
+        board.placePieceAt(new Position(7, 4), pawn);
+
+        game.executeMove(new Position(7, 4), new Position(8, 4));
+        game.executePromotion(PieceType.QUEEN);
+
+        assertFalse(game.isPromotionPending());
+    }
+
+    @Test
+    public void ExecutePromotion_NoPendingPromotion_ThrowsIllegalStateException() {
+        Game game = new Game();
+        game.startGame();
+
+        assertThrows(IllegalStateException.class,
+                () -> game.executePromotion(PieceType.QUEEN));
+    }
+
+    @Test
+    public void ExecutePromotion_WhitePawnToQueen_ReplacesAndSwitchesTurn() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        board.placePieceAt(new Position(8, 4), null);
+        Pawn pawn = new Pawn(Color.WHITE);
+        pawn.markMoved();
+        board.placePieceAt(new Position(7, 4), pawn);
+
+        game.executeMove(new Position(7, 4), new Position(8, 4));
+        game.executePromotion(PieceType.QUEEN);
+
+        assertEquals(PieceType.QUEEN, board.getPieceAt(new Position(8, 4)).getPieceType());
+        assertEquals(Color.WHITE, board.getPieceAt(new Position(8, 4)).getColor());
+        assertFalse(game.isPromotionPending());
+        assertEquals(Color.BLACK, game.getCurrentTurn());
+    }
+
+    @Test
+    public void ExecutePromotion_WhitePawnToRook_ReplacesAndSwitchesTurn() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        board.placePieceAt(new Position(8, 4), null);
+        Pawn pawn = new Pawn(Color.WHITE);
+        pawn.markMoved();
+        board.placePieceAt(new Position(7, 4), pawn);
+
+        game.executeMove(new Position(7, 4), new Position(8, 4));
+        game.executePromotion(PieceType.ROOK);
+
+        assertEquals(PieceType.ROOK, board.getPieceAt(new Position(8, 4)).getPieceType());
+        assertEquals(Color.WHITE, board.getPieceAt(new Position(8, 4)).getColor());
+        assertEquals(Color.BLACK, game.getCurrentTurn());
+    }
+
+    @Test
+    public void ExecutePromotion_WhitePawnToBishop_ReplacesAndSwitchesTurn() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        board.placePieceAt(new Position(8, 4), null);
+        Pawn pawn = new Pawn(Color.WHITE);
+        pawn.markMoved();
+        board.placePieceAt(new Position(7, 4), pawn);
+
+        game.executeMove(new Position(7, 4), new Position(8, 4));
+        game.executePromotion(PieceType.BISHOP);
+
+        assertEquals(PieceType.BISHOP, board.getPieceAt(new Position(8, 4)).getPieceType());
+        assertEquals(Color.WHITE, board.getPieceAt(new Position(8, 4)).getColor());
+        assertEquals(Color.BLACK, game.getCurrentTurn());
+    }
+
+    @Test
+    public void ExecutePromotion_WhitePawnToKnight_ReplacesAndSwitchesTurn() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        board.placePieceAt(new Position(8, 4), null);
+        Pawn pawn = new Pawn(Color.WHITE);
+        pawn.markMoved();
+        board.placePieceAt(new Position(7, 4), pawn);
+
+        game.executeMove(new Position(7, 4), new Position(8, 4));
+        game.executePromotion(PieceType.KNIGHT);
+
+        assertEquals(PieceType.KNIGHT, board.getPieceAt(new Position(8, 4)).getPieceType());
+        assertEquals(Color.WHITE, board.getPieceAt(new Position(8, 4)).getColor());
+        assertEquals(Color.BLACK, game.getCurrentTurn());
+    }
+
+    @Test
+    public void ExecutePromotion_PromoteToPawn_ThrowsIllegalArgumentException() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        board.placePieceAt(new Position(8, 4), null);
+        Pawn pawn = new Pawn(Color.WHITE);
+        pawn.markMoved();
+        board.placePieceAt(new Position(7, 4), pawn);
+
+        game.executeMove(new Position(7, 4), new Position(8, 4));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> game.executePromotion(PieceType.PAWN));
+    }
+
+    @Test
+    public void ExecutePromotion_PromoteToKing_ThrowsIllegalArgumentException() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        board.placePieceAt(new Position(8, 4), null);
+        Pawn pawn = new Pawn(Color.WHITE);
+        pawn.markMoved();
+        board.placePieceAt(new Position(7, 4), pawn);
+
+        game.executeMove(new Position(7, 4), new Position(8, 4));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> game.executePromotion(PieceType.KING));
+    }
+
+    @Test
+    public void ExecutePromotion_BlackPawnToQueen_ReplacesAndSwitchesTurn() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        board.placePieceAt(new Position(1, 4), null);
+        Pawn pawn = new Pawn(Color.BLACK);
+        pawn.markMoved();
+        board.placePieceAt(new Position(2, 4), pawn);
+
+        game.executeMove(new Position(2, 1), new Position(3, 1));
+        game.executeMove(new Position(2, 4), new Position(1, 4));
+        game.executePromotion(PieceType.QUEEN);
+
+        assertEquals(PieceType.QUEEN, board.getPieceAt(new Position(1, 4)).getPieceType());
+        assertEquals(Color.BLACK, board.getPieceAt(new Position(1, 4)).getColor());
+        assertEquals(Color.WHITE, game.getCurrentTurn());
+    }
+
+    @Test
+    public void ExecuteMove_WhilePromotionPending_ThrowsIllegalStateException() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        board.placePieceAt(new Position(8, 4), null);
+        Pawn pawn = new Pawn(Color.WHITE);
+        pawn.markMoved();
+        board.placePieceAt(new Position(7, 4), pawn);
+
+        game.executeMove(new Position(7, 4), new Position(8, 4));
+
+        assertThrows(IllegalStateException.class,
+                () -> game.executeMove(new Position(2, 1), new Position(3, 1)));
+    }
+
+    @Test
+    public void ExecuteMove_WhitePawnReachesRank8_TurnDoesNotSwitch() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        board.placePieceAt(new Position(8, 4), null);
+        Pawn pawn = new Pawn(Color.WHITE);
+        pawn.markMoved();
+        board.placePieceAt(new Position(7, 4), pawn);
+
+        game.executeMove(new Position(7, 4), new Position(8, 4));
+
+        assertTrue(game.isPromotionPending());
+        assertEquals(Color.WHITE, game.getCurrentTurn());
     }
 }

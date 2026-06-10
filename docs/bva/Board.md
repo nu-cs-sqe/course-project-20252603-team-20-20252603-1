@@ -98,6 +98,8 @@ As these are unit tests, the only new boundary with adding `King` is using the a
 | TC60 | BLACK rook at `(5,1)`, WHITE king at `(5,8)`, WHITE knight at `(3,3)`, no other pieces, `pos=(3,3)`   | includes `(5,4)`, does not include `(1,2)`                            | :white_check_mark: |
 | TC61 | BLACK rook at `(6,5)`, WHITE king at `(5,5)`, no other pieces, `pos=(5,5)`                            | includes `(6,5)`                                                      | :white_check_mark: |
 | TC62 | WHITE king at `(1,5)`, WHITE knight at `(3,3)`, BLACK bishop at `(5,1)`, no other pieces, `pos=(3,3)` | returns `[]`                                                          | :white_check_mark: |
+| TC72 | WHITE Pawn (hasMoved=false) at `(2,1)`, BLACK piece at `(3,1)`, `(4,1)` empty                         | returns `[]` — one-square blocked prevents two-square jump            | :white_check_mark: |
+| TC73 | BLACK Pawn (hasMoved=false) at `(7,1)`, WHITE piece at `(6,1)`, `(5,1)` empty                         | returns `[]` — one-square blocked prevents two-square jump            | :white_check_mark: |
 
 ### Method under test: `movePiece(Position from, Position to)`
 
@@ -128,15 +130,31 @@ Input boundaries:
 
 Output boundary: `false`, `true`
 
-| ID   | State of the System                                                                                         | Expected output | Implemented?       |
-| ---- | ----------------------------------------------------------------------------------------------------------- | --------------- | ------------------ |
-| TC51 | initialized board, `isInCheck(WHITE)`                                                                       | `false`         | :white_check_mark: |
-| TC52 | initialized board, `isInCheck(BLACK)`                                                                       | `false`         | :white_check_mark: |
-| TC53 | WHITE king at `(5,8)`, BLACK rook at `(5,1)`, no other pieces                                               | `true`          | :white_check_mark: |
-| TC54 | WHITE king at `(5,5)`, BLACK rook at `(5,1)`, WHITE pawn at `(5,3)`, no other pieces                        | `false`         | :white_check_mark: |
-| TC55 | WHITE king at `(5,5)`, BLACK knight at `(3,4)`, no other pieces                                             | `true`          | :white_check_mark: |
-| TC56 | BLACK king at `(5,5)`, WHITE queen at `(5,1)`, no other pieces                                              | `true`          | :white_check_mark: |
-| TC57 | WHITE rook at `(1,1)`, BLACK rook at `(4,1)`, BLACK king at `(8,1)`, WHITE king at `(4,5)`, no other pieces | `true`          | :white_check_mark: |
+| ID   | State of the System                                                                                         | Expected output                | Implemented?       |
+| ---- | ----------------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------ |
+| TC51 | initialized board, `isInCheck(WHITE)`                                                                       | `false`                        | :white_check_mark: |
+| TC52 | initialized board, `isInCheck(BLACK)`                                                                       | `false`                        | :white_check_mark: |
+| TC53 | WHITE king at `(5,8)`, BLACK rook at `(5,1)`, no other pieces                                               | `true`                         | :white_check_mark: |
+| TC54 | WHITE king at `(5,5)`, BLACK rook at `(5,1)`, WHITE pawn at `(5,3)`, no other pieces                        | `false`                        | :white_check_mark: |
+| TC55 | WHITE king at `(5,5)`, BLACK knight at `(3,4)`, no other pieces                                             | `true`                         | :white_check_mark: |
+| TC56 | BLACK king at `(5,5)`, WHITE queen at `(5,1)`, no other pieces                                              | `true`                         | :white_check_mark: |
+| TC57 | WHITE rook at `(1,1)`, BLACK rook at `(4,1)`, BLACK king at `(8,1)`, WHITE king at `(4,5)`, no other pieces | `true`                         | :white_check_mark: |
+| TC74 | no WHITE king on board, `isInCheck(WHITE)` called                                                           | throws `IllegalStateException` | :white_check_mark: |
+
+### Method under test: `promotePawn(Position position, PieceType pieceType)`
+
+| ID   | State of the System                                            | Expected output                                                    | Implemented?       |
+| ---- | -------------------------------------------------------------- | ------------------------------------------------------------------ | :----------------- |
+| TC63 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), QUEEN)`             | `getPieceAt((8,4))` = QUEEN, WHITE; piece is instance of `Queen`   | :white_check_mark: |
+| TC64 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), ROOK)`              | `getPieceAt((8,4))` = ROOK, WHITE; piece is instance of `Rook`     | :white_check_mark: |
+| TC65 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), BISHOP)`            | `getPieceAt((8,4))` = BISHOP, WHITE; piece is instance of `Bishop` | :white_check_mark: |
+| TC66 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), KNIGHT)`            | `getPieceAt((8,4))` = KNIGHT, WHITE; piece is instance of `Knight` | :white_check_mark: |
+| TC67 | BLACK PAWN at `(1,4)`, `promotePawn((1,4), QUEEN)`             | `getPieceAt((1,4))` = QUEEN, BLACK; piece is instance of `Queen`   | :white_check_mark: |
+| TC68 | WHITE PAWN at `(4,4)` (mid-board), `promotePawn((4,4), QUEEN)` | throws `IllegalArgumentException` - not at promotion rank          | :white_check_mark: |
+| TC69 | WHITE KNIGHT at `(8,4)`, `promotePawn((8,4), QUEEN)`           | throws `IllegalArgumentException` - not a pawn                     | :white_check_mark: |
+| TC70 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), PAWN)`              | throws `IllegalArgumentException` - cannot promote to PAWN         | :white_check_mark: |
+| TC71 | WHITE PAWN at `(8,4)`, `promotePawn((8,4), KING)`              | throws `IllegalArgumentException` - cannot promote to KING         | :white_check_mark: |
+| TC75 | empty position `(8,4)`, `promotePawn((8,4), QUEEN)`            | throws `IllegalArgumentException` - no piece at position           | :white_check_mark: |
 
 ### Method under test: `public List<Position> validMovesForPlayer(Color color)`
 
@@ -148,7 +166,7 @@ Output boundaries: `IllegalArgumentException`, empty list, non-empty list
 
 | ID   | State of the System                                                                                 | Expected output | Implemented?       |
 | ---- | --------------------------------------------------------------------------------------------------- | --------------- | ------------------ |
-| TC63 | initialized board, `color=WHITE`                                                                    | non-empty list  | :white_check_mark: |
-| TC64 | initialized board, `color=BLACK`                                                                    | non-empty list  | :white_check_mark: |
-| TC65 | WHITE king at `(1,1)`, BLACK rook at `(2,8)`, BLACK rook at `(8,2)`, no other pieces, `color=WHITE` | `[]`            | :white_check_mark: |
-| TC66 | BLACK king at `(8,8)`, WHITE rook at `(7,1)`, WHITE rook at `(1,7)`, no other pieces, `color=BLACK` | `[]`            | :white_check_mark: |
+| TC75 | initialized board, `color=WHITE`                                                                    | non-empty list  | :white_check_mark: |
+| TC76 | initialized board, `color=BLACK`                                                                    | non-empty list  | :white_check_mark: |
+| TC77 | WHITE king at `(1,1)`, BLACK rook at `(2,8)`, BLACK rook at `(8,2)`, no other pieces, `color=WHITE` | `[]`            | :white_check_mark: |
+| TC78 | BLACK king at `(8,8)`, WHITE rook at `(7,1)`, WHITE rook at `(1,7)`, no other pieces, `color=BLACK` | `[]`            | :white_check_mark: |

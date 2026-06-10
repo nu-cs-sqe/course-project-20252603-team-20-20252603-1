@@ -86,6 +86,35 @@ Output boundaries: `throws IllegalStateException`, `false`, `true`
 | TC22 | game started, WHITE king on same rank as attacking BLACK rook, no pieces between, `player=WHITE` | `true`                         | :white_check_mark: |
 | TC23 | game started, BLACK king on same rank as attacking WHITE rook, no pieces between, `player=BLACK` | `true`                         | :white_check_mark: |
 
+### Method under test: `isPromotionPending()`
+
+| ID   | State of the System                                                     | Expected output | Implemented?       |
+| ---- | ----------------------------------------------------------------------- | --------------- | :----------------- |
+| TC24 | game started, no moves made                                             | `false`         | :white_check_mark: |
+| TC25 | WHITE pawn at `(7,4)`, `(8,4)` empty, `executeMove((7,4),(8,4))` called | `true`          | :white_check_mark: |
+| TC26 | after TC25, `executePromotion(QUEEN)` called                            | `false`         | :white_check_mark: |
+
+### Method under test: `executePromotion(PieceType pieceType)`
+
+| ID   | State of the System                                                             | Expected output                                                                            | Implemented?       |
+| ---- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | :----------------- |
+| TC27 | no promotion pending, `executePromotion(QUEEN)` called                          | throws `IllegalStateException`                                                             | :white_check_mark: |
+| TC28 | WHITE pawn moved to `(8,4)`, `promotionPending`=true, `executePromotion(QUEEN)` | `getPieceAt((8,4))` = QUEEN(WHITE); `isPromotionPending()`=false; `getCurrentTurn()`=BLACK | :white_check_mark: |
+| TC29 | same setup as TC28, `executePromotion(ROOK)`                                    | `getPieceAt((8,4))` = ROOK(WHITE); `getCurrentTurn()`=BLACK                                | :white_check_mark: |
+| TC30 | same setup as TC28, `executePromotion(BISHOP)`                                  | `getPieceAt((8,4))` = BISHOP(WHITE); `getCurrentTurn()`=BLACK                              | :white_check_mark: |
+| TC31 | same setup as TC28, `executePromotion(KNIGHT)`                                  | `getPieceAt((8,4))` = KNIGHT(WHITE); `getCurrentTurn()`=BLACK                              | :white_check_mark: |
+| TC32 | same setup as TC28, `executePromotion(PAWN)`                                    | throws `IllegalArgumentException`                                                          | :white_check_mark: |
+| TC33 | same setup as TC28, `executePromotion(KING)`                                    | throws `IllegalArgumentException`                                                          | :white_check_mark: |
+| TC34 | BLACK pawn moved to `(1,4)`, `promotionPending`=true, `executePromotion(QUEEN)` | `getPieceAt((1,4))` = QUEEN(BLACK); `getCurrentTurn()`=WHITE                               | :white_check_mark: |
+
+### Method under test: `executeMove` - promotion extension
+
+| ID   | State of the System                                              | Expected output                                                               | Implemented?       |
+| ---- | ---------------------------------------------------------------- | ----------------------------------------------------------------------------- | :----------------- |
+| TC35 | `promotionPending`=true, `executeMove` called                    | throws `IllegalStateException` - must resolve promotion first                 | :white_check_mark: |
+| TC36 | WHITE pawn at `(7,4)`, `(8,4)` empty, `executeMove((7,4),(8,4))` | `isPromotionPending()`=true; `getCurrentTurn()`=WHITE (turn not yet switched) | :white_check_mark: |
+
+
 
 ### Method under test: `isGameOver()`
 
