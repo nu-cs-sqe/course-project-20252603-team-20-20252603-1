@@ -197,7 +197,7 @@ Output boundaries: `IllegalArgumentException`, true, false
 | TC79 | `color=null`                                     | throws `IllegalArgumentException` | :white_check_mark: |
 | TC80 | `color=WHITE`, white only has king               |                 true              | :white_check_mark: |
 | TC81 | `color=BLACK`, black only has king & knight      |                 true              | :white_check_mark: |
-| TC82 | `color=WHITE`, white only has king & bishop      |                 true              |          :x:       |
-| TC83 | `color=BLACK`, black only has king & two knights |                 true              |          :x:       |
-| TC84 | `color=WHITE`, white has king & rook             |                false              |          :x:       |
+| TC82 | `color=WHITE`, white only has king & bishop      |                 true              | :white_check_mark: |
+| TC83 | `color=BLACK`, black only has king & two knights |                 true              | :white_check_mark: |
+| TC84 | `color=WHITE`, white has king & rook             |                false              |          :white_check_mark: |
 | TC85 | `color=BLACK`, black has king & two bishops      |                false              |          :x:       |

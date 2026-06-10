@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Board {
 
@@ -277,13 +279,24 @@ public class Board {
     }
 
     public boolean hasInsufficientMaterial(Color color) {
-        if (color == Color.WHITE){
-            return true;
-        }
-        else if (color == Color.BLACK){
-            return true;
-        }
-        else {
+        if (color == Color.WHITE || color == Color.BLACK) {
+            List<PieceType> types = allPositions().stream()
+                    .filter(pos -> !isEmpty(pos))
+                    .map(this::getPieceAt)
+                    .filter(piece -> piece.getColor() == color)
+                    .map(Piece::getPieceType)
+                    .collect(Collectors.toList());
+
+            Set<List<PieceType>> insufficientSets = Set.of(
+                    List.of(PieceType.KING),
+                    List.of(PieceType.KING, PieceType.BISHOP),
+                    List.of(PieceType.KING, PieceType.KNIGHT),
+                    List.of(PieceType.KING, PieceType.KNIGHT, PieceType.KNIGHT));
+
+            return insufficientSets.stream()
+                    .anyMatch(s -> s.size() == types.size()
+                            && s.containsAll(types));
+        } else {
             throw new IllegalArgumentException();
         }
     }

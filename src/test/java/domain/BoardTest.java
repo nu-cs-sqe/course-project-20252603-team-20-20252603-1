@@ -1254,7 +1254,7 @@ public class BoardTest {
   @Test
   public void hasInsufficientMaterial_NullColor_ThrowsExcception() {
     Board board = new Board();
-    
+
     assertThrows(IllegalArgumentException.class,
         () -> board.hasInsufficientMaterial(null));
 
@@ -1264,6 +1264,8 @@ public class BoardTest {
   public void hasInsufficientMaterial_White_OnlyKing() {
     Board board = new Board();
     Piece king = stubPiece(Color.WHITE, PieceType.KING, List.of());
+    EasyMock.replay(king);
+    board.placePieceAt(new Position(1, 1), king);
 
     assertTrue(board.hasInsufficientMaterial(Color.WHITE));
   }
@@ -1273,7 +1275,49 @@ public class BoardTest {
     Board board = new Board();
     Piece king = stubPiece(Color.BLACK, PieceType.KING, List.of());
     Piece knight = stubPiece(Color.BLACK, PieceType.KNIGHT, List.of());
+    EasyMock.replay(king, knight );
+    board.placePieceAt(new Position(1, 1), king);
+    board.placePieceAt(new Position(4, 4), knight);
 
     assertTrue(board.hasInsufficientMaterial(Color.BLACK));
+  }
+
+  @Test
+  public void hasInsufficientMaterial_White_KingBishop() {
+    Board board = new Board();
+    Piece king = stubPiece(Color.WHITE, PieceType.KING, List.of());
+    Piece bishop = stubPiece(Color.WHITE, PieceType.KNIGHT, List.of());
+    EasyMock.replay(king, bishop);
+    board.placePieceAt(new Position(1, 1), king);
+    board.placePieceAt(new Position(4, 4), bishop);
+
+
+    assertTrue(board.hasInsufficientMaterial(Color.WHITE));
+  }
+
+  @Test
+  public void hasInsufficientMaterial_Black_King2Knights() {
+    Board board = new Board();
+    Piece king = stubPiece(Color.BLACK, PieceType.KING, List.of());
+    Piece knight1 = stubPiece(Color.BLACK, PieceType.KNIGHT, List.of());
+    Piece knight2 = stubPiece(Color.BLACK, PieceType.KNIGHT, List.of());
+    EasyMock.replay(king, knight1, knight2);
+    board.placePieceAt(new Position(1, 1), king);
+    board.placePieceAt(new Position(4, 4), knight1);
+    board.placePieceAt(new Position(8, 8), knight1); 
+
+    assertTrue(board.hasInsufficientMaterial(Color.BLACK));
+  }
+
+  @Test
+  public void hasSufficientMaterial_White_KingRook() {
+    Board board = new Board();
+    Piece king = stubPiece(Color.WHITE, PieceType.KING, List.of());
+    Piece rook = stubPiece(Color.WHITE, PieceType.ROOK, List.of());
+    EasyMock.replay(king, rook);
+    board.placePieceAt(new Position(1, 1), king);
+    board.placePieceAt(new Position(4, 4), rook);
+
+    assertFalse(board.hasInsufficientMaterial(Color.WHITE));
   }
 }
