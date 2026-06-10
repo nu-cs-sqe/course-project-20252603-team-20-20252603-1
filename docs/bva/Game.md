@@ -109,11 +109,11 @@ Output boundaries: `throws IllegalStateException`, `false`, `true`
 
 ### Method under test: `executeMove` - promotion extension
 
-| ID   | State of the System                                                                                    | Expected output                                                               | Implemented?       |
-|------|--------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|:-------------------|
-| TC35 | `promotionPending`=true, `executeMove` called                                                          | throws `IllegalStateException` - must resolve promotion first                 | :white_check_mark: |
-| TC36 | WHITE pawn at `(7,4)`, `(8,4)` empty, `executeMove((7,4),(8,4))`                                       | `isPromotionPending()`=true; `getCurrentTurn()`=WHITE (turn not yet switched) | :white_check_mark: |
-| TC40 | game started, WHITE pawn at `(7,4)`, BLACK piece at `(8,5)`, `executeMove((7,4),(8,5))` (diagonal capture to promotion rank) | `isPromotionPending()`=true; `getCurrentTurn()`=WHITE | :x:                |
+| ID   | State of the System                                                                                                          | Expected output                                                               | Implemented?       |
+|------|------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|:-------------------|
+| TC35 | `promotionPending`=true, `executeMove` called                                                                                | throws `IllegalStateException` - must resolve promotion first                 | :white_check_mark: |
+| TC36 | WHITE pawn at `(7,4)`, `(8,4)` empty, `executeMove((7,4),(8,4))`                                                             | `isPromotionPending()`=true; `getCurrentTurn()`=WHITE (turn not yet switched) | :white_check_mark: |
+| TC40 | game started, WHITE pawn at `(7,4)`, BLACK piece at `(8,5)`, `executeMove((7,4),(8,5))` (diagonal capture to promotion rank) | `isPromotionPending()`=true; `getCurrentTurn()`=WHITE                         | :x:                |
 
 ### Method under test: `executeMove` - en passant extension
 
