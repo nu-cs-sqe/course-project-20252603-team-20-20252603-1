@@ -28,6 +28,12 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     // Source: https://mvnrepository.com/artifact/org.easymock/easymock
     testImplementation("org.easymock:easymock:5.4.0")
+
+    // Source: Lab 6
+    testImplementation(platform("io.cucumber:cucumber-bom:7.20.1"))
+    testImplementation("io.cucumber:cucumber-java")
+    testImplementation("io.cucumber:cucumber-junit-platform-engine")
+    testImplementation("io.cucumber:cucumber-picocontainer:7.20.1")
 }
 
 java {
@@ -43,6 +49,7 @@ tasks.compileJava {
 // Source: Lab 5 build.gradle.kts
 tasks.test {
     useJUnitPlatform()
+    dependsOn("cucumber")
     finalizedBy(tasks.jacocoTestReport)
     finalizedBy(tasks.pitest)
 }
@@ -80,6 +87,14 @@ tasks.spotbugsTest {
 // https://docs.gradle.org/current/userguide/jacoco_plugin.html
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
+    dependsOn("cucumber")
+
+    executionData.setFrom(
+        fileTree(layout.buildDirectory.dir("jacoco")) {
+            include("*.exec")
+        }
+    )
+
     reports {
         xml.required = false
         csv.required = false
@@ -126,4 +141,27 @@ pitest {
     useClasspathFile.set(true)
     fileExtensionsToFilter.addAll("xml")
     exportLineCoverage = true
+}
+
+// Lab 6
+val cucumberRuntime by configurations.creating {
+    extendsFrom(configurations["testImplementation"])
+}
+
+task("cucumber") {
+    dependsOn("assemble", "compileTestJava")
+    doLast {
+        javaexec {
+            mainClass.set("io.cucumber.core.cli.Main")
+            classpath = cucumberRuntime + sourceSets.main.get().output + sourceSets.test.get().output
+            args = listOf("--plugin", "pretty",
+                        "--glue", "domain",                      // where the step definitions are.
+                        "src/test/resources")                    // where the feature files are.
+            // Configure jacoco agent for the test coverage.
+            val jacocoAgent = zipTree(configurations.jacocoAgent.get().singleFile)
+                .filter { it.name == "jacocoagent.jar" }
+                .singleFile
+            jvmArgs = listOf("-javaagent:$jacocoAgent=destfile=$buildDir/jacoco/cucumber.exec,append=false")
+        }
+    }
 }
