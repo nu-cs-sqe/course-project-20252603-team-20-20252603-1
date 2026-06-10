@@ -15,11 +15,10 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Consumer;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class BoardView extends JPanel implements BoardChangeListener {
+public class BoardView extends JPanel {
     private static final int BOARD_SIZE = 8;
     private static final int TILE_SIZE = 100; // size of each square in pixels
     private final java.awt.Color lightSquareColor = new java.awt.Color(240, 217, 181);
@@ -31,29 +30,17 @@ public class BoardView extends JPanel implements BoardChangeListener {
     private Map<PieceType, Image> whitePieceImages;
     private Map<PieceType, Image> blackPieceImages;
 
-    private final BoardController boardController;
-    private Consumer<Color> onTurnChanged = turn -> {
-    };
+    private final BoardController boardController; 
 
-    public BoardView() {
+    public BoardView(BoardController boardController) {
+        this.boardController = boardController;
         setPreferredSize(new Dimension(BOARD_SIZE * TILE_SIZE, BOARD_SIZE * TILE_SIZE));
         loadPieceImages();
-        this.boardController = new BoardController(this);
         addMouseListener(new BoardMouseListener());
     }
 
     @Override
     protected final void finalize() throws Throwable {
-    }
-
-    public void setOnTurnChanged(Consumer<Color> callback) {
-        this.onTurnChanged = callback;
-    }
-
-    @Override
-    public void onBoardChanged() {
-        onTurnChanged.accept(boardController.getCurrentTurn());
-        repaint();
     }
 
     @Override
