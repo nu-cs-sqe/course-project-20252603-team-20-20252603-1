@@ -1052,4 +1052,27 @@ public class BoardTest {
 
     assertFalse(actual.isEmpty());
   }
+
+  @Test
+  public void GetValidMovesForPlayer_WhiteKingTrappedByBlackRooks_EmptyList() {
+    Board board = new Board();
+    Piece king = stubPiece(Color.WHITE, PieceType.KING, List.of(
+        new Position(2, 1), new Position(1, 2), new Position(2, 2)));
+    Piece rook1 = stubPiece(Color.BLACK, PieceType.ROOK, List.of(
+        new Position(2, 1), new Position(2, 2)));
+    Piece rook2 = stubPiece(Color.BLACK, PieceType.ROOK, List.of(
+        new Position(1, 2), new Position(2, 2)));
+
+    EasyMock.replay(king, rook1, rook2);
+
+    board.placePieceAt(new Position(1, 1), king);
+    board.placePieceAt(new Position(2, 8), rook1);
+    board.placePieceAt(new Position(8, 2), rook2);
+
+    List<Position> actual = board.getValidMovesForPlayer(Color.WHITE);
+
+    assertTrue(actual.isEmpty());
+
+    EasyMock.verify(king, rook1, rook2);
+  }
 }
