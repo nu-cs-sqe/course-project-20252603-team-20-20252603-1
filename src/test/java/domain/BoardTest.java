@@ -1267,4 +1267,13 @@ public class BoardTest {
 
     assertTrue(board.hasInsufficientMaterial(Color.WHITE));
   }
+
+  @Test
+  public void hasInsufficientMaterial_Black_KingKnight() {
+    Board board = new Board();
+    Piece king = stubPiece(Color.BLACK, PieceType.KING, List.of());
+    Piece knight = stubPiece(Color.BLACK, PieceType.KNIGHT, List.of());
+
+    assertTrue(board.hasInsufficientMaterial(Color.BLACK));
+  }
 }

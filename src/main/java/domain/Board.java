@@ -280,6 +280,9 @@ public class Board {
         if (color == Color.WHITE){
             return true;
         }
+        else if (color == Color.BLACK){
+            return true;
+        }
         else {
             throw new IllegalArgumentException();
         }
