@@ -119,18 +119,18 @@ Validates source and destination, physically moves the piece, and calls `piece.m
 
 As these are unit tests, the only new boundary with adding `King` is using the actual `King` instance of `Piece`.
 
-| ID   | State of the System                                                         | Expected output                                                                                                                 | Implemented?       |
-| ---- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| TC35 | new `Board()`, `from=(2,1)` (empty)                                         | throws `IllegalArgumentException`                                                                                               | :white_check_mark: |
-| TC36 | initialized board, `from=(2,1)` WHITE pawn, `to=(5,1)` (not in valid moves) | throws `IllegalArgumentException`                                                                                               | :white_check_mark: |
-| TC37 | initialized board, `from=(2,1)` WHITE pawn, `to=(3,1)` (one step)           | `getPieceAt((3,1))` = WHITE PAWN; piece at `(3,1)` is instance of `Pawn`; `isEmpty((2,1))` = `true`; `pawn.hasMoved()` = `true` | :white_check_mark: |
-| TC38 | initialized board, `from=(2,1)` WHITE pawn, `to=(4,1)` (two steps)          | `getPieceAt((4,1))` = WHITE PAWN; piece at `(4,1)` is instance of `Pawn`; `isEmpty((2,1))` = `true`; `pawn.hasMoved()` = `true` | :white_check_mark: |
-| TC39 | initialized board, `from=(1,2)` WHITE knight, `to=(3,3)`                    | `getPieceAt((3,3))` = WHITE KNIGHT; piece at `(3,3)` is instance of `Knight`; `isEmpty((1,2))` = `true`                         | :white_check_mark: |
-| TC45 | WHITE Knight at (4,4), BLACK Pawn at (6,5); knight moves to (6,5)           | Knight at (6,5); BLACK Pawn removed; (4,4) empty                                                                                | :white_check_mark: |
-| TC49 | initialized board, `(2,6)` cleared, `from=(1,5)` WHITE king, `to=(2,6)`     | `getPieceAt((2,6))` = WHITE King; instance of `King`; `isEmpty((1,5))` = `true`; `king.hasMoved()` = `true`                     | :white_check_mark: |
-| TC50 | initialized board, `(7,4)` cleared, `from=(8,5)` BLACK king, `to=(7,4)`     | `getPieceAt((7,4))` = BLACK King; instance of `King`; `isEmpty((8,5))` = `true`; `king.hasMoved()` = `true`                     | :white_check_mark: |
-| TC92 | WHITE Pawn at `(5,4)`, BLACK Pawn at `(5,5)`, EP target=`(6,5)`: `movePiece((5,4),(6,5))` | WHITE Pawn at `(6,5)`; `isEmpty((5,4))`=`true`; `isEmpty((5,5))`=`true` — captured pawn removed | ☐ |
-| TC93 | BLACK Pawn at `(4,5)`, WHITE Pawn at `(4,4)`, EP target=`(3,4)`: `movePiece((4,5),(3,4))` | BLACK Pawn at `(3,4)`; `isEmpty((4,5))`=`true`; `isEmpty((4,4))`=`true` — captured pawn removed | ☐ |
+| ID   | State of the System                                                                       | Expected output                                                                                                                 | Implemented?       |
+|------|-------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|--------------------|
+| TC35 | new `Board()`, `from=(2,1)` (empty)                                                       | throws `IllegalArgumentException`                                                                                               | :white_check_mark: |
+| TC36 | initialized board, `from=(2,1)` WHITE pawn, `to=(5,1)` (not in valid moves)               | throws `IllegalArgumentException`                                                                                               | :white_check_mark: |
+| TC37 | initialized board, `from=(2,1)` WHITE pawn, `to=(3,1)` (one step)                         | `getPieceAt((3,1))` = WHITE PAWN; piece at `(3,1)` is instance of `Pawn`; `isEmpty((2,1))` = `true`; `pawn.hasMoved()` = `true` | :white_check_mark: |
+| TC38 | initialized board, `from=(2,1)` WHITE pawn, `to=(4,1)` (two steps)                        | `getPieceAt((4,1))` = WHITE PAWN; piece at `(4,1)` is instance of `Pawn`; `isEmpty((2,1))` = `true`; `pawn.hasMoved()` = `true` | :white_check_mark: |
+| TC39 | initialized board, `from=(1,2)` WHITE knight, `to=(3,3)`                                  | `getPieceAt((3,3))` = WHITE KNIGHT; piece at `(3,3)` is instance of `Knight`; `isEmpty((1,2))` = `true`                         | :white_check_mark: |
+| TC45 | WHITE Knight at (4,4), BLACK Pawn at (6,5); knight moves to (6,5)                         | Knight at (6,5); BLACK Pawn removed; (4,4) empty                                                                                | :white_check_mark: |
+| TC49 | initialized board, `(2,6)` cleared, `from=(1,5)` WHITE king, `to=(2,6)`                   | `getPieceAt((2,6))` = WHITE King; instance of `King`; `isEmpty((1,5))` = `true`; `king.hasMoved()` = `true`                     | :white_check_mark: |
+| TC50 | initialized board, `(7,4)` cleared, `from=(8,5)` BLACK king, `to=(7,4)`                   | `getPieceAt((7,4))` = BLACK King; instance of `King`; `isEmpty((8,5))` = `true`; `king.hasMoved()` = `true`                     | :white_check_mark: |
+| TC92 | WHITE Pawn at `(5,4)`, BLACK Pawn at `(5,5)`, EP target=`(6,5)`: `movePiece((5,4),(6,5))` | WHITE Pawn at `(6,5)`; `isEmpty((5,4))`=`true`; `isEmpty((5,5))`=`true` — captured pawn removed                                 | :white_check_mark: |
+| TC93 | BLACK Pawn at `(4,5)`, WHITE Pawn at `(4,4)`, EP target=`(3,4)`: `movePiece((4,5),(3,4))` | BLACK Pawn at `(3,4)`; `isEmpty((4,5))`=`true`; `isEmpty((4,4))`=`true` — captured pawn removed                                 | :x:                |
 
 
 ### Method under test: `public boolean isInCheck(Color player)`

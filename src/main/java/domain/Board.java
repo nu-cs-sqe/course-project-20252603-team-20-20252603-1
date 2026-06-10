@@ -195,12 +195,23 @@ public class Board {
         }
 
         Piece piece = getPieceAt(from);
+        boolean epCapture = isEnPassantCapture(piece, from, to);
 
         piece.markMoved();
 
         setPieceAt(to, piece);
         setPieceAt(from, null);
+        if (epCapture) {
+            setPieceAt(new Position(from.getRow(), to.getCol()), null);
+        }
         updateEnPassantTarget(piece, from, to);
+    }
+
+    private boolean isEnPassantCapture(Piece piece, Position from, Position to) {
+        return piece.getPieceType() == PieceType.PAWN
+                && enPassantTarget.isPresent()
+                && to.equals(enPassantTarget.get())
+                && isEmpty(to);
     }
 
     private List<Position> allPositions() {
