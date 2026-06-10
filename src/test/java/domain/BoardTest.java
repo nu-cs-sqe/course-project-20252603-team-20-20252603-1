@@ -1341,4 +1341,21 @@ public class BoardTest {
 
     assertTrue(moves.contains(new Position(6, 7)));
   }
+
+  @Test
+  public void GetValidMoves_BlackPawnAdjacentAfterWhiteDoubleAdvance_IncludesEPSquare() {
+    Board board = new Board();
+    Pawn black = new Pawn(Color.BLACK);
+    black.markMoved();
+    board.placePieceAt(new Position(4, 4), black);
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 8), new King(Color.BLACK));
+    board.placePieceAt(new Position(2, 5), new Pawn(Color.WHITE));
+    board.movePiece(new Position(2, 5), new Position(4, 5));
+
+    List<Position> moves = board.getValidMoves(new Position(4, 4));
+
+    assertTrue(moves.contains(new Position(3, 5)));
+  }
+
 }
