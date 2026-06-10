@@ -1210,4 +1210,15 @@ public class BoardTest {
 
     assertTrue(board.getEnPassantTarget().isEmpty());
   }
+
+  @Test
+  public void GetEnPassantTarget_AfterDoubleAdvanceThenAnyMove_ReturnsEmpty() {
+    Board board = new Board();
+    board.initializeBoard();
+
+    board.movePiece(new Position(2, 4), new Position(4, 4));
+    board.movePiece(new Position(7, 1), new Position(6, 1));
+
+    assertTrue(board.getEnPassantTarget().isEmpty());
+  }
 }
