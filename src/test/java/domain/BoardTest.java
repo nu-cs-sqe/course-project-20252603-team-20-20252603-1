@@ -1119,4 +1119,16 @@ public class BoardTest {
     assertThrows(IllegalArgumentException.class,
             () -> board.promotePawn(new Position(8, 4), PieceType.KING));
   }
+
+  @Test
+  public void GetValidMoves_UnmovedPawnWithPieceOneAhead_ReturnEmpty() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.WHITE);
+    board.placePieceAt(new Position(2, 1), pawn);
+    board.placePieceAt(new Position(3, 1), new Pawn(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(2, 1));
+
+    assertTrue(moves.isEmpty());
+  }
 }

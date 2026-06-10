@@ -152,7 +152,23 @@ public class Board {
         boolean isPawn = piece.getPieceType() == PieceType.PAWN;
         validMoves.removeIf(pos -> !isEmpty(pos)
                 && (isPawn || getPieceAt(pos).getColor() == piece.getColor()));
+        if (isPawn) {
+            removeBlockedPawnTwoSquareMove(position, piece, validMoves);
+        }
         return validMoves;
+    }
+
+    private void removeBlockedPawnTwoSquareMove(Position position, Piece piece,
+                                                List<Position> validMoves) {
+        int direction = (piece.getColor() == Color.WHITE) ? 1 : -1;
+        int oneForwardRow = position.getRow() + direction;
+        int twoForwardRow = position.getRow() + (2 * direction);
+        int col = position.getCol();
+        if (Position.validPosition(oneForwardRow, col)
+                && !isEmpty(new Position(oneForwardRow, col))
+                && Position.validPosition(twoForwardRow, col)) {
+            validMoves.remove(new Position(twoForwardRow, col));
+        }
     }
 
     public void movePiece(Position from, Position to) {
