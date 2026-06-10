@@ -95,7 +95,8 @@ public class MainView extends JFrame implements BoardChangeListener, ClockListen
                 String timeoutDraw = bundle.getString("timeoutVsInsufficientMaterial");
                 String labelText = MessageFormat.format("{0}: {1}", draw, timeoutDraw);
                 gameStatsView.currentPlayerLabel.setText(labelText);
-                JOptionPane.showMessageDialog(this, labelText, timeout, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, labelText, timeout,
+                        JOptionPane.INFORMATION_MESSAGE);
             } else {
                 Color loser = boardController.getCurrentTurn();
                 String winnerColorName = (loser == Color.WHITE) ? black : white;
@@ -104,7 +105,8 @@ public class MainView extends JFrame implements BoardChangeListener, ClockListen
                 gameStatsView.currentPlayerLabel.setText(labelText);
                 String dialogMsg = MessageFormat.format(
                         "{0} ({1}) {2}!", winnerColorName, winnerPlayerName, wins);
-                JOptionPane.showMessageDialog(this, dialogMsg, timeout, JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, dialogMsg, timeout,
+                        JOptionPane.INFORMATION_MESSAGE);
             }
             return;
         }

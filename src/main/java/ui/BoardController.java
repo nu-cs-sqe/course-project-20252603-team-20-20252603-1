@@ -117,15 +117,15 @@ public class BoardController {
     }
 
     public boolean isTimeout() {
-        return game.isGameOver() &&
-                (game.whyIsGameOver() == GameState.TIMEOUT ||
-                        game.whyIsGameOver() == GameState.TIMEOUT_VS_INSUFFICIENT_MATERIAL);
+        return game.isGameOver()
+                && (game.whyIsGameOver() == GameState.TIMEOUT
+                        || game.whyIsGameOver() == GameState.TIMEOUT_VS_INSUFFICIENT_MATERIAL);
     }
 
     public boolean isDraw() {
-        return game.isGameOver() &&
-                (game.whyIsGameOver() == GameState.STALEMATE ||
-                        game.whyIsGameOver() == GameState.INSUFFICIENT_MATERIAL ||
-                        game.whyIsGameOver() == GameState.TIMEOUT_VS_INSUFFICIENT_MATERIAL);
+        return game.isGameOver()
+                && (game.whyIsGameOver() == GameState.STALEMATE
+                        || game.whyIsGameOver() == GameState.INSUFFICIENT_MATERIAL
+                        || game.whyIsGameOver() == GameState.TIMEOUT_VS_INSUFFICIENT_MATERIAL);
     }
 }
