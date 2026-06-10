@@ -49,3 +49,4 @@ Feature: Detect Check
             | "BLACK" | 4       | 1       | "WHITE"        | "QUEEN"        | 8           | 4           |
             | "WHITE" | 8       | 4       | "BLACK"        | "BISHOP"       | 4           | 1           |
             | "BLACK" | 4       | 8       | "WHITE"        | "KNIGHT"       | 1           | 4           |
+            | "WHITE" | 8       | 4       | "BLACK"        | "PAWN"         | 4           | 1           |

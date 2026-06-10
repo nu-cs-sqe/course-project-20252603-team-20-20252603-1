@@ -115,7 +115,7 @@ See `src/test/resources/features/DetectCheck.feature` for the Scenario Outlines.
 | `Bishop` | :white_check_mark: |
 | `Queen`  | :white_check_mark: |
 | `Knight` | :white_check_mark: |
-| `Pawn`   | :x:                |
+| `Pawn`   | :white_check_mark: |
 
 
 #### Attacker Position
