@@ -1320,4 +1320,18 @@ public class BoardTest {
 
     assertFalse(board.hasInsufficientMaterial(Color.WHITE));
   }
+
+  @Test
+  public void hasSufficientMaterial_Black_King2Bishops() {
+    Board board = new Board();
+    Piece king = stubPiece(Color.BLACK, PieceType.KING, List.of());
+    Piece bishop1 = stubPiece(Color.BLACK, PieceType.BISHOP, List.of());
+    Piece bishop2 = stubPiece(Color.BLACK, PieceType.BISHOP, List.of());
+    EasyMock.replay(king, bishop1, bishop2);
+    board.placePieceAt(new Position(1, 1), king);
+    board.placePieceAt(new Position(4, 4), bishop1);
+    board.placePieceAt(new Position(8, 8), bishop2); 
+
+    assertFalse(board.hasInsufficientMaterial(Color.BLACK));
+  }
 }
