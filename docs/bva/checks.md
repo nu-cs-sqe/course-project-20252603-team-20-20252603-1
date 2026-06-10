@@ -182,4 +182,4 @@ See `src/test/resources/features/DetectCheck.feature` for the Scenario Outlines.
 | `(1, 4)` | :white_check_mark: |
 | `(4, 1)` | :white_check_mark: |
 | `(8, 4)` | :white_check_mark: |
-| `(4, 8)` | :x:                |
+| `(4, 8)` | :white_check_mark: |
