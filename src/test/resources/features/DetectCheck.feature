@@ -17,7 +17,7 @@ Feature: Detect Check
             | "WHITE" | 4       | 1       | "BLACK"        | "BISHOP"       | 8           | 5           |
             | "BLACK" | 4       | 8       | "WHITE"        | "KNIGHT"       | 2           | 7           |
             | "WHITE" | 7       | 1       | "BLACK"        | "ROOK"         | 4           | 1           |
-    # | "BLACK" | 5       | 7       | "WHITE"        | "PAWN"         | 4           | 8           |
+            | "BLACK" | 5       | 7       | "WHITE"        | "PAWN"         | 4           | 8           |
 
     Scenario Outline: <player> is in check by more than one piece
         Given the game is in progress
@@ -33,7 +33,7 @@ Feature: Detect Check
             | "BLACK" | 8       | 4       | "WHITE"        | "QUEEN"      | 1          | 4          | "KNIGHT"     | 7          | 2          |
             | "WHITE" | 4       | 1       | "BLACK"        | "ROOK"       | 4          | 8          | "QUEEN"      | 5          | 2          |
             | "BLACK" | 4       | 8       | "WHITE"        | "QUEEN"      | 4          | 1          | "BISHOP"     | 3          | 7          |
-    # | "WHITE" | 4       | 4       | "BLACK"        | "PAWN"       | 5          | 3          | "PAWN"       | 5          | 5          |
+            | "WHITE" | 4       | 4       | "BLACK"        | "PAWN"       | 5          | 3          | "PAWN"       | 5          | 5          |
 
 
     Scenario Outline: <player> is not in check
