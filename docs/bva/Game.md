@@ -169,3 +169,10 @@ Output boundaries: `IllegalStateException`, `GameState` enums that correspond to
 | TC56 | `isGameOver()` is true                          | throws `IllegalStateException`                   | :white_check_mark: |
 | TC57 | `board.hasInsufficientMaterial(loser)` is true  | sets state to `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | :white_check_mark: |
 | TC58 | `board.hasInsufficientMaterial(loser)` is false | sets state to `TIMEOUT`                          | :white_check_mark: |
+
+### Method under test: `executeMove` - castling extension
+
+| ID   | State of the System                                                                                                                  | Expected output                                            | Implemented? |
+|------|--------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|--------------|
+| TC59 | game started, WHITE King at `(1,5)`, WHITE Rook at `(1,8)`, `(1,6)` and `(1,7)` cleared; `executeMove((1,5),(1,7))`                  | King at `(1,7)`; Rook at `(1,6)`; `getCurrentTurn()`=BLACK | :x:          |
+| TC60 | after TC59 (BLACK's turn), BLACK King at `(8,5)`, BLACK Rook at `(8,1)`, `(8,2)`,`(8,3)`,`(8,4)` cleared; `executeMove((8,5),(8,3))` | King at `(8,3)`; Rook at `(8,4)`; `getCurrentTurn()`=WHITE | :x:          |

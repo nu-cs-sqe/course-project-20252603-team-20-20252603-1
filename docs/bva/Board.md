@@ -212,3 +212,27 @@ Output boundaries: `IllegalArgumentException`, true, false
 | TC105 | `color=BLACK`, black only has king & two knights | true                              | :white_check_mark: |
 | TC106 | `color=WHITE`, white has king & rook             | false                             | :white_check_mark: |
 | TC107 | `color=BLACK`, black has king & two bishops      | false                             | :white_check_mark: |
+
+### Method under test: `getValidMoves(Position pos)` - castling extension
+
+| ID    | State of the System                                                                                                     | Expected output          | Implemented? |
+|-------|-------------------------------------------------------------------------------------------------------------------------|--------------------------|--------------|
+| TC108 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, king not in check          | includes `(1,7)`         | :x:          |
+| TC109 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, `(1,2)`, `(1,3)`, `(1,4)` empty, king not in check    | includes `(1,3)`         | :x:          |
+| TC110 | WHITE King at `(1,5)` `hasMoved`=true, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty                       | does not include `(1,7)` | :x:          |
+| TC111 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` `hasMoved`=true, `(1,6)` and `(1,7)` empty                       | does not include `(1,7)` | :x:          |
+| TC112 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, WHITE piece at `(1,6)`                                | does not include `(1,7)` | :x:          |
+| TC113 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, WHITE piece at `(1,3)`                                | does not include `(1,3)` | :x:          |
+| TC114 | WHITE King at `(1,5)` in check (BLACK Rook at `(5,5)`), WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty      | does not include `(1,7)` | :x:          |
+| TC115 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Rook attacks `(1,6)` | does not include `(1,7)` | :x:          |
+| TC116 | BLACK King at `(8,5)` not moved, BLACK Rook at `(8,8)` not moved, `(8,6)` and `(8,7)` empty, king not in check          | includes `(8,7)`         | :x:          |
+| TC117 | BLACK King at `(8,5)` not moved, BLACK Rook at `(8,1)` not moved, `(8,2)`, `(8,3)`, `(8,4)` empty, king not in check    | includes `(8,3)`         | :x:          |
+
+### Method under test: `movePiece(Position from, Position to)` - castling extension
+
+| ID    | State of the System                                                                | Expected output                                                                                                                | Implemented? |
+|-------|------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|--------------|
+| TC118 | WHITE King at `(1,5)`, WHITE Rook at `(1,8)`, path clear; `movePiece((1,5),(1,7))` | King at `(1,7)`; Rook at `(1,6)`; `isEmpty((1,5))`=true; `isEmpty((1,8))`=true; `king.hasMoved()`=true; `rook.hasMoved()`=true | :x:          |
+| TC119 | WHITE King at `(1,5)`, WHITE Rook at `(1,1)`, path clear; `movePiece((1,5),(1,3))` | King at `(1,3)`; Rook at `(1,4)`; `isEmpty((1,5))`=true; `isEmpty((1,1))`=true                                                 | :x:          |
+| TC120 | BLACK King at `(8,5)`, BLACK Rook at `(8,8)`, path clear; `movePiece((8,5),(8,7))` | King at `(8,7)`; Rook at `(8,6)`; `isEmpty((8,5))`=true; `isEmpty((8,8))`=true                                                 | :x:          |
+| TC121 | BLACK King at `(8,5)`, BLACK Rook at `(8,1)`, path clear; `movePiece((8,5),(8,3))` | King at `(8,3)`; Rook at `(8,4)`; `isEmpty((8,5))`=true; `isEmpty((8,1))`=true                                                 | :x:          |
