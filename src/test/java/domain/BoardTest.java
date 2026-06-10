@@ -1187,4 +1187,17 @@ public class BoardTest {
 
     assertEquals(Optional.of(new Position(6, 3)), board.getEnPassantTarget());
   }
+
+  @Test
+  public void GetEnPassantTarget_AfterPawnSingleAdvance_ReturnsEmpty() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.WHITE);
+    pawn.markMoved();
+    board.placePieceAt(new Position(3, 4), pawn);
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+
+    board.movePiece(new Position(3, 4), new Position(4, 4));
+
+    assertTrue(board.getEnPassantTarget().isEmpty());
+  }
 }
