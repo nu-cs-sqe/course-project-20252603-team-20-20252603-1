@@ -21,3 +21,6 @@
    2. `IllegalStateException` if `isGameOver()` is `false`
    2. returns `GameState`
 
+## Additions
+### Game
+- call `checkForGameEnd` after `executeMove`
