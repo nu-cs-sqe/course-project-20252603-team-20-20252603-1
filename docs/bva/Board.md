@@ -102,7 +102,7 @@ As these are unit tests, the only new boundary with adding `King` is using the a
 | TC73 | BLACK Pawn (hasMoved=false) at `(7,1)`, WHITE piece at `(6,1)`, `(5,1)` empty                         | returns `[]` — one-square blocked prevents two-square jump            | :white_check_mark: |
 | TC82 | WHITE Pawn (`hasMoved=true`) at `(4,4)`, BLACK Pawn at `(5,5)`, no EP target                          | includes `(5,5)` — regular diagonal capture                           | :white_check_mark: |
 | TC83 | WHITE Pawn (`hasMoved=true`) at `(4,4)`, BLACK Pawn at `(5,3)`, no EP target                          | includes `(5,3)` — regular diagonal capture (left)                    | :white_check_mark: |
-| TC84 | WHITE Pawn (`hasMoved=true`) at `(4,4)`, WHITE Pawn at `(5,5)`, no EP target                          | does not include `(5,5)` — friendly piece                             | :x:                |
+| TC84 | WHITE Pawn (`hasMoved=true`) at `(4,4)`, WHITE Pawn at `(5,5)`, no EP target                          | does not include `(5,5)` — friendly piece                             | :white_check_mark: |
 | TC85 | BLACK Pawn (`hasMoved=true`) at `(5,4)`, WHITE Pawn at `(4,5)`, no EP target                          | includes `(4,5)` — BLACK diagonal capture                             | :x:                |
 | TC86 | WHITE Pawn (`hasMoved=true`) at `(5,4)`, BLACK Pawn at `(5,5)`, EP target=`(6,5)`                     | includes `(6,4)` and `(6,5)` — forward + en passant                   | :x:                |
 | TC87 | WHITE Pawn (`hasMoved=true`) at `(5,4)`, BLACK Pawn at `(5,3)`, EP target=`(6,3)`                     | includes `(6,4)` and `(6,3)` — forward + en passant (left)            | :x:                |
