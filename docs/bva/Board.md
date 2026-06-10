@@ -111,7 +111,7 @@ As these are unit tests, the only new boundary with adding `King` is using the a
 | TC90 | BLACK Pawn (`hasMoved=true`) at `(4,4)`, WHITE Pawn at `(4,5)`, EP target=`(3,5)`                     | includes `(3,4)` and `(3,5)` — BLACK en passant                       | :white_check_mark: |
 | TC91 | WHITE Pawn (`hasMoved=true`) at `(5,4)`, EP target=`(6,5)`, `(6,5)` empty                             | includes `(6,5)` — EP capture to empty square                         | :white_check_mark: |
 | TC94 | WHITE Pawn (`hasMoved=true`) at `(7,4)`, BLACK piece at `(8,5)`, no EP target                         | includes `(8,5)` — diagonal capture onto promotion rank               | :white_check_mark: |
-| TC95 | BLACK Pawn (`hasMoved=true`) at `(2,4)`, WHITE piece at `(1,5)`, no EP target                         | includes `(1,5)` — diagonal capture onto promotion rank               | :x:                |
+| TC95 | BLACK Pawn (`hasMoved=true`) at `(2,4)`, WHITE piece at `(1,5)`, no EP target                         | includes `(1,5)` — diagonal capture onto promotion rank               | :white_check_mark: |
 
 ### Method under test: `movePiece(Position from, Position to)`
 
