@@ -137,3 +137,19 @@ Output boundary: `false`, `true`
 | TC55 | WHITE king at `(5,5)`, BLACK knight at `(3,4)`, no other pieces                                             | `true`          | :white_check_mark: |
 | TC56 | BLACK king at `(5,5)`, WHITE queen at `(5,1)`, no other pieces                                              | `true`          | :white_check_mark: |
 | TC57 | WHITE rook at `(1,1)`, BLACK rook at `(4,1)`, BLACK king at `(8,1)`, WHITE king at `(4,5)`, no other pieces | `true`          | :white_check_mark: |
+
+### Method under test: `public List<Position> validMovesForPlayer(Color color)`
+
+Input boundaries:
+- `color`: `null`, `WHITE`, `BLACK`
+- Board state: valid moves, no valid moves
+
+Output boundaries: `IllegalArgumentException`, empty list, non-empty list
+
+| ID   | State of the System                                                                                 | Expected output                   | Implemented? |
+| ---- | --------------------------------------------------------------------------------------------------- | --------------------------------- | ------------ |
+| TC63 | any board state, `color=null`                                                                       | throws `IllegalArgumentException` | :x:          |
+| TC64 | initialized board, `color=WHITE`                                                                    | non-empty list                    | :x:          |
+| TC65 | initialized board, `color=BLACK`                                                                    | non-empty list                    | :x:          |
+| TC66 | WHITE king at `(1,1)`, BLACK rook at `(2,8)`, BLACK rook at `(8,2)`, no other pieces, `color=WHITE` | `[]`                              | :x:          |
+| TC67 | BLACK king at `(8,8)`, WHITE rook at `(7,1)`, WHITE rook at `(1,7)`, no other pieces, `color=BLACK` | `[]`                              | :x:          |
