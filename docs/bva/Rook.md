@@ -44,4 +44,4 @@
 | ID   | State of the System                 | Expected output                          | Implemented?       |
 |------|-------------------------------------|------------------------------------------|--------------------|
 | TC11 | new Rook, `markMoved()` called once | `hasMoved()` returns `true`              | :white_check_mark: |
-| TC12 | `markMoved()` called a second time  | `hasMoved()` returns `true` (idempotent) | :x:                |
+| TC12 | `markMoved()` called a second time  | `hasMoved()` returns `true` (idempotent) | :white_check_mark: |

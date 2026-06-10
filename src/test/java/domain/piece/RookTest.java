@@ -175,4 +175,14 @@ public class RookTest {
 
                 assertTrue(rook.hasMoved());
         }
+
+        @Test
+        public void MarkMoved_CalledTwice_HasMovedStillTrue() {
+                Rook rook = new Rook(Color.WHITE);
+
+                rook.markMoved();
+                rook.markMoved();
+
+                assertTrue(rook.hasMoved());
+        }
 }
