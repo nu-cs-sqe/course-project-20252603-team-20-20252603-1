@@ -155,7 +155,7 @@ task("cucumber") {
             mainClass.set("io.cucumber.core.cli.Main")
             classpath = cucumberRuntime + sourceSets.main.get().output + sourceSets.test.get().output
             args = listOf("--plugin", "pretty",
-                        "--glue", "chess",                       // where the step definitions are.
+                        "--glue", "domain",                      // where the step definitions are.
                         "src/test/resources")                    // where the feature files are.
             // Configure jacoco agent for the test coverage.
             val jacocoAgent = zipTree(configurations.jacocoAgent.get().singleFile)
