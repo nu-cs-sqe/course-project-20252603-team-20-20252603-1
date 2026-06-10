@@ -109,12 +109,19 @@ Output boundaries: `throws IllegalStateException`, `false`, `true`
 
 ### Method under test: `executeMove` - promotion extension
 
-| ID   | State of the System                                              | Expected output                                                               | Implemented?       |
-| ---- | ---------------------------------------------------------------- | ----------------------------------------------------------------------------- | :----------------- |
-| TC35 | `promotionPending`=true, `executeMove` called                    | throws `IllegalStateException` - must resolve promotion first                 | :white_check_mark: |
-| TC36 | WHITE pawn at `(7,4)`, `(8,4)` empty, `executeMove((7,4),(8,4))` | `isPromotionPending()`=true; `getCurrentTurn()`=WHITE (turn not yet switched) | :white_check_mark: |
+| ID   | State of the System                                                                                                          | Expected output                                                               | Implemented?       |
+|------|------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|:-------------------|
+| TC35 | `promotionPending`=true, `executeMove` called                                                                                | throws `IllegalStateException` - must resolve promotion first                 | :white_check_mark: |
+| TC36 | WHITE pawn at `(7,4)`, `(8,4)` empty, `executeMove((7,4),(8,4))`                                                             | `isPromotionPending()`=true; `getCurrentTurn()`=WHITE (turn not yet switched) | :white_check_mark: |
+| TC40 | game started, WHITE pawn at `(7,4)`, BLACK piece at `(8,5)`, `executeMove((7,4),(8,5))` (diagonal capture to promotion rank) | `isPromotionPending()`=true; `getCurrentTurn()`=WHITE                         | :white_check_mark: |
 
+### Method under test: `executeMove` - en passant extension
 
+| ID   | State of the System                                                                           | Expected output                                                                        | Implemented?       |
+|------|-----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|--------------------|
+| TC37 | game started, WHITE Pawn at `(2,4)`, BLACK Pawn placed at `(4,5)`, `executeMove((2,4),(4,4))` | `getCurrentTurn()`=BLACK; `getValidMoves((4,5))` includes `(3,4)` (EP available)       | :white_check_mark: |
+| TC38 | after TC37 (BLACK's turn), `executeMove((4,5),(3,4))` (en passant capture)                    | BLACK Pawn at `(3,4)`; `isEmpty((4,4))`=`true`; `getCurrentTurn()`=WHITE               | :white_check_mark: |
+| TC39 | after TC37, BLACK makes a non-EP move instead; WHITE Pawn remains at `(4,4)`                  | `getValidMoves` for adjacent BLACK Pawn no longer includes `(3,4)` (EP target expired) | :white_check_mark: |
 
 ### Method under test: `isGameOver()`
 
@@ -125,13 +132,13 @@ Output boundaries: `throws IllegalStateException`, `false`, `true`
 
 | ID   | State of the System                              | Expected output                | Implemented?       |
 | ---- | ------------------------------------------------ | ------------------------------ | ------------------ |
-| TC37 | `startGame()` not called                         | throws `IllegalStateException` | :white_check_mark: |
-| TC38 | game state is `IN_PROGRESS`                      | returns `False`                | :white_check_mark: |
-| TC39 | game state is `CHECKMATE`                        | returns `True`                 | :white_check_mark: |
-| TC40 | game state is `STALEMATE`                        | returns `True`                 | :white_check_mark: |
-| TC41 | game state is `INSUFFICIENT_MATERIAL`            | returns `True`                 | :white_check_mark: |
-| TC42 | game state is `TIMEOUT`                          | returns `True`                 | :white_check_mark: |
-| TC43 | game state is `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | returns `True`                 | :white_check_mark: |
+| TC41 | `startGame()` not called                         | throws `IllegalStateException` | :white_check_mark: |
+| TC42 | game state is `IN_PROGRESS`                      | returns `False`                | :white_check_mark: |
+| TC43 | game state is `CHECKMATE`                        | returns `True`                 | :white_check_mark: |
+| TC44 | game state is `STALEMATE`                        | returns `True`                 | :white_check_mark: |
+| TC45 | game state is `INSUFFICIENT_MATERIAL`            | returns `True`                 | :white_check_mark: |
+| TC46 | game state is `TIMEOUT`                          | returns `True`                 | :white_check_mark: |
+| TC47 | game state is `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | returns `True`                 | :white_check_mark: |
 
 ### Method under test: `whyIsGameOver()`
 
@@ -142,13 +149,13 @@ Output boundaries: `IllegalStateException`, `GameState` enums that correspond to
 
 | ID   | State of the System                              | Expected output                            | Implemented?       |
 | ---- | ------------------------------------------------ | ------------------------------------------ | ------------------ |
-| TC44 | `startGame()` not called                         | throws `IllegalStateException`             | :white_check_mark: |
-| TC45 | game state is `IN_PROGRESS`                      | returns `IllegalStateException`            | :white_check_mark: |
-| TC46 | game state is `CHECKMATE`                        | returns `CHECKMATE`                        | :white_check_mark: |
-| TC47 | game state is `STALEMATE`                        | returns `STALEMATE`                        | :white_check_mark: |
-| TC48 | game state is `INSUFFICIENT_MATERIAL`            | returns `INSUFFICIENT_MATERIAL`            | :white_check_mark: |
-| TC49 | game state is `TIMEOUT`                          | returns `TIMEOUT`                          | :white_check_mark: |
-| TC50 | game state is `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | returns `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | :white_check_mark: |
+| TC48 | `startGame()` not called                         | throws `IllegalStateException`             | :white_check_mark: |
+| TC49 | game state is `IN_PROGRESS`                      | returns `IllegalStateException`            | :white_check_mark: |
+| TC50 | game state is `CHECKMATE`                        | returns `CHECKMATE`                        | :white_check_mark: |
+| TC51 | game state is `STALEMATE`                        | returns `STALEMATE`                        | :white_check_mark: |
+| TC52 | game state is `INSUFFICIENT_MATERIAL`            | returns `INSUFFICIENT_MATERIAL`            | :white_check_mark: |
+| TC53 | game state is `TIMEOUT`                          | returns `TIMEOUT`                          | :white_check_mark: |
+| TC54 | game state is `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | returns `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | :white_check_mark: |
 
 ### Method under test: `handleTimeout(Color loser)`
 
@@ -158,8 +165,7 @@ Output boundaries: `IllegalStateException`, `GameState` enums that correspond to
 
 | ID   | State of the System                             | Expected output                                  | Implemented?       |
 | ---- | ----------------------------------------------- | ------------------------------------------------ | ------------------ |
-| TC51 | `startGame()` not called                        | throws `IllegalStateException`                   | :white_check_mark: |
-| TC52 | `isGameOver()` is true                         | throws `IllegalStateException`                   | :white_check_mark: |
-| TC53 | `board.hasInsufficientMaterial(loser)` is true  | sets state to `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | :white_check_mark: | *Covered by TC50*
-| TC54 | `board.hasInsufficientMaterial(loser)` is false | sets state to `TIMEOUT`                          | :white_check_mark: | *Covered by TC49*
-
+| TC55 | `startGame()` not called                        | throws `IllegalStateException`                   | :white_check_mark: |
+| TC56 | `isGameOver()` is true                          | throws `IllegalStateException`                   | :white_check_mark: |
+| TC57 | `board.hasInsufficientMaterial(loser)` is true  | sets state to `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | :white_check_mark: |
+| TC58 | `board.hasInsufficientMaterial(loser)` is false | sets state to `TIMEOUT`                          | :white_check_mark: |

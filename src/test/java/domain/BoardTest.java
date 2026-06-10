@@ -26,6 +26,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class BoardTest {
 
@@ -1252,6 +1253,301 @@ public class BoardTest {
   }
 
   @Test
+  public void GetEnPassantTarget_NewBoard_ReturnsEmpty() {
+    Board board = new Board();
+
+    assertTrue(board.getEnPassantTarget().isEmpty());
+  }
+
+  @Test
+  public void GetEnPassantTarget_AfterWhitePawnDoubleAdvance_ReturnsPassedSquare() {
+    Board board = new Board();
+    board.initializeBoard();
+
+    board.movePiece(new Position(2, 4), new Position(4, 4));
+
+    assertEquals(Optional.of(new Position(3, 4)), board.getEnPassantTarget());
+  }
+
+  @Test
+  public void GetEnPassantTarget_AfterBlackPawnDoubleAdvance_ReturnsPassedSquare() {
+    Board board = new Board();
+    board.initializeBoard();
+
+    board.movePiece(new Position(7, 3), new Position(5, 3));
+
+    assertEquals(Optional.of(new Position(6, 3)), board.getEnPassantTarget());
+  }
+
+  @Test
+  public void GetEnPassantTarget_AfterPawnSingleAdvance_ReturnsEmpty() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.WHITE);
+    pawn.markMoved();
+    board.placePieceAt(new Position(3, 4), pawn);
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+
+    board.movePiece(new Position(3, 4), new Position(4, 4));
+
+    assertTrue(board.getEnPassantTarget().isEmpty());
+  }
+
+  @Test
+  public void GetEnPassantTarget_AfterKnightMove_ReturnsEmpty() {
+    Board board = new Board();
+    board.initializeBoard();
+
+    board.movePiece(new Position(1, 2), new Position(3, 3));
+
+    assertTrue(board.getEnPassantTarget().isEmpty());
+  }
+
+  @Test
+  public void GetEnPassantTarget_AfterDoubleAdvanceThenAnyMove_ReturnsEmpty() {
+    Board board = new Board();
+    board.initializeBoard();
+
+    board.movePiece(new Position(2, 4), new Position(4, 4));
+    board.movePiece(new Position(7, 1), new Position(6, 1));
+
+    assertTrue(board.getEnPassantTarget().isEmpty());
+  }
+
+  @Test
+  public void GetValidMoves_WhitePawnEnemyDiagonalRight_IncludesDiagonalCapture() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.WHITE);
+    pawn.markMoved();
+    board.placePieceAt(new Position(4, 4), pawn);
+    board.placePieceAt(new Position(5, 5), new Pawn(Color.BLACK));
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+
+    List<Position> moves = board.getValidMoves(new Position(4, 4));
+
+    assertTrue(moves.contains(new Position(5, 5)));
+  }
+
+  @Test
+  public void GetValidMoves_WhitePawnEnemyDiagonalLeft_IncludesDiagonalCapture() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.WHITE);
+    pawn.markMoved();
+    board.placePieceAt(new Position(4, 4), pawn);
+    board.placePieceAt(new Position(5, 3), new Pawn(Color.BLACK));
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+
+    List<Position> moves = board.getValidMoves(new Position(4, 4));
+
+    assertTrue(moves.contains(new Position(5, 3)));
+  }
+
+  @Test
+  public void GetValidMoves_WhitePawnFriendlyDiagonal_ExcludesDiagonalSquare() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.WHITE);
+    pawn.markMoved();
+    board.placePieceAt(new Position(4, 4), pawn);
+    board.placePieceAt(new Position(5, 5), new Pawn(Color.WHITE));
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+
+    List<Position> moves = board.getValidMoves(new Position(4, 4));
+
+    assertFalse(moves.contains(new Position(5, 5)));
+  }
+
+  @Test
+  public void GetValidMoves_BlackPawnEnemyDiagonal_IncludesDiagonalCapture() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.BLACK);
+    pawn.markMoved();
+    board.placePieceAt(new Position(5, 4), pawn);
+    board.placePieceAt(new Position(4, 5), new Pawn(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(5, 4));
+
+    assertTrue(moves.contains(new Position(4, 5)));
+  }
+
+  @Test
+  public void GetValidMoves_WhitePawnAdjacentAfterBlackDoubleAdvanceRight_IncludesEPSquare() {
+    Board board = new Board();
+    Pawn white = new Pawn(Color.WHITE);
+    white.markMoved();
+    board.placePieceAt(new Position(5, 4), white);
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 8), new King(Color.BLACK));
+    board.placePieceAt(new Position(7, 5), new Pawn(Color.BLACK));
+    board.movePiece(new Position(7, 5), new Position(5, 5));
+
+    List<Position> moves = board.getValidMoves(new Position(5, 4));
+
+    assertTrue(moves.contains(new Position(6, 5)));
+  }
+
+  @Test
+  public void GetValidMoves_WhitePawnAdjacentAfterBlackDoubleAdvanceLeft_IncludesEPSquare() {
+    Board board = new Board();
+    Pawn white = new Pawn(Color.WHITE);
+    white.markMoved();
+    board.placePieceAt(new Position(5, 4), white);
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 8), new King(Color.BLACK));
+    board.placePieceAt(new Position(7, 3), new Pawn(Color.BLACK));
+    board.movePiece(new Position(7, 3), new Position(5, 3));
+
+    List<Position> moves = board.getValidMoves(new Position(5, 4));
+
+    assertTrue(moves.contains(new Position(6, 3)));
+  }
+
+  @Test
+  public void GetValidMoves_WhitePawnColLowAfterBlackDoubleAdvance_IncludesEPSquare() {
+    Board board = new Board();
+    Pawn white = new Pawn(Color.WHITE);
+    white.markMoved();
+    board.placePieceAt(new Position(5, 1), white);
+    board.placePieceAt(new Position(1, 8), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 8), new King(Color.BLACK));
+    board.placePieceAt(new Position(7, 2), new Pawn(Color.BLACK));
+    board.movePiece(new Position(7, 2), new Position(5, 2));
+
+    List<Position> moves = board.getValidMoves(new Position(5, 1));
+
+    assertTrue(moves.contains(new Position(6, 2)));
+  }
+
+  @Test
+  public void GetValidMoves_WhitePawnColHighAfterBlackDoubleAdvance_IncludesEPSquare() {
+    Board board = new Board();
+    Pawn white = new Pawn(Color.WHITE);
+    white.markMoved();
+    board.placePieceAt(new Position(5, 8), white);
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 1), new King(Color.BLACK));
+    board.placePieceAt(new Position(7, 7), new Pawn(Color.BLACK));
+    board.movePiece(new Position(7, 7), new Position(5, 7));
+
+    List<Position> moves = board.getValidMoves(new Position(5, 8));
+
+    assertTrue(moves.contains(new Position(6, 7)));
+  }
+
+  @Test
+  public void GetValidMoves_BlackPawnAdjacentAfterWhiteDoubleAdvance_IncludesEPSquare() {
+    Board board = new Board();
+    Pawn black = new Pawn(Color.BLACK);
+    black.markMoved();
+    board.placePieceAt(new Position(4, 4), black);
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 8), new King(Color.BLACK));
+    board.placePieceAt(new Position(2, 5), new Pawn(Color.WHITE));
+    board.movePiece(new Position(2, 5), new Position(4, 5));
+
+    List<Position> moves = board.getValidMoves(new Position(4, 4));
+
+    assertTrue(moves.contains(new Position(3, 5)));
+  }
+
+  @Test
+  public void GetValidMoves_WhitePawnEPTargetIsEmptySquare_IncludesEPSquare() {
+    Board board = new Board();
+    Pawn white = new Pawn(Color.WHITE);
+    white.markMoved();
+    board.placePieceAt(new Position(5, 4), white);
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 8), new King(Color.BLACK));
+    board.placePieceAt(new Position(7, 5), new Pawn(Color.BLACK));
+    board.movePiece(new Position(7, 5), new Position(5, 5));
+
+    List<Position> moves = board.getValidMoves(new Position(5, 4));
+
+    assertTrue(moves.contains(new Position(6, 5)));
+    assertTrue(board.isEmpty(new Position(6, 5)));
+  }
+
+  @Test
+  public void GetValidMoves_WhitePawnDiagonalCaptureToPromotionRank_IncludesCapture() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.WHITE);
+    pawn.markMoved();
+    board.placePieceAt(new Position(7, 4), pawn);
+    board.placePieceAt(new Position(8, 5), new Rook(Color.BLACK));
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
+
+    List<Position> moves = board.getValidMoves(new Position(7, 4));
+
+    assertTrue(moves.contains(new Position(8, 5)));
+  }
+
+  @Test
+  public void GetValidMoves_BlackPawnDiagonalCaptureToPromotionRank_IncludesCapture() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.BLACK);
+    pawn.markMoved();
+    board.placePieceAt(new Position(2, 4), pawn);
+    board.placePieceAt(new Position(1, 5), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(8, 8), new King(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(2, 4));
+
+    assertTrue(moves.contains(new Position(1, 5)));
+  }
+
+  @Test
+  public void MovePiece_WhiteEnPassantCapture_RemovesCapturedPawn() {
+    Board board = new Board();
+    Pawn white = new Pawn(Color.WHITE);
+    white.markMoved();
+    board.placePieceAt(new Position(5, 4), white);
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 8), new King(Color.BLACK));
+    board.placePieceAt(new Position(7, 5), new Pawn(Color.BLACK));
+    board.movePiece(new Position(7, 5), new Position(5, 5)); // sets EP target (6,5)
+
+    board.movePiece(new Position(5, 4), new Position(6, 5));
+
+    assertFalse(board.isEmpty(new Position(6, 5)));
+    assertTrue(board.isEmpty(new Position(5, 4)));
+    assertTrue(board.isEmpty(new Position(5, 5)));
+  }
+
+  @Test
+  public void MovePiece_BlackEnPassantCapture_RemovesCapturedPawn() {
+    Board board = new Board();
+    Pawn black = new Pawn(Color.BLACK);
+    black.markMoved();
+    board.placePieceAt(new Position(4, 5), black);
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 8), new King(Color.BLACK));
+    board.placePieceAt(new Position(2, 4), new Pawn(Color.WHITE));
+    board.movePiece(new Position(2, 4), new Position(4, 4)); // sets EP target (3,4)
+
+    board.movePiece(new Position(4, 5), new Position(3, 4));
+
+    assertFalse(board.isEmpty(new Position(3, 4)));
+    assertTrue(board.isEmpty(new Position(4, 5)));
+    assertTrue(board.isEmpty(new Position(4, 4)));
+  }
+
+  @Test
+  public void GetValidMoves_EPCaptureWouldExposeKing_EPSquareFiltered() {
+    Board board = new Board();
+    Pawn white = new Pawn(Color.WHITE);
+    white.markMoved();
+    board.placePieceAt(new Position(5, 4), white);
+    board.placePieceAt(new Position(5, 1), new King(Color.WHITE));
+    board.placePieceAt(new Position(5, 8), new Rook(Color.BLACK));
+    board.placePieceAt(new Position(8, 8), new King(Color.BLACK));
+    board.placePieceAt(new Position(7, 5), new Pawn(Color.BLACK));
+    board.movePiece(new Position(7, 5), new Position(5, 5));
+
+    List<Position> moves = board.getValidMoves(new Position(5, 4));
+
+    assertFalse(moves.contains(new Position(6, 5)));
+  }
+
+  @Test
   public void hasInsufficientMaterial_NullColor_ThrowsExcception() {
     Board board = new Board();
 
@@ -1330,7 +1626,7 @@ public class BoardTest {
     EasyMock.replay(king, bishop1, bishop2);
     board.placePieceAt(new Position(1, 1), king);
     board.placePieceAt(new Position(4, 4), bishop1);
-    board.placePieceAt(new Position(8, 8), bishop2); 
+    board.placePieceAt(new Position(8, 8), bishop2);
 
     assertFalse(board.hasInsufficientMaterial(Color.BLACK));
   }

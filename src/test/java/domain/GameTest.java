@@ -861,6 +861,8 @@ public class GameTest {
         Pawn pawn = new Pawn(Color.BLACK);
         pawn.markMoved();
         board.placePieceAt(new Position(2, 4), pawn);
+        board.placePieceAt(new Position(1, 5), null);
+        board.placePieceAt(new Position(4, 5), new King(Color.WHITE));
 
         game.executeMove(new Position(2, 1), new Position(3, 1));
         game.executeMove(new Position(2, 4), new Position(1, 4));
@@ -900,6 +902,65 @@ public class GameTest {
         board.placePieceAt(new Position(7, 4), pawn);
 
         game.executeMove(new Position(7, 4), new Position(8, 4));
+
+        assertTrue(game.isPromotionPending());
+        assertEquals(Color.WHITE, game.getCurrentTurn());
+    }
+
+    @Test
+    public void ExecuteMove_WhitePawnDoubleAdvance_EPAvailableForAdjacentBlackPawn() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+        board.placePieceAt(new Position(4, 5), new Pawn(Color.BLACK));
+
+        game.executeMove(new Position(2, 4), new Position(4, 4));
+
+        assertEquals(Color.BLACK, game.getCurrentTurn());
+        assertTrue(game.getValidMoves(new Position(4, 5)).contains(new Position(3, 4)));
+    }
+
+    @Test
+    public void ExecuteMove_BlackEnPassantCapture_RemovesCapturedPawnAndSwitchesTurn() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+        board.placePieceAt(new Position(4, 5), new Pawn(Color.BLACK));
+        game.executeMove(new Position(2, 4), new Position(4, 4));
+
+        game.executeMove(new Position(4, 5), new Position(3, 4));
+
+        assertEquals(Color.BLACK, game.getPieceAt(new Position(3, 4)).getColor());
+        assertEquals(PieceType.PAWN, game.getPieceAt(new Position(3, 4)).getPieceType());
+        assertTrue(board.isEmpty(new Position(4, 4)));
+        assertEquals(Color.WHITE, game.getCurrentTurn());
+    }
+
+    @Test
+    public void ExecuteMove_BlackMakesNonEPMove_EPTargetExpires() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+        board.placePieceAt(new Position(4, 5), new Pawn(Color.BLACK));
+        game.executeMove(new Position(2, 4), new Position(4, 4));
+
+        game.executeMove(new Position(7, 1), new Position(6, 1));
+
+        assertFalse(board.getValidMoves(new Position(4, 5)).contains(new Position(3, 4)));
+    }
+
+    @Test
+    public void ExecuteMove_DiagonalCaptureToPromotionRank_PromotionPending() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+
+        Pawn whitePawn = new Pawn(Color.WHITE);
+        whitePawn.markMoved();
+        board.placePieceAt(new Position(7, 4), whitePawn);
+        board.placePieceAt(new Position(8, 5), new Rook(Color.BLACK));
+
+        game.executeMove(new Position(7, 4), new Position(8, 5));
 
         assertTrue(game.isPromotionPending());
         assertEquals(Color.WHITE, game.getCurrentTurn());
@@ -1115,7 +1176,7 @@ public class GameTest {
     public void HandleTimeout_GameNotStarted() {
         Board board = EasyMock.createMock(Board.class);
         Game game = new Game(board);
-        
+
         assertThrows(IllegalStateException.class,  () ->  game.handleTimeout(Color.WHITE));
     }
 
@@ -1143,7 +1204,7 @@ public class GameTest {
 
         game.startGame();
         game.executeMove(from, to);
-        
+
         assertThrows(IllegalStateException.class,  () ->  game.handleTimeout(Color.WHITE));
     }
 }

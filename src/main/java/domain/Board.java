@@ -27,6 +27,7 @@ public class Board {
     private static final int BLACK_PAWN_RANK = 6;
     private static final int WHITE_PROMOTION_ROW = NUM_ROWS; // row 8
     private static final int BLACK_PROMOTION_ROW = 1;
+    private Optional<Position> enPassantTarget = Optional.empty();
 
     private static final PieceType[] BACK_RANK = {
             PieceType.ROOK, PieceType.KNIGHT, PieceType.BISHOP, PieceType.QUEEN,
@@ -159,8 +160,19 @@ public class Board {
                 && (isPawn || getPieceAt(pos).getColor() == piece.getColor()));
         if (isPawn) {
             removeBlockedPawnTwoSquareMove(position, piece, validMoves);
+            addPawnCaptureMoves(position, piece, validMoves);
         }
         return validMoves;
+    }
+
+    private void addPawnCaptureMoves(Position position, Piece piece, List<Position> validMoves) {
+        for (Position capture : piece.getCaptureMoves(position)) {
+            if (!isEmpty(capture) && getPieceAt(capture).getColor() != piece.getColor()) {
+                validMoves.add(capture);
+            } else if (enPassantTarget.isPresent() && capture.equals(enPassantTarget.get())) {
+                validMoves.add(capture);
+            }
+        }
     }
 
     private void removeBlockedPawnTwoSquareMove(Position position, Piece piece,
@@ -188,11 +200,23 @@ public class Board {
         }
 
         Piece piece = getPieceAt(from);
+        final boolean epCapture = isEnPassantCapture(piece, from, to);
 
         piece.markMoved();
 
         setPieceAt(to, piece);
         setPieceAt(from, null);
+        if (epCapture) {
+            setPieceAt(new Position(from.getRow(), to.getCol()), null);
+        }
+        updateEnPassantTarget(piece, from, to);
+    }
+
+    private boolean isEnPassantCapture(Piece piece, Position from, Position to) {
+        return piece.getPieceType() == PieceType.PAWN
+                && enPassantTarget.isPresent()
+                && to.equals(enPassantTarget.get())
+                && isEmpty(to);
     }
 
     private List<Position> allPositions() {
@@ -251,8 +275,12 @@ public class Board {
         boardAfterMove.copyFromBoard(getSnapshot());
 
         Piece piece = boardAfterMove.getPieceAt(from);
+        final boolean epCapture = isEnPassantCapture(piece, from, to);
         boardAfterMove.setPieceAt(from, null);
         boardAfterMove.setPieceAt(to, piece);
+        if (epCapture) {
+            boardAfterMove.setPieceAt(new Position(from.getRow(), to.getCol()), null);
+        }
 
         return boardAfterMove.isInCheck(color);
     }
@@ -323,5 +351,19 @@ public class Board {
 
     private boolean isValidPromotionTarget(PieceType pieceType) {
         return pieceType != PieceType.PAWN && pieceType != PieceType.KING;
+    }
+
+    Optional<Position> getEnPassantTarget() {
+        return enPassantTarget;
+    }
+
+    private void updateEnPassantTarget(Piece piece, Position from, Position to) {
+        if (piece.getPieceType() == PieceType.PAWN
+                && Math.abs(from.getRow() - to.getRow()) == 2) {
+            enPassantTarget = Optional.of(
+                    new Position((from.getRow() + to.getRow()) / 2, from.getCol()));
+        } else {
+            enPassantTarget = Optional.empty();
+        }
     }
 }
