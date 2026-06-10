@@ -1420,4 +1420,23 @@ public class BoardTest {
     assertTrue(board.isEmpty(new Position(5, 4)));
     assertTrue(board.isEmpty(new Position(5, 5)));
   }
+
+  @Test
+  public void MovePiece_BlackEnPassantCapture_RemovesCapturedPawn() {
+    Board board = new Board();
+    Pawn black = new Pawn(Color.BLACK);
+    black.markMoved();
+    board.placePieceAt(new Position(4, 5), black);
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 8), new King(Color.BLACK));
+    board.placePieceAt(new Position(2, 4), new Pawn(Color.WHITE));
+    board.movePiece(new Position(2, 4), new Position(4, 4)); // sets EP target (3,4)
+
+    board.movePiece(new Position(4, 5), new Position(3, 4));
+
+    assertFalse(board.isEmpty(new Position(3, 4)));
+    assertTrue(board.isEmpty(new Position(4, 5)));
+    assertTrue(board.isEmpty(new Position(4, 4)));
+  }
+
 }

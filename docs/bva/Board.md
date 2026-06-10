@@ -130,7 +130,7 @@ As these are unit tests, the only new boundary with adding `King` is using the a
 | TC49 | initialized board, `(2,6)` cleared, `from=(1,5)` WHITE king, `to=(2,6)`                   | `getPieceAt((2,6))` = WHITE King; instance of `King`; `isEmpty((1,5))` = `true`; `king.hasMoved()` = `true`                     | :white_check_mark: |
 | TC50 | initialized board, `(7,4)` cleared, `from=(8,5)` BLACK king, `to=(7,4)`                   | `getPieceAt((7,4))` = BLACK King; instance of `King`; `isEmpty((8,5))` = `true`; `king.hasMoved()` = `true`                     | :white_check_mark: |
 | TC92 | WHITE Pawn at `(5,4)`, BLACK Pawn at `(5,5)`, EP target=`(6,5)`: `movePiece((5,4),(6,5))` | WHITE Pawn at `(6,5)`; `isEmpty((5,4))`=`true`; `isEmpty((5,5))`=`true` — captured pawn removed                                 | :white_check_mark: |
-| TC93 | BLACK Pawn at `(4,5)`, WHITE Pawn at `(4,4)`, EP target=`(3,4)`: `movePiece((4,5),(3,4))` | BLACK Pawn at `(3,4)`; `isEmpty((4,5))`=`true`; `isEmpty((4,4))`=`true` — captured pawn removed                                 | :x:                |
+| TC93 | BLACK Pawn at `(4,5)`, WHITE Pawn at `(4,4)`, EP target=`(3,4)`: `movePiece((4,5),(3,4))` | BLACK Pawn at `(3,4)`; `isEmpty((4,5))`=`true`; `isEmpty((4,4))`=`true` — captured pawn removed                                 | :white_check_mark: |
 
 
 ### Method under test: `public boolean isInCheck(Color player)`

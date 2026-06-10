@@ -195,7 +195,7 @@ public class Board {
         }
 
         Piece piece = getPieceAt(from);
-        boolean epCapture = isEnPassantCapture(piece, from, to);
+        final boolean epCapture = isEnPassantCapture(piece, from, to);
 
         piece.markMoved();
 
