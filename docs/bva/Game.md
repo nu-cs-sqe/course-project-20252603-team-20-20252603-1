@@ -146,9 +146,9 @@ Output boundaries: `IllegalStateException`, `GameState` enums that correspond to
 | TC45 | game state is `IN_PROGRESS`                      | returns `IllegalStateException`            | :white_check_mark: |
 | TC46 | game state is `CHECKMATE`                        | returns `CHECKMATE`                        | :white_check_mark: |
 | TC47 | game state is `STALEMATE`                        | returns `STALEMATE`                        | :white_check_mark: |
-| TC48 | game state is `INSUFFICIENT_MATERIAL`            | returns `INSUFFICIENT_MATERIAL`            |          :x:       |
-| TC49 | game state is `TIMEOUT`                          | returns `TIMEOUT`                          |          :x:       |
-| TC50 | game state is `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | returns `TIMEOUT_VS_INSUFFICIENT_MATERIAL` |          :x:       |
+| TC48 | game state is `INSUFFICIENT_MATERIAL`            | returns `INSUFFICIENT_MATERIAL`            | :white_check_mark: |
+| TC49 | game state is `TIMEOUT`                          | returns `TIMEOUT`                          | :white_check_mark: |
+| TC50 | game state is `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | returns `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | :white_check_mark: |
 
 ### Method under test: `handleTimeout(Color loser)`
 

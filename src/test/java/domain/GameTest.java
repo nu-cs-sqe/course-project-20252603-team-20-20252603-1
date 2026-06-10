@@ -1038,4 +1038,75 @@ public class GameTest {
         EasyMock.verify(board, whitePiece);
 
     }
+
+    @Test
+    public void WhyIsGameOver_InsufficientMaterial() {
+        Board board = EasyMock.createMock(Board.class);
+        Piece whiteKing = EasyMock.createMock(Piece.class);
+        Position from = new Position(8, 5);
+        Position to = new Position(8, 6);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.expect(board.getPieceAt(from)).andReturn(whiteKing);
+        EasyMock.expect(whiteKing.getColor()).andReturn(Color.WHITE);
+        board.movePiece(from, to);
+        EasyMock.expectLastCall();
+        EasyMock.expect(board.getPieceAt(to)).andReturn(whiteKing);
+        EasyMock.expect(whiteKing.getPieceType()).andReturn(PieceType.KING);
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
+        EasyMock.expect(board.isInCheck(Color.BLACK)).andReturn(false);
+        EasyMock.expect(board.getValidMovesForPlayer(Color.BLACK)).andReturn(List.of(from));
+        EasyMock.expect(board.hasInsufficientMaterial(Color.BLACK)).andReturn(true);
+        EasyMock.expect(board.hasInsufficientMaterial(Color.WHITE)).andReturn(true);
+
+        EasyMock.replay(board, whiteKing);
+
+        game.startGame();
+        game.executeMove(from, to);
+
+        assertEquals(GameState.INSUFFICIENT_MATERIAL, game.whyIsGameOver());
+
+        EasyMock.verify(board, whiteKing);
+    }
+
+    @Test
+    public void WhyIsGameOver_Timeout() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+        EasyMock.expect(board.hasInsufficientMaterial(Color.BLACK)).andReturn(false);
+
+        EasyMock.replay(board);
+
+        game.startGame();
+        game.handleTimeout(Color.WHITE);
+
+        assertEquals(GameState.TIMEOUT, game.whyIsGameOver());
+
+        EasyMock.verify(board);
+    }
+
+    @Test
+    public void WhyIsGameOver_Timeout_InsufficientMaterial() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+        EasyMock.expect(board.hasInsufficientMaterial(Color.BLACK)).andReturn(true);
+
+        EasyMock.replay(board);
+
+        game.startGame();
+        game.handleTimeout(Color.WHITE);
+
+        assertEquals(GameState.TIMEOUT_VS_INSUFFICIENT_MATERIAL, game.whyIsGameOver());
+
+        EasyMock.verify(board);
+    }
 }
