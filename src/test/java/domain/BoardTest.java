@@ -1325,4 +1325,20 @@ public class BoardTest {
 
     assertTrue(moves.contains(new Position(6, 2)));
   }
+
+  @Test
+  public void GetValidMoves_WhitePawnColHighAfterBlackDoubleAdvance_IncludesEPSquare() {
+    Board board = new Board();
+    Pawn white = new Pawn(Color.WHITE);
+    white.markMoved();
+    board.placePieceAt(new Position(5, 8), white);
+    board.placePieceAt(new Position(1, 1), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 1), new King(Color.BLACK));
+    board.placePieceAt(new Position(7, 7), new Pawn(Color.BLACK));
+    board.movePiece(new Position(7, 7), new Position(5, 7));
+
+    List<Position> moves = board.getValidMoves(new Position(5, 8));
+
+    assertTrue(moves.contains(new Position(6, 7)));
+  }
 }
