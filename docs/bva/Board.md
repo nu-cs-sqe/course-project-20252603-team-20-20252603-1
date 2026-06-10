@@ -139,7 +139,7 @@ Output boundary: `false`, `true`
 | TC55 | WHITE king at `(5,5)`, BLACK knight at `(3,4)`, no other pieces                                             | `true`                         | :white_check_mark: |
 | TC56 | BLACK king at `(5,5)`, WHITE queen at `(5,1)`, no other pieces                                              | `true`                         | :white_check_mark: |
 | TC57 | WHITE rook at `(1,1)`, BLACK rook at `(4,1)`, BLACK king at `(8,1)`, WHITE king at `(4,5)`, no other pieces | `true`                         | :white_check_mark: |
-| TC74 | no WHITE king on board, `isInCheck(WHITE)` called                                                           | throws `IllegalStateException` | :x:                |
+| TC74 | no WHITE king on board, `isInCheck(WHITE)` called                                                           | throws `IllegalStateException` | :white_check_mark: |
 
 ### Method under test: `promotePawn(Position position, PieceType pieceType)`
 

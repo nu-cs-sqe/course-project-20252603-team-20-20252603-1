@@ -1143,4 +1143,12 @@ public class BoardTest {
 
     assertTrue(moves.isEmpty());
   }
+
+  @Test
+  public void IsInCheck_NoKingOnBoard_ThrowsIllegalState() {
+    Board board = new Board();
+    board.placePieceAt(new Position(4, 4), new Pawn(Color.WHITE));
+
+    assertThrows(IllegalStateException.class, () -> board.isInCheck(Color.WHITE));
+  }
 }
