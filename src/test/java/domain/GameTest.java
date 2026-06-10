@@ -1109,4 +1109,13 @@ public class GameTest {
 
         EasyMock.verify(board);
     }
+
+
+    @Test
+    public void HandleTimeout_GameNotStarted() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+        
+        assertThrows(IllegalStateException.class,  () ->  game.handleTimeout(Color.WHITE));
+    }
 }

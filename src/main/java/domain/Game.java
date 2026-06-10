@@ -172,12 +172,17 @@ public class Game {
     }
 
     public void handleTimeout(Color loserOnTime) {
-        Color winnerOnTime = (currentTurn == Color.WHITE) ? Color.BLACK : Color.WHITE;
-        if (board.hasInsufficientMaterial(winnerOnTime)) {
-            this.gameState = GameState.TIMEOUT_VS_INSUFFICIENT_MATERIAL;
+        if (this.gameState == GameState.NOT_STARTED) {
+            throw new IllegalStateException("No timeout, game has not started");
         }
         else {
-            this.gameState = GameState.TIMEOUT;
+            Color winnerOnTime = (currentTurn == Color.WHITE) ? Color.BLACK : Color.WHITE;
+            if (board.hasInsufficientMaterial(winnerOnTime)) {
+                this.gameState = GameState.TIMEOUT_VS_INSUFFICIENT_MATERIAL;
+            }
+            else {
+                this.gameState = GameState.TIMEOUT;
+            }
         }
     }
 
