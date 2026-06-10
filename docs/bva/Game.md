@@ -130,13 +130,15 @@ Input boundaries:
 
 Output boundaries: `throws IllegalStateException`, `false`, `true`
 
-| ID   | State of the System         | Expected output                | Implemented?       |
-| ---- | --------------------------- | ------------------------------ | ------------------ |
-| TC41 | `startGame()` not called    | throws `IllegalStateException` | :white_check_mark: |
-| TC42 | game state is `IN_PROGRESS` | returns `False`                | :white_check_mark: |
-| TC43 | game state is `CHECKMATE`   | returns `True`                 | :white_check_mark: |
-
-**Add more once draw conditions are done and move timer is done**
+| ID   | State of the System                              | Expected output                | Implemented?       |
+| ---- | ------------------------------------------------ | ------------------------------ | ------------------ |
+| TC41 | `startGame()` not called                         | throws `IllegalStateException` | :white_check_mark: |
+| TC42 | game state is `IN_PROGRESS`                      | returns `False`                | :white_check_mark: |
+| TC43 | game state is `CHECKMATE`                        | returns `True`                 | :white_check_mark: |
+| TC44 | game state is `STALEMATE`                        | returns `True`                 | :white_check_mark: |
+| TC45 | game state is `INSUFFICIENT_MATERIAL`            | returns `True`                 | :white_check_mark: |
+| TC46 | game state is `TIMEOUT`                          | returns `True`                 | :white_check_mark: |
+| TC47 | game state is `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | returns `True`                 | :white_check_mark: |
 
 ### Method under test: `whyIsGameOver()`
 
@@ -145,10 +147,25 @@ Input boundaries:
 
 Output boundaries: `IllegalStateException`, `GameState` enums that correspond to game end
 
-| ID   | State of the System         | Expected output                 | Implemented?       |
-| ---- | --------------------------- | ------------------------------- | ------------------ |
-| TC44 | `startGame()` not called    | throws `IllegalStateException`  | :white_check_mark: |
-| TC45 | game state is `IN_PROGRESS` | returns `IllegalStateException` | :white_check_mark: |
-| TC46 | game state is `CHECKMATE`   | returns `CHECKMATE`             | :white_check_mark: |
+| ID   | State of the System                              | Expected output                            | Implemented?       |
+| ---- | ------------------------------------------------ | ------------------------------------------ | ------------------ |
+| TC48 | `startGame()` not called                         | throws `IllegalStateException`             | :white_check_mark: |
+| TC49 | game state is `IN_PROGRESS`                      | returns `IllegalStateException`            | :white_check_mark: |
+| TC50 | game state is `CHECKMATE`                        | returns `CHECKMATE`                        | :white_check_mark: |
+| TC51 | game state is `STALEMATE`                        | returns `STALEMATE`                        | :white_check_mark: |
+| TC52 | game state is `INSUFFICIENT_MATERIAL`            | returns `INSUFFICIENT_MATERIAL`            | :white_check_mark: |
+| TC53 | game state is `TIMEOUT`                          | returns `TIMEOUT`                          | :white_check_mark: |
+| TC54 | game state is `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | returns `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | :white_check_mark: |
 
-**Add more once draw conditions are done and move timer is done**
+### Method under test: `handleTimeout(Color loser)`
+
+Input boundaries: `color`: `null`, `WHITE`, `BLACK`
+
+Output boundaries: `IllegalStateException`, `GameState` enums that correspond to game ending in timeout
+
+| ID   | State of the System                             | Expected output                                  | Implemented?       |
+| ---- | ----------------------------------------------- | ------------------------------------------------ | ------------------ |
+| TC55 | `startGame()` not called                        | throws `IllegalStateException`                   | :white_check_mark: |
+| TC56 | `isGameOver()` is true                          | throws `IllegalStateException`                   | :white_check_mark: |
+| TC57 | `board.hasInsufficientMaterial(loser)` is true  | sets state to `TIMEOUT_VS_INSUFFICIENT_MATERIAL` | :white_check_mark: |
+| TC58 | `board.hasInsufficientMaterial(loser)` is false | sets state to `TIMEOUT`                          | :white_check_mark: |

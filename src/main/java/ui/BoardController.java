@@ -66,7 +66,8 @@ public class BoardController {
 
     public void handleTimeout(Color loser) {
         clock.stop();
-        // TODO: handle winning condition
+        game.handleTimeout(loser);
+        changeListener.onBoardChanged();
     }
 
     private void trySelect(Position pos) {
@@ -105,5 +106,26 @@ public class BoardController {
 
     public boolean isCheckmate() {
         return game.isGameOver() && game.whyIsGameOver() == GameState.CHECKMATE;
+    }
+
+    public boolean isStalemate() {
+        return game.isGameOver() && game.whyIsGameOver() == GameState.STALEMATE;
+    }
+
+    public boolean isInsufficientMaterial() {
+        return game.isGameOver() && game.whyIsGameOver() == GameState.INSUFFICIENT_MATERIAL;
+    }
+
+    public boolean isTimeout() {
+        return game.isGameOver()
+                && (game.whyIsGameOver() == GameState.TIMEOUT
+                        || game.whyIsGameOver() == GameState.TIMEOUT_VS_INSUFFICIENT_MATERIAL);
+    }
+
+    public boolean isDraw() {
+        return game.isGameOver()
+                && (game.whyIsGameOver() == GameState.STALEMATE
+                        || game.whyIsGameOver() == GameState.INSUFFICIENT_MATERIAL
+                        || game.whyIsGameOver() == GameState.TIMEOUT_VS_INSUFFICIENT_MATERIAL);
     }
 }
