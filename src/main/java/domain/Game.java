@@ -2,12 +2,18 @@ package domain;
 
 import domain.piece.Color;
 import domain.piece.Piece;
+import domain.piece.PieceType;
 import java.util.List;
+import java.util.Optional;
 
 public class Game {
     private final Board board;
     private Color currentTurn;
     private boolean gameInProgress = false;
+    private boolean promotionPending = false;
+    private static final int WHITE_PROMOTION_ROW = 8;
+    private static final int BLACK_PROMOTION_ROW = 1;
+    private Optional<Position> promotionPosition = Optional.empty();
 
     public Game() {
         this.board = new Board();
@@ -53,23 +59,6 @@ public class Game {
         return board.getPieceAt(pos);
     }
 
-    public void executeMove(Position from, Position to) {
-        if (!this.gameInProgress) {
-            throw new IllegalStateException("Cannot execute move if the game has not started.");
-        }
-
-        Piece piece = board.getPieceAt(from);
-        Color pieceColor = piece.getColor();
-
-        if (pieceColor != this.currentTurn) {
-            throw new IllegalArgumentException(
-                    "Cannot execute move if the current turn is not the piece's color.");
-        }
-
-        board.movePiece(from, to);
-        switchTurn();
-    }
-
     public List<Position> getValidMoves(Position position) {
         if (!this.gameInProgress) {
             throw new IllegalStateException(
@@ -95,6 +84,58 @@ public class Game {
                     "Cannot get board snapshot if the game has not started.");
         }
         return board.getSnapshot();
+    }
+
+    public boolean isPromotionPending() {
+        return this.promotionPending;
+    }
+
+    public void executeMove(Position from, Position to) {
+        if (!this.gameInProgress) {
+            throw new IllegalStateException("Cannot execute move if the game has not started.");
+        }
+        if (this.promotionPending) {
+            throw new IllegalStateException("Cannot execute move while promotion is pending.");
+        }
+        validateTurn(from);
+        board.movePiece(from, to);
+        handlePostMove(to);
+    }
+
+    private void validateTurn(Position from) {
+        Piece piece = board.getPieceAt(from);
+        if (piece.getColor() != this.currentTurn) {
+            throw new IllegalArgumentException(
+                    "Cannot execute move if the current turn is not the piece's color.");
+        }
+    }
+
+    private void handlePostMove(Position to) {
+        Piece movedPiece = board.getPieceAt(to);
+        if (isPromotionMove(movedPiece, to)) {
+            this.promotionPending = true;
+            this.promotionPosition = Optional.of(to);
+        } else {
+            switchTurn();
+        }
+    }
+
+    private boolean isPromotionMove(Piece piece, Position position) {
+        if (piece.getPieceType() != PieceType.PAWN) {
+            return false;
+        }
+        return (piece.getColor() == Color.WHITE && position.getRow() == WHITE_PROMOTION_ROW)
+                || (piece.getColor() == Color.BLACK && position.getRow() == BLACK_PROMOTION_ROW);
+    }
+
+    public void executePromotion(PieceType pieceType) {
+        if (!this.promotionPending) {
+            throw new IllegalStateException("No promotion is pending.");
+        }
+        board.promotePawn(promotionPosition.get(), pieceType);
+        this.promotionPending = false;
+        this.promotionPosition = Optional.empty();
+        switchTurn();
     }
 
     public boolean playerInCheck(Color player) {

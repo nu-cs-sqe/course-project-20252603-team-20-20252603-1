@@ -42,5 +42,4 @@ public class Piece {
 
     public void markMoved() {
     }
-
 }

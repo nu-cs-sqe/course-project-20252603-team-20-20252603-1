@@ -1018,4 +1018,145 @@ public class BoardTest {
 
     EasyMock.verify(blackBishop);
   }
+
+  @Test
+  public void PromotePawn_WhitePawnAtRank8ToQueen_ReplacesWithQueen() {
+    Board board = new Board();
+    board.placePieceAt(new Position(8, 4), new Pawn(Color.WHITE));
+
+    board.promotePawn(new Position(8, 4), PieceType.QUEEN);
+
+    Piece piece = board.getPieceAt(new Position(8, 4));
+    assertEquals(PieceType.QUEEN, piece.getPieceType());
+    assertEquals(Color.WHITE, piece.getColor());
+    assertInstanceOf(Queen.class, piece);
+  }
+
+  @Test
+  public void PromotePawn_WhitePawnAtRank8ToRook_ReplacesWithRook() {
+    Board board = new Board();
+    board.placePieceAt(new Position(8, 4), new Pawn(Color.WHITE));
+
+    board.promotePawn(new Position(8, 4), PieceType.ROOK);
+
+    Piece piece = board.getPieceAt(new Position(8, 4));
+    assertEquals(PieceType.ROOK, piece.getPieceType());
+    assertEquals(Color.WHITE, piece.getColor());
+    assertInstanceOf(Rook.class, piece);
+  }
+
+  @Test
+  public void PromotePawn_WhitePawnAtRank8ToBishop_ReplacesWithBishop() {
+    Board board = new Board();
+    board.placePieceAt(new Position(8, 4), new Pawn(Color.WHITE));
+
+    board.promotePawn(new Position(8, 4), PieceType.BISHOP);
+
+    Piece piece = board.getPieceAt(new Position(8, 4));
+    assertEquals(PieceType.BISHOP, piece.getPieceType());
+    assertEquals(Color.WHITE, piece.getColor());
+    assertInstanceOf(Bishop.class, piece);
+  }
+
+  @Test
+  public void PromotePawn_WhitePawnAtRank8ToKnight_ReplacesWithKnight() {
+    Board board = new Board();
+    board.placePieceAt(new Position(8, 4), new Pawn(Color.WHITE));
+
+    board.promotePawn(new Position(8, 4), PieceType.KNIGHT);
+
+    Piece piece = board.getPieceAt(new Position(8, 4));
+    assertEquals(PieceType.KNIGHT, piece.getPieceType());
+    assertEquals(Color.WHITE, piece.getColor());
+    assertInstanceOf(Knight.class, piece);
+  }
+
+  @Test
+  public void PromotePawn_BlackPawnAtRank1ToQueen_ReplacesWithQueen() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 4), new Pawn(Color.BLACK));
+
+    board.promotePawn(new Position(1, 4), PieceType.QUEEN);
+
+    Piece piece = board.getPieceAt(new Position(1, 4));
+    assertEquals(PieceType.QUEEN, piece.getPieceType());
+    assertEquals(Color.BLACK, piece.getColor());
+    assertInstanceOf(Queen.class, piece);
+  }
+
+  @Test
+  public void PromotePawn_WhitePawnAtMidBoard_ThrowsIllegalArgumentException() {
+    Board board = new Board();
+    board.placePieceAt(new Position(4, 4), new Pawn(Color.WHITE));
+
+    assertThrows(IllegalArgumentException.class,
+            () -> board.promotePawn(new Position(4, 4), PieceType.QUEEN));
+  }
+
+  @Test
+  public void PromotePawn_NonPawnAtRank8_ThrowsIllegalArgumentException() {
+    Board board = new Board();
+    board.placePieceAt(new Position(8, 4), new Knight(Color.WHITE));
+
+    assertThrows(IllegalArgumentException.class,
+            () -> board.promotePawn(new Position(8, 4), PieceType.QUEEN));
+  }
+
+  @Test
+  public void PromotePawn_PromoteToPawn_ThrowsIllegalArgumentException() {
+    Board board = new Board();
+    board.placePieceAt(new Position(8, 4), new Pawn(Color.WHITE));
+
+    assertThrows(IllegalArgumentException.class,
+            () -> board.promotePawn(new Position(8, 4), PieceType.PAWN));
+  }
+
+  @Test
+  public void PromotePawn_PromoteToKing_ThrowsIllegalArgumentException() {
+    Board board = new Board();
+    board.placePieceAt(new Position(8, 4), new Pawn(Color.WHITE));
+
+    assertThrows(IllegalArgumentException.class,
+            () -> board.promotePawn(new Position(8, 4), PieceType.KING));
+  }
+
+  @Test
+  public void GetValidMoves_UnmovedPawnWithPieceOneAhead_ReturnEmpty() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.WHITE);
+    board.placePieceAt(new Position(2, 1), pawn);
+    board.placePieceAt(new Position(3, 1), new Pawn(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(2, 1));
+
+    assertTrue(moves.isEmpty());
+  }
+
+  @Test
+  public void GetValidMoves_UnmovedBlackPawnWithPieceOneAhead_ReturnsEmpty() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.BLACK);
+    board.placePieceAt(new Position(7, 1), pawn);
+    board.placePieceAt(new Position(6, 1), new Pawn(Color.WHITE));
+
+    List<Position> moves = board.getValidMoves(new Position(7, 1));
+
+    assertTrue(moves.isEmpty());
+  }
+
+  @Test
+  public void IsInCheck_NoKingOnBoard_ThrowsIllegalState() {
+    Board board = new Board();
+    board.placePieceAt(new Position(4, 4), new Pawn(Color.WHITE));
+
+    assertThrows(IllegalStateException.class, () -> board.isInCheck(Color.WHITE));
+  }
+
+  @Test
+  public void PromotePawn_EmptyPosition_ThrowsIllegalArgumentException() {
+    Board board = new Board();
+
+    assertThrows(IllegalArgumentException.class,
+            () -> board.promotePawn(new Position(8, 4), PieceType.QUEEN));
+  }
 }
