@@ -1084,4 +1084,30 @@ public class BoardTest {
 
     EasyMock.verify(king, rook1, rook2);
   }
+
+  @Test
+  public void CreatePiece_OnNull_ThrowsException() {
+    Board board = new Board();
+
+    Exception exception = assertThrows(
+        IllegalStateException.class,
+        () -> board.createPiece(null, null));
+
+    String expected = "Unhandled piece type: " + null;
+    String actual = exception.getMessage();
+    assertEquals(expected, actual);
+  }
+
+  @Test
+  public void IsInCheck_OnEmptyBoard_ThrowsException() {
+    Board board = new Board();
+
+    Exception exception = assertThrows(
+        IllegalStateException.class,
+        () -> board.isInCheck(Color.WHITE));
+
+    String expected = "cannot locateKing: king of specified color is not on the board.";
+    String actual = exception.getMessage();
+    assertEquals(expected, actual);
+  }
 }
