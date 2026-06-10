@@ -89,7 +89,7 @@ See `src/test/resources/features/DetectCheck.feature` for the Scenario Outlines.
 | Value   | Covered?           |
 | ------- | ------------------ |
 | `White` | :white_check_mark: |
-| `Black` | :x:                |
+| `Black` | :white_check_mark: |
 
 #### `gameInProgress`
 
@@ -103,7 +103,7 @@ See `src/test/resources/features/DetectCheck.feature` for the Scenario Outlines.
 | Value    | Covered            |
 | -------- | ------------------ |
 | `(1, 4)` | :white_check_mark: |
-| `(4, 1)` | :x:                |
+| `(4, 1)` | :white_check_mark: |
 | `(8, 4)` | :x:                |
 | `(4, 8)` | :x:                |
 
@@ -113,7 +113,7 @@ See `src/test/resources/features/DetectCheck.feature` for the Scenario Outlines.
 | -------- | ------------------ |
 | `Rook`   | :white_check_mark: |
 | `Bishop` | :x:                |
-| `Queen`  | :x:                |
+| `Queen`  | :white_check_mark: |
 | `Knight` | :x:                |
 
 #### Attacker Position
@@ -122,7 +122,7 @@ See `src/test/resources/features/DetectCheck.feature` for the Scenario Outlines.
 | -------- | ------------------ |
 | `(1, 4)` | :x:                |
 | `(4, 1)` | :x:                |
-| `(8, 4)` | :x:                |
+| `(8, 4)` | :white_check_mark: |
 | `(4, 8)` | :white_check_mark: |
 
 ---
