@@ -24,22 +24,22 @@ See `src/test/resources/features/DetectCheck.feature` for the Scenario Outlines.
 
 #### PieceType of Attacker
 
-| Value    | Covered            |
-| -------- | ------------------ |
-| `Rook`   | :white_check_mark: |
-| `Bishop` | :white_check_mark: |
-| `Queen`  | :white_check_mark: |
-| `Knight` | :white_check_mark: |
-| `Pawn`   | :x:                |
+| Value    | Covered                  |
+| -------- | ------------------------ |
+| `Rook`   | :white_check_mark:       |
+| `Bishop` | :white_check_mark:       |
+| `Queen`  | :white_check_mark:       |
+| `Knight` | :white_check_mark:       |
+| `Pawn`   | :hourglass_flowing_sand: |
 
 #### Attacker Position
 
-| Value    | Covered            |
-| -------- | ------------------ |
-| `(1, 4)` | :white_check_mark: |
-| `(4, 1)` | :white_check_mark: |
-| `(8, 4)` | :white_check_mark: |
-| `(4, 8)` | :x:                |
+| Value    | Covered                  |
+| -------- | ------------------------ |
+| `(1, 4)` | :white_check_mark:       |
+| `(4, 1)` | :white_check_mark:       |
+| `(8, 4)` | :white_check_mark:       |
+| `(4, 8)` | :hourglass_flowing_sand: |
 
 ---
 
