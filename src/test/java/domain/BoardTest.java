@@ -1200,4 +1200,14 @@ public class BoardTest {
 
     assertTrue(board.getEnPassantTarget().isEmpty());
   }
+
+  @Test
+  public void GetEnPassantTarget_AfterKnightMove_ReturnsEmpty() {
+    Board board = new Board();
+    board.initializeBoard();
+
+    board.movePiece(new Position(1, 2), new Position(3, 3));
+
+    assertTrue(board.getEnPassantTarget().isEmpty());
+  }
 }

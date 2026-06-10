@@ -178,5 +178,5 @@ Output boundary: `false`, `true`
 | TC77 | WHITE Pawn at `(2,4)`, `movePiece((2,4),(4,4))` (double advance)               | `Optional.of((3,4))` | :white_check_mark: |
 | TC78 | BLACK Pawn at `(7,3)`, `movePiece((7,3),(5,3))` (double advance)               | `Optional.of((6,3))` | :white_check_mark: |
 | TC79 | WHITE Pawn (`hasMoved=true`) at `(3,4)`, `movePiece((3,4),(4,4))` (one square) | `Optional.empty()`   | :white_check_mark: |
-| TC80 | initialized board, WHITE knight `movePiece((1,2),(3,3))`                       | `Optional.empty()`   | :x:                |
+| TC80 | initialized board, WHITE knight `movePiece((1,2),(3,3))`                       | `Optional.empty()`   | :white_check_mark: |
 | TC81 | after TC77, BLACK Pawn `movePiece((7,1),(6,1))` (next move clears target)      | `Optional.empty()`   | :x:                |
