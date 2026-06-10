@@ -7,6 +7,7 @@ import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class MainView extends JFrame implements BoardChangeListener, ClockListener {
 
@@ -61,19 +62,37 @@ public class MainView extends JFrame implements BoardChangeListener, ClockListen
 
     @Override
     public void onBoardChanged() {
+        boardView.repaint();
+
+        if (boardController.isCheckmate()) {
+            String white = bundle.getString("white");
+            String black = bundle.getString("black");
+            String checkmate = bundle.getString("checkmate");
+            String wins = bundle.getString("wins");
+            Color loser = boardController.getCurrentTurn();
+            String winnerColorName = (loser == Color.WHITE) ? black : white;
+            String winnerPlayerName = (loser == Color.WHITE) ? player2Name : player1Name;
+            String labelText = MessageFormat.format("{0} {1}!", checkmate, winnerColorName);
+            gameStatsView.currentPlayerLabel.setText(labelText);
+            String dialogMsg = MessageFormat.format("{0} ({1}) {2}!", winnerColorName, winnerPlayerName, wins);
+            JOptionPane.showMessageDialog(this, dialogMsg, checkmate, JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
         Color turn = boardController.getCurrentTurn();
         String white = bundle.getString("white");
         String black = bundle.getString("black");
         String currentPlayer = bundle.getString("currentPlayer");
-
         String name = (turn == Color.WHITE) ? white : black;
         String currentPlayerLabelString = MessageFormat.format("{0}: {1}", currentPlayer, name);
         gameStatsView.currentPlayerLabel.setText(currentPlayerLabelString);
-        boardView.repaint();
     }
 
     @Override
     public void onTimerTick(Color color, long timeRemainingMillis) {
+        if (boardController.isGameOver()) {
+            return;
+        }
         gameStatsView.updateTimer(color, timeRemainingMillis);
     }
 
