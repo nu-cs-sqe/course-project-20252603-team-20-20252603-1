@@ -8,6 +8,8 @@ import java.awt.Frame;
 import java.awt.Image;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,14 +17,16 @@ import javax.swing.JDialog;
 
 public class PromotionDialog extends JDialog {
     private static final int BUTTON_SIZE = 80;
+    private static final int BUTTON_PADDING = 10;
     private static final PieceType[] PROMOTION_OPTIONS = {
             PieceType.QUEEN, PieceType.ROOK, PieceType.BISHOP, PieceType.KNIGHT
     };
 
     private PieceType selectedPieceType;
 
-    public PromotionDialog(Frame parent, Color pawnColor) {
-        super(parent, "Choose promotion piece", true);
+    public PromotionDialog(Frame parent, Color pawnColor, Locale locale) {
+        super(parent, ResourceBundle.getBundle("labels/labels", locale)
+                .getString("promotionTitle"), true);
         setLayout(new FlowLayout());
         String colorPrefix = (pawnColor == Color.WHITE) ? "white" : "black";
         for (PieceType type : PROMOTION_OPTIONS) {
@@ -47,7 +51,7 @@ public class PromotionDialog extends JDialog {
                 throw new RuntimeException(e);
             }
         }
-        button.setPreferredSize(new Dimension(BUTTON_SIZE + 10, BUTTON_SIZE + 10));
+        button.setPreferredSize(new Dimension(BUTTON_SIZE + BUTTON_PADDING, BUTTON_SIZE + BUTTON_PADDING));
         button.addActionListener(e -> {
             this.selectedPieceType = type;
             dispose();
