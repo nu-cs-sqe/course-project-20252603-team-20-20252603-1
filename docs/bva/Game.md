@@ -112,7 +112,7 @@ Output boundaries: `IllegalStateException`, `GameState` enums that correspond to
 | ID   | State of the System         | Expected output                 | Implemented?       |
 | ---- | --------------------------- | ------------------------------- | ------------------ |
 | TC27 | `startGame()` not called    | throws `IllegalStateException`  | :white_check_mark: |
-| TC28 | game state is `IN_PROGRESS` | returns `IllegalStateException` | :x:                |
+| TC28 | game state is `IN_PROGRESS` | returns `IllegalStateException` | :white_check_mark: |
 | TC29 | game state is `CHECKMATE`   | returns `CHECKMATE`             | :x:                |
 
 **Add more once draw conditions are done and move timer is done**

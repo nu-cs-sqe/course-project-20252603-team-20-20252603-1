@@ -543,4 +543,27 @@ public class GameTest {
         EasyMock.verify(board);
 
     }
+
+    @Test
+    public void WhyIsGameOver_GameInProgress_ThrowsIllegalState() {
+        Board board = EasyMock.createMock(Board.class);
+        Game game = new Game(board);
+
+        board.initializeBoard();
+        EasyMock.expectLastCall();
+
+        EasyMock.replay(board);
+
+        game.startGame();
+
+        Exception exception = assertThrows(IllegalStateException.class,
+                () -> game.whyIsGameOver());
+
+        String expected = "Cannot answer why game is over if the game is in progress.";
+        String actual = exception.getMessage();
+        assertEquals(expected, actual);
+
+        EasyMock.verify(board);
+
+    }
 }

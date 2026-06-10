@@ -114,6 +114,11 @@ public class Game {
     }
 
     public GameState whyIsGameOver() {
-        throw new IllegalStateException("Cannot answer why game is over if the game has not started.");
+        switch (this.gameState) {
+            case NOT_STARTED:
+                throw new IllegalStateException("Cannot answer why game is over if the game has not started.");
+            default:
+                throw new IllegalStateException("Cannot answer why game is over if the game is in progress.");
+        }
     }
 }
