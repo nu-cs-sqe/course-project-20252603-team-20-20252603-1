@@ -42,4 +42,8 @@ public class Piece {
 
     public void markMoved() {
     }
+
+    public List<Position> getCaptureMoves(Position position) {
+        return new ArrayList<>();
+    }
 }

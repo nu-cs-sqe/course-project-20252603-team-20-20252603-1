@@ -126,4 +126,16 @@ public class PieceTest {
         EasyMock.verify(position);
 
     }
+
+    @Test
+    public void GetCaptureMoves_AnyPosition_ReturnsEmptyList() {
+        Piece piece = new Piece(PieceType.KING, Color.BLACK);
+        Position position = EasyMock.createMock(Position.class);
+        EasyMock.replay(position);
+
+        List<Position> actual = piece.getCaptureMoves(position);
+
+        assertTrue(actual.isEmpty());
+        EasyMock.verify(position);
+    }
 }

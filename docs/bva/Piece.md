@@ -39,3 +39,9 @@
 | ID   | State of the System | Expected output               | Implemented?       |
 | ---- | ------------------- | ----------------------------- | ------------------ |
 | TC18 | any position        | returns empty array, length 0 | :white_check_mark: |
+
+### Method under test: `getCaptureMoves(Position position)`
+
+| ID   | State of the System | Expected output    | Implemented?       |
+|------|---------------------|--------------------|--------------------|
+| TC19 | any position        | returns empty list | :white_check_mark: |
