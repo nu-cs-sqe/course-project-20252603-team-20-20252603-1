@@ -1131,4 +1131,16 @@ public class BoardTest {
 
     assertTrue(moves.isEmpty());
   }
+
+  @Test
+  public void GetValidMoves_UnmovedBlackPawnWithPieceOneAhead_ReturnsEmpty() {
+    Board board = new Board();
+    Pawn pawn = new Pawn(Color.BLACK);
+    board.placePieceAt(new Position(7, 1), pawn);
+    board.placePieceAt(new Position(6, 1), new Pawn(Color.WHITE));
+
+    List<Position> moves = board.getValidMoves(new Position(7, 1));
+
+    assertTrue(moves.isEmpty());
+  }
 }
