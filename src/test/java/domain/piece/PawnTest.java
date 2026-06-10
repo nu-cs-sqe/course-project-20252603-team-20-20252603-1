@@ -258,4 +258,5 @@ public class PawnTest {
         assertEquals(2, candidates.size());
         assertTrue(candidates.containsAll(List.of(new Position(7, 1), new Position(8, 1))));
     }
+
 }

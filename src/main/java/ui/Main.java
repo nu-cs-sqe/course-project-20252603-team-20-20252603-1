@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new WelcomeView().setVisible(true);
+            new LocaleSelectionView().setVisible(true);
         });
     }
 

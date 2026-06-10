@@ -4,12 +4,12 @@ import domain.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bishop extends Piece {
+public class Rook extends Piece {
 
-    private static final int[][] DIRECTIONS = { { 1, 1 }, { -1, -1 }, { -1, 1 }, { 1, -1 } };
+    private static final int[][] DIRECTIONS = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
 
-    public Bishop(Color color) {
-        super(PieceType.BISHOP, color);
+    public Rook(Color color) {
+        super(PieceType.ROOK, color);
     }
 
     public List<Position> getCandidateMoves(Position position) {

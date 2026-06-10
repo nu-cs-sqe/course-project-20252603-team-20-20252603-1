@@ -1,117 +1,64 @@
 package ui;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import javax.swing.BorderFactory;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
-public class WelcomeView extends JFrame {
+public class WelcomeView extends BaseView {
 
-    private static final int WINDOW_SIZE = 600;
-    private static final int INSET_SIZE = 10;
-    private static final int FONT_SIZE_TITLE = 28;
-    private static final int FONT_SIZE_LABEL = 16;
-    private static final int FONT_SIZE_BUTTON = 20;
-    private static final int TEXT_FIELD_COLUMNS = 20;
     private static final int BUTTON_ROW = 3;
-    private static final int BORDER_THICKNESS = 2;
-    private static final Color NU_PURPLE = new Color(104, 76, 150);
+    private static final int TEXT_FIELD_COLUMNS = 20;
 
-    private JTextField player1NameField;
-    private JTextField player2NameField;
+    private final ResourceBundle bundle;
 
-    public WelcomeView() {
-        setTitle("Welcome Screen!");
-        setSize(WINDOW_SIZE, WINDOW_SIZE);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-
-        createWelcomeScreen();
+    public WelcomeView(Locale locale) {
+        super(ResourceBundle.getBundle("labels/labels", locale).getString("welcomeTitle"));
+        this.bundle = ResourceBundle.getBundle("labels/labels", locale);
+        buildScreen(locale);
     }
 
-    private void createWelcomeScreen() {
-        JPanel welcomePanel = new JPanel(new GridBagLayout());
-        welcomePanel.setBackground(NU_PURPLE);
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(INSET_SIZE, INSET_SIZE, INSET_SIZE, INSET_SIZE);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-
-        // Welcome message
-        JLabel welcomeLabel = new JLabel("Welcome to our Chess Game!", SwingConstants.CENTER);
-        welcomeLabel.setFont(new Font("Arial", Font.BOLD, FONT_SIZE_TITLE));
-        welcomeLabel.setForeground(Color.WHITE);
+    private void buildScreen(Locale locale) {
+        GridBagConstraints gbc = createGbc();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
-        welcomePanel.add(welcomeLabel, gbc);
 
-        // Player 1 Name Input
+        JPanel panel = createBasePanel();
+        panel.add(createTitleLabel(bundle.getString("welcomeMessage")), gbc);
+
         gbc.gridwidth = 1;
         gbc.gridx = 0;
         gbc.gridy = 1;
-        JLabel player1NameLabel = new JLabel("Player 1 Name:");
-        player1NameLabel.setFont(new Font("Arial", Font.PLAIN, FONT_SIZE_LABEL));
-        player1NameLabel.setForeground(Color.WHITE);
-        welcomePanel.add(player1NameLabel, gbc);
-        player1NameField = new JTextField(TEXT_FIELD_COLUMNS);
-        player1NameField.setFont(new Font("Arial", Font.PLAIN, FONT_SIZE_LABEL));
+        panel.add(createBodyLabel(bundle.getString("player1NamePrompt")), gbc);
+        JTextField player1Field = createStyledTextField(TEXT_FIELD_COLUMNS);
         gbc.gridx = 1;
         gbc.gridy = 1;
-        welcomePanel.add(player1NameField, gbc);
+        panel.add(player1Field, gbc);
 
-        // Player 2 Name Input
         gbc.gridx = 0;
         gbc.gridy = 2;
-        JLabel player2NameLabel = new JLabel("Player 2 Name:");
-        player2NameLabel.setFont(new Font("Arial", Font.PLAIN, FONT_SIZE_LABEL));
-        player2NameLabel.setForeground(Color.WHITE);
-        welcomePanel.add(player2NameLabel, gbc);
-        player2NameField = new JTextField(TEXT_FIELD_COLUMNS);
-        player2NameField.setFont(new Font("Arial", Font.PLAIN, FONT_SIZE_LABEL));
+        panel.add(createBodyLabel(bundle.getString("player2NamePrompt")), gbc);
+        JTextField player2Field = createStyledTextField(TEXT_FIELD_COLUMNS);
         gbc.gridx = 1;
         gbc.gridy = 2;
-        welcomePanel.add(player2NameField, gbc);
+        panel.add(player2Field, gbc);
 
-        // Start Game Button
-        JButton startGameButton = new JButton("Start Game");
-        startGameButton.setFont(new Font("Arial", Font.BOLD, FONT_SIZE_BUTTON));
-        startGameButton.setOpaque(true);
-        startGameButton.setBackground(Color.WHITE);
-        startGameButton.setForeground(Color.BLACK);
-        startGameButton.setBorder(
-                BorderFactory.createLineBorder(Color.WHITE, BORDER_THICKNESS, true));
-        startGameButton.setCursor(new Cursor(Cursor.HAND_CURSOR)); // Hand cursor on hover
-        startGameButton.addActionListener(e -> {
-            // Get player names
-            String player1Name = player1NameField.getText().trim();
-            String player2Name = player2NameField.getText().trim();
-
+        JButton startButton = createStyledButton(bundle.getString("startGame"));
+        startButton.addActionListener(e -> {
+            String p1 = player1Field.getText().trim();
+            String p2 = player2Field.getText().trim();
             // FIXME: perform input validation on player names
-
-            // Hide the welcome screen
-            setVisible(false);
-            dispose(); // Dispose of this frame to free up resources
-
-            // Create and show the main game screen
-            MainView mainScreen = new MainView(player1Name, player2Name);
-            mainScreen.setVisible(true);
+            transitionTo(new TimeControlView(p1, p2, locale));
         });
         gbc.gridx = 0;
         gbc.gridy = BUTTON_ROW;
-        gbc.gridwidth = 2; // Span two columns
-        gbc.anchor = GridBagConstraints.CENTER; // Center the button
-        welcomePanel.add(startGameButton, gbc);
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(startButton, gbc);
 
-        add(welcomePanel);
+        add(panel);
     }
 }

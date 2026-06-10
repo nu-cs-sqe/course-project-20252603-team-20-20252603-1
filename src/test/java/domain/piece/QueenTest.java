@@ -248,4 +248,17 @@ public class QueenTest {
         assertEquals(27, actual.size());
         assertTrue(actual.containsAll(expected));
     }
+
+    @Test
+    public void GetSlidingDirections_AnyQueen_Returns8Directions() {
+        Queen queen = new Queen(Color.WHITE);
+
+        int[][] directions = queen.getSlidingDirections();
+
+        assertEquals(8, directions.length);
+        for (int[] direction : directions) {
+            assertNotNull(direction);
+            assertEquals(2, direction.length);
+        }
+    }
 }
