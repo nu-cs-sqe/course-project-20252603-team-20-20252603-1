@@ -672,6 +672,8 @@ public class GameTest {
         Pawn pawn = new Pawn(Color.BLACK);
         pawn.markMoved();
         board.placePieceAt(new Position(2, 4), pawn);
+        board.placePieceAt(new Position(1, 5), null);
+        board.placePieceAt(new Position(4, 5), new King(Color.WHITE));
 
         game.executeMove(new Position(2, 1), new Position(3, 1));
         game.executeMove(new Position(2, 4), new Position(1, 4));

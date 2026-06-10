@@ -155,8 +155,19 @@ public class Board {
                 && (isPawn || getPieceAt(pos).getColor() == piece.getColor()));
         if (isPawn) {
             removeBlockedPawnTwoSquareMove(position, piece, validMoves);
+            addPawnCaptureMoves(position, piece, validMoves);
         }
         return validMoves;
+    }
+
+    private void addPawnCaptureMoves(Position position, Piece piece, List<Position> validMoves) {
+        for (Position capture : piece.getCaptureMoves(position)) {
+            if (!isEmpty(capture) && getPieceAt(capture).getColor() != piece.getColor()) {
+                validMoves.add(capture);
+            } else if (enPassantTarget.isPresent() && capture.equals(enPassantTarget.get())) {
+                validMoves.add(capture);
+            }
+        }
     }
 
     private void removeBlockedPawnTwoSquareMove(Position position, Piece piece,
