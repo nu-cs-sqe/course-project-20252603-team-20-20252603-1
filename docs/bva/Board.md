@@ -146,10 +146,9 @@ Input boundaries:
 
 Output boundaries: `IllegalArgumentException`, empty list, non-empty list
 
-| ID   | State of the System                                                                                 | Expected output                   | Implemented?       |
-| ---- | --------------------------------------------------------------------------------------------------- | --------------------------------- | ------------------ |
-| TC63 | any board state, `color=null`                                                                       | throws `IllegalArgumentException` | :white_check_mark: |
-| TC64 | initialized board, `color=WHITE`                                                                    | non-empty list                    | :white_check_mark: |
-| TC65 | initialized board, `color=BLACK`                                                                    | non-empty list                    | :white_check_mark: |
-| TC66 | WHITE king at `(1,1)`, BLACK rook at `(2,8)`, BLACK rook at `(8,2)`, no other pieces, `color=WHITE` | `[]`                              | :white_check_mark: |
-| TC67 | BLACK king at `(8,8)`, WHITE rook at `(7,1)`, WHITE rook at `(1,7)`, no other pieces, `color=BLACK` | `[]`                              | :white_check_mark: |
+| ID   | State of the System                                                                                 | Expected output | Implemented?       |
+| ---- | --------------------------------------------------------------------------------------------------- | --------------- | ------------------ |
+| TC63 | initialized board, `color=WHITE`                                                                    | non-empty list  | :white_check_mark: |
+| TC64 | initialized board, `color=BLACK`                                                                    | non-empty list  | :white_check_mark: |
+| TC65 | WHITE king at `(1,1)`, BLACK rook at `(2,8)`, BLACK rook at `(8,2)`, no other pieces, `color=WHITE` | `[]`            | :white_check_mark: |
+| TC66 | BLACK king at `(8,8)`, WHITE rook at `(7,1)`, WHITE rook at `(1,7)`, no other pieces, `color=BLACK` | `[]`            | :white_check_mark: |

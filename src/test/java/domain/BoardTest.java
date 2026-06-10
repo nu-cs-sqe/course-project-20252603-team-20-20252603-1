@@ -1020,20 +1020,6 @@ public class BoardTest {
   }
 
   @Test
-  public void GetValidMovesForPlayer_ColorNull_ThrowsException() {
-    Board board = new Board();
-
-    Exception exception = assertThrows(
-        IllegalArgumentException.class,
-        () -> board.getValidMovesForPlayer(null));
-
-    String expected = "Cannot get valid moves for null player";
-    String actual = exception.getMessage();
-    assertEquals(expected, actual);
-
-  }
-
-  @Test
   public void GetValidMovesForPlayer_AfterInitColorWhite_NonEmptyList() {
     Board board = new Board();
     board.initializeBoard();

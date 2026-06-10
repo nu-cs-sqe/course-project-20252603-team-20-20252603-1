@@ -236,10 +236,6 @@ public class Board {
 
     public List<Position> getValidMovesForPlayer(Color player) {
 
-        if (!(player instanceof Color)) {
-            throw new IllegalArgumentException("Cannot get valid moves for null player");
-        }
-
         List<Position> moves = new ArrayList<Position>();
         for (Position position : allPositions()) {
             if (pieceAt(position).isEmpty()) {
