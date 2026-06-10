@@ -154,8 +154,6 @@ See `src/test/resources/features/DetectCheck.feature` for the Scenario Outlines.
 | `Rook`   | :x:     |
 | `Bishop` | :x:     |
 | `Queen`  | :x:     |
-| `Knight` | :x:     |
-| `Pawn`   | :x:     |
 
 #### Attacker Position
 
