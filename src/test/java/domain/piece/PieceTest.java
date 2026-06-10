@@ -193,4 +193,18 @@ public class PieceTest {
 
         assertEquals(0, captures.size());
     }
+
+    @Test
+    public void GetCaptureMoves_BlackInterior_ReturnsBothDiagonals() {
+        Pawn pawn = new Pawn(Color.BLACK);
+        Position position = EasyMock.createMock(Position.class);
+        EasyMock.expect(position.getRow()).andStubReturn(5);
+        EasyMock.expect(position.getCol()).andStubReturn(4);
+        EasyMock.replay(position);
+
+        List<Position> captures = pawn.getCaptureMoves(position);
+
+        assertEquals(2, captures.size());
+        assertTrue(captures.containsAll(List.of(new Position(4, 3), new Position(4, 5))));
+    }
 }
