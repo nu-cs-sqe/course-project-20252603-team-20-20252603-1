@@ -51,7 +51,7 @@ public class WelcomeView extends BaseView {
             String p1 = player1Field.getText().trim();
             String p2 = player2Field.getText().trim();
             // FIXME: perform input validation on player names
-            transitionTo(new MainView(p1, p2, locale));
+            transitionTo(new TimeControlView(p1, p2, locale));
         });
         gbc.gridx = 0;
         gbc.gridy = BUTTON_ROW;

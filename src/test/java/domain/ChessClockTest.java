@@ -1,0 +1,272 @@
+package domain;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
+
+import org.easymock.EasyMock;
+import domain.piece.Color;
+ 
+
+public class ChessClockTest {
+
+    @Test
+    public void Constructor_5Min_ClockCreated() {
+        long FIVE_MIN_TIME_CONTROL = 300000;
+
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        
+        ChessClock clock = new ChessClock(300000, listener);
+
+        assertEquals(clock.getTimeRemaining(Color.WHITE), FIVE_MIN_TIME_CONTROL);
+        assertEquals(clock.getTimeRemaining(Color.BLACK), FIVE_MIN_TIME_CONTROL);
+    }
+
+    @Test
+    public void Constructor_10Min_ClockCreated() {
+        long TEN_MIN_TIME_CONTROL = 600000;
+
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        
+        ChessClock clock = new ChessClock(600000, listener);
+
+        assertEquals(clock.getTimeRemaining(Color.WHITE), TEN_MIN_TIME_CONTROL);
+        assertEquals(clock.getTimeRemaining(Color.BLACK), TEN_MIN_TIME_CONTROL);
+    }
+
+    @Test
+    public void Constructor_1Hr_ClockCreated() {
+        long ONE_HR_TIME_CONTROL = 3600000;
+
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        
+        ChessClock clock = new ChessClock(3600000, listener);
+
+        assertEquals(clock.getTimeRemaining(Color.WHITE), ONE_HR_TIME_CONTROL);
+        assertEquals(clock.getTimeRemaining(Color.BLACK), ONE_HR_TIME_CONTROL);
+    }
+
+    @Test
+    public void Constructor_NullListener_Exception() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            new ChessClock(300000, null);
+        });
+        assertEquals("No valid listener passed", exception.getMessage());
+    }
+
+    @Test 
+    public void Start_NewClock() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        ChessClock clock = new ChessClock(3600000, listener);
+
+        clock.start();
+        assertTrue(clock.isRunning());
+
+    }
+
+    @Test 
+    public void Start_RunningClock() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        ChessClock clock = new ChessClock(3600000, listener);
+
+        clock.start();
+        clock.start();
+        assertTrue(clock.isRunning());
+
+    }
+
+    @Test 
+    public void Stop_RunningClock() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        ChessClock clock = new ChessClock(3600000, listener);
+
+        clock.start();
+        clock.stop();
+        assertFalse(clock.isRunning());
+
+    }
+
+    @Test 
+    public void Stop_ClockNotStarted() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        ChessClock clock = new ChessClock(3600000, listener);
+
+        clock.stop();
+        assertFalse(clock.isRunning());
+
+    }
+
+    @Test 
+    public void SwitchClock_WhiteHighTime() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.start();
+        clock.setTime(299999, Color.WHITE);
+        clock.switchClock();
+        assertEquals(clock.getActiveColor(), Color.BLACK);
+        assertEquals(clock.getTimeRemaining(Color.WHITE), 299999);
+        assertEquals(clock.getTimeRemaining(Color.BLACK), 300000);
+
+    }
+
+    @Test 
+    public void SwitchClock_HighTimeActive_LowTimeOpponent() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.start();
+        clock.switchClock();
+        clock.setTime(1, Color.WHITE);
+        clock.setTime(299999, Color.BLACK);
+        clock.switchClock();
+        assertEquals(clock.getActiveColor(), Color.WHITE);
+        assertEquals(clock.getTimeRemaining(Color.WHITE), 1);
+        assertEquals(clock.getTimeRemaining(Color.BLACK), 299999);
+
+    }
+
+    @Test 
+    public void SwitchClock_LowTimeActive_HighTimeOpponent() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.start();
+        clock.switchClock();
+        clock.setTime(1, Color.BLACK);
+        clock.setTime(299999, Color.WHITE);
+        clock.switchClock();
+        assertEquals(clock.getActiveColor(), Color.WHITE);
+        assertEquals(clock.getTimeRemaining(Color.BLACK), 1);
+        assertEquals(clock.getTimeRemaining(Color.WHITE), 299999);
+
+    }
+
+    @Test 
+    public void SwitchClock_BothLow() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.start();
+        clock.setTime(1, Color.BLACK);
+        clock.setTime(1, Color.WHITE);
+        clock.switchClock();
+        assertEquals(clock.getActiveColor(), Color.BLACK);
+        assertEquals(clock.getTimeRemaining(Color.BLACK), 1);
+        assertEquals(clock.getTimeRemaining(Color.WHITE), 1);
+
+    }
+
+    @Test 
+    public void GetTimeRemaining_WhiteNoTime() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.start();
+        clock.setTime(0, Color.WHITE);
+        clock.switchClock();
+        assertEquals(clock.getTimeRemaining(Color.WHITE), 0);
+
+    }
+
+    @Test 
+    public void GetTimeRemaining_BlackNoTime() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.start();
+        clock.setTime(0, Color.BLACK);
+        clock.switchClock();
+        assertEquals(clock.getTimeRemaining(Color.BLACK), 0);
+
+    }
+
+    @Test 
+    public void GetTimeRemaining_NullColor() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.start();
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            clock.getTimeRemaining(null);
+        });
+        assertEquals("No color passed", exception.getMessage());
+    }
+
+
+    @Test 
+    public void TickWhite_OnTimerTick_AtBoundary() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        listener.onTimerTick(Color.WHITE, 1000);
+        EasyMock.replay(listener);
+
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.setTime(2000, Color.WHITE);
+        clock.tick();
+
+        EasyMock.verify(listener);
+    }
+
+    @Test 
+    public void TickBlack_OnTimerTick_AtBoundary() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        listener.onTimerTick(Color.BLACK, 1000);
+        EasyMock.replay(listener);
+
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.switchClock();
+        clock.setTime(2000, Color.BLACK);
+        clock.tick();
+
+        EasyMock.verify(listener);
+    }
+
+    @Test 
+    public void TickWhite_OnTimeout() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        listener.onTimeout(Color.WHITE);
+        EasyMock.replay(listener);
+
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.setTime(1000, Color.WHITE);
+        clock.tick();
+
+        EasyMock.verify(listener);
+    }
+
+    @Test 
+    public void TickBlack_OnTimeout() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        listener.onTimeout(Color.BLACK);
+        EasyMock.replay(listener);
+
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.switchClock();
+        clock.setTime(1000, Color.BLACK);
+        clock.tick();
+
+        EasyMock.verify(listener);
+    }
+    
+    @Test 
+    public void TickWhite_AtStart() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        listener.onTimerTick(Color.WHITE, 299000);
+        EasyMock.replay(listener);
+
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.tick();
+
+        EasyMock.verify(listener);
+    }
+
+    @Test 
+    public void TickBlack_AtStart() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        listener.onTimerTick(Color.BLACK, 299000);
+        EasyMock.replay(listener);
+
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.switchClock();
+        clock.tick();
+
+        EasyMock.verify(listener);
+    }
+}

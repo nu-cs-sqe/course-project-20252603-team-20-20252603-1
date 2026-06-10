@@ -1,5 +1,6 @@
 package ui;
 
+import domain.ClockListener;
 import domain.piece.Color;
 import java.awt.BorderLayout;
 import java.text.MessageFormat;
@@ -7,23 +8,28 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.JFrame;
 
-public class MainView extends JFrame {
+public class MainView extends JFrame implements BoardChangeListener, ClockListener {
 
     private static final int WINDOW_WIDTH = 800;
     private static final int WINDOW_HEIGHT = 1200;
 
     private BoardView boardView;
     private GameStatsView gameStatsView;
+    private BoardController boardController;
     private String player1Name;
     private String player2Name;
     private Locale locale;
     private ResourceBundle bundle;
+    private long timeControl;
+    private GameConfig config; 
 
-    public MainView(String player1Name, String player2Name, Locale locale) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
-        this.locale = locale;
+    public MainView(GameConfig config) {
+        this.config = config;
+        this.player1Name = config.getPlayer1Name();
+        this.player2Name = config.getPlayer2Name();
+        this.locale = config.getLocale();
         this.bundle = ResourceBundle.getBundle("labels/labels", locale);
+        this.timeControl = config.getTimeControl();
 
         configureMainView();
         addGameStatsView();
@@ -42,24 +48,37 @@ public class MainView extends JFrame {
     }
 
     private void addGameStatsView() {
-        gameStatsView = new GameStatsView(player1Name, player2Name, locale);
+        gameStatsView = new GameStatsView(this.config);
         add(gameStatsView, BorderLayout.PAGE_START);
     }
 
     private void addBoardView() {
-        boardView = new BoardView();
+        boardController = new BoardController(this, this);
+        boardController.startGame(timeControl);
+        boardView = new BoardView(boardController);
         add(boardView, BorderLayout.CENTER);
-        boardView.setOnTurnChanged(turn -> {
-            String white = bundle.getString("white");
-            String black = bundle.getString("black");
-            String currentPlayer = bundle.getString("currentPlayer");
+    }
 
-            String name = (turn == Color.WHITE) ? white : black;
+    @Override
+    public void onBoardChanged() {
+        Color turn = boardController.getCurrentTurn();
+        String white = bundle.getString("white");
+        String black = bundle.getString("black");
+        String currentPlayer = bundle.getString("currentPlayer");
 
-            String currentPlayerLabelString = MessageFormat.format("{0}: {1}",
-                    currentPlayer, name);
+        String name = (turn == Color.WHITE) ? white : black;
+        String currentPlayerLabelString = MessageFormat.format("{0}: {1}", currentPlayer, name);
+        gameStatsView.currentPlayerLabel.setText(currentPlayerLabelString);
+        boardView.repaint();
+    }
 
-            gameStatsView.currentPlayerLabel.setText(currentPlayerLabelString);
-        });
+    @Override
+    public void onTimerTick(Color color, long timeRemainingMillis) {
+        gameStatsView.updateTimer(color, timeRemainingMillis);
+    }
+
+    @Override
+    public void onTimeout(Color color) {
+        boardController.handleTimeout(color);
     }
 }
