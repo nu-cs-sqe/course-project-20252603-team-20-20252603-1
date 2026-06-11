@@ -203,16 +203,16 @@ Input boundaries: `color`: `null`, `WHITE`, `BLACK`
 
 Output boundaries: `IllegalArgumentException`, true, false
 
-| ID    | State of the System                              | Expected output                   | Implemented?       |
-|-------|--------------------------------------------------|-----------------------------------|:-------------------|
-| TC101 | `color=null`                                     | throws `IllegalArgumentException` | :white_check_mark: |
-| TC102 | `color=WHITE`, white only has king               | true                              | :white_check_mark: |
-| TC103 | `color=BLACK`, black only has king & knight      | true                              | :white_check_mark: |
-| TC104 | `color=WHITE`, white only has king & bishop      | true                              | :white_check_mark: |
-| TC105 | `color=BLACK`, black only has king & two knights | true                              | :white_check_mark: |
-| TC106 | `color=WHITE`, white has king & rook             | false                             | :white_check_mark: |
-| TC107 | `color=BLACK`, black has king & two bishops      | false                             | :white_check_mark: |
-| TC126 | `color=WHITE`, WHITE has only king, BLACK has king & rook | true                       | :x: |
+| ID    | State of the System                                       | Expected output                   | Implemented?       |
+|-------|-----------------------------------------------------------|-----------------------------------|:-------------------|
+| TC101 | `color=null`                                              | throws `IllegalArgumentException` | :white_check_mark: |
+| TC102 | `color=WHITE`, white only has king                        | true                              | :white_check_mark: |
+| TC103 | `color=BLACK`, black only has king & knight               | true                              | :white_check_mark: |
+| TC104 | `color=WHITE`, white only has king & bishop               | true                              | :white_check_mark: |
+| TC105 | `color=BLACK`, black only has king & two knights          | true                              | :white_check_mark: |
+| TC106 | `color=WHITE`, white has king & rook                      | false                             | :white_check_mark: |
+| TC107 | `color=BLACK`, black has king & two bishops               | false                             | :white_check_mark: |
+| TC126 | `color=WHITE`, WHITE has only king, BLACK has king & rook | true                              | :white_check_mark: |
 
 ### Method under test: `getValidMoves(Position pos)` - castling extension
 

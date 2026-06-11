@@ -1879,4 +1879,13 @@ public class BoardTest {
     List<Position> moves = board.getValidMoves(new Position(1, 5));
     assertFalse(moves.contains(new Position(1, 7)));
   }
+
+  @Test
+  void HasInsufficientMaterial_WhiteOnlyKing_BlackHasRook_ReturnsTrue() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+    board.placePieceAt(new Position(5, 1), new Rook(Color.BLACK));
+    assertTrue(board.hasInsufficientMaterial(Color.WHITE));
+  }
 }
