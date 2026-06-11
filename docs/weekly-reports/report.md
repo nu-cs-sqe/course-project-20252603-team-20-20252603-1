@@ -56,6 +56,32 @@ N/A, same status as last week.
 7. [TODO]: US-3: Allow user to move a piece
 8. [TODO]: US-3: GUI highlights legal moves of a piece, GUI responds when player moves a piece
 
+# Week 10 (05/31/2026-06/06/2026) 
+**Planning and Progress Tracking**:
+1. [done] Domingo: Queen Movement [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/38)
+2. [done] Kavi: Bishop Movement [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/39)
+3. [in-progress]: Kavi: complete US-3
+4. [in-progress]: Annabelle: Rook Movement
+5. [in-progress]: Kavi: King Movement
+6. [TODO]: Complete remaining user stories
+
+# Week 11 (06/06/2026-06/13/2026) 
+**Planning and Progress Tracking**:
+1. [done]: Kavi: complete US-3 [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/43)
+2. [done]: Annabelle: Rook Movement [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/49)
+3. [done]: Kavi: King Movement [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/50)
+4. [done]: Domingo: complete US-4 capturing [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/51)
+5. [done]: Annabelle: complete US-5 Locale support [PR1](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/52), [PR2](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/55)
+6. [done]: Kavi: complete US-8 Checks [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/56)
+7. [done]: Domingo: complete US-6 Pawn Promotion [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/57)
+8. [done]: Annabelle: complete US-7 Additional Feature: Move Timer [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/59)
+9. [done]: Kavi: Integration Test #1 for Checks [Original PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/60), merged into [New PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/62)
+10. [done]: Kavi: Checkmate, under US-10: [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/issues/47) 
+11. [done]: Domingo: En Passant US-9 [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/62)
+12. [done]: Annabelle: Non-Checkmate Game End conditions, under US-10 [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/63)
+13. [done]: Annabelle: Integration Test #2 for Pawn Promotion
+14. [done]: Domingo: Castling
+
 # Week X (XX/XX/2026-XX/XX/2026) TEMPLATE (You can change the format to whatever the team likes better)
 **Planning and Progress Tracking**:
 1. [done] Person: Task (Links to PR)
