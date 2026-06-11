@@ -40,14 +40,14 @@ See `src/test/resources/features/PawnPromotion.feature ` for the Scenario Outlin
 | Value   | Covered?           |
 | ------- | ------------------ |
 | `White` | :white_check_mark: |
-| `Black` |         :x:        |
+| `Black` | :white_check_mark: |
 
 #### Pawn Position before capture
 
 | Value    | Covered?           |
 | -------- | ------------------ |
 | `(7, 1)` | :white_check_mark: |
-| `(7, 4)` |         :x:        |
+| `(7, 4)` | :white_check_mark: |
 | `(7, 8)` |         :x:        |
 | `(2, 1)` |         :x:        |
 | `(2, 4)` | :white_check_mark: |
@@ -66,7 +66,7 @@ See `src/test/resources/features/PawnPromotion.feature ` for the Scenario Outlin
 | -------- | ------------------ |
 | `Queen`  | :white_check_mark: |
 | `Rook`   | :white_check_mark: |
-| `Bishop` |         :x:        |
+| `Bishop` | :white_check_mark: |
 | `Knight` |         :x:        |
 
 ### Promoted Queen behaves correctly
