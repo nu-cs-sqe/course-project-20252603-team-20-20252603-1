@@ -226,7 +226,7 @@ Output boundaries: `IllegalArgumentException`, true, false
 | TC114 | WHITE King at `(1,5)` in check (BLACK Rook at `(5,5)`), WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty      | does not include `(1,7)` | :white_check_mark: |
 | TC115 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Rook attacks `(1,6)` | does not include `(1,7)` | :white_check_mark: |
 | TC116 | BLACK King at `(8,5)` not moved, BLACK Rook at `(8,8)` not moved, `(8,6)` and `(8,7)` empty, king not in check          | includes `(8,7)`         | :white_check_mark: |
-| TC117 | BLACK King at `(8,5)` not moved, BLACK Rook at `(8,1)` not moved, `(8,2)`, `(8,3)`, `(8,4)` empty, king not in check    | includes `(8,3)`         | :x:                |
+| TC117 | BLACK King at `(8,5)` not moved, BLACK Rook at `(8,1)` not moved, `(8,2)`, `(8,3)`, `(8,4)` empty, king not in check    | includes `(8,3)`         | :white_check_mark: |
 
 ### Method under test: `movePiece(Position from, Position to)` - castling extension
 
