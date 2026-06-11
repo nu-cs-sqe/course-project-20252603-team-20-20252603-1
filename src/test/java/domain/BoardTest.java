@@ -1630,4 +1630,16 @@ public class BoardTest {
 
     assertFalse(board.hasInsufficientMaterial(Color.BLACK));
   }
+
+  @Test
+  public void GetValidMoves_WhiteKingsideCastlingAvailable_IncludesCastlingSquare() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 8), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+
+    assertTrue(moves.contains(new Position(1, 7)));
+  }
 }
