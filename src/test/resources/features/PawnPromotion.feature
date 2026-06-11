@@ -36,3 +36,4 @@ Feature: Pawn Promotion
             | "BLACK" |  "WHITE" |    2    |    4    |   1   |    3  |     "ROOK"     |
             | "WHITE" |  "BLACK" |    7    |    4    |   8   |    3  |    "BISHOP"    |
             | "BLACK" |  "WHITE" |    2    |    1    |   1   |    2  |    "KNIGHT"    |
+            | "WHITE" |  "BLACK" |    7    |    8    |   8   |    7  |     "ROOK"     |
