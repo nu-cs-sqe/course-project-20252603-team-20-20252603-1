@@ -18,7 +18,7 @@ See `src/test/resources/features/PawnPromotion.feature ` for the Scenario Outlin
 | Value    | Covered?           |
 | -------- | ------------------ |
 | `(7, 1)` | :white_check_mark: |
-| `(7, 4)` |         :x:        |
+| `(7, 4)` | :white_check_mark: |
 | `(7, 8)` |         :x:        |
 | `(2, 1)` | :white_check_mark: |
 | `(2, 4)` |         :x:        |
@@ -30,7 +30,7 @@ See `src/test/resources/features/PawnPromotion.feature ` for the Scenario Outlin
 | -------- | ------------------ |
 | `Queen`  | :white_check_mark: |
 | `Rook`   | :white_check_mark: |
-| `Bishop` |         :x:        |
+| `Bishop` | :white_check_mark: |
 | `Knight` |         :x:        |
 
 ### \<player\> promotes by capturing to back rank

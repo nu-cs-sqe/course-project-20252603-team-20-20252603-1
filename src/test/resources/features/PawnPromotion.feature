@@ -15,4 +15,5 @@ Feature: Pawn Promotion
             | player  | fromRow | toRow | pawnCol | promotionPiece | 
             | "WHITE" |    7    |   8   |    1    |     "QUEEN"    |
             | "BLACK" |    2    |   1   |    1    |     "ROOK"     | 
+            | "WHITE" |    7    |   8   |    4    |    "BISHOP"    |
 
