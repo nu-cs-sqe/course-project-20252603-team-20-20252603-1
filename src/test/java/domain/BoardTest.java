@@ -1668,4 +1668,18 @@ public class BoardTest {
 
     assertFalse(moves.contains(new Position(1, 7)));
   }
+
+  @Test
+  public void GetValidMoves_RookHasMoved_CastlingNotAvailable() {
+    Board board = new Board();
+    Rook rook = new Rook(Color.WHITE);
+    rook.markMoved();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 8), rook);
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+
+    assertFalse(moves.contains(new Position(1, 7)));
+  }
 }
