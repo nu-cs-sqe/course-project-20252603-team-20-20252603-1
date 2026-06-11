@@ -216,22 +216,22 @@ Output boundaries: `IllegalArgumentException`, true, false
 
 ### Method under test: `getValidMoves(Position pos)` - castling extension
 
-| ID    | State of the System                                                                                                     | Expected output          | Implemented?       |
-|-------|-------------------------------------------------------------------------------------------------------------------------|--------------------------|--------------------|
-| TC108 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, king not in check          | includes `(1,7)`         | :white_check_mark: |
-| TC109 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, `(1,2)`, `(1,3)`, `(1,4)` empty, king not in check    | includes `(1,3)`         | :white_check_mark: |
-| TC110 | WHITE King at `(1,5)` `hasMoved`=true, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty                       | does not include `(1,7)` | :white_check_mark: |
-| TC111 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` `hasMoved`=true, `(1,6)` and `(1,7)` empty                       | does not include `(1,7)` | :white_check_mark: |
-| TC112 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, WHITE piece at `(1,6)`                                | does not include `(1,7)` | :white_check_mark: |
-| TC113 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, WHITE piece at `(1,3)`                                | does not include `(1,3)` | :white_check_mark: |
-| TC114 | WHITE King at `(1,5)` in check (BLACK Rook at `(5,5)`), WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty      | does not include `(1,7)` | :white_check_mark: |
-| TC115 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Rook attacks `(1,6)` | does not include `(1,7)` | :white_check_mark: |
-| TC116 | BLACK King at `(8,5)` not moved, BLACK Rook at `(8,8)` not moved, `(8,6)` and `(8,7)` empty, king not in check          | includes `(8,7)`         | :white_check_mark: |
-| TC117 | BLACK King at `(8,5)` not moved, BLACK Rook at `(8,1)` not moved, `(8,2)`, `(8,3)`, `(8,4)` empty, king not in check    | includes `(8,3)`         | :white_check_mark: |
-| TC122 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` `hasMoved`=true, `(1,2)`, `(1,3)`, `(1,4)` empty                 | does not include `(1,3)` | :x: |
-| TC123 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, `(1,2)`, `(1,3)`, `(1,4)` empty, BLACK Rook attacks `(1,4)` | does not include `(1,3)` | :x: |
-| TC124 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Knight at `(2,4)` attacks `(1,6)` | does not include `(1,7)` | :x: |
-| TC125 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Pawn at `(2,7)` attacks `(1,6)` | does not include `(1,7)` | :x: |
+| ID    | State of the System                                                                                                                  | Expected output          | Implemented?       |
+|-------|--------------------------------------------------------------------------------------------------------------------------------------|--------------------------|--------------------|
+| TC108 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, king not in check                       | includes `(1,7)`         | :white_check_mark: |
+| TC109 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, `(1,2)`, `(1,3)`, `(1,4)` empty, king not in check                 | includes `(1,3)`         | :white_check_mark: |
+| TC110 | WHITE King at `(1,5)` `hasMoved`=true, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty                                    | does not include `(1,7)` | :white_check_mark: |
+| TC111 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` `hasMoved`=true, `(1,6)` and `(1,7)` empty                                    | does not include `(1,7)` | :white_check_mark: |
+| TC112 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, WHITE piece at `(1,6)`                                             | does not include `(1,7)` | :white_check_mark: |
+| TC113 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, WHITE piece at `(1,3)`                                             | does not include `(1,3)` | :white_check_mark: |
+| TC114 | WHITE King at `(1,5)` in check (BLACK Rook at `(5,5)`), WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty                   | does not include `(1,7)` | :white_check_mark: |
+| TC115 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Rook attacks `(1,6)`              | does not include `(1,7)` | :white_check_mark: |
+| TC116 | BLACK King at `(8,5)` not moved, BLACK Rook at `(8,8)` not moved, `(8,6)` and `(8,7)` empty, king not in check                       | includes `(8,7)`         | :white_check_mark: |
+| TC117 | BLACK King at `(8,5)` not moved, BLACK Rook at `(8,1)` not moved, `(8,2)`, `(8,3)`, `(8,4)` empty, king not in check                 | includes `(8,3)`         | :white_check_mark: |
+| TC122 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` `hasMoved`=true, `(1,2)`, `(1,3)`, `(1,4)` empty                              | does not include `(1,3)` | :white_check_mark: |
+| TC123 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, `(1,2)`, `(1,3)`, `(1,4)` empty, BLACK Rook attacks `(1,4)`        | does not include `(1,3)` | :x:                |
+| TC124 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Knight at `(2,4)` attacks `(1,6)` | does not include `(1,7)` | :x:                |
+| TC125 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Pawn at `(2,7)` attacks `(1,6)`   | does not include `(1,7)` | :x:                |
 
 ### Method under test: `movePiece(Position from, Position to)` - castling extension
 
