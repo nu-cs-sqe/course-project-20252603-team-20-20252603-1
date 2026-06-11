@@ -36,3 +36,23 @@
    1. https://github.com/nu-cs-sqe/example-chess-startercode-with-java-swing-20252603-annabellesole2026
 6. Cucumber Build
    1. Lab 6 `build.gradle.kts`
+
+## Exceptions
+
+### JaCoCo - Missing Coverage
+
+- `ChessClock.java` line 27, `Game.java` line 31, `Piece.java` line 25, `Position.java` (finalize body): each class contains an empty `@Override protected final void finalize() throws Throwable {}` to suppress the JVM finalizer. These lines contain no logic and are only invoked by the garbage collector, not by test code.
+- `ChessClock.java` lines 41-42 (Swing Timer lambda and `timer.start()`): the `javax.swing.Timer` fires asynchronously after a 1000 ms delay. Tests call `tick()` directly and never let the timer actually fire. Covering these lines would require real-time waits or mocking `javax.swing.Timer`, introducing non-determinism without meaningful verification.
+- `Board.java` line 192 (`validPosition` false branch in `removeBlockedPawnTwoSquareMove`): this method is only called for pawns at their starting rank, so `oneForwardRow` is always row 3 or 6, both valid positions. The false branch is unreachable in valid gameplay.
+- `Board.java` line 235 (`isEmpty(to)` false branch in `isEnPassantCapture`): the en passant target is always the square the double-pushed pawn passed through, which is guaranteed to be empty. The false branch is unreachable under valid game state.
+- `Board.java` line 369 (one branch in `isAtPromotionRank` compound boolean): `Color` has only `WHITE` and `BLACK`. When `piece.getColor() == Color.WHITE` is false, `piece.getColor() == Color.BLACK` is always true, making one JVM short-circuit branch unreachable.
+
+### Pitest - Surviving Mutants
+
+- `Board.java` `removeBlockedPawnTwoSquareMove`, `Pawn.java` line 35 (`2 * direction` to `2 / direction`): `direction` is always +1 or -1, so integer multiplication and division produce identical results. These are equivalent mutants.
+- `Board.java` `movePiece` and `executeCastle` (`to.getCol() > from.getCol()` to `>=`): the king's source and destination columns are never equal in a valid castling move (5 to 3 or 7), so both operators produce the same boolean. Equivalent mutant.
+- `Board.java` `getCastlingMoves` early returns (`return moves` to `Collections.emptyList()`): both return empty lists. Callers never mutate the returned collection, so the difference is unobservable. Equivalent mutant.
+- `Board.java` `moveLeavesPlayerInCheck` (removed `executeCastle` call): repositioning the rook during castling simulation does not change whether the king's destination square is attacked. In any valid castling setup, no piece attacking the king's destination is blocked only by the rook's new position. Equivalent mutant.
+- `King.java` lines 38-39, `Knight.java` lines 22-23 (addition to subtraction in direction arithmetic): the DIRECTIONS arrays contain symmetric pairs. Negating one direction produces the same complete set of candidate squares. Equivalent mutants.
+- `Piece.java` lines 36 and 47 (`new ArrayList<>()` to `Collections.emptyList()`): base-class default implementations return empty collections. All concrete subclasses override these methods, and no caller mutates the returned empty list. Equivalent mutants.
+- `ChessClock.java` lines 41-42 (see JaCoCo note above): the timer lambda and `timer.start()` survive because tests never observe the timer firing.

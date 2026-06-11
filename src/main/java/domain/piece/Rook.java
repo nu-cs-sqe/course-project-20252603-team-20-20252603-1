@@ -7,6 +7,7 @@ import java.util.List;
 public class Rook extends Piece {
 
     private static final int[][] DIRECTIONS = { { 0, 1 }, { 0, -1 }, { -1, 0 }, { 1, 0 } };
+    private boolean hasMoved = false;
 
     public Rook(Color color) {
         super(PieceType.ROOK, color);
@@ -36,5 +37,14 @@ public class Rook extends Piece {
             copy[i] = DIRECTIONS[i].clone();
         }
         return copy;
+    }
+
+    public boolean hasMoved() {
+        return hasMoved;
+    }
+
+    @Override
+    public void markMoved() {
+        hasMoved = true;
     }
 }

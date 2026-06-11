@@ -1630,4 +1630,288 @@ public class BoardTest {
 
     assertFalse(board.hasInsufficientMaterial(Color.BLACK));
   }
+
+  @Test
+  public void GetValidMoves_WhiteKingsideCastlingAvailable_IncludesCastlingSquare() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 8), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+
+    assertTrue(moves.contains(new Position(1, 7)));
+  }
+
+  @Test
+  public void GetValidMoves_WhiteQueensideCastlingAvailable_IncludesCastlingSquare() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 1), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+
+    assertTrue(moves.contains(new Position(1, 3)));
+  }
+
+  @Test
+  public void GetValidMoves_KingHasMoved_CastlingNotAvailable() {
+    Board board = new Board();
+    King king = new King(Color.WHITE);
+    king.markMoved();
+    board.placePieceAt(new Position(1, 5), king);
+    board.placePieceAt(new Position(1, 8), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+
+    assertFalse(moves.contains(new Position(1, 7)));
+  }
+
+  @Test
+  public void GetValidMoves_RookHasMoved_CastlingNotAvailable() {
+    Board board = new Board();
+    Rook rook = new Rook(Color.WHITE);
+    rook.markMoved();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 8), rook);
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+
+    assertFalse(moves.contains(new Position(1, 7)));
+  }
+
+  @Test
+  public void GetValidMoves_PieceBetweenKingsideKingAndRook_CastlingNotAvailable() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 8), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(1, 6), new Knight(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+
+    assertFalse(moves.contains(new Position(1, 7)));
+  }
+
+  @Test
+  public void GetValidMoves_PieceBetweenQueensideKingAndRook_CastlingNotAvailable() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 1), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(1, 3), new Knight(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+
+    assertFalse(moves.contains(new Position(1, 3)));
+  }
+
+  @Test
+  public void GetValidMoves_KingInCheck_CastlingNotAvailable() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 8), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(5, 5), new Rook(Color.BLACK));
+    board.placePieceAt(new Position(8, 1), new King(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+
+    assertFalse(moves.contains(new Position(1, 7)));
+  }
+
+  @Test
+  public void GetValidMoves_KingPassesThroughAttackedSquare_CastlingNotAvailable() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 8), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(5, 6), new Rook(Color.BLACK));
+    board.placePieceAt(new Position(8, 1), new King(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+
+    assertFalse(moves.contains(new Position(1, 7)));
+  }
+
+  @Test
+  public void GetValidMoves_BlackKingsideCastlingAvailable_IncludesCastlingSquare() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+    board.placePieceAt(new Position(8, 8), new Rook(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(8, 5));
+
+    assertTrue(moves.contains(new Position(8, 7)));
+  }
+
+  @Test
+  public void GetValidMoves_BlackQueensideCastlingAvailable_IncludesCastlingSquare() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+    board.placePieceAt(new Position(8, 1), new Rook(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(8, 5));
+
+    assertTrue(moves.contains(new Position(8, 3)));
+  }
+
+  @Test
+  public void MovePiece_WhiteKingsideCastle_MovesKingAndRook() {
+    Board board = new Board();
+    King king = new King(Color.WHITE);
+    Rook rook = new Rook(Color.WHITE);
+    board.placePieceAt(new Position(1, 5), king);
+    board.placePieceAt(new Position(1, 8), rook);
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+
+    board.movePiece(new Position(1, 5), new Position(1, 7));
+
+    assertInstanceOf(King.class, board.getPieceAt(new Position(1, 7)));
+    assertInstanceOf(Rook.class, board.getPieceAt(new Position(1, 6)));
+    assertTrue(board.isEmpty(new Position(1, 5)));
+    assertTrue(board.isEmpty(new Position(1, 8)));
+    assertTrue(king.hasMoved());
+    assertTrue(rook.hasMoved());
+  }
+
+  @Test
+  public void MovePiece_WhiteQueensideCastle_MovesKingAndRook() {
+    Board board = new Board();
+    King king = new King(Color.WHITE);
+    Rook rook = new Rook(Color.WHITE);
+    board.placePieceAt(new Position(1, 5), king);
+    board.placePieceAt(new Position(1, 1), rook);
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+
+    board.movePiece(new Position(1, 5), new Position(1, 3));
+
+    assertInstanceOf(King.class, board.getPieceAt(new Position(1, 3)));
+    assertInstanceOf(Rook.class, board.getPieceAt(new Position(1, 4)));
+    assertTrue(board.isEmpty(new Position(1, 5)));
+    assertTrue(board.isEmpty(new Position(1, 1)));
+    assertTrue(king.hasMoved());
+    assertTrue(rook.hasMoved());
+  }
+
+  @Test
+  public void MovePiece_BlackKingsideCastle_MovesKingAndRook() {
+    Board board = new Board();
+    King king = new King(Color.BLACK);
+    Rook rook = new Rook(Color.BLACK);
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), king);
+    board.placePieceAt(new Position(8, 8), rook);
+
+    board.movePiece(new Position(8, 5), new Position(8, 7));
+
+    assertInstanceOf(King.class, board.getPieceAt(new Position(8, 7)));
+    assertInstanceOf(Rook.class, board.getPieceAt(new Position(8, 6)));
+    assertTrue(board.isEmpty(new Position(8, 5)));
+    assertTrue(board.isEmpty(new Position(8, 8)));
+    assertTrue(king.hasMoved());
+    assertTrue(rook.hasMoved());
+  }
+
+  @Test
+  public void MovePiece_BlackQueensideCastle_MovesKingAndRook() {
+    Board board = new Board();
+    King king = new King(Color.BLACK);
+    Rook rook = new Rook(Color.BLACK);
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), king);
+    board.placePieceAt(new Position(8, 1), rook);
+
+    board.movePiece(new Position(8, 5), new Position(8, 3));
+
+    assertInstanceOf(King.class, board.getPieceAt(new Position(8, 3)));
+    assertInstanceOf(Rook.class, board.getPieceAt(new Position(8, 4)));
+    assertTrue(board.isEmpty(new Position(8, 5)));
+    assertTrue(board.isEmpty(new Position(8, 1)));
+    assertTrue(king.hasMoved());
+    assertTrue(rook.hasMoved());
+  }
+
+  @Test
+  void GetValidMoves_QueensideRookHasMoved_CastlingNotAvailable() {
+    Board board = new Board();
+    Rook rook = new Rook(Color.WHITE);
+    rook.markMoved();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 1), rook);
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+    assertFalse(moves.contains(new Position(1, 3)));
+  }
+
+  @Test
+  void GetValidMoves_QueensideKingPassesThroughAttackedSquare_CastlingNotAvailable() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 1), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+    board.placePieceAt(new Position(5, 4), new Rook(Color.BLACK));
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+    assertFalse(moves.contains(new Position(1, 3)));
+  }
+
+  @Test
+  void GetValidMoves_KingPassesThroughSquareAttackedByEnemyKnight_CastlingNotAvailable() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 8), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+    board.placePieceAt(new Position(2, 4), new Knight(Color.BLACK));
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+    assertFalse(moves.contains(new Position(1, 7)));
+  }
+
+  @Test
+  void GetValidMoves_KingPassesThroughSquareAttackedByEnemyPawn_CastlingNotAvailable() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 8), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+    board.placePieceAt(new Position(2, 7), new Pawn(Color.BLACK));
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+    assertFalse(moves.contains(new Position(1, 7)));
+  }
+
+  @Test
+  void HasInsufficientMaterial_WhiteOnlyKing_BlackHasRook_ReturnsTrue() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+    board.placePieceAt(new Position(5, 1), new Rook(Color.BLACK));
+    assertTrue(board.hasInsufficientMaterial(Color.WHITE));
+  }
+
+  @Test
+  void GetValidMoves_KingDestSquareOccupied_KingsideCastlingNotAvailable() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 8), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(1, 7), new Knight(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+
+    assertFalse(moves.contains(new Position(1, 7)));
+  }
+
+  @Test
+  void GetValidMoves_RookDestSquareOccupied_QueensideCastlingNotAvailable() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 1), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(1, 4), new Knight(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+
+    assertFalse(moves.contains(new Position(1, 3)));
+  }
 }
