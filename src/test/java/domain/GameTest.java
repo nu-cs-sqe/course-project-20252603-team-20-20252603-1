@@ -1218,4 +1218,21 @@ public class GameTest {
         assertInstanceOf(Rook.class, game.getPieceAt(new Position(1, 6)));
         assertEquals(Color.BLACK, game.getCurrentTurn());
     }
+
+    @Test
+    public void ExecuteMove_BlackQueensideCastle_SwitchesTurnToWhite() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+        board.placePieceAt(new Position(8, 2), null);
+        board.placePieceAt(new Position(8, 3), null);
+        board.placePieceAt(new Position(8, 4), null);
+        game.executeMove(new Position(2, 1), new Position(3, 1));
+
+        game.executeMove(new Position(8, 5), new Position(8, 3));
+
+        assertInstanceOf(King.class, game.getPieceAt(new Position(8, 3)));
+        assertInstanceOf(Rook.class, game.getPieceAt(new Position(8, 4)));
+        assertEquals(Color.WHITE, game.getCurrentTurn());
+    }
 }
