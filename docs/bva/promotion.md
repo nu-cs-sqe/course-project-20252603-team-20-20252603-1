@@ -121,13 +121,13 @@ See `src/test/resources/features/PawnPromotion.feature ` for the Scenario Outlin
 
 #### `player`
 
-| Value   | Covered? |
-| ------- | -------- |
-| `White` |    :x:   |
-| `Black` |    :x:   |
+| Value   | Covered?           |
+| ------- | ------------------ |
+| `White` |         :x:        |
+| `Black` | :white_check_mark: |
 
 #### Move direction
 
-| Value     | Covered? |
-| --------- | -------- |
-| `l-shape` |    :x:   |
+| Value     | Covered?           |
+| --------- | ------------------ |
+| `l-shape` | :white_check_mark: |
