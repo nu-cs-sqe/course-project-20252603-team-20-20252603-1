@@ -37,37 +37,37 @@ See `src/test/resources/features/PawnPromotion.feature ` for the Scenario Outlin
 
 #### `player`
 
-| Value   | Covered? |
-| ------- | -------- |
-| `White` |    :x:   |
-| `Black` |    :x:   |
+| Value   | Covered?           |
+| ------- | ------------------ |
+| `White` | :white_check_mark: |
+| `Black` |         :x:        |
 
 #### Pawn Position before capture
 
-| Value    | Covered? |
-| -------- | -------- |
-| `(7, 1)` |    :x:   |
-| `(7, 4)` |    :x:   |
-| `(7, 8)` |    :x:   |
-| `(2, 1)` |    :x:   |
-| `(2, 4)` |    :x:   |
-| `(2, 8)` |    :x:   |
+| Value    | Covered?           |
+| -------- | ------------------ |
+| `(7, 1)` | :white_check_mark: |
+| `(7, 4)` |         :x:        |
+| `(7, 8)` |         :x:        |
+| `(2, 1)` |         :x:        |
+| `(2, 4)` |         :x:        |
+| `(2, 8)` |         :x:        |
 
 #### Capture Direction
 
-| Value            | Covered? |
-| ---------------- | -------- |
-| `left diagonal`  |    :x:   |
-| `right diagonal` |    :x:   |
+| Value            | Covered?           |
+| ---------------- | ------------------ |
+| `left diagonal`  |         :x:        |
+| `right diagonal` | :white_check_mark: |
 
 #### Promotion Piece
 
-| Value    | Covered? |
-| -------- | -------- |
-| `Queen`  |    :x:   |
-| `Rook`   |    :x:   |
-| `Bishop` |    :x:   |
-| `Knight` |    :x:   |
+| Value    | Covered?           |
+| -------- | ------------------ |
+| `Queen`  | :white_check_mark: |
+| `Rook`   |         :x:        |
+| `Bishop` |         :x:        |
+| `Knight` |         :x:        |
 
 ### Promoted Queen behaves correctly
 

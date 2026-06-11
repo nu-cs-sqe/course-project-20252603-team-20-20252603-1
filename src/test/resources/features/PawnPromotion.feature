@@ -12,11 +12,24 @@ Feature: Pawn Promotion
         And a <player> <promotionPiece> is placed at row <toRow> col <pawnCol>
 
         Examples:
-            | player  | fromRow | toRow | pawnCol | promotionPiece | 
-            | "WHITE" |    7    |   8   |    1    |     "QUEEN"    |
-            | "BLACK" |    2    |   1   |    1    |     "ROOK"     | 
-            | "WHITE" |    7    |   8   |    4    |    "BISHOP"    |
-            | "BLACK" |    2    |   1   |    4    |    "KNIGHT"    | 
-            | "WHITE" |    7    |   8   |    8    |     "ROOK"     |
-            | "BLACK" |    2    |   1   |    8    |     "QUEEN"    | 
+            | player  | fromRow | toRow | pawnCol | promotionPiece |
+            | "WHITE" | 7       | 8     | 1       | "QUEEN"        |
+            | "BLACK" | 2       | 1     | 1       | "ROOK"         |
+            | "WHITE" | 7       | 8     | 4       | "BISHOP"       |
+            | "BLACK" | 2       | 1     | 4       | "KNIGHT"       |
+            | "WHITE" | 7       | 8     | 8       | "ROOK"         |
+            | "BLACK" | 2       | 1     | 8       | "QUEEN"        |
 
+    Scenario Outline: <player> pawn promotes by capturing to back rank
+        Given the game is in progress
+        And a <player> Pawn is at row <fromRow> col <fromCol>
+        And an <opponent> piece is at row <toRow> col <toCol>
+        When <player> captures the piece at row <toRow> col <toCol>
+        And <player> selects <promotionPiece> as the promotion piece
+        Then the pawn is removed from row <fromRow> col <fromCol>
+        And the <opponent> piece is removed from row <toRow> col <toCol>
+        And a <player> <promotionPiece> is placed at row <toRow> col <toCol>
+
+        Examples:
+            | player  | opponent | fromRow | fromCol | toRow | toCol | promotionPiece |
+            | "WHITE" |  "BLACK" |    7    |    1    |   8   |    2  |     "QUEEN"    |

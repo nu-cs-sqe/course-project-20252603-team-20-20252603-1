@@ -5,6 +5,7 @@ import domain.piece.King;
 import domain.piece.Pawn;
 import domain.piece.Piece;
 import domain.piece.PieceType;
+import domain.piece.Rook;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -17,6 +18,7 @@ public class PawnPromotion {
     Position fromPosition;
     Position toPosition;
     PieceType selected;
+    Color opponent;
 
     public PawnPromotion(ChessSteps steps) {
         this.steps = steps;
@@ -29,12 +31,29 @@ public class PawnPromotion {
         this.steps.board.placePieceAt(fromPosition, new Pawn(this.steps.player));
     }
 
+    @Given("an {string} piece is at row {int} col {int}")
+    public void an_piece_is_at_row_col(String opponent, Integer row, Integer col) {
+        Color oppColor = Color.valueOf(opponent);
+        Position opponentPosition = new Position(row, col);
+        this.steps.board.placePieceAt(opponentPosition, new Rook(oppColor));
+    }
+
     @When("{string} moves the pawn to row {int} col {int}")
     public void moves_the_pawn_to_row_col(String player, Integer row, Integer col) {
         // Silence locateKing exception
-        Position kingPosition = new Position(4,4);
+        Position kingPosition = new Position(4, 4);
         this.steps.board.placePieceAt(kingPosition, new King(this.steps.player));
-        
+
+        this.toPosition = new Position(row, col);
+        this.steps.board.movePiece(this.fromPosition, this.toPosition);
+    }
+
+    @When("{string} captures the piece at row {int} col {int}")
+    public void captures_the_piece_at_row_col(String player, Integer row, Integer col) {
+        // Silence locateKing exception
+        Position kingPosition = new Position(4, 4);
+        this.steps.board.placePieceAt(kingPosition, new King(this.steps.player));
+
         this.toPosition = new Position(row, col);
         this.steps.board.movePiece(this.fromPosition, this.toPosition);
     }
@@ -49,6 +68,12 @@ public class PawnPromotion {
     public void the_pawn_is_removed_from_row_col(Integer int1, Integer int2) {
         Piece pieceAtDest = this.steps.board.getPieceAt(this.toPosition);
         assertFalse(pieceAtDest.getPieceType() == PieceType.PAWN);
+    }
+
+    @Then("the {string} piece is removed from row {int} col {int}")
+    public void the_piece_is_removed_from_row_col(String string, Integer int1, Integer int2) {
+        Piece pieceAtDest = this.steps.board.getPieceAt(this.toPosition);
+        assertFalse(pieceAtDest.getPieceType() == PieceType.ROOK);
     }
 
     @Then("a {string} {string} is placed at row {int} col {int}")
