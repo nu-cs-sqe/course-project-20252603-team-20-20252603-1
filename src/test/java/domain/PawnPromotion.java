@@ -17,6 +17,7 @@ public class PawnPromotion {
     ChessSteps steps;
     Position fromPosition;
     Position toPosition;
+    Position movePosition;
     PieceType selected;
     Color opponent;
 
@@ -64,6 +65,13 @@ public class PawnPromotion {
         this.steps.board.promotePawn(this.toPosition, selected);
     }
 
+    @When("{string} moves the {string} from row {int} col {int} to row {int} col {int}")
+    public void moves_the_from_row_col_to_row_col(String player, String promotionPiece, Integer toRow, Integer pawnCol,
+            Integer moveRow, Integer moveCol) {
+        this.movePosition = new Position(moveRow, moveCol);
+        this.steps.board.movePiece(this.toPosition, this.movePosition);
+    }
+
     @Then("the pawn is removed from row {int} col {int}")
     public void the_pawn_is_removed_from_row_col(Integer int1, Integer int2) {
         Piece pieceAtDest = this.steps.board.getPieceAt(this.toPosition);
@@ -82,4 +90,12 @@ public class PawnPromotion {
         Piece pieceAtDest = this.steps.board.getPieceAt(this.toPosition);
         assertTrue(pieceAtDest.getPieceType() == this.selected);
     }
+
+    @Then("the {string} {string} is at row {int} col {int}")
+    public void the_is_at_row_col(String player, String promotionPiece, Integer moveRow, Integer moveCol) {
+        Piece pieceMoved = this.steps.board.getPieceAt(this.movePosition);
+        assertTrue((pieceMoved.getPieceType() == this.selected) 
+            && (pieceMoved.getColor() == this.steps.player));
+    }
+
 }

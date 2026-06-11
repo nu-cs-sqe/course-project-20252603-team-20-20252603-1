@@ -73,18 +73,18 @@ See `src/test/resources/features/PawnPromotion.feature ` for the Scenario Outlin
 
 #### `player`
 
-| Value   | Covered? |
-| ------- | -------- |
-| `White` |    :x:   |
-| `Black` |    :x:   |
+| Value   | Covered?           |
+| ------- | ------------------ |
+| `White` | :white_check_mark: |
+| `Black` |         :x:        |
 
 #### Move direction
 
-| Value         | Covered? |
-| ------------- | -------- |
-| `horizontal`  |    :x:   |
-| `vertical`    |    :x:   |
-| `diagonal`    |    :x:   |
+| Value         | Covered?           |
+| ------------- | ------------------ |
+| `horizontal`  | :white_check_mark: |
+| `vertical`    |         :x:        |
+| `diagonal`    |         :x:        |
 
 ### Promoted Rook behaves correctly
 
