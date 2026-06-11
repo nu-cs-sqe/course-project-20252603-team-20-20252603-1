@@ -123,7 +123,7 @@ See `src/test/resources/features/PawnPromotion.feature ` for the Scenario Outlin
 
 | Value   | Covered?           |
 | ------- | ------------------ |
-| `White` |         :x:        |
+| `White` | :white_check_mark: |
 | `Black` | :white_check_mark: |
 
 #### Move direction
