@@ -16,4 +16,4 @@ Feature: Pawn Promotion
             | "WHITE" |    7    |   8   |    1    |     "QUEEN"    |
             | "BLACK" |    2    |   1   |    1    |     "ROOK"     | 
             | "WHITE" |    7    |   8   |    4    |    "BISHOP"    |
-
+            | "BLACK" |    2    |   1   |    4    |    "KNIGHT"    | 
