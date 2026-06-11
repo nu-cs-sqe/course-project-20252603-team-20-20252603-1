@@ -84,7 +84,7 @@ See `src/test/resources/features/PawnPromotion.feature ` for the Scenario Outlin
 | ------------- | ------------------ |
 | `horizontal`  | :white_check_mark: |
 | `vertical`    | :white_check_mark: |
-| `diagonal`    |         :x:        |
+| `diagonal`    | :white_check_mark: |
 
 ### Promoted Rook behaves correctly
 
