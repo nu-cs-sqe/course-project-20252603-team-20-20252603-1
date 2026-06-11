@@ -1758,4 +1758,23 @@ public class BoardTest {
 
     assertTrue(moves.contains(new Position(8, 3)));
   }
+
+  @Test
+  public void MovePiece_WhiteKingsideCastle_MovesKingAndRook() {
+    Board board = new Board();
+    King king = new King(Color.WHITE);
+    Rook rook = new Rook(Color.WHITE);
+    board.placePieceAt(new Position(1, 5), king);
+    board.placePieceAt(new Position(1, 8), rook);
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+
+    board.movePiece(new Position(1, 5), new Position(1, 7));
+
+    assertInstanceOf(King.class, board.getPieceAt(new Position(1, 7)));
+    assertInstanceOf(Rook.class, board.getPieceAt(new Position(1, 6)));
+    assertTrue(board.isEmpty(new Position(1, 5)));
+    assertTrue(board.isEmpty(new Position(1, 8)));
+    assertTrue(king.hasMoved());
+    assertTrue(rook.hasMoved());
+  }
 }
