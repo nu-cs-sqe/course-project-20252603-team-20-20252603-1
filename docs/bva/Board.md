@@ -222,7 +222,7 @@ Output boundaries: `IllegalArgumentException`, true, false
 | TC110 | WHITE King at `(1,5)` `hasMoved`=true, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty                       | does not include `(1,7)` | :white_check_mark: |
 | TC111 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` `hasMoved`=true, `(1,6)` and `(1,7)` empty                       | does not include `(1,7)` | :white_check_mark: |
 | TC112 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, WHITE piece at `(1,6)`                                | does not include `(1,7)` | :white_check_mark: |
-| TC113 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, WHITE piece at `(1,3)`                                | does not include `(1,3)` | :x:                |
+| TC113 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, WHITE piece at `(1,3)`                                | does not include `(1,3)` | :white_check_mark: |
 | TC114 | WHITE King at `(1,5)` in check (BLACK Rook at `(5,5)`), WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty      | does not include `(1,7)` | :x:                |
 | TC115 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Rook attacks `(1,6)` | does not include `(1,7)` | :x:                |
 | TC116 | BLACK King at `(8,5)` not moved, BLACK Rook at `(8,8)` not moved, `(8,6)` and `(8,7)` empty, king not in check          | includes `(8,7)`         | :x:                |
