@@ -1,11 +1,5 @@
 package domain;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -13,6 +7,8 @@ import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 
 import domain.piece.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
 
@@ -1206,5 +1202,20 @@ public class GameTest {
         game.executeMove(from, to);
 
         assertThrows(IllegalStateException.class,  () ->  game.handleTimeout(Color.WHITE));
+    }
+
+    @Test
+    public void ExecuteMove_WhiteKingsideCastle_SwitchesTurnToBlack() {
+        Board board = new Board();
+        Game game = new Game(board);
+        game.startGame();
+        board.placePieceAt(new Position(1, 6), null);
+        board.placePieceAt(new Position(1, 7), null);
+
+        game.executeMove(new Position(1, 5), new Position(1, 7));
+
+        assertInstanceOf(King.class, game.getPieceAt(new Position(1, 7)));
+        assertInstanceOf(Rook.class, game.getPieceAt(new Position(1, 6)));
+        assertEquals(Color.BLACK, game.getCurrentTurn());
     }
 }
