@@ -21,7 +21,7 @@ See `src/test/resources/features/PawnPromotion.feature ` for the Scenario Outlin
 | `(7, 4)` | :white_check_mark: |
 | `(7, 8)` | :white_check_mark: |
 | `(2, 1)` | :white_check_mark: |
-| `(2, 4)` |         :x:        |
+| `(2, 4)` | :white_check_mark: |
 | `(2, 8)` |         :x:        |
 
 #### Promotion Piece
