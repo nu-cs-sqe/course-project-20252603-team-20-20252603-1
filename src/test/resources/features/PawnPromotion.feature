@@ -52,3 +52,4 @@ Feature: Pawn Promotion
             | "WHITE" | 7       | 8     | 5       | "QUEEN"        | 8       | 1       |
             | "BLACK" | 2       | 1     | 6       | "QUEEN"        | 8       | 6       |
             | "WHITE" | 7       | 8     | 2       | "QUEEN"        | 2       | 8       |
+            | "BLACK" | 2       | 1     | 5       | "ROOK"         | 1       | 8       |
