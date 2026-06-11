@@ -50,14 +50,14 @@ See `src/test/resources/features/PawnPromotion.feature ` for the Scenario Outlin
 | `(7, 4)` |         :x:        |
 | `(7, 8)` |         :x:        |
 | `(2, 1)` |         :x:        |
-| `(2, 4)` |         :x:        |
+| `(2, 4)` | :white_check_mark: |
 | `(2, 8)` |         :x:        |
 
 #### Capture Direction
 
 | Value            | Covered?           |
 | ---------------- | ------------------ |
-| `left diagonal`  |         :x:        |
+| `left diagonal`  | :white_check_mark: |
 | `right diagonal` | :white_check_mark: |
 
 #### Promotion Piece
@@ -65,7 +65,7 @@ See `src/test/resources/features/PawnPromotion.feature ` for the Scenario Outlin
 | Value    | Covered?           |
 | -------- | ------------------ |
 | `Queen`  | :white_check_mark: |
-| `Rook`   |         :x:        |
+| `Rook`   | :white_check_mark: |
 | `Bishop` |         :x:        |
 | `Knight` |         :x:        |
 

@@ -33,3 +33,4 @@ Feature: Pawn Promotion
         Examples:
             | player  | opponent | fromRow | fromCol | toRow | toCol | promotionPiece |
             | "WHITE" |  "BLACK" |    7    |    1    |   8   |    2  |     "QUEEN"    |
+            | "BLACK" |  "WHITE" |    2    |    4    |   1   |    3  |     "ROOK"     |

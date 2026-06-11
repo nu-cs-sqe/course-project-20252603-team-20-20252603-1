@@ -73,7 +73,8 @@ public class PawnPromotion {
     @Then("the {string} piece is removed from row {int} col {int}")
     public void the_piece_is_removed_from_row_col(String string, Integer int1, Integer int2) {
         Piece pieceAtDest = this.steps.board.getPieceAt(this.toPosition);
-        assertFalse(pieceAtDest.getPieceType() == PieceType.ROOK);
+        assertFalse((pieceAtDest.getPieceType() == PieceType.ROOK)
+                && (pieceAtDest.getColor() == opponent));
     }
 
     @Then("a {string} {string} is placed at row {int} col {int}")
