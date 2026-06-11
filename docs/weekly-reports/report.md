@@ -79,8 +79,8 @@ N/A, same status as last week.
 10. [done]: Kavi: Checkmate, under US-10: [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/issues/47) 
 11. [done]: Domingo: En Passant US-9 [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/62)
 12. [done]: Annabelle: Non-Checkmate Game End conditions, under US-10 [PR](https://github.com/nu-cs-sqe/course-project-20252603-team-20-20252603-1/pull/63)
-13. [in-progress]: Annabelle: Integration Test #2 for Pawn Promotion
-14. [in-progress]: Domingo: Castling
+13. [done]: Annabelle: Integration Test #2 for Pawn Promotion
+14. [done]: Domingo: Castling
 
 # Week X (XX/XX/2026-XX/XX/2026) TEMPLATE (You can change the format to whatever the team likes better)
 **Planning and Progress Tracking**:
