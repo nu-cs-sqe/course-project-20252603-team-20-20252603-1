@@ -232,6 +232,8 @@ Output boundaries: `IllegalArgumentException`, true, false
 | TC123 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, `(1,2)`, `(1,3)`, `(1,4)` empty, BLACK Rook attacks `(1,4)`        | does not include `(1,3)` | :white_check_mark: |
 | TC124 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Knight at `(2,4)` attacks `(1,6)` | does not include `(1,7)` | :white_check_mark: |
 | TC125 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Pawn at `(2,7)` attacks `(1,6)`   | does not include `(1,7)` | :white_check_mark: |
+| TC127 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, WHITE piece at `(1,7)`, `(1,6)` empty                              | does not include `(1,7)` | :white_check_mark: |
+| TC128 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, WHITE piece at `(1,4)`, `(1,2)` and `(1,3)` empty                  | does not include `(1,3)` | :x:                |
 
 ### Method under test: `movePiece(Position from, Position to)` - castling extension
 

@@ -1888,4 +1888,17 @@ public class BoardTest {
     board.placePieceAt(new Position(5, 1), new Rook(Color.BLACK));
     assertTrue(board.hasInsufficientMaterial(Color.WHITE));
   }
+
+  @Test
+  void GetValidMoves_KingDestSquareOccupied_KingsideCastlingNotAvailable() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 8), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(1, 7), new Knight(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+
+    assertFalse(moves.contains(new Position(1, 7)));
+  }
 }

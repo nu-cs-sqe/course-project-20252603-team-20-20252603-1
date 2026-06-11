@@ -43,6 +43,9 @@
 
 - `ChessClock.java` line 27, `Game.java` line 31, `Piece.java` line 25, `Position.java` (finalize body): each class contains an empty `@Override protected final void finalize() throws Throwable {}` to suppress the JVM finalizer. These lines contain no logic and are only invoked by the garbage collector, not by test code.
 - `ChessClock.java` lines 41-42 (Swing Timer lambda and `timer.start()`): the `javax.swing.Timer` fires asynchronously after a 1000 ms delay. Tests call `tick()` directly and never let the timer actually fire. Covering these lines would require real-time waits or mocking `javax.swing.Timer`, introducing non-determinism without meaningful verification.
+- `Board.java` line 192 (`validPosition` false branch in `removeBlockedPawnTwoSquareMove`): this method is only called for pawns at their starting rank, so `oneForwardRow` is always row 3 or 6, both valid positions. The false branch is unreachable in valid gameplay.
+- `Board.java` line 235 (`isEmpty(to)` false branch in `isEnPassantCapture`): the en passant target is always the square the double-pushed pawn passed through, which is guaranteed to be empty. The false branch is unreachable under valid game state.
+- `Board.java` line 369 (one branch in `isAtPromotionRank` compound boolean): `Color` has only `WHITE` and `BLACK`. When `piece.getColor() == Color.WHITE` is false, `piece.getColor() == Color.BLACK` is always true, making one JVM short-circuit branch unreachable.
 
 ### Pitest - Surviving Mutants
 
