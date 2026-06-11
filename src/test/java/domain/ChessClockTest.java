@@ -284,4 +284,20 @@ public class ChessClockTest {
         assertFalse(clock.isRunning());
         EasyMock.verify(listener);
     }
+
+    @Test
+    public void TickBlack_OnTimeout_ClockStopped() {
+        ClockListener listener = EasyMock.createMock(ClockListener.class);
+        listener.onTimeout(Color.BLACK);
+        EasyMock.replay(listener);
+
+        ChessClock clock = new ChessClock(300000, listener);
+        clock.start();
+        clock.switchClock();
+        clock.setTime(1000, Color.BLACK);
+        clock.tick();
+
+        assertFalse(clock.isRunning());
+        EasyMock.verify(listener);
+    }
 }
