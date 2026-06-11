@@ -27,6 +27,11 @@ public class Board {
     private static final int BLACK_PAWN_RANK = 6;
     private static final int WHITE_PROMOTION_ROW = NUM_ROWS; // row 8
     private static final int BLACK_PROMOTION_ROW = 1;
+    private static final int KINGSIDE_ROOK_COL = NUM_COLS;
+    private static final int KINGSIDE_KING_DEST_COL = 7;
+    private static final int KINGSIDE_ROOK_DEST_COL = 6;
+    private static final int QUEENSIDE_KING_DEST_COL = 3;
+    private static final int QUEENSIDE_ROOK_DEST_COL = 4;
     private Optional<Position> enPassantTarget = Optional.empty();
 
     private static final PieceType[] BACK_RANK = {
@@ -162,6 +167,9 @@ public class Board {
             removeBlockedPawnTwoSquareMove(position, piece, validMoves);
             addPawnCaptureMoves(position, piece, validMoves);
         }
+        if (piece.getPieceType() == PieceType.KING) {
+            validMoves.addAll(getCastlingMoves(position, piece));
+        }
         return validMoves;
     }
 
@@ -201,6 +209,7 @@ public class Board {
 
         Piece piece = getPieceAt(from);
         final boolean epCapture = isEnPassantCapture(piece, from, to);
+        final boolean castling = isCastlingMove(from, to);
 
         piece.markMoved();
 
@@ -208,6 +217,13 @@ public class Board {
         setPieceAt(from, null);
         if (epCapture) {
             setPieceAt(new Position(from.getRow(), to.getCol()), null);
+        }
+        if (castling) {
+            int row = from.getRow();
+            boolean kingside = to.getCol() > from.getCol();
+            Position rookFrom = new Position(row, kingside ? KINGSIDE_ROOK_COL : 1);
+            getPieceAt(rookFrom).markMoved();
+            executeCastle(from, to);
         }
         updateEnPassantTarget(piece, from, to);
     }
@@ -276,10 +292,14 @@ public class Board {
 
         Piece piece = boardAfterMove.getPieceAt(from);
         final boolean epCapture = isEnPassantCapture(piece, from, to);
+        final boolean castling = isCastlingMove(from, to);
         boardAfterMove.setPieceAt(from, null);
         boardAfterMove.setPieceAt(to, piece);
         if (epCapture) {
             boardAfterMove.setPieceAt(new Position(from.getRow(), to.getCol()), null);
+        }
+        if (castling) {
+            boardAfterMove.executeCastle(from, to);
         }
 
         return boardAfterMove.isInCheck(color);
@@ -351,6 +371,99 @@ public class Board {
 
     private boolean isValidPromotionTarget(PieceType pieceType) {
         return pieceType != PieceType.PAWN && pieceType != PieceType.KING;
+    }
+
+    private List<Position> getAttackSquares(Position position) {
+        Piece piece = getPieceAt(position);
+        if (piece.getSlidingDirections().length > 0) {
+            return getSlidingValidMoves(position, piece, piece.getSlidingDirections());
+        }
+        if (piece.getPieceType() == PieceType.PAWN) {
+            return piece.getCaptureMoves(position);
+        }
+        return piece.getCandidateMoves(position);
+    }
+
+    private boolean isSquareAttackedByEnemy(Position target, Color friendlyColor) {
+        for (Position square : allPositions()) {
+            if (pieceAt(square).isEmpty()) {
+                continue;
+            }
+            Piece piece = getPieceAt(square);
+            if (piece.getColor() != friendlyColor && getAttackSquares(square).contains(target)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean canCastleKingside(int row, Color color) {
+        Position rookPos = new Position(row, KINGSIDE_ROOK_COL);
+        if (isEmpty(rookPos)) {
+            return false;
+        }
+        Piece rook = getPieceAt(rookPos);
+        if (!(rook instanceof Rook) || ((Rook) rook).hasMoved()) {
+            return false;
+        }
+        if (!isEmpty(new Position(row, KINGSIDE_ROOK_DEST_COL))
+                || !isEmpty(new Position(row, KINGSIDE_KING_DEST_COL))) {
+            return false;
+        }
+        return !isSquareAttackedByEnemy(new Position(row, KINGSIDE_ROOK_DEST_COL), color);
+    }
+
+    private boolean canCastleQueenside(int row, Color color) {
+        Position rookPos = new Position(row, 1);
+        if (isEmpty(rookPos)) {
+            return false;
+        }
+        Piece rook = getPieceAt(rookPos);
+        if (!(rook instanceof Rook) || ((Rook) rook).hasMoved()) {
+            return false;
+        }
+        if (!isEmpty(new Position(row, 2)) || !isEmpty(new Position(row, QUEENSIDE_KING_DEST_COL))
+                || !isEmpty(new Position(row, QUEENSIDE_ROOK_DEST_COL))) {
+            return false;
+        }
+        return !isSquareAttackedByEnemy(new Position(row, QUEENSIDE_ROOK_DEST_COL), color);
+    }
+
+    private List<Position> getCastlingMoves(Position from, Piece king) {
+        List<Position> moves = new ArrayList<>();
+        if (!(king instanceof King) || ((King) king).hasMoved()) {
+            return moves;
+        }
+        if (isSquareAttackedByEnemy(from, king.getColor())) {
+            return moves;
+        }
+        int row = from.getRow();
+        Color color = king.getColor();
+        if (canCastleKingside(row, color)) {
+            moves.add(new Position(row, KINGSIDE_KING_DEST_COL));
+        }
+        if (canCastleQueenside(row, color)) {
+            moves.add(new Position(row, QUEENSIDE_KING_DEST_COL));
+        }
+        return moves;
+    }
+
+    private boolean isCastlingMove(Position from, Position to) {
+        Piece piece = getPieceAt(from);
+        return piece.getPieceType() == PieceType.KING
+                && from.getRow() == to.getRow()
+                && Math.abs(from.getCol() - to.getCol()) == 2;
+    }
+
+    private void executeCastle(Position kingFrom, Position kingTo) {
+        int row = kingFrom.getRow();
+        boolean kingside = kingTo.getCol() > kingFrom.getCol();
+        Position rookFrom = new Position(row, kingside ? KINGSIDE_ROOK_COL : 1);
+        Position rookTo =
+                new Position(row, kingside ? KINGSIDE_ROOK_DEST_COL : QUEENSIDE_ROOK_DEST_COL);
+        Piece rook = getPieceAt(rookFrom);
+        setPieceAt(rookTo, rook);
+        setPieceAt(rookFrom, null);
     }
 
     Optional<Position> getEnPassantTarget() {

@@ -203,12 +203,43 @@ Input boundaries: `color`: `null`, `WHITE`, `BLACK`
 
 Output boundaries: `IllegalArgumentException`, true, false
 
-| ID    | State of the System                              | Expected output                   | Implemented?       |
-|-------|--------------------------------------------------|-----------------------------------|:-------------------|
-| TC101 | `color=null`                                     | throws `IllegalArgumentException` | :white_check_mark: |
-| TC102 | `color=WHITE`, white only has king               | true                              | :white_check_mark: |
-| TC103 | `color=BLACK`, black only has king & knight      | true                              | :white_check_mark: |
-| TC104 | `color=WHITE`, white only has king & bishop      | true                              | :white_check_mark: |
-| TC105 | `color=BLACK`, black only has king & two knights | true                              | :white_check_mark: |
-| TC106 | `color=WHITE`, white has king & rook             | false                             | :white_check_mark: |
-| TC107 | `color=BLACK`, black has king & two bishops      | false                             | :white_check_mark: |
+| ID    | State of the System                                       | Expected output                   | Implemented?       |
+|-------|-----------------------------------------------------------|-----------------------------------|:-------------------|
+| TC101 | `color=null`                                              | throws `IllegalArgumentException` | :white_check_mark: |
+| TC102 | `color=WHITE`, white only has king                        | true                              | :white_check_mark: |
+| TC103 | `color=BLACK`, black only has king & knight               | true                              | :white_check_mark: |
+| TC104 | `color=WHITE`, white only has king & bishop               | true                              | :white_check_mark: |
+| TC105 | `color=BLACK`, black only has king & two knights          | true                              | :white_check_mark: |
+| TC106 | `color=WHITE`, white has king & rook                      | false                             | :white_check_mark: |
+| TC107 | `color=BLACK`, black has king & two bishops               | false                             | :white_check_mark: |
+| TC126 | `color=WHITE`, WHITE has only king, BLACK has king & rook | true                              | :white_check_mark: |
+
+### Method under test: `getValidMoves(Position pos)` - castling extension
+
+| ID    | State of the System                                                                                                                  | Expected output          | Implemented?       |
+|-------|--------------------------------------------------------------------------------------------------------------------------------------|--------------------------|--------------------|
+| TC108 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, king not in check                       | includes `(1,7)`         | :white_check_mark: |
+| TC109 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, `(1,2)`, `(1,3)`, `(1,4)` empty, king not in check                 | includes `(1,3)`         | :white_check_mark: |
+| TC110 | WHITE King at `(1,5)` `hasMoved`=true, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty                                    | does not include `(1,7)` | :white_check_mark: |
+| TC111 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` `hasMoved`=true, `(1,6)` and `(1,7)` empty                                    | does not include `(1,7)` | :white_check_mark: |
+| TC112 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, WHITE piece at `(1,6)`                                             | does not include `(1,7)` | :white_check_mark: |
+| TC113 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, WHITE piece at `(1,3)`                                             | does not include `(1,3)` | :white_check_mark: |
+| TC114 | WHITE King at `(1,5)` in check (BLACK Rook at `(5,5)`), WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty                   | does not include `(1,7)` | :white_check_mark: |
+| TC115 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Rook attacks `(1,6)`              | does not include `(1,7)` | :white_check_mark: |
+| TC116 | BLACK King at `(8,5)` not moved, BLACK Rook at `(8,8)` not moved, `(8,6)` and `(8,7)` empty, king not in check                       | includes `(8,7)`         | :white_check_mark: |
+| TC117 | BLACK King at `(8,5)` not moved, BLACK Rook at `(8,1)` not moved, `(8,2)`, `(8,3)`, `(8,4)` empty, king not in check                 | includes `(8,3)`         | :white_check_mark: |
+| TC122 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` `hasMoved`=true, `(1,2)`, `(1,3)`, `(1,4)` empty                              | does not include `(1,3)` | :white_check_mark: |
+| TC123 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, `(1,2)`, `(1,3)`, `(1,4)` empty, BLACK Rook attacks `(1,4)`        | does not include `(1,3)` | :white_check_mark: |
+| TC124 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Knight at `(2,4)` attacks `(1,6)` | does not include `(1,7)` | :white_check_mark: |
+| TC125 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Pawn at `(2,7)` attacks `(1,6)`   | does not include `(1,7)` | :white_check_mark: |
+| TC127 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, WHITE piece at `(1,7)`, `(1,6)` empty                              | does not include `(1,7)` | :white_check_mark: |
+| TC128 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, WHITE piece at `(1,4)`, `(1,2)` and `(1,3)` empty                  | does not include `(1,3)` | :white_check_mark: |
+
+### Method under test: `movePiece(Position from, Position to)` - castling extension
+
+| ID    | State of the System                                                                | Expected output                                                                                                                | Implemented?       |
+|-------|------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|--------------------|
+| TC118 | WHITE King at `(1,5)`, WHITE Rook at `(1,8)`, path clear; `movePiece((1,5),(1,7))` | King at `(1,7)`; Rook at `(1,6)`; `isEmpty((1,5))`=true; `isEmpty((1,8))`=true; `king.hasMoved()`=true; `rook.hasMoved()`=true | :white_check_mark: |
+| TC119 | WHITE King at `(1,5)`, WHITE Rook at `(1,1)`, path clear; `movePiece((1,5),(1,3))` | King at `(1,3)`; Rook at `(1,4)`; `isEmpty((1,5))`=true; `isEmpty((1,1))`=true                                                 | :white_check_mark: |
+| TC120 | BLACK King at `(8,5)`, BLACK Rook at `(8,8)`, path clear; `movePiece((8,5),(8,7))` | King at `(8,7)`; Rook at `(8,6)`; `isEmpty((8,5))`=true; `isEmpty((8,8))`=true                                                 | :white_check_mark: |
+| TC121 | BLACK King at `(8,5)`, BLACK Rook at `(8,1)`, path clear; `movePiece((8,5),(8,3))` | King at `(8,3)`; Rook at `(8,4)`; `isEmpty((8,5))`=true; `isEmpty((8,1))`=true                                                 | :white_check_mark: |

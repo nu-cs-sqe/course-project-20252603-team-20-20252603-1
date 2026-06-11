@@ -32,3 +32,16 @@
 | TC7  | color=`BLACK`, position=`(4,8)` | returns 14 squares - N: (5,8)-(8,8), S: (3,8)-(1,8), W: (4,1)-(4,7) | :white_check_mark: |
 | TC8  | color=`WHITE`, position=`(1,1)` | returns 14 squares - N: (2,1)-(8,1), E: (1,2)-(1,8)                 | :white_check_mark: |
 | TC9  | color=`BLACK`, position=`(8,8)` | returns 14 squares - S: (7,8)-(1,8), W: (8,7)-(8,1)                 | :white_check_mark: |
+
+### Method under test: `hasMoved()`
+
+| ID   | State of the System       | Expected output | Implemented?       |
+|------|---------------------------|-----------------|--------------------|
+| TC10 | new `Rook(WHITE)` created | returns `false` | :white_check_mark: |
+
+### Method under test: `markMoved()`
+
+| ID   | State of the System                 | Expected output                          | Implemented?       |
+|------|-------------------------------------|------------------------------------------|--------------------|
+| TC11 | new Rook, `markMoved()` called once | `hasMoved()` returns `true`              | :white_check_mark: |
+| TC12 | `markMoved()` called a second time  | `hasMoved()` returns `true` (idempotent) | :white_check_mark: |
