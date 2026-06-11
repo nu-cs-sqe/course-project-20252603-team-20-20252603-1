@@ -34,9 +34,9 @@ public class PawnPromotion {
 
     @Given("an {string} piece is at row {int} col {int}")
     public void an_piece_is_at_row_col(String opponent, Integer row, Integer col) {
-        Color oppColor = Color.valueOf(opponent);
+        this.opponent = Color.valueOf(opponent);
         Position opponentPosition = new Position(row, col);
-        this.steps.board.placePieceAt(opponentPosition, new Rook(oppColor));
+        this.steps.board.placePieceAt(opponentPosition, new Rook(this.opponent));
     }
 
     @When("{string} moves the pawn to row {int} col {int}")
@@ -82,7 +82,7 @@ public class PawnPromotion {
     public void the_piece_is_removed_from_row_col(String string, Integer int1, Integer int2) {
         Piece pieceAtDest = this.steps.board.getPieceAt(this.toPosition);
         assertFalse((pieceAtDest.getPieceType() == PieceType.ROOK)
-                && (pieceAtDest.getColor() == opponent));
+                && (pieceAtDest.getColor() == this.opponent));
     }
 
     @Then("a {string} {string} is placed at row {int} col {int}")
