@@ -212,6 +212,7 @@ Output boundaries: `IllegalArgumentException`, true, false
 | TC105 | `color=BLACK`, black only has king & two knights | true                              | :white_check_mark: |
 | TC106 | `color=WHITE`, white has king & rook             | false                             | :white_check_mark: |
 | TC107 | `color=BLACK`, black has king & two bishops      | false                             | :white_check_mark: |
+| TC126 | `color=WHITE`, WHITE has only king, BLACK has king & rook | true                       | :x: |
 
 ### Method under test: `getValidMoves(Position pos)` - castling extension
 
@@ -227,6 +228,10 @@ Output boundaries: `IllegalArgumentException`, true, false
 | TC115 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Rook attacks `(1,6)` | does not include `(1,7)` | :white_check_mark: |
 | TC116 | BLACK King at `(8,5)` not moved, BLACK Rook at `(8,8)` not moved, `(8,6)` and `(8,7)` empty, king not in check          | includes `(8,7)`         | :white_check_mark: |
 | TC117 | BLACK King at `(8,5)` not moved, BLACK Rook at `(8,1)` not moved, `(8,2)`, `(8,3)`, `(8,4)` empty, king not in check    | includes `(8,3)`         | :white_check_mark: |
+| TC122 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` `hasMoved`=true, `(1,2)`, `(1,3)`, `(1,4)` empty                 | does not include `(1,3)` | :x: |
+| TC123 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,1)` not moved, `(1,2)`, `(1,3)`, `(1,4)` empty, BLACK Rook attacks `(1,4)` | does not include `(1,3)` | :x: |
+| TC124 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Knight at `(2,4)` attacks `(1,6)` | does not include `(1,7)` | :x: |
+| TC125 | WHITE King at `(1,5)` not moved, WHITE Rook at `(1,8)` not moved, `(1,6)` and `(1,7)` empty, BLACK Pawn at `(2,7)` attacks `(1,6)` | does not include `(1,7)` | :x: |
 
 ### Method under test: `movePiece(Position from, Position to)` - castling extension
 

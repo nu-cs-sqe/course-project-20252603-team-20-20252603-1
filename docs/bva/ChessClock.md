@@ -64,4 +64,6 @@
 | TC23 | `whiteTimeRemaining`=1000, activeColor=`WHITE`    | `whiteTimeRemaining`=0, onTimeout() is called        | :white_check_mark: | 
 | TC24 | `blackTimeRemaining`=1000, activeColor=`BLACK`    | `blackTimeRemaining`=0, onTimeout() is called        | :white_check_mark: | 
 | TC25 | `whiteTimeRemaining`=300000, activeColor=`WHITE`  | `whiteTimeRemaining`=299000, onTimerTick() is called | :white_check_mark: | 
-| TC26 | `blackTimeRemaining`=300000, activeColor=`BLACK`  | `blackTimeRemaining`=299000, onTimerTick() is called | :white_check_mark: | 
+| TC26 | `blackTimeRemaining`=300000, activeColor=`BLACK`  | `blackTimeRemaining`=299000, onTimerTick() is called | :white_check_mark: |
+| TC27 | `whiteTimeRemaining`=1000, activeColor=`WHITE`, `tick()` called | `isRunning()` returns false | :x: |
+| TC28 | `blackTimeRemaining`=1000, activeColor=`BLACK`, `tick()` called | `isRunning()` returns false | :x: | 
