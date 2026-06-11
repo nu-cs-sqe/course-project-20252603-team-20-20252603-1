@@ -1846,4 +1846,15 @@ public class BoardTest {
     List<Position> moves = board.getValidMoves(new Position(1, 5));
     assertFalse(moves.contains(new Position(1, 3)));
   }
+
+  @Test
+  void GetValidMoves_QueensideKingPassesThroughAttackedSquare_CastlingNotAvailable() {
+    Board board = new Board();
+    board.placePieceAt(new Position(1, 5), new King(Color.WHITE));
+    board.placePieceAt(new Position(1, 1), new Rook(Color.WHITE));
+    board.placePieceAt(new Position(8, 5), new King(Color.BLACK));
+    board.placePieceAt(new Position(5, 4), new Rook(Color.BLACK));
+    List<Position> moves = board.getValidMoves(new Position(1, 5));
+    assertFalse(moves.contains(new Position(1, 3)));
+  }
 }
