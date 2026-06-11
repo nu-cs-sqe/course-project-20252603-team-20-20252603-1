@@ -92,7 +92,7 @@ See `src/test/resources/features/PawnPromotion.feature ` for the Scenario Outlin
 
 | Value   | Covered?           |
 | ------- | ------------------ |
-| `White` |         :x:        |
+| `White` | :white_check_mark: |
 | `Black` | :white_check_mark: |
 
 #### Move direction
@@ -100,7 +100,7 @@ See `src/test/resources/features/PawnPromotion.feature ` for the Scenario Outlin
 | Value         | Covered?           |
 | ------------- | ------------------ |
 | `horizontal`  | :white_check_mark: |
-| `vertical`    |         :x:        |
+| `vertical`    | :white_check_mark: |
 
 ### Promoted Bishop behaves correctly
 
