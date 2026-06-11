@@ -8,30 +8,30 @@ See `src/test/resources/features/PawnPromotion.feature ` for the Scenario Outlin
 
 #### `player`
 
-| Value   | Covered? |
-| ------- | -------- |
-| `White` |    :x:   |
-| `Black` |    :x:   |
+| Value   | Covered?           |
+| ------- | ------------------ |
+| `White` | :white_check_mark: |
+| `Black` | :white_check_mark: |
 
 #### Pawn Position before move
 
-| Value    | Covered? |
-| -------- | -------- |
-| `(7, 1)` |    :x:   |
-| `(7, 4)` |    :x:   |
-| `(7, 8)` |    :x:   |
-| `(2, 1)` |    :x:   |
-| `(2, 4)` |    :x:   |
-| `(2, 8)` |    :x:   |
+| Value    | Covered?           |
+| -------- | ------------------ |
+| `(7, 1)` | :white_check_mark: |
+| `(7, 4)` |         :x:        |
+| `(7, 8)` |         :x:        |
+| `(2, 1)` | :white_check_mark: |
+| `(2, 4)` |         :x:        |
+| `(2, 8)` |         :x:        |
 
 #### Promotion Piece
 
-| Value    | Covered? |
-| -------- | -------- |
-| `Queen`  |    :x:   |
-| `Rook`   |    :x:   |
-| `Bishop` |    :x:   |
-| `Knight` |    :x:   |
+| Value    |      Covered?      |
+| -------- | ------------------ |
+| `Queen`  | :white_check_mark: |
+| `Rook`   | :white_check_mark: |
+| `Bishop` |         :x:        |
+| `Knight` |         :x:        |
 
 ### \<player\> promotes by capturing to back rank
 

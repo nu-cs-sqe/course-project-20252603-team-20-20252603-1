@@ -13,4 +13,6 @@ Feature: Pawn Promotion
 
         Examples:
             | player  | fromRow | toRow | pawnCol | promotionPiece | 
-            | "WHITE" |    7    |   8   |    1    |     "QUEEN"    | 
+            | "WHITE" |    7    |   8   |    1    |     "QUEEN"    |
+            | "BLACK" |    2    |   1   |    1    |     "ROOK"     | 
+
